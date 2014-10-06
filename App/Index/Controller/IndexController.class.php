@@ -13,6 +13,6 @@ class IndexController extends Controller{
      * 首页
      */
     public function index(){
-        $this->display();
+        $this->display('index.v2.html');
     }
 }
