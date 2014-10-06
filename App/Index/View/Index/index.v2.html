@@ -563,7 +563,7 @@
         },
         /*******************************************/
         set_login = function() {
-            link_right_user.innerHTML = '<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIcomplate(location.href) + '">注册</a><a class="right">登入</a>';
+            link_right_user.innerHTML = '<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">注册</a><a class="right">登入</a>';
             $('aside').setAttribute('hidden', 'hidden');
             link_right_user.addEventListener('click', login, false)
         },
