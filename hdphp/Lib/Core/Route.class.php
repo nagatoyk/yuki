@@ -122,7 +122,7 @@ final class Route
     {
         //域名
         $host = $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-        defined('__HOST__') or define("__HOST__", C("HTTPS") ? "https://" : "http://" . $host);
+        defined('__HOST__') or define("__HOST__", C("HTTPS") ? "https://" . $host : "http://" . $host);
         //网站根-不含入口文件
         $script_file = rtrim($_SERVER['SCRIPT_NAME'], '/');
         $root = rtrim(dirname($script_file), '/');
