@@ -167,7 +167,7 @@
                 } else if (_preload_music == true) {
                     preload_music(playlist[count+1].url)
                 }*/
-            } else if(loop) {
+            } else if(is_loop) {
                 count = 0;
                 audio.src = playlist[count].url;
                 update_info()
@@ -738,11 +738,263 @@
                 update_playlist()
             }
         };
+        audio.addEventListener('play', function() {
+            c_play.setAttribute('hidden', 'hidden');
+            c_pause.removeAttribute('hidden');
+            update_info()
+        }, false);
+        audio.addEventListener('pause', function() {
+            c_pause.setAttribute('hidden', 'hidden');
+            c_play.removeAttribute('hidden')
+        }, false);
+        audio.addEventListener('timeupdate', function() {
+            if (!isNaN(audio.duration)) {
+                $.css(timeline_current, 'width: ' + (audio.currentTime / audio.duration) * 100 + '%');
+                if (audio.buffered.length>0) {
+                    $.css(timeline_duration, 'width: ' + (audio.buffered.end(audio.buffered.length-1).toFixed(2)) / (audio.duration.toFixed(2)) * 100 + '%')
+                };
+                timeline_current_time.innerHTML = parseInt(audio.currentTime / 60) + ':' + (parseInt(audio.currentTime) % 60 < 10 ? '0' + parseInt(audio.currentTime) % 60 : parseInt(audio.currentTime) % 60);
+                timeline_duration_time.innerHTML = parseInt(audio.duration / 60) + ':' + (parseInt(audio.duration) % 60 < 10 ? '0' + parseInt(audio.duration) % 60 : parseInt(audio.duration) % 60)
+            }
+        }, false);
+        audio.addEventListener('error', function() {
+            var context;
+            switch (audio.error.code) {
+                case 1:
+                    context = 'MEDIA_ERR_ABORTED（文件在取回时被用户中止）';
+                    break;
+                case 2:
+                    context = 'MEDIA_ERR_NETWORK（文件在下载时发生错误）';
+                    break;
+                case 3:
+                    context = 'MEDIA_ERR_DECODE（文件在解码时发生错误）';
+                    break;
+                case 4:
+                    context = 'MEDIA_ERR_SRC_NOT_SUPPORTED（不支持的音频格式）';
+                    break;
+                default:
+                    context = 'MEDIA_ERR_UNKNOWN（未知错误，错误代码：'+audio.error.code+'）';
+            };
+            switch (audio.networkState) {
+                case 0:
+                    context += '<br>NETWORK_EMPTY（音频尚未初始化）';
+                    break;
+                case 1:
+                    context += '<br>NETWORK_IDLE（音频已缓存）';
+                    break;
+                case 2:
+                    context += '<br>NETWORK_LOADING（浏览器正在下载数据）';
+                    break;
+                case 3:
+                    context += '<br>NETWORK_NO_SOURCE（未找到音频来源）';
+                    break;
+                default:
+                    context += 'NETWORK_UNKNOWN（未知错误，错误代码：' + audio.error.code + '）';
+            };
+            update_error('audio', context);
+            audio_play()
+        }, false);
+        audio.addEventListener('ended', function() {
+            if (next == 0) {
+                update_log()
+            } else {
+                next = 0
+            };
+            audio_play()
+        }, false);
+        cover_preload.addEventListener('load', function(){
+            $.css(cover, 'background-image: url(' + playlist[count].cover.large + ')');
+            $.css(cover_loading_notification, 'opacity: 0');
+        }, false);
+        cover_preload.addEventListener('error', function() {
+            if (cover_retry < 3) {
+                update_error('cover', '正在重试加载......');
+                cover_preload.src = playlist[count].cover.large;
+                cover_retry++
+            } else {
+                update_error('cover', '超过最大重新加载次数限制');
+                cover_retry = 0
+            }
+        }, false);
+        c_play.addEventListener('click', audio.play, false);
+        c_pause.addEventListener('click', audio.pause, false);
+        c_previous.addEventListener('click', function() {
+            if (count > 0) {
+                next = 1;
+                count -= 2;
+                audio_play()
+            }
+        }, false);
+        c_next.addEventListener('click', function() {
+            next = 1;
+            audio_play()
+        }, false);
+        c_like.addEventListener('click', function() {
+            if (c_like.hasAttribute('meow')) {
+                update_fav(1, 1)
+            } else {
+                update_fav(1, 0)
+            }
+        }, false);
+        c_dislike.addEventListener('click', function() {
+            if (c_dislike.hasAttribute('meow')) {
+                update_fav(2, 1)
+            } else {
+                update_fav(2, 0)
+            }
+        }, false);
+        c_volume_icon.addEventListener('click', function() {
+            if (c_volume_range.hasAttribute('disabled')) {
+                c_volume_range.removeAttribute('disabled');
+                $.css(c_volume_range, 'opacity: 1');
+                audio.volume = volume / 100;
+                update_volume_icon(volume)
+            } else {
+                volume = audio.volume * 100;
+                c_volume_icon.innerHTML = '静';
+                c_volume_range.setAttribute('disabled', 'disabled');
+                $.css(c_volume_range, 'opacity: 0.75');
+                audio.volume = 0;
+            }
+        }, false);
+        c_volume_range.addEventListener('change', function() {
+            volume = c_volume_range.value;
+            audio.volume = volume / 100;
+            update_volume_icon(volume);
+            setting.volume = volume;
+            localStorage.setItem('moefm-html5-setting', JSON.stringify(setting))
+        }, false);
+        c_share.addEventListener('click', share, false);
+        timeline.addEventListener('mouseup', function(event) {
+            audio.currentTime = (event.clientX / document.body.clientWidth) * audio.duration
+        }, false);
+        aside_album.addEventListener('click', function() {
+            p = 0;
+            update_playlist('fav=music')
+        }, false);
+        aside_song.addEventListener('click', function() {
+            p = 0;
+            update_playlist('fav=song')
+        }, false);
+        aside_radio.addEventListener('click', function() {
+            p = 0;
+            update_playlist('fav=radio')
+        }, false);
+        aside_random.addEventListener('click', function() {
+            p = 0;
+            url_data = null;
+            update_playlist()
+        }, false);
+        background_preload.addEventListener('load', function() {
+            $.css($('html'), 'background-image: url(' + background_preload.src + ')')
+        }, false);
+        background_preload.addEventListener('error', function() {
+            update_error('background', '获取背景图片时发生错误');
+        }, false);
+        link_setting_background.addEventListener('click', function() {
+            var div = $.D.m('div'),
+            div2 = $.D.m('div'),
+            t = $.D.m('textarea'),
+            b = $.D.m('button');
+            div.className = 'setting_background_panel';
+            div2.className = 'setting_background_panel_background';
+            div2.title = '点击黑色区域以退出';
+            b.innerHTML = '确定';
+            t.setAttribute('title', '请在文本框内输入图片地址，以回车间隔，一行一个');
+            t.setAttribute('autofocus', 'autofocus');
+            $.D.a(div ,t);
+            $.D.a(div, b);
+            if (background_list.length != 0) {
+                t.value = background_list.join('\n')
+            };
+            $.D.a(div);
+            $.D.a(div2);
+            div2.addEventListener('click', function() {
+                setTimeout(function() {
+                    $.D.d(div);
+                    setTimeout(function() {
+                        $.D.d(div2);
+                    }, 200)
+                }, 200)
+            }, false);
+            b.addEventListener('click', function() {
+                var l = t.value.split('\n'),
+                r = [];
+                for (var i = 0; i < l.length; i++) {
+                    if (l != '') {
+                        r.push(l[i])
+                    }
+                };
+                background_list = r;
+                div2.click();
+                update_background();
+                setting.background = r;
+                localStorage.setItem('moefm-html5-setting', JSON.stringify(setting))
+            }, false)
+        }, false);
+        link_about.addEventListener('click', about, false);
+        album.addEventListener('click', function() {
+            if (confirm('播放专辑『' + playlist[count].wiki_title + '』？') == true) {
+                update_playlist('music=' + playlist[count].wiki_id)
+            }
+        }, false);
+        window.addEventListener('keydown', function(e) {
+            switch (e.keyCode) {
+                case 32:
+                    audio.paused == false ? audio.pause() : audio.play();
+                    break;
+                case 39:
+                    next = 1;
+                    audio_play();
+                    break;
+                case 38:
+                    c_like.click();
+                    break;
+                case 40:
+                    c_dislike.click();
+                    break;
+                case 37:
+                    next = 1;
+                    count -= 2;
+                    audio_play();
+                    //穿越OAO();
+                    break;
+                case 13:
+                    穿越OAO();
+                    break;
+            }
+        }, false);
+        if (location.hash.indexOf('accessToken') >= 0) {
+            localStorage.setItem('accessToken', location.hash.match(/accessToken=([0-9a-f]{41})/)[1]);
+            localStorage.setItem('accessTokenSecret', location.hash.match(/accessTokenSecret=([0-9a-f]{32})/)[1]);
+        };
         if (localStorage.getItem('accessToken')) {
             check_login()
         } else {
             set_login();
             start()
+        };
+        if (location.hash.indexOf('currentTime') >= 0) {
+            audio.onplay = function() {
+                audio.currentTime = location.hash.match(/currentTime=([0-9.]+)/)[1];
+                audio.onplay = null
+            }
+        };
+        c_volume_range.value = volume;
+        audio.volume = volume / 100;
+        update_volume_icon(volume);
+        if (location.hash.indexOf('background=0') < 0) {
+            update_background();
+            update_background_count(1);
+            window.addEventListener('focus', function() {
+                update_background_count(1)
+            }, false);
+            window.addEventListener('blur', function() {
+                update_background_count(0)
+            }, false)
+        };
+        if (location.search.indexOf('loop=1') > 0) {
+            is_loop = 1
         };
         console.log($.unicode.decToHex('ed984f8b6cce5f0d28f8db7cf04f845e05432dd3a') + '\n\n' + $.unicode.decToHex('bf0fc9bfd00f81f0add5e5adb81d5f20'))
     </script>
