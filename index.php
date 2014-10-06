@@ -1,10 +1,9 @@
 <?php
-if($_SERVER['REQUEST_SCHEME'] == 'https') {
+/*if($_SERVER['REQUEST_SCHEME'] == 'https') {
     header('Location:http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
     exit();
-}
-define('DEBUG', true);
-define('DIR_SAFE', true);
+}*/
+// define('DEBUG', true);
 define('APP_PATH', './App/');
 /*****************本地测试用*******************/
 
