@@ -832,8 +832,12 @@
                 cover_retry = 0
             }
         }, false);
-        c_play.addEventListener('click', audio.play(), false);
-        c_pause.addEventListener('click', audio.pause(), false);
+        c_play.addEventListener('click', function {
+            audio.play()
+        }, false);
+        c_pause.addEventListener('click', function() {
+            audio.pause()
+        }, false);
         c_previous.addEventListener('click', function() {
             if (count > 0) {
                 next = 1;
