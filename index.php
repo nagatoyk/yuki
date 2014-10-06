@@ -1,3 +1,8 @@
 <?php
-echo '<pre>';
-print_r($_SERVER);
+define('DEBUG', true);
+define('DIR_SAFE', true);
+define('APP_PATH', './App/');
+/*****************本地测试用*******************/
+
+/*****************本地测试用*******************/
+include './hdphp/hdphp.php';
