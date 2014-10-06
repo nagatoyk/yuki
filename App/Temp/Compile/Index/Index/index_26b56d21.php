@@ -1,0 +1,41 @@
+<?php if(!defined("HDPHP_PATH"))exit;C("SHOW_NOTICE",FALSE);?><!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用HDPHP框架</title>
+    <style type="text/css">
+        div#main {
+            padding: 20px 50px;
+            font-family: '微软雅黑';
+            color:#333;
+        }
+
+        div#main h1 {
+            font-size: 100px;
+            font-weight: normal;
+            margin: 0px;
+            padding-bottom: 30px;
+        }
+
+        div#main div.hdphp {
+            font-size: 40px;
+            color: #333;
+        }
+
+        div#main div.path {
+            font-size: 26px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <h1>:)</h1>
+
+    <div class="hdphp">欢迎使用 <b>HDPHP </b>!</div>
+    <div class="path">
+        [ 您现在访问的是<?php echo MODULE;?>模块的<?php echo CONTROLLER;?>控制器<?php echo ACTION;?>动作 ]
+    </div>
+</div>
+</body>
+</html>
