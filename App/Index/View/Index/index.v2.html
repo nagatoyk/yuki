@@ -160,11 +160,6 @@
                 if (count > playlist.length-5) {
                     update_playlist(null, false)
                 }
-                /*if (_check_music == true) {
-                    check_file_exist(playlist[count+1].url)
-                } else if (_preload_music == true) {
-                    preload_music(playlist[count+1].url)
-                }*/
             } else if(is_loop) {
                 count = 0;
                 audio.src = playlist[count].url;
@@ -175,7 +170,7 @@
         },
         update_info = function() {
             cover_retry = 0;
-            if(cover_preload.src != playlist[count].cover.large) {
+            if (cover_preload.src != playlist[count].cover.large) {
                 $.css(cover_loading_notification, 'opacity: 1')
             };
             cover_preload.src = playlist[count].cover.large;
@@ -222,7 +217,9 @@
                 c_dislike.removeAttribute('hidden')
             };
             if (playlist[count].fav_wiki) {
-                if(playlist[count].fav_wiki.fav_type == 1) album.innerHTML = '(♥) ' + playlist[count].wiki_title || '&nbsp;'
+                if (playlist[count].fav_wiki.fav_type == 1) {
+                    album.innerHTML = '(♥) ' + playlist[count].wiki_title || '&nbsp;'
+                }
             }
         },
         update_error = function(t, c) {
@@ -257,9 +254,9 @@
             div.innerHTML = context;
             $.D.a(div);
             $.css(div, 'opacity: 1;bottom: 30px');
-            setTimeout(function(){
+            setTimeout(function() {
                 $.css(div, 'opacity: 0;bottom: 0px');
-                setTimeout(function(){
+                setTimeout(function() {
                     $.D.d(div)
                 }, 1000)
             }, 5000)
@@ -301,9 +298,6 @@
                 consumerSecret: cs,
                 token: accessToken,
                 tokenSecret: accessTokenSecret,
-                // fav_type: d,
-                // fav_obj_type: 'song',
-                // fav_obj_id: playlist[count].sub_id
             };
             xhr.onreadystatechange = function(){
                 if (xhr.readyState == 4) {
@@ -365,9 +359,6 @@
                         p = 1
                     }
                 };
-                /*if (m != null && m == true) {
-                    is_update = 0
-                };*/
                 playlist_fetching = 1;
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
@@ -375,9 +366,7 @@
                         if (xhr.status == 200) {
                             if (JSON.parse(xhr.responseText).playlist) {
                                 playlist_fetching = 0;
-                                // count = -1;
                                 if (k == false && is_update == 1) {
-                                    // playlist = /*playlist.concat(*/JSON.parse(xhr.responseText).playlist/*)*/;
                                     for (var i = 0, j = JSON.parse(xhr.responseText).playlist; i < j.length; i++) {
                                         playlist.push(j[i])
                                     };
@@ -387,7 +376,6 @@
                                         p = 0;
                                         url_data = null
                                     }
-                                    // count= -1;
                                 } else {
                                     playlist = JSON.parse(xhr.responseText).playlist;
                                     if (JSON.parse(xhr.responseText).info.may_have_next == true) {
@@ -396,42 +384,13 @@
                                         p = 0;
                                         url_data = null
                                     }
-                                    // count = -1;
                                 };
                                 if (k != false) {
                                     audio_play()
                                 }
-                                /*playlist = JSON.parse(xhr.responseText).playlist;
-                                playlist_fetching = 0;
-                                count = -1;
-                                if (p != 0) {
-                                    if (JSON.parse(xhr.responseText).info.may_have_next == true) {
-                                        p++
-                                    } else {
-                                        p = 0;
-                                        url_data = null
-                                    }
-                                };
-                                audio_play()*/
                             } else if (JSON.parse(xhr.responseText).response.playlist) {
                                 playlist_fetching = 0;
-                                // count = -1;
-                                /*if (p != 0) {
-                                    playlist = JSON.parse(xhr.responseText).response.playlist;
-                                    count = -1;
-                                    if (JSON.parse(xhr.responseText).response.information.may_have_next == true) {
-                                        p++
-                                    } else {
-                                        p = 0;
-                                        url_data = null
-                                    }
-                                } else {
-                                    playlist = JSON.parse(xhr.responseText).response.playlist;
-                                    count = -1
-                                };
-                                audio_play()*/
                                 if (k == false && is_update == 1) {
-                                    // playlist = /*playlist.concat(*/JSON.parse(xhr.responseText).playlist/*)*/;
                                     for (var i = 0, j = JSON.parse(xhr.responseText).response.playlist; i < j.length; i++){
                                         playlist.push(j[i])
                                     };
@@ -441,7 +400,6 @@
                                         p = 0;
                                         url_data = null
                                     }
-                                    // count = -1
                                 } else {
                                     playlist = JSON.parse(xhr.responseText).response.playlist;
                                     if (JSON.parse(xhr.responseText).response.information.may_have_next == true) {
@@ -450,7 +408,6 @@
                                         p = 0;
                                         url_data = null
                                     }
-                                    // count = -1
                                 }
                                 if (k != false) {
                                     audio_play()
@@ -486,7 +443,9 @@
                         var url='http://moe.fm/listen/playlist?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
                     };
                     console.log(url);
-                    console.log(generateOauthUrl(url,options));
+                    if (typeof is_login != 'undefined' && is_login == true) {
+                        console.log(generateOauthUrl(url, options))
+                    };
                     xhr.open('GET', generateOauthUrl(url, options))
                 } else {
                     if (url_data == null) {
@@ -536,7 +495,7 @@
                     } else {
                         background_count_time_value++
                     }
-                },1000)
+                }, 1000)
             } else {
                 clearInterval(background_count_time)
             }
@@ -550,7 +509,7 @@
             div.innerHTML = '<button onclick="var p = prompt(\'请按下 Ctrl + C 以复制，点击确定可跳转至该页面，点击取消返回。\',\'' + playlist[count].sub_url + '#' + playlist[count].sub_title + ' | 萌否电台\');if (p != null) {window.open(\'' + playlist[count].sub_url + '\', \'information\');return false}">复制当前曲目地址</button><button onclick="var p = prompt(\'请按下 Ctrl + C 以复制，点击确定可跳转至该页面，点击取消返回。\', \'' + playlist[count].wiki_url + '#'+playlist[count].wiki_title + ' | 萌否电台\');if (p!=null) {window.open(\'' + playlist[count].wiki_url + '\',\'information\');return false)">复制当前专辑地址</button><span class="share_buttons">' + playlist[count].share_buttons + '</span>';
             $.D.a(div);
             $.D.a(div2);
-            div2.addEventListener('click',function(){
+            div2.addEventListener('click', function(){
                 setTimeout(function() {
                     $.D.d(div);
                     setTimeout(function() {
