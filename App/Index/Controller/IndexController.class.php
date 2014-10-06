@@ -1,11 +1,18 @@
 <?php
-//测试控制器类
+/**
+ * 前台
+ */
 class IndexController extends Controller{
-    //动作方法
+    /**
+     * 初始化
+     */
+    public function __construct(){
+        parent::__construct();
+    }
+    /**
+     * 首页
+     */
     public function index(){
-        //显示视图
-        p($_SERVER);
-        p($GLOBALS);
         $this->display();
     }
 }
