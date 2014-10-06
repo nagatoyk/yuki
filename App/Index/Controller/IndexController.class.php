@@ -5,6 +5,7 @@ class IndexController extends Controller{
     public function index(){
         //显示视图
         p($_SERVER);
+        p($GLOBALS);
         $this->display();
     }
 }
