@@ -703,16 +703,7 @@
                                 xhr2.open('GET', generateOauthUrl(url, options));
                                 xhr2.send()
                             });
-                            f = $.D.m('form');
-                            f.setAttribute('action', re_url);
-                            f.setAttribute('method', 'GET');
-                            f.setAttribute('target', '_blank');
-                            $.D.a(f);
-                            f.submit();
-                            setTimeout(function(){
-                                $.D.d(f)
-                            }, 1000);
-                            // window.open(re_url, 'authorized');
+                            window.open(re_url, 'authorized');
                         } else {
                             update_error('login', 'XHR Ready State: ' + xhr.readyState + '<br>XHR Status: ' + xhr.statusText)
                         }
