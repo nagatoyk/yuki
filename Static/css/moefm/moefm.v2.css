@@ -1,6 +1,6 @@
 @font-face {
     font-family:moefm-html5-icomoon;
-    src:url('../font/moefm-html5-icomoon.ttf')
+    src:url('../../font/moefm-html5-icomoon.ttf')
 }
 html,body {
     width:100%;
