@@ -725,6 +725,24 @@
                 }
             }
         },
+        about = function() {
+            var div = $.D.m('div'),
+            div2 = $.D.m('div');
+            div.className = 'about_panel';
+            div2.className = 'about_panel_background';
+            div2.title = '点击黑色区域以退出';
+            div.innerHTML = '<strong>MoeFM HTML5 Project (Beta)</strong><br>萌否电台 HTML5 版本（非官方）<br>作者：<a href="http://moefou.org/home/864907600cc" target="_blank">864907600cc</a><br>致谢：<a href="http://blog.likelikeslike.com/" target="_blank">Jak Wings</a>（提供萌否 OAuth 认证 example）、<a href="http://moefou.org/home/zanko" target="_blank">zanko</a>（提供 API 使用支持）<br>桌面设备测试：Chrome 32/33 (Windows 7 64-bit/Ubuntu 13.10 64-bit)、Firefox 25 (Windows 7 64-bit)、Internet Explorer (Windows 7 64-bit)<br>移动设备测试：Android 自带浏览器（Android 4.1/4.3）、UC 浏览器（Android 2.2/4.3，不完全支持）、海豚浏览器（Android 4.3）<br>Powered by <a href="http://moe.fm" target="_blank">Moe.FM</a> | Hosted on <a href="https://www.openshift.com">OpenShift</a><br><p><a href="http://moefou.org/group/moefm_html5_project" target="_blank">项目小组</a> <a href="http://moefou.org/topic/1730" target="_blank">Bug 反馈</a></p>';
+            $.D.a(div);
+            $.D.a(div2);
+            div2.addEventListener('click', function(){
+                setTimeout(function() {
+                    $.D.d(div);
+                    setTimeout(function() {
+                        $.D.d(div2)
+                    }, 200)
+                }, 200)
+            })
+        },
         start = function() {
             if (location.search.indexOf('song') >= 0) {
                 update_playlist(location.search.match(/song=[0-9,]*/)[0])
