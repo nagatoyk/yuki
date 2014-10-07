@@ -8,7 +8,6 @@
         if (window.opener) {
             window.opener.document.getElementsByClassName('login_verifier')[0].value = verifier;
             window.opener.document.getElementsByClassName('login_confirm_last')[0].click();
-            window.opener.fm.user.check();
             window.close();
         } else {
             prompt('请复制下面的验证码并贴入播放页指定文本框以完成验证', verifier);
