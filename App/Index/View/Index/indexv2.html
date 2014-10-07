@@ -531,7 +531,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				});
 				$('.login_confirm').bind('click', function() {
 					div.html('正在拉取授权数据，请耐心等待......');
-					window.open('{|U:"request_token"}', 'authorize');
+					window.open('{|U:"request_token"}', '_blank', 'authorize', 'resizable=0,scrollbars=0,width=800,height=600');
 					div.html('请在新弹出的页面中完成授权，完成授权后请复制萌否开放平台提供的验证码，并粘贴于下面的文本框中。<br>如果浏览器未弹出授权页面，请手动<a href="{|U:"request_token"}" target="_blank">点击此处</a>打开授权页面。<br>请于 1 小时内完成授权。<br><input type="text" placeholder="请在此输入验证码" class="login_verifier"><br><button class="login_confirm_last">确定</button>');
 					$('.login_confirm_last').bind('click', function() {
 						$.ajax({
@@ -640,8 +640,8 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					if (audio[0].buffered.length>0) {
 						timeline_duration.width((audio[0].buffered.end(audio[0].buffered.length-1).toFixed(2)) / (audio[0].duration.toFixed(2)) * 100 + '%')
 					};
-					timeline_current_time.html(parseInt(audio[0].currentTime / 60) + ':' + (parseInt(audio[0].currentTime) % 60 < 10 ? '0' + parseInt(audio[0].currentTime) % 60 : parseInt(audio.currentTime) % 60));
-					timeline_duration_time.html(parseInt(audio[0].duration / 60) + ':' + (parseInt(audio[0].duration) % 60 < 10 ? '0' + parseInt(audio[0].duration) % 60 : parseInt(audio.duration) % 60))
+					timeline_current_time.html(parseInt(audio[0].currentTime / 60) + ':' + (parseInt(audio[0].currentTime) % 60 < 10 ? '0' + parseInt(audio[0].currentTime) % 60 : parseInt(audio[0].currentTime) % 60));
+					timeline_duration_time.html(parseInt(audio[0].duration / 60) + ':' + (parseInt(audio[0].duration) % 60 < 10 ? '0' + parseInt(audio[0].duration) % 60 : parseInt(audio[0].duration) % 60))
 				}
 			});
 			audio.bind('error', function() {
