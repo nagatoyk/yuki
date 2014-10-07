@@ -15,4 +15,22 @@ class IndexController extends Controller{
     public function index(){
         $this->display('index.v2.html');
     }
+    /**
+     * 抓取
+     */
+    public function catch_listen(){
+        header('Content-Type:application/json;charset=utf-8');
+        $url = 'http://moe.fm/listen/playlist?';
+        echo $this->curl($url.$_SERVER['QUERY_STRING']);
+
+    }
+    private function curl($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
 }

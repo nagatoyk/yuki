@@ -438,9 +438,9 @@
                         tokenSecret: accessTokenSecret
                     };
                     if (url_data == null) {
-                        var url = 'http://moe.fm/listen/playlist?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
+                        var url = '{|U:'Index/Index/catch_listen'}?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
                     } else {
-                        var url='http://moe.fm/listen/playlist?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
+                        var url='{|U:'Index/Index/catch_listen'}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
                     };
                     console.log(url);
                     if (typeof is_login != 'undefined' && is_login == true) {
@@ -449,9 +449,9 @@
                     xhr.open('GET', generateOauthUrl(url, options))
                 } else {
                     if (url_data == null) {
-                        xhr.open('GET', 'http://moe.fm/listen/playlist?share_buttons=1&perpage=30&_=' + new Date().getTime())
+                        xhr.open('GET', '{|U:'Index/Index/catch_listen'}?share_buttons=1&perpage=30&_=' + new Date().getTime())
                     } else {
-                        xhr.open('GET', 'http://moe.fm/listen/playlist?share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime())
+                        xhr.open('GET', '{|U:'Index/Index/catch_listen'}?share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime())
                     }
                 };
                 xhr.send()
