@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>萌否电台html5</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<!--[if lt IE 10]>
+<script>
+alert('很抱歉，看起来您的浏览器版本过老了……\n请使用 IE 10 及以上版本，建议使用 IE 11');
+window.location.href='http://moe.fm/listen'+window.location.search;
+</script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/moefm.v3.css">
+<jquery></head>
+
+<body>
+	<section>
+		<audio autoplay="true" class="audio"></audio>
+		<div class="cover">
+			<div class="control2">
+				<span class="c_play" title="播放" hidden="hidden">播</span>
+				<span class="c_pause" title="暂停">停</span>
+			</div>
+			<img class="cover_preload" width="0" height="0">
+			<div class="cover_loading_notification"></div>
+		</div>
+		<div class="info">
+			<ul>
+				<li class="title">Title</li>
+				<li class="artist">Artist</li>
+				<li class="album">Album</li>
+			</ul>
+		</div>
+		<div class="control">
+			<span class="c_previous" title="上一曲">上</span>
+			<span class="c_next" title="下一曲">下</span>
+			<span class="c_like" title="喜欢">藏</span>
+			<span class="c_dislike" title="抛弃">弃</span>
+			<span class="c_volume" title="音量">
+				<span class="c_volume_icon">大</span>
+				<input class="c_volume_range" type="range">
+			</span>
+			<span class="c_share" title="分享">享</span>
+		</div>
+		<div class="timeline">
+			<div class="timeline_duration"></div>
+			<div class="timeline_current"></div>
+			<div class="timeline_duration_time"></div>
+			<div class="timeline_current_time"></div>
+		</div>
+	</section>
+	<aside>
+		<ul>
+			<li class="aside_album">我收藏的专辑</li>
+			<li class="aside_song">我喜欢的曲目</li>
+			<li class="aside_radio">我收藏的电台</li>
+			<li class="aside_random">魔力播放</li>
+		</ul>
+	</aside>
+	<footer>
+		<div class="link_left">
+			<a href="http://moe.fm/" target="_blank">电台首页</a>
+			<a href="http://moefm.ccloli.com">开始聆听</a>
+			<a href="http://moe.fm/explore" target="_blank">发现音乐</a>
+			<a href="http://moe.fm/about/client" target="_blank">客户端</a>
+			<a href="http://moefou.org/group/moefm" target="_blank">电台小组</a>
+		</div>
+		<div class="link_right">
+			<!--<span class="link_setting">设置</span>-->
+			<span class="link_about">关于本站</span>
+			<span class="link_setting_background">设置背景</span>
+			<div class="link_right_user"></div>
+		</div>
+		<img class="background_preload" width="0" height="0">
+	</footer>
+	<script type="text/javascript">
+		window.onerror = function(errorMessage, scriptURL, lineNumber) {
+			console.log(errorMessage, scriptURL, lineNumber)
+		};
+		$(function() {
+			var audio_pretest = $('.audio')[0];
+			if (audio_pretest.canPlayType('audio/mpeg') == '') {
+				alert('很抱歉，看起来您的浏览器不支持 MPEG (MP3) 文件……\n支持 MPEG 编码的浏览器请参考 http://caniuse.com/#feat=mpeg4');
+				window.location.href = 'http://moe.fm/listen' + window.location.search;
+				throw 'It seems that the browser doesn\'t support MPEG media...';
+			};
+			var setting = JSON.parse(localStorage.getItem('moefm-html5-setting')) || {},
+			audio = $('.audio'),
+			cover = $('.cover'),
+			cover_preload = $('.cover_preload'),
+			cover_loading_notification = $('.cover_loading_notification'),
+			title = $('.title'),
+			artist = $('.artist'),
+			album = $('.album'),
+			c_play = $('.c_play'),
+			c_pause = $('.c_pause'),
+			c_previous = $('.c_previous'),
+			c_next = $('.c_next'),
+			c_like = $('.c_like'),
+			c_dislike = $('.c_dislike'),
+			c_volume = $('.c_volume'),
+			c_volume_icon = $('.c_volume_icon'),
+			c_volume_range = $('.c_volume_range'),
+			c_share = $('.c_share'),
+			timeline = $('.timeline'),
+			timeline_duration = $('.timeline_duration'),
+			timeline_current = $('.timeline_current'),
+			timeline_duration_time = $('.timeline_duration_time'),
+			timeline_current_time = $('.timeline_current_time'),
+			link_right_user = $('.link_right_user'),
+			aside_album = $('.aside_album'),
+			aside_song = $('.aside_song'),
+			aside_radio = $('.aside_radio'),
+			aside_random = $('.aside_random'),
+			background_preload = $('.background_preload'),
+			link_setting_background = $('.link_setting_background'),
+			link_about = $('.link_about'),
+			playlist = [],
+			playlist_fetching = 0,
+			count = -1,
+			volume = setting.volume || 80,
+			next = 0,
+			url_data = undefined,
+			cover_retry = 0,
+			login_retry = 0,
+			p = 0,
+			background_list = setting.background || [],
+			background_count_time = undefined,
+			background_count_time_value = 0,
+			loop = setting.loop,
+			is_login = false,
+			accessToken = localStorage.getItem('accessToken'),
+			accessTokenSecret = localStorage.getItem('accessTokenSecret');
+			audio_play = function(c) {
+				if (c == null) {
+					c = 1;
+				};
+				if (count < playlist.length - 1) {
+					count += c;
+					audio[0].src = playlist[count].url;
+					update_info();
+					if (count > playlist.length-5) {
+						update_playlist(null, false)
+					}
+					/*if (_check_music == true) {
+						check_file_exist(playlist[count+1].url)
+					} else if (_preload_music == true) {
+						preload_music(playlist[count+1].url)
+					}*/
+				} else if(loop) {
+					count = 0;
+					audio[0].src = playlist[count].url;
+					update_info()
+				} else {
+					update_playlist(null, false)
+				}
+			};
+			update_info = function() {
+				cover_retry = 0;
+				if(cover_preload[0].src != playlist[count].cover.large) {
+					cover_loading_notification.css('opacity', 1)
+				};
+				cover_preload[0].src = playlist[count].cover.large;
+				if (c_like.attr('meow')) {
+					c_like.removeAttr('meow')
+				};
+				if (c_dislike.attr('meow')) {
+					c_dislike.removeAttr('meow')
+				};
+				if (location.search.indexOf('music=') >= 0 ? location.search.split('music=')[1].split('&')[0].indexOf(playlist[count].wiki_id) < 0 : (location.search.indexOf('song=') >= 0 ? location.search.split('song=')[1].split('&')[0].indexOf(playlist[count].sub_id) < 0 : location.search.indexOf('radio=') < 0)) {
+					window.history.replaceState(null, '', '?song=' + playlist[count].sub_id)
+				};
+				if (playlist[count].sub_title) {
+						title.attr('title', playlist[count].sub_title);
+					title.html(playlist[count].sub_title);
+					document.title = playlist[count].sub_title + ' | 萌否电台'
+				} else {
+					title.html(null);
+					document.title = '收听音乐 | 萌否电台'
+				};
+				if (playlist[count].artist) {
+					artist.html(playlist[count].artist);
+					artist.attr('title', playlist[count].artist)
+				} else {
+					artist.html(null)
+				};
+				if (playlist[count].wiki_title) {
+					album.html(playlist[count].wiki_title);
+					album.attr('title', playlist[count].wiki_title)
+				} else {
+					album.html(null)
+				};
+				if (playlist[count].fav_sub != null) {
+					if (playlist[count].fav_sub.fav_type == 1) {
+						c_like.attr('meow', '1');
+						c_dislike.attr('hidden', 'hidden')
+					}
+					if (playlist[count].fav_sub.fav_type == 2) {
+						c_dislike.attr('meow', '1');
+						c_like.attr('hidden', 'hidden')
+					}
+				} else {
+					c_like.removeAttr('hidden');
+					c_dislike.removeAttr('hidden')
+				};
+				if (playlist[count].fav_wiki) {
+					if(playlist[count].fav_wiki.fav_type == 1) {
+						album.html('(♥) ' + playlist[count].wiki_title || '&nbsp;')
+					}
+				}
+			};
+			update_error = function(t, c) {
+				var div = $('<div/>'), context;
+				div.addClass('error_notification');
+				switch (t) {
+					case 'audio':
+						context = '播放音频时发生错误<br>' + c;
+						break;
+					case 'log':
+						context = '记录播放历史失败<br>' + c;
+						break;
+					case 'fav':
+						context = '添加收藏/抛弃记录失败<br>' + c;
+						break;
+					case 'playlist':
+						context = '获取播放列表失败<br>' + c;
+						break;
+					case 'cover':
+						context = '获取专辑图片失败<br>' + c;
+						break;
+					case 'background':
+						context = '获取背景图片失败<br>' + c;
+						break;
+					case 'login':
+						context = '获取登录数据失败<br>' + c;
+						break;
+					default:
+						context = 'Seems that something lovely goes wrong...<br>' + c
+				};
+				div.html(context);
+				$('body').append(div);
+				div.css({'opacity': 1, 'bottom': '30px'});
+				setTimeout(function() {
+					div.css({'opacity': 0, 'bottom': '0px'});
+					setTimeout(function(){
+						div.remove()
+					}, 1000)
+				}, 5000)
+			},
+			update_log = function() {
+				if (is_login == true) {
+					$.ajax({
+						url: '{|U:"my_log"}?api=json&log_obj_type=sub&log_type=listen&obj_type=song&obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+						type: 'get',
+						dataType: 'json',
+						success: function(re) {
+							update_error('log', re.response.msg)
+						},
+						error: function(er) {
+							update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+						}
+					})
+				}
+			};
+			update_fav = function(t, d) {
+				$.ajax({
+					url: '{|U:"fav"}?method=' + (d == 0 ? 'add' : 'delete') + '&fav_type=' + t + '&fav_obj_type=song&fav_obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+					type: 'get',
+					dataType: 'json',
+					success: function(re) {
+						if (re.status == false) {
+							update_error('fav', re.msg)
+						} else {
+							switch (t) {
+								case 1:
+									switch (d) {
+										case 1:
+											c_like.removeAttr('meow');
+											c_dislike.removeAttr('hidden', 'hidden');
+											playlist[count].fav_sub = null;
+											break;
+										case 0:
+											c_like.attr('meow','1');
+											c_dislike.attr('hidden', 'hidden');
+											playlist[count].fav_sub = {};
+											playlist[count].fav_sub.fav_type = 1;
+											break;
+									}
+									break;
+								case 2:
+									switch (d) {
+										case 1:
+											c_like.removeAttr('hidden', 'hidden');
+											c_dislike.removeAttr('meow');
+											playlist[count].fav_sub = null;
+											break;
+										case 0:
+											c_like.attr('hidden', 'hidden');
+											c_dislike.attr('meow','1');
+											playlist[count].fav_sub = {};
+											playlist[count].fav_sub.fav_type = 2;
+											break;
+									}
+									break;
+							}
+						}
+					},
+					error: function(er) {
+							update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+					}
+				})
+			};
+			update_playlist = function(d, k, m) {
+				if (playlist_fetching == 0) {
+					var is_update = 1;
+					if (d != null) {
+						url_data = d;
+						is_update = 0;
+						count = -1;
+						if (/\d+/.test(d)) {
+							p = 1
+						}
+					};
+					playlist_fetching = 1;
+					if (is_login == true) {
+						if (url_data == null) {
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime()
+						} else {
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime()
+						}
+					} else {
+						if (url_data == null) {
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
+						} else {
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
+						}
+					};
+					$.ajax({
+						url: listen,
+						type: 'get',
+						dataType: 'json',
+						success: function(re) {
+							if (re.playlist) {
+								playlist_fetching = 0;
+								if (k == false && is_update == 1) {
+									for (var i = 0, j = re.playlist; i < j.length; i++) {
+										playlist.push(j[i])
+									};
+									if (re.info.may_have_next == true) {
+										p++
+									} else {
+										p = 0;
+										url_data = null
+									}
+								} else {
+									playlist = re.playlist;
+									if (re.info.may_have_next == true) {
+										p++
+									} else {
+										p = 0;
+										url_data = null
+									}
+								};
+								if (k != false) {
+									audio_play()
+								}
+							} else if (re.response.playlist) {
+								playlist_fetching = 0;
+								if (k == false && is_update == 1) {
+									for (var i = 0, j = re.response.playlist; i < j.length; i++){
+										playlist.push(j[i])
+									};
+									if (re.response.information.may_have_next == true){
+										p++
+									} else {
+										p = 0;
+										url_data = null
+									}
+								} else {
+									playlist = re.response.playlist;
+									if (re.response.information.may_have_next == true) {
+										p++
+									} else {
+										p = 0;
+										url_data = null
+									}
+								}
+								if (k != false) {
+									audio_play()
+								}
+							} else if (re.response.error) {
+								update_error('playlist', re.response.error.message)
+							}
+						},
+						error: function(er) {
+							update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+						}
+					})
+				}
+			};
+			update_volume_icon = function(v) {
+				if (v > 66) {
+					c_volume_icon.html('大')
+				} else if (v > 33){
+					c_volume_icon.html('中')
+				} else {
+					c_volume_icon.html('小')
+				}
+			};
+			update_background = function() {
+				if (background_list.length == 0) {
+					$.ajax({
+						url: 'http://moefm.ccloli.com/background/',
+						type: 'get',
+						dataType: 'json',
+						success: function(re) {
+							background_list = re.background_list;
+							update_background()
+						},
+						error: function(er) {
+							update_error('background', '获取背景图片列表失败<br>XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+						}
+					})
+				} else {
+					var num = parseInt(Math.random() * (background_list.length - 1));
+					background_preload[0].src = background_list[num]
+				}
+			};
+			update_background_count = function(v) {
+				if (v == 1) {
+					background_count_time = setInterval(function() {
+						if (background_count_time_value >= 60) {
+							update_background();
+							background_count_time_value = 0
+						} else {
+							background_count_time_value++
+						}
+					},1000)
+				} else {
+					clearInterval(background_count_time)
+				}
+			};
+			share = function() {
+				var div = $('<div/>'),
+				div2 = $('<div/>');
+				div.addClass('share_panel');
+				div2.addClass('share_panel_background');
+				div2.attr('title', '点击黑色区域以退出');
+				btn = '<button onclick="var p = prompt(\'请按下 Ctrl + C 以复制，点击确定可跳转至该页面，点击取消返回。\',\'' + playlist[count].sub_url + '#' + playlist[count].sub_title + ' | 萌否电台\');if (p != null) {window.open(\'' + playlist[count].sub_url + '\', \'information\');return false}">复制当前曲目地址</button>';
+				btn += '<button onclick="var p = prompt(\'请按下 Ctrl + C 以复制，点击确定可跳转至该页面，点击取消返回。\', \'' + playlist[count].wiki_url + '#'+playlist[count].wiki_title + ' | 萌否电台\');if (p!=null) {window.open(\'' + playlist[count].wiki_url + '\',\'information\');return false}">复制当前专辑地址</button><span class="share_buttons">' + playlist[count].share_buttons + '</span>';
+				div.html(btn);
+				$('body').append(div);
+				$('body').append(div2);
+				div2.bind('click', function() {
+					setTimeout(function() {
+						div.remove();
+						setTimeout(function() {
+							div2.remove()
+						}, 200)
+					}, 200)
+				})
+			};
+			set_login = function() {
+				link_right_user.html('<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">注册</a><a class="right">登入</a>');
+				$('aside').hide();
+				link_right_user.bind('click', login)
+			};
+			check_login = function() {
+				link_right_user.html('正在获取用户信息......');
+				$.ajax({
+					url: '{|U:"check_login"}?oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+					type: 'get',
+					dataType: 'json',
+					success: function(json) {
+						if (!json.response.error) {
+							is_login = true;
+							data = json.response.user;
+							link_right_user.html(null);
+							var user_btn = $('<span/>');
+							user_btn.html(data.user_nickname);
+							user_btn.addClass('link_right_user_btn');
+							user_btn.appendTo(link_right_user);
+							var user_pan = $('<div/>');
+							user_pan.html('<div style="padding:6px"><div style="float:left"><img class="avatar" style="width:48px;height:48px" src="' + data.user_avatar.small + '" alt=""></div><div style="padding-left:6px;margin-left:48px;width:108px"><a title="个人主页" href="' + data.user_fm_url + '">我的主页</a><a target="_blank" class="external" href="http://moefou.org/user/setting">个人设定</a><a onclick="logout()">登出</a><div style="clear:both"></div></div><div style="clear:both"></div></div>');
+							user_pan.css({'position': 'fixed', 'background': 'rgba(0,0,0,0.5)', 'bottom': '0px', 'right': '10px', 'opacity': 0});
+							user_pan.hide();
+							user_pan.appendTo(user_btn);
+							user_btn.hover(function() {
+								user_pan.show();
+								user_pan.css({'opacity': 1, 'bottom': '20px'})
+							},
+							function() {
+								user_pan.hide();
+								user_pan.css({'opacity': 0, 'bottom': '0px'})
+							});
+							if ($('aside').hide()) {
+								$('aside').show();
+							};
+							if (playlist.length == 0) {
+								start()
+							}
+						} else if (json.response.error.code == 401) {
+							set_login();
+							start()
+						} else {
+							console.log(json.response.error)
+						}
+					},
+					error: function(er) {
+						update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+					}
+				})
+			};
+			login = function() {
+				var div = $('<div/>'),
+				div2 = $('<div/>');
+				div.addClass('login_panel');
+				div2.addClass('login_panel_background');
+				div2.attr('title', '点击黑色区域以退出');
+				div.html('您即将使用您的萌否账号授权登录本站点，授权过程均在萌否服务器完成，本站点不会记录您的密码，但您授权后的 access token 数据将以可能不安全的方式储存在浏览器中。<br>如果您之前已授权却仍被要求重新授权，那么可能是您目前在另一台计算机上，或您曾经清除过浏览器数据集而误清理了 access token。<br><button class="login_confirm">我已了解，开始授权</button>');
+				$('body').append(div);
+				$('body').append(div2);
+				div2.bind('click', function() {
+					setTimeout(function() {
+						div.remove();
+						setTimeout(function() {
+							div2.remove()
+						}, 200)
+					}, 200)
+				});
+				$('.login_confirm').bind('click', function() {
+					div.html('正在拉取授权数据，请耐心等待......');
+					window.open('{|U:"request_token"}', 'authorize');
+					div.html('请在新弹出的页面中完成授权，完成授权后请复制萌否开放平台提供的验证码，并粘贴于下面的文本框中。<br>如果浏览器未弹出授权页面，请手动<a href="{|U:"request_token"}" target="_blank">点击此处</a>打开授权页面。<br>请于 1 小时内完成授权。<br><input type="text" placeholder="请在此输入验证码" class="login_verifier"><br><button class="login_confirm_last">确定</button>');
+					$('.login_confirm_last').bind('click', function() {
+						$.ajax({
+							url: '{|U:"access_token"}',
+							type: 'get',
+							data: {
+								oauth_verifier:$('.login_verifier').val()
+							},
+							dataType: 'json',
+							success: function(re) {
+								console.log(re);
+								_r = re.str.split('&');
+								accessToken = _r[0].split('=')[1];
+								accessTokenSecret = _r[1].split('=')[1];
+								console.log(accessToken, accessTokenSecret);
+								localStorage.setItem('accessToken', accessToken);
+								localStorage.setItem('accessTokenSecret', accessTokenSecret);
+								check_login();
+								setTimeout(function() {
+									div.remove();
+									setTimeout(function() {
+										div2.remove()
+									}, 200)
+								}, 200)
+							},
+							error: function(er) {
+								console.log(er.status + '---' + new Date().getTime())
+							}
+						})
+					})
+				})
+			};
+			logout = function() {
+				var c = confirm('您即将登出，在下次登录时需要重新授权，是否继续？');
+				if (c == true) {
+					localStorage.removeItem('accessToken');
+					localStorage.removeItem('accessTokenSecret');
+					set_login();
+					var c = confirm('数据已清除，您已成功登出本站。\n是否需要前往萌否开放平台取消授权？');
+					if (c == true) {
+						window.open('http://open.moefou.org/apps/authorized', 'authorized')
+					}
+				}
+			},
+			about = function() {
+				var div = $('<div/>'),
+				div2 = $('<div/>');
+				div.addClass('about_panel');
+				div2.addClass('about_panel_background');
+				div2.attr('title', '点击黑色区域以退出');
+				div.html('<strong>MoeFM HTML5 Project (Beta)</strong><br>萌否电台 HTML5 版本（非官方）<br>作者：<a href="http://moefou.org/home/864907600cc" target="_blank">864907600cc</a><br>致谢：<a href="http://blog.likelikeslike.com/" target="_blank">Jak Wings</a>（提供萌否 OAuth 认证 example）、<a href="http://moefou.org/home/zanko" target="_blank">zanko</a>（提供 API 使用支持）<br>桌面设备测试：Chrome 32/33 (Windows 7 64-bit/Ubuntu 13.10 64-bit)、Firefox 25 (Windows 7 64-bit)、Internet Explorer (Windows 7 64-bit)<br>移动设备测试：Android 自带浏览器（Android 4.1/4.3）、UC 浏览器（Android 2.2/4.3，不完全支持）、海豚浏览器（Android 4.3）<br>Powered by <a href="http://moe.fm" target="_blank">Moe.FM</a> | Hosted on <a href="https://www.openshift.com">OpenShift</a><br><p><a href="http://moefou.org/group/moefm_html5_project" target="_blank">项目小组</a> <a href="http://moefou.org/topic/1730" target="_blank">Bug 反馈</a></p>');
+				$('body').append(div);
+				$('body').append(div2);
+				div2.bind('click', function() {
+					setTimeout(function() {
+						div.remove();
+						setTimeout(function() {
+							div2.remove()
+						}, 200)
+					}, 200)
+				})
+			},
+			穿越OAO = function() {
+				audio[0].pause();
+				var div = $('<div/>'),
+				div2 = $('<div/>');
+				div.addClass('穿越_panel');
+				div2.addClass('穿越_panel_background');
+				div2.attr('title', '点击黑色区域以退出');
+				div.html('扫描二维码，在移动设备上继续收听，无需重新登录<br><img src="http://moefm.ccloli.com/qr.php?data=' + encodeURIComponent('http://moefm.ccloli.com/?song=' + playlist[count].sub_id + '#' + (accessToken != null ? ('accessToken=' + accessToken + ',accessTokenSecret=' + accessTokenSecret) + ',' : '') + 'currentTime=' + audio.currentTime) + '" alt="" width="180" height="180">');
+				$('body').append(div);
+				$('body').append(div2);
+				div2.bind('click', function() {
+					setTimeout(function() {
+						div.remove();
+						setTimeout(function() {
+							div2.remove()
+						}, 200)
+					}, 200);
+					audio[0].play()
+				})
+			},
+			start = function() {
+				if (location.search.indexOf('song') >= 0) {
+					update_playlist(location.search.match(/song=[0-9,]*/)[0])
+				} else if(location.search.indexOf('music') >= 0) {
+					update_playlist(location.search.match(/music=[0-9,]*/)[0])
+				} else if(location.search.indexOf('radio') >= 0) {
+					update_playlist(location.search.match(/radio=[0-9,]*/)[0])
+				} else {
+					update_playlist()
+				}
+			};
+			audio.bind('play', function() {
+				c_play.hide();
+				c_pause.show();
+				update_info()
+			});
+			audio.bind('pause', function() {
+				c_pause.hide();
+				c_play.show()
+			});
+			audio.bind('timeupdate', function() {
+				if (!isNaN(audio[0].duration)) {
+					timeline_current.width((audio[0].currentTime / audio[0].duration) * 100 + '%');
+					if (audio[0].buffered.length>0) {
+						timeline_duration.width((audio[0].buffered.end(audio[0].buffered.length-1).toFixed(2)) / (audio[0].duration.toFixed(2)) * 100 + '%')
+					};
+					timeline_current_time.html(parseInt(audio[0].currentTime / 60) + ':' + (parseInt(audio[0].currentTime) % 60 < 10 ? '0' + parseInt(audio[0].currentTime) % 60 : parseInt(audio.currentTime) % 60));
+					timeline_duration_time.html(parseInt(audio[0].duration / 60) + ':' + (parseInt(audio[0].duration) % 60 < 10 ? '0' + parseInt(audio[0].duration) % 60 : parseInt(audio.duration) % 60))
+				}
+			});
+			audio.bind('error', function() {
+				var context;
+				switch (audio[0].error.code) {
+					case 1:
+						context = 'MEDIA_ERR_ABORTED（文件在取回时被用户中止）';
+						break;
+					case 2:
+						context = 'MEDIA_ERR_NETWORK（文件在下载时发生错误）';
+						break;
+					case 3:
+						context = 'MEDIA_ERR_DECODE（文件在解码时发生错误）';
+						break;
+					case 4:
+						context = 'MEDIA_ERR_SRC_NOT_SUPPORTED（不支持的音频格式）';
+						break;
+					default:
+						context = 'MEDIA_ERR_UNKNOWN（未知错误，错误代码：' + audio.error.code + '）';
+				};
+				switch (audio[0].networkState) {
+					case 0:
+						context += '<br>NETWORK_EMPTY（音频尚未初始化）';
+						break;
+					case 1:
+						context += '<br>NETWORK_IDLE（音频已缓存）';
+						break;
+					case 2:
+						context += '<br>NETWORK_LOADING（浏览器正在下载数据）';
+						break;
+					case 3:
+						context += '<br>NETWORK_NO_SOURCE（未找到音频来源）';
+						break;
+					default:
+						context += 'NETWORK_UNKNOWN（未知错误，错误代码：' + audio[0].error.code + '）';
+				};
+				update_error('audio', context);
+				audio_play()
+			});
+			audio.bind('ended', function() {
+				if (next == 0 && is_login == true) {
+					update_log()
+				} else {
+					next = 0
+				};
+				audio_play()
+			});
+			cover_preload.bind('load', function(){
+				cover.css({'background-image': 'url(' + playlist[count].cover.large + ')'});
+				cover_loading_notification.css('opacity', 0);
+			});
+			cover_preload.bind('error', function() {
+				if (cover_retry < 3) {
+					update_error('cover', '正在重试加载......');
+					cover_preload[0].src = playlist[count].cover.large;
+					cover_retry++
+				} else {
+					update_error('cover', '超过最大重新加载次数限制');
+					cover_retry = 0
+				}
+			});
+			c_play.bind('click', function() {
+				audio[0].play()
+			});
+			c_pause.bind('click', function() {
+				audio[0].pause()
+			});
+			c_previous.bind('click', function() {
+				if (count > 0) {
+					next = 1;
+					count -= 2;
+					audio_play()
+				}
+			});
+			c_next.bind('click', function() {
+				next = 1;
+				audio_play()
+			});
+			c_like.bind('click', function() {
+				if (c_like.attr('meow')) {
+					update_fav(1, 1)
+				} else {
+					update_fav(1, 0)
+				}
+			});
+			c_dislike.bind('click', function() {
+				if (c_dislike.attr('meow')) {
+					update_fav(2, 1)
+				} else {
+					update_fav(2, 0)
+				}
+			});
+			c_volume_icon.bind('click', function() {
+				if (c_volume_range.attr('disabled')) {
+					c_volume_range.removeAttr('disabled');
+					$.css(c_volume_range, 'opacity: 1');
+					audio[0].volume = volume / 100;
+					update_volume_icon(volume)
+				} else {
+					volume = audio.volume * 100;
+					c_volume_icon.html('静');
+					c_volume_range.disabled();
+					c_volume_range.css('opacity', '0.75');
+					audio[0].volume = 0;
+				}
+			});
+			c_volume_range.bind('change', function() {
+				volume = c_volume_range.val();
+				audio[0].volume = volume / 100;
+				update_volume_icon(volume);
+				setting.volume = volume;
+				localStorage.setItem('moefm-html5-setting', JSON.stringify(setting))
+			});
+			c_share.bind('click', share);
+			timeline.bind('mouseup', function(event) {
+				audio[0].currentTime = (event.clientX / document.body.clientWidth) * audio[0].duration
+			});
+			aside_album.bind('click', function() {
+				p = 0;
+				update_playlist('fav=music')
+			});
+			aside_song.bind('click', function() {
+				p = 0;
+				update_playlist('fav=song')
+			});
+			aside_radio.bind('click', function() {
+				p = 0;
+				update_playlist('fav=radio')
+			});
+			aside_random.bind('click', function() {
+				p = 0;
+				url_data = null;
+				update_playlist()
+			});
+			background_preload.bind('load', function() {
+				$('html').css('background-image', 'url(' + background_preload[0].src + ')')
+			});
+			background_preload.bind('error', function() {
+				update_error('background', '获取背景图片时发生错误');
+			});
+			link_setting_background.bind('click', function() {
+				var div = $('<div/>'),
+				div2 = $('<div/>'),
+				t = $('<textarea/>'),
+				b = $('<button/>');
+				div.addClass('setting_background_panel');
+				div2.addClass('setting_background_panel_background');
+				div2.attr('title', '点击黑色区域以退出');
+				b.html('确定');
+				t.attr('title', '请在文本框内输入图片地址，以回车间隔，一行一个');
+				t.attr('autofocus', 'autofocus');
+				div.append(t);
+				div.append(b);
+				if (background_list.length != 0) {
+					t.val(background_list.join('\n'))
+				};
+				$('body').append(div);
+				$('body').append(div2);
+				div2.bind('click', function() {
+					setTimeout(function() {
+						div.remove();
+						setTimeout(function() {
+							div2.remove()
+						}, 200)
+					}, 200)
+				});
+				b.bind('click', function() {
+					var l = t.val().split('\n'),
+					r = [];
+					for (var i = 0; i < l.length; i++) {
+						if (l != '') {
+							r.push(l[i])
+						}
+					};
+					background_list = r;
+					div2.click();
+					update_background();
+					setting.background = r;
+					localStorage.setItem('moefm-html5-setting', JSON.stringify(setting))
+				})
+			});
+			link_about.bind('click', about);
+			album.bind('click', function() {
+				if (confirm('播放专辑『' + playlist[count].wiki_title + '』？') == true) {
+					update_playlist('music=' + playlist[count].wiki_id)
+				}
+			});
+			$(window).bind('keydown', function(e) {
+				switch (e.keyCode) {
+					case 32:
+						audio[0].paused == false ? audio[0].pause() : audio[0].play();
+						break;
+					case 39:
+						next = 1;
+						audio_play();
+						break;
+					case 38:
+						c_like.click();
+						break;
+					case 40:
+						c_dislike.click();
+						break;
+					case 37:
+						next = 1;
+						count -= 2;
+						audio_play();
+						//穿越OAO();
+						break;
+					case 13:
+						穿越OAO();
+						break;
+				}
+			}, false);
+			if (location.hash.indexOf('accessToken') >= 0) {
+				localStorage.setItem('accessToken', location.hash.match(/accessToken=([0-9a-f]{41})/)[1]);
+				localStorage.setItem('accessTokenSecret', location.hash.match(/accessTokenSecret=([0-9a-f]{32})/)[1]);
+			};
+			if (localStorage.getItem('accessToken')) {
+				check_login()
+			} else {
+				set_login();
+				start()
+			};
+			if (location.hash.indexOf('currentTime') >= 0) {
+				audio[0].onplay = function() {
+					audio[0].currentTime = location.hash.match(/currentTime=([0-9.]+)/)[1];
+					audio[0].onplay = null;
+				}
+			};
+			c_volume_range.val(volume);
+			audio[0].volume = volume / 100;
+			update_volume_icon(volume);
+			if (location.hash.indexOf('background=0') < 0) {
+				update_background();
+				update_background_count(1);
+				$(window).bind('focus', function() {
+					update_background_count(1)
+				});
+				$(window).bind('blur', function() {
+					update_background_count(0)
+				})
+			};
+			if (location.search.indexOf('loop=1') > 0) {
+				setting.loop = 1;
+				localStorage.setItem('moefm-html5-setting', JSON.stringify(setting))
+			};
+		})
+	</script>
+</body>
+</html>
