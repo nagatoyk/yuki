@@ -438,9 +438,9 @@
                         tokenSecret: accessTokenSecret
                     };
                     if (url_data == null) {
-                        var url = '{|U:'Index/Index/catch_listen'}?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
+                        var url = 'http://moe.fm/listen/playlist?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
                     } else {
-                        var url='{|U:'Index/Index/catch_listen'}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
+                        var url='http://moe.fm/listen/playlist?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
                     };
                     console.log(url);
                     if (typeof is_login != 'undefined' && is_login == true) {
@@ -449,9 +449,9 @@
                     xhr.open('GET', generateOauthUrl(url, options))
                 } else {
                     if (url_data == null) {
-                        xhr.open('GET', '{|U:'Index/Index/catch_listen'}?share_buttons=1&perpage=30&_=' + new Date().getTime())
+                        xhr.open('GET', 'http://moe.fm/listen/playlist?share_buttons=1&perpage=30&_=' + new Date().getTime())
                     } else {
-                        xhr.open('GET', '{|U:'Index/Index/catch_listen'}?share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime())
+                        xhr.open('GET', 'http://moe.fm/listen/playlist?share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime())
                     }
                 };
                 xhr.send()
@@ -529,7 +529,7 @@
             accessTokenSecret = localStorage.getItem('accessTokenSecret');
             link_right_user.innerHTML = '正在获取用户信息......';
             var xhr = new XMLHttpRequest(),
-            url = '{|U:'Index/Index/catch_detail'}',
+            url = 'http://api.moefou.org/user/detail.json',
             options = {
                 method: 'get',
                 consumerKey: ck,
