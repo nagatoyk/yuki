@@ -13,6 +13,6 @@ class OauthController extends Controller{
      * 回调处理
      */
     public function index(){
-        echo $_SERVER['QUERY_STRING'];
+        $this->display();
     }
 }
