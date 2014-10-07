@@ -8,7 +8,7 @@ class IndexController extends Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->_qqweibo = new qqweibo(C('QQ_T_KEY'), C('QQ_T_SECRET'), U('callback'));
-		$this->_moefm = new Moefou(C('MF_KEY'), C('MF_SECRET'), 'http://yukimax.cn/lab/mf/callback.php');
+		$this->_moefm = new Moefou(C('MF_KEY'), C('MF_SECRET'), U('Index/Oauth/index'));
 	}
 	/**
 	 * 首页
