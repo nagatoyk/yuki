@@ -57,7 +57,7 @@ class IndexController extends Controller{
 		unset($_GET['oauth_token_secret']);
 		unset($_GET['callback']);
 		$data = '';
-		if(!empty($oauth_token) && !empty($oauth_token_secret)){
+		if($oauth_token && $oauth_token_secret){
 			$data = $this->_moefm->do_get('http://moe.fm/listen/playlist', $oauth_token, $oauth_token_secret);
 			$json = json_decode($data, true);
 			unset($json['response']['information']['parameters']);
@@ -66,7 +66,8 @@ class IndexController extends Controller{
 		}else{
 			$params = $this->_moefm->get_normalized_string($_GET);
 			$data = $this->_moefm->curl('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
-			$this->ajax('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
+			$json = json_decode($data, true);
+			$this->ajax($json);
 		}
 	}
 	/**
