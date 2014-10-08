@@ -482,7 +482,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							user_btn.addClass('link_right_user_btn');
 							user_btn.appendTo(link_right_user);
 							var user_pan = $('<div/>');
-							user_pan.html('<div style="padding:6px"><div style="float:left"><img class="avatar" style="width:48px;height:48px" src="' + data.user_avatar.small + '" alt=""></div><div style="padding-left:6px;margin-left:48px;width:108px"><a title="个人主页" href="' + data.user_fm_url + '">我的主页</a><a target="_blank" class="external" href="http://moefou.org/user/setting">个人设定</a><a onclick="logout()">登出</a><div style="clear:both"></div></div><div style="clear:both"></div></div>');
+							user_pan.html('<div style="padding:6px"><div style="float:left"><img class="avatar" style="width:48px;height:48px" src="' + data.user_avatar.small + '" alt=""></div><div style="padding-left:6px;margin-left:48px;width:108px"><a title="个人主页" href="' + data.user_fm_url + '" target="_blank">我的主页</a><a target="_blank" class="external" href="http://moefou.org/user/setting">个人设定</a><a onclick="logout()">登出</a><div style="clear:both"></div></div><div style="clear:both"></div></div>');
 							user_pan.css({'position': 'fixed', 'background': 'rgba(0,0,0,0.5)', 'bottom': '0px', 'right': '10px', 'opacity': 0});
 							user_pan.hide();
 							user_pan.appendTo(user_btn);
