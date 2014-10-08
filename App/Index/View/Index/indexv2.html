@@ -253,7 +253,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					$.ajax({
 						url: '{|U:"my_log"}?api=json&log_obj_type=sub&log_type=listen&obj_type=song&obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 						type: 'get',
-						dataType: 'jsonp',
+						dataType: 'json',
 						success: function(re) {
 							update_error('log', re.response.msg)
 						},
@@ -267,7 +267,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				$.ajax({
 					url: '{|U:"fav"}?method=' + (d == 0 ? 'add' : 'delete') + '&fav_type=' + t + '&fav_obj_type=song&fav_obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 					type: 'get',
-					dataType: 'jsonp',
+					dataType: 'json',
 					success: function(re) {
 						if (re.status == false) {
 							update_error('fav', re.msg)
@@ -339,7 +339,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					$.ajax({
 						url: listen,
 						type: 'get',
-						dataType: 'jsonp',
+						dataType: 'json',
 						success: function(re) {
 							if (re.playlist) {
 								playlist_fetching = 0;
@@ -471,7 +471,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				$.ajax({
 					url: '{|U:"check_login"}?oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 					type: 'get',
-					dataType: 'jsonp',
+					dataType: 'json',
 					success: function(json) {
 						if (!json.response.error) {
 							is_login = true;
