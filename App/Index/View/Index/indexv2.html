@@ -503,14 +503,15 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 						} else if (json.response.error.code == 401) {
 							set_login();
 							start()
-						} else {
-							console.log(json.response.error)
+						} else if (!json) {
+							set_login();
+							start()
 						}
 					},
 					error: function(er) {
 						update_error('login', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText);
-						set_login();
-						start()
+							set_login();
+							start()
 					}
 				})
 			};
