@@ -790,7 +790,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				$('html').css('background-image', 'url(' + background_preload[0].src + ')')
 			});
 			background_preload.bind('error', function() {
-				if (background_retry <) {
+				if (background_retry < 3) {
 					$('html').css('background-image', 'url(' + background_preload[0].src + ')');
 					background_retry++
 				} else {
