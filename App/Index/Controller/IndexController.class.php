@@ -55,6 +55,7 @@ class IndexController extends Controller{
 		unset($_GET['_']);
 		unset($_GET['oauth_token']);
 		unset($_GET['oauth_token_secret']);
+		unset($_GET['callback'])
 		$data = '';
 		if(!empty($oauth_token) && !empty($oauth_token_secret)){
 			$data = $this->_moefm->do_get('http://moe.fm/listen/playlist', $oauth_token, $oauth_token_secret);
