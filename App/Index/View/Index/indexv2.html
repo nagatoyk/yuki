@@ -413,7 +413,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					$.ajax({
 						url: 'http://moefm.ccloli.com/background/',
 						type: 'get',
-						dataType: 'jsonp',
+						dataType: 'json',
 						success: function(re) {
 							background_list = re.background_list;
 							update_background()
