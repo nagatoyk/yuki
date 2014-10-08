@@ -462,9 +462,9 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				})
 			};
 			set_login = function() {
-				link_right_user.html('<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">注册</a><a class="right">登入</a>');
+				link_right_user.html('<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">注册</a><a id="login" class="right">登入</a>');
 				$('aside').hide();
-				link_right_user.bind('click', login)
+				$('#login').bind('click', login)
 			};
 			check_login = function() {
 				link_right_user.html('正在获取用户信息......');
