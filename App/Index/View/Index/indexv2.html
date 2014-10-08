@@ -419,7 +419,8 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							update_background()
 						},
 						error: function(er) {
-							update_error('background', '获取背景图片列表失败<br>XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+							update_error('background', '获取背景图片列表失败<br>XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText);
+							update_background()
 						}
 					})
 				} else {
