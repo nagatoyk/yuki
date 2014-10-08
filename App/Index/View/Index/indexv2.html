@@ -497,7 +497,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							if ($('aside').hide()) {
 								$('aside').show();
 							};
-							if (playlist.length == 0) {
+							if (!!playlist && playlist.length == 0) {
 								start()
 							}
 						} else if (json.response.error.code == 401) {
@@ -508,7 +508,9 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 						}
 					},
 					error: function(er) {
-						update_error('login', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+						update_error('login', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText);
+						set_login();
+						start()
 					}
 				})
 			};
