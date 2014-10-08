@@ -168,9 +168,9 @@ final class Route
             //pathinfo|rewrite
             case 1:
             default:
-                defined('__MODULE__') or define("__MODULE__", __WEB__ . '/' . MODULE);
-                defined('__CONTROLLER__') or define("__CONTROLLER__", __MODULE__ . '/' . CONTROLLER);
-                defined('__ACTION__') or define("__ACTION__", __CONTROLLER__ . '/' . ACTION);
+                defined('__MODULE__') or define("__MODULE__", __WEB__ . MODULE);
+                defined('__CONTROLLER__') or define("__CONTROLLER__", __MODULE__ . CONTROLLER);
+                defined('__ACTION__') or define("__ACTION__", __CONTROLLER__ . ACTION);
                 break;
         }
 
