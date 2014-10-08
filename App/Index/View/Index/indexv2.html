@@ -124,7 +124,6 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 			url_data = undefined,
 			cover_retry = 0,
 			login_retry = 0,
-			background_retry = 0,
 			p = 0,
 			background_list = setting.background || [],
 			background_count_time = undefined,
@@ -790,13 +789,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				$('html').css('background-image', 'url(' + background_preload[0].src + ')')
 			});
 			background_preload.bind('error', function() {
-				if (background_retry < 3) {
-					$('html').css('background-image', 'url(' + background_preload[0].src + ')');
-					background_retry++
-				} else {
-					update_error('background', '获取背景图片时发生错误');
-					background_retry = 0
-				}
+				$('html').css('background-image', 'url(' + background_preload[0].src + ')')
 			});
 			link_setting_background.bind('click', function() {
 				var div = $('<div/>'),
