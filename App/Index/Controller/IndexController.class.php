@@ -55,9 +55,10 @@ class IndexController extends Controller{
 		unset($_GET['_']);
 		unset($_GET['oauth_token']);
 		unset($_GET['oauth_token_secret']);
-		if ($oauth_token && $oauth_token_secret) {
+		$data = '';
+		if(!empty($oauth_token) && !empty($oauth_token_secret)){
 			$data = $this->_moefm->do_get('http://moe.fm/listen/playlist', $oauth_token, $oauth_token_secret);
-		} else {
+		}else{
 			$params = $this->_moefm->get_normalized_string($_GET);
 			$data = $this->_moefm->curl('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
 		}
