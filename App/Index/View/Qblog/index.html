@@ -2,9 +2,136 @@
 <html>
 <head>
 <title>Qblog</title>
-<jquery>
+<jquery><script type="text/javascript" src="__STATIC__/js/jquery.jplayer.js"></script>
+<style type="text/css">
+	@font-face {
+		font-family:moefm-html5-icomoon;
+		src:url('__STATIC__/font/moefm-html5-icomoon.ttf')
+	}
+	body {
+		margin: 0;
+		padding: 0
+	}
+	div.openyy {
+		cursor: pointer;
+		text-decoration: none;
+		font-family:"Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei",Arial,Tahoma,sans-serif;
+		overflow: hidden;
+		display: block;
+		width: 100%;
+		height: 60px;
+		line-height: 60px;
+		white-space: nowrap;
+		background-color: #FF6503;
+		color: #fff;
+		border-bottom: #C4753D 1px solid;
+		text-align: center;
+		border-radius: 3px;
+		text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+		font-size: 38px
+	}
+	.openyy span {
+		float: left;
+		margin-left: 10px;
+		width: 80%;
+		overflow: hidden;
+		text-align: left
+	}
+	.openyy #play {
+		width: 0;
+		height: 0;
+		border-left: 30px solid #FFF;
+		border-right: 15px solid #FF6503;
+		border-bottom: 15px solid #FF6503;
+		border-top: 15px solid #FF6503;
+		float: right;
+		margin-top: 15px
+	}
+	.openyy #pause {
+		width: 10px;
+		height: 40px;
+		border-left: 10px solid #FFF;
+		border-right: 10px solid #FFF;
+		float: right;
+		margin-top: 10px;
+		margin-right: 20px
+	}
+	.openyy #next {
+		float: right;
+		position: absolute;
+	}
+	#progress {
+		height: 60px;
+		background: #FF8F00;
+		position: absolute;
+		opacity: 0.5;
+		-moz-opacity: 0.5;
+		filter: alpha(opacity=50)
+	}
+</style>
 </head>
 <body>
-<div id="moefm"></div>
+	<div class="openyy">
+		<div id="progress"></div>
+		<div id="jplayer"></div>
+		<span></span>
+		<div id="play"></div>
+		<div id="next"><span class="c_next" title="下一曲">下</span></div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			count = 0;
+			playlist = [];
+			$.ajax({
+				url: 'http://moe.fm/listen/playlist?api=json&api_key=\u0065\u0064\u0039\u0038\u0034\u0066\u0038\u0062\u0036\u0063\u0063\u0065\u0035\u0066\u0030\u0064\u0032\u0038\u0066\u0038\u0064\u0062\u0037\u0063\u0066\u0030\u0034\u0066\u0038\u0034\u0035\u0065\u0030\u0035\u0034\u0033\u0032\u0064\u0064\u0033\u0061',
+				type: 'GET',
+				dataType: 'jsonp',
+				async: false,
+				success: function(d) {
+					if (d.response.playlist) {
+						var j = d.response.playlist;
+						for (i in j) {
+							playlist.push(j[i])
+						};
+						play(0)
+					}
+				}
+			});
+			$('#jplayer').bind($.jPlayer.event.timeupdate, function(e) {
+				$('#progress').width(Math.round(e.jPlayer.status.currentPercentAbsolute / 100 * $('.openyy span').width()))
+			});
+			$('body').on('click', '#play', function() {
+				$('#jplayer').jPlayer('play');
+				$(this).attr('id', 'pause')
+			});
+			$('body').on('click', '#pause', function() {
+				$('#jplayer').jPlayer('pause');
+				$(this).attr('id', 'play')
+			});
+			play = function() {
+				$('#jplayer').jPlayer({
+					ready: function() {
+						$(this).jPlayer('setMedia', {
+							mp3: playlist[count].url,
+							poster: playlist[count].cover.large
+						});
+						$('title').html(playlist[count].sub_title);
+						$('.openyy span').html(playlist[count].sub_title);
+					},
+					ended: function() {
+						$('#progress').width('0px');
+						if (count < (playlist.length - 1)) {
+							count++;
+							play()
+						}
+					},
+					preload: 'none',
+					swfPath: '__STATIC__/flash',
+					supplied: 'mp3'
+				})
+			};
+			console.log(count)
+		})
+	</script>
 </body>
 </html>

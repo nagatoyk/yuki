@@ -555,7 +555,6 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 								_r = re.str.split('&');
 								accessToken = _r[0].split('=')[1];
 								accessTokenSecret = _r[1].split('=')[1];
-								console.log(accessToken, accessTokenSecret);
 								localStorage.setItem('accessToken', accessToken);
 								localStorage.setItem('accessTokenSecret', accessTokenSecret);
 								check_login();
