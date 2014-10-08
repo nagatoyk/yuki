@@ -58,14 +58,15 @@ class IndexController extends Controller{
 		$data = '';
 		if(!empty($oauth_token) && !empty($oauth_token_secret)){
 			$data = $this->_moefm->do_get('http://moe.fm/listen/playlist', $oauth_token, $oauth_token_secret);
+			$json = json_decode($data, true);
+			unset($json['response']['information']['parameters']);
+			unset($json['response']['information']['request']);
+			$this->ajax($json);
 		}else{
 			$params = $this->_moefm->get_normalized_string($_GET);
 			$data = $this->_moefm->curl('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
+			$this->ajax($_GET);
 		}
-		$json = json_decode($data, true);
-		unset($json['response']['information']['parameters']);
-		unset($json['response']['information']['request']);
-		$this->ajax($json);
 	}
 	/**
 	 * 收藏
