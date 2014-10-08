@@ -501,11 +501,18 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 								start()
 							}
 						} else if (json.response.error.code == 401) {
+							update_error('login', '用户信息验证失败，可能是因为您曾经取消授权，请尝试重新授权登录。');
 							set_login();
 							start()
-						} else if (!json) {
-							set_login();
-							start()
+						} else {
+							login_retry++;
+							if (login_retry < 3) {
+								update_error('login', '无法获取用户信息，可能是网络问题或服务器故障，正在尝试重新连接......<br>XHR Ready State: ' + xhr.readyState + '<br>XHR Status: ' + xhr.statusText);
+								check_login()
+							} else {
+								update_error('login', '无法获取用户信息，可能是网络问题或服务器故障，请稍候刷新重试......<br>XHR Ready State: ' + xhr.readyState + '<br>XHR Status: ' + xhr.statusText);
+								set_login()
+							}
 						}
 					},
 					error: function(er) {
