@@ -258,7 +258,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							update_error('log', re.response.msg)
 						},
 						error: function(er) {
-							update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+							update_error('log', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
 						}
 					})
 				}
@@ -394,7 +394,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							}
 						},
 						error: function(er) {
-							update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+							update_error('playlist', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
 						}
 					})
 				}
@@ -413,7 +413,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					$.ajax({
 						url: 'http://moefm.ccloli.com/background/',
 						type: 'get',
-						dataType: 'json',
+						dataType: 'jsonp',
 						success: function(re) {
 							background_list = re.background_list;
 							update_background()
@@ -469,9 +469,9 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 			check_login = function() {
 				link_right_user.html('正在获取用户信息......');
 				$.ajax({
-					url: '{|U:"check_login"}?oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+					url: '{|U:"check_login"}?oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 					type: 'get',
-					dataType: 'json',
+					dataType: 'jsonp',
 					success: function(json) {
 						if (!json.response.error) {
 							is_login = true;
@@ -508,7 +508,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 						}
 					},
 					error: function(er) {
-						update_error('fav', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
+						update_error('login', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
 					}
 				})
 			};
@@ -542,7 +542,6 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 							},
 							dataType: 'json',
 							success: function(re) {
-								console.log(re);
 								_r = re.str.split('&');
 								accessToken = _r[0].split('=')[1];
 								accessTokenSecret = _r[1].split('=')[1];
@@ -558,7 +557,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 								}, 200)
 							},
 							error: function(er) {
-								console.log(er.status + '---' + new Date().getTime())
+								update_error('login', 'XHR Ready State: ' + er.readyState + '<br>XHR Status: ' + er.statusText)
 							}
 						})
 					})
