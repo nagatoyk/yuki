@@ -3,4 +3,5 @@
     <allow-access-from domain="*.yukimax.cn"/>
     <allow-access-from domain="*.kloli.tk"/>
     <allow-access-from domain="*.loli-yuki.tk"/>
+    <allow-access-from domain="*-yukimax.rhcloud.com"/>
 </cross-domain-policy>
