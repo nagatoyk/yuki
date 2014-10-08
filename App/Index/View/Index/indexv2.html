@@ -840,6 +840,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				})
 			});
 			link_about.bind('click', about);
+			album.css('cursor', 'pointer');
 			album.bind('click', function() {
 				if (confirm('播放专辑『' + playlist[count].wiki_title + '』？') == true) {
 					update_playlist('music=' + playlist[count].wiki_id)
