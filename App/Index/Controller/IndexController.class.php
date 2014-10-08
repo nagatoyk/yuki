@@ -65,7 +65,7 @@ class IndexController extends Controller{
 		}else{
 			$params = $this->_moefm->get_normalized_string($_GET);
 			$data = $this->_moefm->curl('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
-			$this->ajax($_GET);
+			$this->ajax('http://moe.fm/listen/playlist?api_key='.C('MF_KEY').'&'.$params);
 		}
 	}
 	/**
