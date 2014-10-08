@@ -251,9 +251,9 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 			update_log = function() {
 				if (is_login == true) {
 					$.ajax({
-						url: '{|U:"my_log"}?api=json&log_obj_type=sub&log_type=listen&obj_type=song&obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+						url: '{|U:"my_log"}?api=json&log_obj_type=sub&log_type=listen&obj_type=song&obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 						type: 'get',
-						dataType: 'json',
+						dataType: 'jsonp',
 						success: function(re) {
 							update_error('log', re.response.msg)
 						},
@@ -265,9 +265,9 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 			};
 			update_fav = function(t, d) {
 				$.ajax({
-					url: '{|U:"fav"}?method=' + (d == 0 ? 'add' : 'delete') + '&fav_type=' + t + '&fav_obj_type=song&fav_obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime(),
+					url: '{|U:"fav"}?method=' + (d == 0 ? 'add' : 'delete') + '&fav_type=' + t + '&fav_obj_type=song&fav_obj_id=' + playlist[count].sub_id + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret,
 					type: 'get',
-					dataType: 'json',
+					dataType: 'jsonp',
 					success: function(re) {
 						if (re.status == false) {
 							update_error('fav', re.msg)
@@ -325,21 +325,21 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					playlist_fetching = 1;
 					if (is_login == true) {
 						if (url_data == null) {
-							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime()
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret
 						} else {
-							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret + '&_=' + new Date().getTime()
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&oauth_token=' + accessToken + '&oauth_token_secret=' + accessTokenSecret
 						}
 					} else {
 						if (url_data == null) {
-							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&_=' + new Date().getTime()
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30'
 						} else {
-							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data + '&_=' + new Date().getTime()
+							var listen = '{|U:"listen"}?api=json&share_buttons=1&perpage=30&page=' + p + '&' + url_data
 						}
 					};
 					$.ajax({
 						url: listen,
 						type: 'get',
-						dataType: 'json',
+						dataType: 'jsonp',
 						success: function(re) {
 							if (re.playlist) {
 								playlist_fetching = 0;
