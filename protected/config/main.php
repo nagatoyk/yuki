@@ -84,7 +84,7 @@ return array(
 			'autoStart'=>true,
 			'sessionName'=>'moefm_access',
 			'cookieMode'=>'only',
-			'savePath'=$OPENSHIFT_DATA_DIR.'/session',
+			'savePath'=getenv('OPENSHIFT_DATA_DIR').'/session',
 		),
 	),
 
