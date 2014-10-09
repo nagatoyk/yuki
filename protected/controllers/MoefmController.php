@@ -20,6 +20,7 @@ class MoefmController extends Controller{
             }catch(OAuthException $e){
             }
         }
+        echo $token;
         var_dump($_REQUEST);
         if($token){
             $_SESSION['token'] = $token;
