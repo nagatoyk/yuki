@@ -15,6 +15,6 @@
     </script>
 </head>
 <body>
-新浪微博授权回调
+
 </body>
 </html>
