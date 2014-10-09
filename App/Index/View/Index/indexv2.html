@@ -462,9 +462,10 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 				})
 			};
 			set_login = function() {
-				link_right_user.html('<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">注册</a><a id="login" class="right">登入</a>');
+				link_right_user.html('<a class="right" target="_blank" href="http://moefou.org/register?redirect=' + encodeURIComponent(location.href) + '">加入萌否</a><a id="login" class="right">萌否登入</a>|<a id="wb">新浪登录</a>');
 				$('aside').hide();
-				$('#login').bind('click', login)
+				$('#login').bind('click', login);
+				$('#wb').bind('click', wb_login)
 			};
 			check_login = function() {
 				link_right_user.html('正在获取用户信息......');
@@ -572,6 +573,10 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					})
 				})
 			};
+			wb_login = function() {
+				window.open('{$wburl}', '_blank', 'authorize', 'resizable=0,scrollbars=0,width=800,height=600');
+				return false
+			};
 			logout = function() {
 				var c = confirm('您即将登出，在下次登录时需要重新授权，是否继续？');
 				if (c == true) {
@@ -583,7 +588,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 						window.open('http://open.moefou.org/apps/authorized', 'authorized')
 					}
 				}
-			},
+			};
 			about = function() {
 				var div = $('<div/>'),
 				div2 = $('<div/>');
@@ -601,7 +606,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 						}, 200)
 					}, 200)
 				})
-			},
+			};
 			穿越OAO = function() {
 				audio[0].pause();
 				var div = $('<div/>'),
@@ -621,7 +626,7 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 					}, 200);
 					audio[0].play()
 				})
-			},
+			};
 			start = function() {
 				if (location.search.indexOf('song') >= 0) {
 					update_playlist(location.search.match(/song=[0-9,]*/)[0])
