@@ -18,7 +18,8 @@ class MoefmController extends Controller{
             $keys['redirect_uri'] = Yii::app()->request->hostinfo.Yii::app()->createUrl('saetcallback');
             try{
                 $token = $o->getAccessToken('code', $keys);
-            }catch(new OAuthException $e){
+            }catch(OAuthException $e){
+                p($e);
             }
         }
         p($token);
