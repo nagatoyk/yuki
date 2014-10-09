@@ -718,11 +718,11 @@ function wb_login(){
     return false
 }
 function wb_check(){
-    js_token = '<?php echo $saet->getTokenFromJSSDK(); ?>';
+    js_token = '<?php echo $o->getTokenFromJSSDK(); ?>';
     if (js_token !== '') {
         console.log('未找到')
     } else {
-        console.log(cookie(js_token));
+        console.log(js_token);
     }
 }
 function logout(){
