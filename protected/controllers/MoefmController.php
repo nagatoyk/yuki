@@ -31,5 +31,6 @@ class MoefmController extends Controller{
         }else{
             echo 0;
         }
+        p($_SESSION);
     }
 }

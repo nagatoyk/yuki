@@ -80,6 +80,12 @@ return array(
 
 			),
 		),
+		'session'=>array(
+			'autoStart'=>true,
+			'sessionName'=>'moefm_access',
+			'cookieMode'=>'only',
+			'savePath'=$OPENSHIFT_DATA_DIR.'/session',
+		),
 	),
 
 	// application-level parameters that can be accessed
