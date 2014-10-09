@@ -3,7 +3,7 @@
 <head>
     <title>新浪微博授权回调</title>
     <script type="text/javascript">
-        window.opener.document.wb_check();
+        self.opener.wb_check();
         setTimeout(function(){
             window.close()
         }, 3000)
