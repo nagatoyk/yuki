@@ -16,6 +16,7 @@ class MoefmController extends Controller{
             $keys = array();
             $keys['code'] = $_REQUEST['code'];
             $keys['redirect_uri'] = $o->getAuthorizeURL('http://i.loli-yuki.tk'.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
+            p($keys);
             try{
                 $token = $o->getAccessToken('code', $keys);
             }catch(OAuthException $e){
