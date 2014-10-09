@@ -11,7 +11,6 @@ class MoefmController extends Controller{
     }
     public function actionSaetcallback(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
-        var_dump($o);
         if(isset($_REQUEST['code'])){
             $keys = array();
             $keys['code'] = $_REQUEST['code'];
