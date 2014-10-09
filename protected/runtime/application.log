@@ -312,3 +312,47 @@ Stack trace:
 #10 {main}
 REQUEST_URI=/yuki/?song=84687
 ---
+2014/10/09 10:47:22 [error] [php] include(SaeTOAuthV2.php): failed to open stream: No such file or directory (D:\wamp\www\yuki\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\wamp\www\yuki\protected\controllers\MoefmController.php(13): spl_autoload_call()
+#1 D:\wamp\www\yuki\framework\web\actions\CInlineAction.php(49): MoefmController->actionSaetcallback()
+#2 D:\wamp\www\yuki\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\wamp\www\yuki\framework\web\CController.php(286): MoefmController->runAction()
+#4 D:\wamp\www\yuki\framework\web\CController.php(265): MoefmController->runActionWithFilters()
+#5 D:\wamp\www\yuki\framework\web\CWebApplication.php(282): MoefmController->run()
+#6 D:\wamp\www\yuki\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\wamp\www\yuki\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\wamp\www\yuki\index.php(13): CWebApplication->run()
+REQUEST_URI=/YUKI/index.php?r=moefm/saetcallback&code=e33de8f83c47ffa0189566f11ce22233
+in D:\wamp\www\yuki\protected\controllers\MoefmController.php (13)
+in D:\wamp\www\yuki\index.php (13)
+2014/10/09 10:49:04 [error] [php] include(SaeTOAuthV2.php): failed to open stream: No such file or directory (D:\wamp\www\yuki\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\wamp\www\yuki\protected\controllers\MoefmController.php(13): spl_autoload_call()
+#1 D:\wamp\www\yuki\framework\web\actions\CInlineAction.php(49): MoefmController->actionSaetcallback()
+#2 D:\wamp\www\yuki\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\wamp\www\yuki\framework\web\CController.php(286): MoefmController->runAction()
+#4 D:\wamp\www\yuki\framework\web\CController.php(265): MoefmController->runActionWithFilters()
+#5 D:\wamp\www\yuki\framework\web\CWebApplication.php(282): MoefmController->run()
+#6 D:\wamp\www\yuki\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\wamp\www\yuki\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\wamp\www\yuki\index.php(13): CWebApplication->run()
+REQUEST_URI=/YUKI/index.php?r=moefm/saetcallback&code=e33de8f83c47ffa0189566f11ce22233
+in D:\wamp\www\yuki\protected\controllers\MoefmController.php (13)
+in D:\wamp\www\yuki\index.php (13)
+2014/10/09 10:50:32 [error] [php] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead (D:\wamp\www\yuki\protected\extensions\SaeTOAuthV2.php:343)
+Stack trace:
+#0 D:\wamp\www\yuki\protected\extensions\SaeTOAuthV2.php(183): SaeTOAuthV2->oAuthRequest()
+#1 D:\wamp\www\yuki\protected\controllers\MoefmController.php(20): SaeTOAuthV2->getAccessToken()
+#2 D:\wamp\www\yuki\framework\web\actions\CInlineAction.php(49): MoefmController->actionSaetcallback()
+#3 D:\wamp\www\yuki\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 D:\wamp\www\yuki\framework\web\CController.php(286): MoefmController->runAction()
+#5 D:\wamp\www\yuki\framework\web\CController.php(265): MoefmController->runActionWithFilters()
+#6 D:\wamp\www\yuki\framework\web\CWebApplication.php(282): MoefmController->run()
+#7 D:\wamp\www\yuki\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 D:\wamp\www\yuki\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 D:\wamp\www\yuki\index.php(13): CWebApplication->run()
+REQUEST_URI=/YUKI/index.php?r=moefm/saetcallback&code=e33de8f83c47ffa0189566f11ce22233
+in D:\wamp\www\yuki\protected\extensions\SaeTOAuthV2.php (343)
+in D:\wamp\www\yuki\protected\extensions\SaeTOAuthV2.php (322)
+in D:\wamp\www\yuki\protected\extensions\SaeTOAuthV2.php (183)
