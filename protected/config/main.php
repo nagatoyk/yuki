@@ -84,7 +84,7 @@ return array(
 			'autoStart'=>true,
 			'sessionName'=>'moefm_access',
 			'cookieMode'=>'only',
-			'savePath'=dirname(__FILE__).DIRECTORY_SEPARATOR.'../session',
+			'savePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../session',
 		),
 	),
 
