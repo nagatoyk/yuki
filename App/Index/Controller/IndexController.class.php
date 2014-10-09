@@ -15,6 +15,7 @@ class IndexController extends Controller{
 	 */
 	public function index(){
 		import('@.Common.Lib.saetv2');
+		// 1331
 		$o = new SaeTOAuthV2(C('SAET_AKEY'), C('SAET_SKEY'));
 		$this->wburl = $o->getAuthorizeURL(U('Index/Oauth/wbcallback'));
 		$this->display('indexv2');
