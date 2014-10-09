@@ -149,8 +149,8 @@ var setting=JSON.parse(localStorage.getItem('moefm-html5-setting'))||{},
         OAuth.SignatureMethod.sign(message, accessor);
         return url + (url.indexOf('?')>=0?'&':'?') + OAuth.formEncode(message.parameters);
     },
-    ck='<?php echo unicode_encode(Yii::app()->params['mf_api_key']); ?>',
-    cs='<?php echo unicode_encode(Yii::app()->params['mf_api_secret']); ?>',
+    ck='<?php echo Yii::app()->params['mf_api_key']; ?>',
+    cs='<?php echo Yii::app()->params['mf_api_secret']; ?>',
     accessToken,
     accessTokenSecret,
     options;
