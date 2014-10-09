@@ -718,7 +718,7 @@ function wb_login(){
     return false
 }
 function wb_check(){
-    js_token = '<?php echo $saet->client_id; ?>';
+    js_token = '<?php echo $saet->getTokenFromJSSDK(); ?>';
     if (js_token !== '') {
         console.log('未找到')
     } else {
