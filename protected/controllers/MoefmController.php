@@ -20,8 +20,8 @@ class MoefmController extends Controller{
             }catch(OAuthException $e){
             }
         }
-        var_dump($o);
-        var_dump($token);
+        p($o);
+        p($token);
         if($token){
             $_SESSION['token'] = $token;
             setcookie('weibojs_'.$o->client_id, http_build_query($token));
