@@ -76,6 +76,8 @@ return array(
 
 				array(
 					'class'=>'CWebLogRoute',
+					'levels'=>'trace',
+					// 'categories'=>'system.db.*'
 				),
 
 			),
