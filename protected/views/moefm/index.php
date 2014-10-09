@@ -543,9 +543,10 @@ function share(){
     })
 }
 function set_login(){
-    link_right_user.innerHTML='<a class="right" target="_blank" href="http://moefou.org/register?redirect=http%3A%2F%2Fmoefm.ccloli.com">注册</a><a class="right">登入</a>';
+    link_right_user.innerHTML='<a class="right" target="_blank" href="http://moefou.org/register?redirect=http%3A%2F%2Fi.loli-yuki.tk">萌否注册</a><a class="right">萌否登入</a><a class="right wb">微博登录</a>';
     document.getElementsByTagName('aside')[0].setAttribute('hidden','hidden');
     link_right_user.getElementsByTagName('a')[1].addEventListener('click',function(){login()})
+    link_right_user.getElementsByTagName('a')[2].addEventListener('click',function(){wb_login()})
     //start();
 }
 function check_login(){
@@ -701,6 +702,10 @@ function login(){
         xhr.open('GET',generateOauthUrl(url,options));
         xhr.send();
     })
+}
+function wb_login(){
+    window.open('<?php echo $wburl; ?>', 'authorized');
+    return false
 }
 function logout(){
     var c=confirm('您即将登出，在下次登录时需要重新授权，是否继续？');

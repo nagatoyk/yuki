@@ -16,6 +16,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.extensions.*'
 	),
 
 	'modules'=>array(
@@ -88,5 +89,9 @@ return array(
 		'adminEmail'=>'webmaster@example.com',
 		'mf_api_key'=>'18f95c02504fb5a0fdd83b205e7e1aee05421a58b',
 		'mf_api_secret'=>'a3af2e9f06faaefb9408897388f0f916',
+		'qq_api_key'=>'801005675',
+		'qq_api_secret'=>'3d5750291ebfcadde762739aed14fc06',
+		'saet_api_key' => '1093396876',
+		'saet_api_secret' => 'd126f1302a7f1b7e36536f4ad84622a0'
 	),
 );
