@@ -7,7 +7,7 @@ class MoefmController extends Controller{
     }*/
     public function actionIndex(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
-        $wburl = $o->getAuthorizeURL(Yii::app()->baseUrl.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
+        $wburl = $o->getAuthorizeURL(Yii::app()->request->hostinfo.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
         $this->render('index', array('wburl' => $wburl));
     }
     public function actionSaetcallback(){
@@ -15,7 +15,7 @@ class MoefmController extends Controller{
         if(isset($_REQUEST['code'])){
             $keys = array();
             $keys['code'] = $_REQUEST['code'];
-            $keys['redirect_uri'] = $o->getAuthorizeURL(Yii::app()->baseUrl.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
+            $keys['redirect_uri'] = $o->getAuthorizeURL(Yii::app()->request->hostinfo.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
             p($keys);
             try{
                 $token = $o->getAccessToken('code', $keys);
