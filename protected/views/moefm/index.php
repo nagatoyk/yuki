@@ -160,7 +160,7 @@ var setting=JSON.parse(localStorage.getItem('moefm-html5-setting'))||{},
     //alert('Sorry, but seems that your browser doesn\'t support MPEG audio (mp3 file)...\nThe list of browsers which support MPEG could be seen at http://caniuse.com/#feat=mpeg4\nThe window will be closed...');
     window.close();
 }*/
-function = cookie(g, f, h) {
+function cookie(g, f, h) {
     if (typeof f != 'undefined') {
         h = h || 31536000;
         var j = new Date();
