@@ -8,7 +8,7 @@ class MoefmController extends Controller{
     public function actionIndex(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
         $wburl = $o->getAuthorizeURL(Yii::app()->request->hostinfo.$this->createUrl('saetcallback'), 'code', 'moefm', 'default');
-        $this->render('index', array('wburl' => $wburl));
+        $this->render('index', array('wburl' => $wburl, 'saet' => $o));
     }
     public function actionSaetcallback(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);

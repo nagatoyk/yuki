@@ -160,7 +160,17 @@ var setting=JSON.parse(localStorage.getItem('moefm-html5-setting'))||{},
     //alert('Sorry, but seems that your browser doesn\'t support MPEG audio (mp3 file)...\nThe list of browsers which support MPEG could be seen at http://caniuse.com/#feat=mpeg4\nThe window will be closed...');
     window.close();
 }*/
-
+function = cookie(g, f, h) {
+    if (typeof f != 'undefined') {
+        h = h || 31536000;
+        var j = new Date();
+        j.setTime(j.getTime() + h * 1000);
+        b.cookie = g + '=' + escape(f) + ';expires=' + j.toGMTString();
+    } else {
+        var e = b.cookie.match(new RegExp('(^| )' + g + '=([^;]*)(;|$)'));
+        return e == null ? null: unescape(e[2]);
+    }
+}
 function audio_play(c){
     if(c==null)c=1;
     if(count<playlist.length-1){
@@ -706,6 +716,14 @@ function login(){
 function wb_login(){
     window.open('<?php echo $wburl; ?>', 'authorized');
     return false
+}
+function wb_check(){
+    js_token = '<?php echo $saet->getTokenFromJSSDK(); ?>';
+    if (js_token !== '') {
+        console.log('未找到')
+    } else {
+        console.log(cookie(js_token));
+    }
 }
 function logout(){
     var c=confirm('您即将登出，在下次登录时需要重新授权，是否继续？');
