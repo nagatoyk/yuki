@@ -719,8 +719,8 @@ function wb_login(){
 }
 function wb_check(){
     weibojs = 'weibojs_<?php echo Yii::app()->params['saet_api_key']; ?>';
-    if (typeof weibojs !== 'undefined') {
-        console.log(weibojs)
+    if (typeof cookie(weibojs) !== 'undefined') {
+        console.log(cookie(weibojs))
     } else {
         console.log('未找到')
     }
