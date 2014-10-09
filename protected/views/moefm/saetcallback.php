@@ -3,10 +3,16 @@
 <head>
     <title>新浪微博授权回调</title>
     <script type="text/javascript">
-        self.opener.wb_check();
-        setTimeout(function(){
-            window.close()
-        }, 3000)
+        if (window.location.href.indexOf('code') >= 0) {
+            if (window.opener) {
+                window.opener.wb_check;
+                window.close()
+            } else {
+                alert('请手动刷新')
+            };
+            alert('3秒后关闭窗口');
+            setTimeout(window.close, 3000)
+        }
     </script>
 </head>
 <body>
