@@ -654,7 +654,7 @@ function login(){
                 method: 'get',
                 consumerKey: ck,
                 consumerSecret: cs,
-                callback: 'http://yukimax.cn/lab/mf/callback.php'
+                callback: '<?php echo Yii::app()->request->hostinfo.Yii::app()->createUrl('moefmcallback'); ?>'
             },
             xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
