@@ -718,11 +718,11 @@ function wb_login(){
     return false
 }
 function wb_check(){
-    js_token = 'weibojs_<?php echo Yii::app()->params['saet_api_key']; ?>';
-    if (js_token !== '') {
-        console.log('未找到')
+    weibojs = 'weibojs_<?php echo Yii::app()->params['saet_api_key']; ?>';
+    if (typeof weibojs !== 'undefined') {
+        console.log(weibojs)
     } else {
-        console.log(js_token);
+        console.log('未找到')
     }
 }
 function logout(){
