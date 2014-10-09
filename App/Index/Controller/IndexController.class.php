@@ -14,6 +14,7 @@ class IndexController extends Controller{
 	 * 首页
 	 */
 	public function index(){
+		import('@.Lib.saetv2', '', 'class');
 		$o = new SaeTOAuthV2(C('SAET_AKEY'), C('SAET_SKEY'));
 		$this->wburl = $o->getAuthorizeURL(U('Index/Oauth/wbcallback'));
 		$this->display('indexv2');
