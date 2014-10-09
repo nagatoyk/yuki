@@ -86,5 +86,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'mf_api_key'=>'18f95c02504fb5a0fdd83b205e7e1aee05421a58b',
+		'mf_api_secret'=>'a3af2e9f06faaefb9408897388f0f916',
 	),
 );

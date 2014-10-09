@@ -16,8 +16,8 @@
 <link id="favicon" href="http://moefou.org/public/images/fm/favicon.ico" rel="icon" type="image/x-icon">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script src="<?php echo Yii::app()->baseUrl; ?>/asset/js/sha1.js"></script>
-<script src="<?php echo Yii::app()->baseUrl; ?>/asset/js/oauth.js"></script>
+<script src="<?php echo Yii::app()->baseUrl; ?>/assets/js/sha1.js"></script>
+<script src="<?php echo Yii::app()->baseUrl; ?>/assets/js/oauth.js"></script>
 <!--[if lt IE 10]>
 <script>
 alert('很抱歉，看起来您的浏览器版本过老了……\n请使用 IE 10 及以上版本，建议使用 IE 11');
@@ -27,147 +27,10 @@ window.location.href='http://moe.fm/listen'+window.location.search;
 <style>
 @font-face{
     font-family:moefm-html5-icomoon;
-    src:url(<?php echo Yii::app()->baseUrl; ?>/font/moefm-html5-icomoon.ttf?_=20140611)
-}
-html,body{width:100%;height:100%;margin:0;padding:0;overflow:hidden;background-color:transparent}
-html,.cover{background-size:cover;background-position:center center;background-repeat:no-repeat no-repeat}
-html{background-attachment:fixed;transition:background 0.5s linear}
-body{background:rgba(255,255,255,0.5);user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;font-family:"Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei",Arial,Tahoma,sans-serif}
-::selection{background:rgba(0,0,0,0.5)}
-::-moz-selection{background:rgba(0,0,0,0.5)}
-section{width:600px;height:600px;position:absolute;left:0;right:0;top:0;bottom:0;font-size:16px;margin:auto;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;text-shadow:0 0 1px rgba(50,50,50,0.75)}
-.cover{width:400px;height:400px;background-color:rgba(50,50,50,.75);margin:10px auto;border:solid 2px #fff;box-shadow:0 0 5px #000;-webkit-transition:0.25s width linear,0.25s height linear;-o-transition:0.25s width linear,0.25s height linear;transition:0.25s width linear,0.25s height linear;margin:20px auto 10px}
-.cover_preload,.background_preload{position:absolute}
-.info ul{list-style:none;padding:0;margin:0;text-align:center}
-.info ul li{padding:5px 0;user-select:text;-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;line-height:1em;overflow:hidden;height:1em;white-space:nowrap;text-overflow:ellipsis;transition:0.25s all linear}
-.title{font-size:2em}
-.control{font-size:3em;text-align:center;font-family:moefm-html5-icomoon;/*pointer-events:none*/}
-.control>span:not([hidden]){cursor:pointer;pointer-events:auto;display:inline-block;width:1.1em;height:1.1em;line-height:1.1em;text-align:left;overflow:hidden;white-space:nowrap;padding:0 5px;letter-spacing:0.1em;transition:0.25s all linear}
-.control>span:hover{text-shadow:0 0 2px #000}
-.control>span[meow]{color:#F00}
-.control>span.c_volume:hover{width:3.5em}
-.control>span.c_volume:hover .c_volume_range{width:100px;opacity:1}
-.control>span.c_volume_icon{display:inline-block;width:1.1em}
-.control2{text-align:center;font-family:moefm-html5-icomoon;position:absolute;z-index:1;cursor:pointer}
-.control2>span{opacity:0;font-size:200px;padding:100px;background:rgba(0,0,0,0.5);position:absolute;transition:0.25s all linear;text-shadow:0 0 5px #FFF}
-.control2:hover>span{opacity:1}
-.control2>span.c_play{opacity:1}
-.c_volume_range{height:20px;width:0px;margin:0;padding:0;opacity:0;-webkit-appearance:none;-webkit-transition:0.25s all linear;-o-transition:0.25s all linear;transition:0.25s all linear;outline:none;position:absolute;margin-left:5px;margin-top:15px;background:none}
-.c_volume_range::-webkit-slider-container{-webkit-appearance:none;height:2em}
-.c_volume_range::-webkit-slider-runnable-track{-webkit-appearance:none;background:#000;box-shadow:0 0 1px #000}
-.c_volume_range::-webkit-slider-thumb{-webkit-appearance:none;background:#FFF;border:1px #000 solid;border-radius:0;width:10px;height:20px}
-.c_volume_range::-moz-range-track{background:#000;height:20px;box-shadow:0 0 1px #000}
-.c_volume_range::-moz-range-thumb{background:#FFF;border-radius:0;width:10px;height:20px}
-.c_volume_range::-ms-track{background:#000;height:20px;box-shadow:0 0 1px #000}
-.c_volume_range::-ms-thumb{background:#FFF;border-radius:0;width:10px;height:20px}
-.c_volume_range::-ms-fill-lower{background:#000}
-.c_volume_range[disabled]{opacity:0.75;pointer-events:none}
-.timeline{position:fixed;top:0;left:0;width:100%;height:20px;font-size:12px;line-height:20px;background:rgba(0,0,0,0.5);color:#fff;z-index:100;-webkit-transition:0.25s all linear;-o-transition:0.25s all linear;transition:0.25s all linear;box-shadow:0 0 2px rgba(0,0,0,0.5)}
-.timeline_current_time,.timeline_duration_time{z-index:105;position:fixed;pointer-events:none;transition:0.25s all linear}
-.timeline_current_time{left:5px}
-.timeline_duration_time{right:5px}
-.timeline_current,.timeline_duration{left:0px;height:20px;position:fixed;top:0;-webkit-transition:0.25s all linear;-o-transition:0.25s all linear;transition:0.25s all linear;pointer-events:none}
-.timeline_duration{background:rgba(255,255,255,0.5);z-index:101}
-.timeline_current{background:rgba(0,0,0,0.5);z-index:102}
-footer{background:rgba(0,0,0,0.5);position:fixed;bottom:0;left:0;width:100%;height:20px;font-size:12px;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;color:#FFF;/*pointer-events:none;*/text-shadow:0 0 2px #000;-webkit-transition:0.25s all linear;-o-transition:0.25s all linear;transition:0.25s all linear;box-shadow:0 0 2px rgba(0,0,0,0.5)}
-footer a,footer span{display:inline-block;padding:0 5px;color:#FFF;text-decoration:none;cursor:pointer;pointer-events:auto;transition:0.25s all ease-out}
-footer a:hover,footer span:hover{background-color:rgba(255,255,255,0.5);color:#FFF;transition:0.25s all ease-out}
-.link_left{position:fixed;height:20px;line-height:20px;padding-left:10px;left:0;bottom:0;transition:0.25s all linear}
-.link_right{position:fixed;height:20px;line-height:20px;padding-right:10px;right:0;bottom:0;transition:0.25s all linear}
-.link_right_user{display:inline}
-.link_right_user_btn>div a{display:block;height:16.66667px;line-height:16.66667px}
-aside{width:200px;font-size:12px;position:fixed;height:100px;right:-180px;top:50%;margin-top:-50px;/*top:0;bottom:0;left:auto;margin:auto;*/background-color:rgba(0,0,0,0.5);-webkit-transition:0.25s all ease-in;-o-transition:0.25s all ease-in;transition:0.25s all ease-in;box-shadow:0 0 2px rgba(0,0,0,0.5)}
-aside:hover{right:0;-webkit-transition:0.25s all ease-out;-o-transition:0.25s all ease-out;transition:0.25s all ease-out;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-aside ul{margin:0;padding:0;opacity:0;;-webkit-transition:0.25s all ease-in;-o-transition:0.25s all ease-in;transition:0.25s all ease-in;pointer-events:none}
-aside:hover ul{opacity:1;-webkit-transition:0.25s all ease-out;-o-transition:0.25s all ease-out;transition:0.25s all ease-out;pointer-events:auto}
-aside li{height:25px;line-height:25px;list-style:none;padding-left:24px;color:#FFF;-webkit-transition:0.25s all ease-in;-o-transition:0.25s all ease-in;transition:0.25s all ease-in;cursor:pointer;background-repeat:no-repeat no-repeat;background-position:4px center;background-image:none;margin-left:200px}
-aside:hover li{margin-left:0px}
-aside li:hover{background-color:rgba(255,255,255,0.5);transition:0.25s all ease-out;-webkit-transition:0.25s all ease-out;-o-transition:0.25s all ease-out}
-aside .aside_album{background-image:url(http://moe.fm/public/images/fm/fav_music_gray.png)}
-aside .aside_song{background-image:url(http://moe.fm/public/images/fm/fav_love_gray.png)}
-aside .aside_radio{background-image:url(http://moe.fm/public/images/fm/fav_star_gray.png)}
-aside .aside_random{background-image:url(http://moe.fm/public/images/fm/fav_magnifier_gray.png)}
-.share_panel,.setting_background_panel,.login_panel,.about_panel,.穿越_panel{background:rgba(255,255,255,0.5);box-shadow:0 0 0 5000px rgba(0,0,0,0.5);border-radius:2px;padding:20px;width:200px;height:100px;position:absolute;top:0;bottom:0;left:0;right:0;z-index:201;margin:auto;text-align:center;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;max-width:90%;max-height:90%}
-.setting_background_panel{width:600px;height:400px}
-.share_panel button,.setting_background_panel button{margin:6px;font-size:14px}
-.setting_background_panel textarea{width:100%;height:350px;background-color:rgba(255,255,255,0.5)}
-.share_panel_background,.setting_background_panel_background,.login_panel_background,.about_panel_background,.穿越_panel_background{width:100%;height:100%;position:fixed;z-index:200}
-.share_buttons{display:block;margin:5px}
-.share_buttons .share-button{height:16px;width:16px;background:transparent url('http://moe.fm/public/images/fm/share_button.png?v=20120520') no-repeat;opacity:0.6;-webkit-transition:0.25s opacity ease-in;-o-transition:0.25s opacity ease-in;transition:0.25s opacity ease-in;display:inline-block}
-.share_buttons .share-button:hover{opacity:1;-webkit-transition:0.25s opacity ease-out;-o-transition:0.25s opacity ease-out;transition:0.25s opacity ease-out;}
-.share_buttons .share-button.share-sina{background-position:0 0}
-.share_buttons .share-button.share-tencent{background-position:0 -32px}
-.share_buttons .share-button.share-douban{background-position:0 -16px}
-.share_buttons .share-button.share-renren{background-position:0 -48px}
-.share_buttons .share-button.share-twitter{background-position:0 -128px}
-.share_buttons .share-button.share-163{background-position:0 -64px}
-.share_buttons .share-button.share-googleplus{background-position:0 -144px}
-.share_buttons .share-button.share-dianbo{background-position:0 -160px}
-.login_panel{width:500px;height:150px}
-.about_panel{font-size:12px;width:500px;height:200px}
-.穿越_panel{width:500px;height:200px}
-.error_notification{position:fixed;right:10px;padding:5px;bottom:0px;box-shadow:0 0 1px 5px rgba(0,0,0,0.5);background:rgba(0,0,0,0.5);font-size:12px;color:#fff;opacity:0;-webkit-transition:0.25s all linear;-o-transition:0.25s all linear;transition:0.25s all linear;pointer-events:none}
-.cover_loading_notification{width:100%;height:100%;background:rgba(0,0,0,0.5);color:#FFF;opacity:0;text-shadow:0 0 2px #FFF;pointer-events:none;transition:0.25s all linear}
-a{color:#000}
-@media all and (min-width:500px) and (max-width:600px),all and (min-height:450px) and (max-height:600px){
-    section{width:500px;height:400px;font-size:14px}
-    .cover{width:250px;height:250px;margin:5px auto}
-    .info ul{margin:5px 0}
-    .c_volume_range{max-width:80px;height:20px;margin-top:8px}
-    .control2>span{font-size:150px;padding:50px}
-}
-@media all and (min-width:500px) and (min-height:200px) and (max-height:450px),all and (max-width:500px) and (max-height:299px){
-    section{width:500px;height:165px;font-size:14px}
-    .cover{width:150px;height:150px;float:left;margin:5px}
-    .info ul{margin:1em 0}
-    .c_volume{max-width:3em}
-    .c_volume_range{max-width:50px;height:14px;margin-top:10px}
-    .c_volume_range::-webkit-slider-container,.c_volume_range::-webkit-slider-runnable-track,.c_volume_range::-webkit-slider-thumb{height:1em}
-    .c_volume_range::-moz-range-track,.c_volume_range::-moz-range-thumb{height:1em}
-    .control>span{font-size:32px}
-    .control2>span{font-size:90px;padding:30px}
-}
-@media all and (max-height:200px){
-    section{width:400px;height:105px;font-size:12px}
-    .cover{width:100px;height:100px;margin:0;float:left}
-    .info ul{margin:0}
-    .info ul li{padding:4px 2px}
-    .c_volume{max-width:3em}
-    .c_volume_range{max-width:40px;height:14px;margin-top:5px}
-    .c_volume_range::-webkit-slider-container,.c_volume_range::-webkit-slider-runnable-track,.c_volume_range::-webkit-slider-thumb{height:1em}
-    .c_volume_range::-moz-range-track,.c_volume_range::-moz-range-thumb{height:1em}
-    .control>span{font-size:24px}
-    .control2>span{font-size:50px;padding:25px}
-}
-@media all and (max-height:150px){
-    .timeline,.timeline>*{top:-20px!important}
-    footer,footer>*{bottom:-20px!important}
-    aside{right:-200px}
-    aside,footer,.timeline{box-shadow:none}
-}
-@media all and (max-width:500px) and (min-height:300px){
-    section{width:300px;height:330px;font-size:12px}
-    .cover{width:200px;height:200px;margin:5px auto}
-    .control>span{font-size:24px}
-    .c_volume_range{max-width:50px;height:14px;margin-top:0px}
-    .control{font-size:1em}
-    .control2>span{font-size:120px;padding:40px}
-    .c_volume_range::-webkit-slider-container,.c_volume_range::-webkit-slider-runnable-track,.c_volume_range::-webkit-slider-thumb{height:1em}
-    .c_volume_range::-moz-range-track,.c_volume_range::-moz-range-thumb{height:1em}
-}
-@media all and (max-width:500px) and (max-height:380px) and (min-height:300px){
-    section{height:270px}
-    .cover{width:150px;height:150px}
-    .control2>span{font-size:90px;padding:30px}
-    .info ul li{padding:4px}
-}
-@media all and (-ms-high-contrast: active), (-ms-high-contrast: none){
-    .c_volume_range{margin-left:-10px;box-shadow:0 0 1px #000}
-}
-@media all and (max-width:500px){
-    .link_left{-webkit-transform:translateX(-300px);transform:translateX(-300px)}
+    src:url(<?php echo Yii::app()->baseUrl; ?>/assets/font/moefm-html5-icomoon.ttf?_=20140611)
 }
 </style>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/assets/css/moefm-html5.css">
 </head>
 
 <body>
@@ -286,8 +149,8 @@ var setting=JSON.parse(localStorage.getItem('moefm-html5-setting'))||{},
         OAuth.SignatureMethod.sign(message, accessor);
         return url + (url.indexOf('?')>=0?'&':'?') + OAuth.formEncode(message.parameters);
     },
-    ck='\u0061\u0065\u0063\u0065\u0065\u0035\u0064\u0030\u0062\u0030\u0035\u0034\u0061\u0035\u0062\u0039\u0033\u0065\u0036\u0039\u0037\u0035\u0061\u0062\u0061\u0064\u0063\u0066\u0037\u0064\u0062\u0032\u0030\u0035\u0032\u0036\u0034\u0062\u0065\u0035\u0031',
-    cs='\u0065\u0037\u0038\u0034\u0061\u0066\u0061\u0033\u0062\u0062\u0030\u0066\u0034\u0030\u0034\u0038\u0062\u0066\u0037\u0064\u0039\u0030\u0066\u0061\u0066\u0033\u0033\u0039\u0030\u0036\u0037\u0034',
+    ck='<?php echo unicode_encode(Yii::app()->params['mf_api_key']); ?>',
+    cs='<?php echo unicode_encode(Yii::app()->params['mf_api_secret']); ?>',
     accessToken,
     accessTokenSecret,
     options;
@@ -780,7 +643,7 @@ function login(){
                 method: 'get',
                 consumerKey: ck,
                 consumerSecret: cs,
-                callback: 'http://moefm.ccloli.com/oauth_callback.html'
+                callback: 'http://yukimax.cn/lab/mf/callback.php'
             },
             xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
