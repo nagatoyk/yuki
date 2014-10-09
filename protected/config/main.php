@@ -75,8 +75,8 @@ return array(
 				// uncomment the following to show log messages on web pages
 
 				array(
-					'class'=>'CWebLogRoute',
-					'levels'=>'trace',
+					// 'class'=>'CWebLogRoute',
+					// 'levels'=>'trace',
 					// 'categories'=>'system.db.*'
 				),
 
