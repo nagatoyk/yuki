@@ -22,7 +22,6 @@ class MoefmController extends Controller{
                 p($e);
             }
         }
-        p($token);
         if($token){
             Yii::app()->session['token'] = $token;
             $jstoken = new CHttpCookie('weibojs_'.$o->client_id, http_build_query($token));
