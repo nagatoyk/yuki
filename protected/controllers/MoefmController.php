@@ -7,7 +7,7 @@ class MoefmController extends Controller{
     }*/
     public function actionIndex(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
-        $wburl = $o->getAuthorizeURL(Yii::app()->request->hostinfo.$this->createUrl('saetcallback'), 'code', 'moefm', 'mobile');
+        $wburl = $o->getAuthorizeURL(Yii::app()->request->hostinfo.$this->createUrl('saetcallback'), 'code', 'moefm', 'default');
         $this->render('index', array('wburl' => $wburl));
     }
     public function actionSaetcallback(){
@@ -24,11 +24,12 @@ class MoefmController extends Controller{
         }
         p($token);
         if($token){
-            $_SESSION['token'] = $token;
-            setcookie('weibojs_'.$o->client_id, http_build_query($token));
-            echo 1;
+            Yii::app()->session['token'] = $token;
+            $jstoken = new CHttpCookie('weibojs_'.$o->client_id, http_build_query($token));
+            // setcookie('weibojs_'.$o->client_id, http_build_query($token));
+            $this->render('saetcallback');
         }else{
-            echo 0;
+            echo '授权失败';
         }
     }
 }
