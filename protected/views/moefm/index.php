@@ -718,7 +718,7 @@ function wb_login(){
     return false
 }
 function wb_check(){
-    js_token = '<?php echo $o->getTokenFromJSSDK(); ?>';
+    js_token = 'weibojs_<?php echo Yii::app()->params['saet_api_key']; ?>';
     if (js_token !== '') {
         console.log('未找到')
     } else {
