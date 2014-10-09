@@ -4,7 +4,9 @@
     <title>新浪微博授权回调</title>
     <script type="text/javascript">
         window.opener.wb_check();
-        window.close();
+        setTimeout(function(){
+            window.close()
+        }, 3000)
     </script>
 </head>
 <body>
