@@ -654,7 +654,7 @@ function login(){
                 method: 'get',
                 consumerKey: ck,
                 consumerSecret: cs,
-                callback: '<?php echo Yii::app()->request->hostinfo.Yii::app()->createUrl('moefmcallback'); ?>'
+                callback: '<?php echo Yii::app()->request->hostinfo.$this->createUrl('saetcallback'); ?>'
             },
             xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
