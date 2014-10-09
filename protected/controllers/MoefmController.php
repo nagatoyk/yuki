@@ -9,7 +9,7 @@ class MoefmController extends Controller{
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
         $this->render('index', array('wburl' => $o->getAuthorizeURL('http://i.loli-yuki.tk'.$this->createUrl('saetcallback'))));
     }
-    public function saetcallback(){
+    public function actionSaetcallback(){
         $o = new SaeTOAuthV2(Yii::app()->params['saet_api_key'], Yii::app()->params['saet_api_secret']);
         if(isset($_REQUEST['code'])){
             $keys = array();
