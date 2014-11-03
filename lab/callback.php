@@ -11,7 +11,7 @@ if(isset($_REQUEST['code'])){
 			break;
 
 		default:
-			header('Location:'.urldecode($_REQUEST['state']).'?code='.$_REQUEST['code']);
+			header('Location:'.urldecode($_REQUEST['state']).'&code='.$_REQUEST['code']);
 			exit();
 			break;
 	}
