@@ -5,7 +5,11 @@ require './saetv2.ex.class.php';
 $o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
 if(isset($_REQUEST['code'])){
 	if(isset($_REQUEST['state'])){
-		header('Location:'.urldecode($_REQUEST['state']).'&code='.$_REQUEST['code']);
+		header('Location:'.urldecode($_REQUEST['state']).'?code='.$_REQUEST['code']);
 		exit();
+	}else{
+		echo 123;
 	}
+}else{
+	echo 456;
 }
