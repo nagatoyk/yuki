@@ -204,7 +204,7 @@ function update_info(){
     if(playlist[count].sub_title){
         title.setAttribute('title',playlist[count].sub_title);
         title.innerHTML=playlist[count].sub_title;
-        document.title=playlist[count].sub_title+' | 萌否电台';
+        document.title=playlist[count].sub_title.replace(/(^\s*)|(\s*$)/g,'')+' | 萌否电台';
     }
     else{
         title.innerHTML='';
