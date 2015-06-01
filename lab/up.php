@@ -64,10 +64,9 @@ function my_scandir($dir){
 	if($handle=opendir($dir)){
 		while(($file = readdir($handle))!==false){
 			if(is_dir($dir.'/'.$file)&&$file!='..'&&$file!='.'){
-					$files[$file]=my_scandir($dir.'/'.$file);
-				}else{
-					$files[]=$file;
-				}
+				$files[$file]=my_scandir($dir.'/'.$file);
+			}else{
+				$files[]=$file;
 			}
 		}
 		closedir($handle);
