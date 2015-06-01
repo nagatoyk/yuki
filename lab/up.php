@@ -47,3 +47,18 @@ if(!empty($_FILES['img']['name'])){
 		echo '<img src="'.$file2.'">';
 	}
 }
+function my_scandir($dir){
+	$files = array();
+	$dir_list = scandir($dir);
+	foreach($dir_list as $file){
+		if($file!='..'&&$file!='.'){
+			if(is_dir($dir.'/'.$file)){
+				$files[$file]=my_scandir($dir.'/'.$file);
+			}else{
+				$files[]=$file;
+			}
+		}
+	}
+	return $files;
+}
+echo my_scandir(dirname(__FILE__));
