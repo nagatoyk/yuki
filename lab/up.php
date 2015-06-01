@@ -6,7 +6,7 @@
 // 提取文件域内容名称，并判断
 if(!empty($_FILES['img']['name'])){
 	// 上传路径
-	$path='uppic/';
+	$path='../uploads/images/';
 	// 检查是否有该文件夹，如果没有就创建，并给予最高权限
 	file_exists($path)||mkdir($path, 0700);
 	// 允许上传的文件格式

@@ -1,1 +1,11 @@
 #!/bin/bash
+upload_dir=${OPENSHIFT_DATA_DIR}
+install_dir=${OPENSHIFT_BUILD_DEPENDENCIES_DIR}${current_version}
+if [ ! -d "${upload_dir}" ]; then
+  mkdir -p $upload_dir
+  cp -rf ${install_dir}/* ${upload_dir}/
+fi
+if [ -d ${OPENSHIFT_REPO_DIR}uploads ]; then
+  rm -rf ${OPENSHIFT_REPO_DIR}uploads
+fi
+ln -sf ${upload_dir} ${OPENSHIFT_REPO_DIR}uploads
