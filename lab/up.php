@@ -61,4 +61,6 @@ function my_scandir($dir){
 	}
 	return $files;
 }
-echo my_scandir(dirname(__FILE__));
+$files=my_scandir('./');
+echo '<pre>';
+print($files);
