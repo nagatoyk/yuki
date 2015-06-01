@@ -81,6 +81,7 @@ function my_scandir($dir){
 	}*/
 }
 $files=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
+echo getenv('OPENSHIFT_DATA_DIR');
 echo '<pre>';
 print_r($files);
 echo '</pre>';
