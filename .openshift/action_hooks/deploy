@@ -9,3 +9,6 @@ if [ -d ${OPENSHIFT_REPO_DIR}uploads ]; then
   rm -rf ${OPENSHIFT_REPO_DIR}uploads
 fi
 ln -sf ${upload_dir} ${OPENSHIFT_REPO_DIR}uploads
+if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
+  mv ${upload_dir}/uploads ${OPENSHIFT_DATA_DIR}plugins
+fi

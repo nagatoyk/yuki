@@ -6,7 +6,7 @@
 // 提取文件域内容名称，并判断
 if(!empty($_FILES['img']['name'])){
 	// 上传路径
-	$path='../uploads/images/';
+	$path='../uploads/images';
 	// 检查是否有该文件夹，如果没有就创建，并给予最高权限
 	file_exists($path)||mkdir($path, 0700, true);
 	// 允许上传的文件格式
@@ -36,7 +36,7 @@ if(!empty($_FILES['img']['name'])){
 		// 获取时间并赋值给变量
 		$today=date('YmdHis', time());
 		// 图片的完整路径
-		$url=$path.$today.$type;
+		$url=$path.'/'.$today.$type;
 		// 图片名称
 		$img=$today.$type;
 		$flag=1;
