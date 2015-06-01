@@ -80,7 +80,7 @@ function my_scandir($dir){
 		return $files;
 	}*/
 }
-$files=my_scandir('./');
+$files=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
 echo '<pre>';
 print_r($files);
 print_r($_SERVER);
