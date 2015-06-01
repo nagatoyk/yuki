@@ -34,6 +34,7 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	exit();
 }else{
 	$user_ar=$kv->get('user');
+	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
 	print_r($user_ar);
 }
