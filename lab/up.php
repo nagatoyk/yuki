@@ -6,7 +6,8 @@
 // 提取文件域内容名称，并判断
 if(!empty($_FILES['img']['name'])){
 	// 上传路径
-	$path='uppic/';
+	$root=getenv('OPENSHIFT_DATA_DIR');
+	$path=$root.'uppic/';
 	// 检查是否有该文件夹，如果没有就创建，并给予最高权限
 	file_exists($path)||mkdir($path, 0700);
 	// 允许上传的文件格式
@@ -36,7 +37,7 @@ if(!empty($_FILES['img']['name'])){
 		// 获取时间并赋值给变量
 		$today=date('YmdHis', time());
 		// 图片的完整路径
-		$file2=$path.$today.$type;
+		$file2=str_replace($root, '', $path).$today.$type;
 		// 图片名称
 		$img=$today.$type;
 		$flag=1;
