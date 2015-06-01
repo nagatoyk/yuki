@@ -1,5 +1,6 @@
 #!/bin/bash
 upload_dir=${OPENSHIFT_DATA_DIR}
+current_version=$(cat ${OPENSHIFT_BUILD_DEPENDENCIES_DIR}.current_version)
 install_dir=${OPENSHIFT_BUILD_DEPENDENCIES_DIR}${current_version}
 if [ ! -d "${upload_dir}" ]; then
   mkdir -p $upload_dir
@@ -12,3 +13,5 @@ ln -sf ${upload_dir} ${OPENSHIFT_REPO_DIR}uploads
 if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
   mv ${upload_dir}/uploads ${OPENSHIFT_DATA_DIR}plugins
 fi
+echo "Copying Uploads from .openshift/uploads"
+cp -rf $OPENSHIFT_REPO_DIR/.openshift/uploads/* ${OPENSHIFT_DATA_DIR}uploads/ 2>/dev/null
