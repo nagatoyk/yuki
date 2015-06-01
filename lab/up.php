@@ -73,8 +73,7 @@ function my_scandir($dir){
 		return $files;
 	}
 }
-$files=my_scandir('./');
+// $files=my_scandir(dirname(__FILE__));
 echo '<pre>';
-print($files);
+print($_SERVER);
 echo '</pre>';
-phpinfo();
