@@ -51,11 +51,11 @@ if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png)/', $_GET['filename'])){
 		exit('filename格式错误');
 	}else{
-		unlink($_GET['filename']);
+		file_exists($_GET['finlename']) ? unlink($_GET['filename']) : exit('文件不存在');
 	}
 }
 function my_scandir($dir){
-	/*$files = array();
+	$files = array();
 	$dir_list = scandir($dir);
 	foreach($dir_list as $file){
 		if($file!='..'&&$file!='.'){
@@ -66,8 +66,8 @@ function my_scandir($dir){
 			}
 		}
 	}
-	return $files;*/
-	$files=array();
+	return $files;
+	/*$files=array();
 	if($handle=opendir($dir)){
 		while(($file = readdir($handle))!==false){
 			if(is_dir($dir.'/'.$file)&&$file!='..'&&$file!='.'){
@@ -78,11 +78,10 @@ function my_scandir($dir){
 		}
 		closedir($handle);
 		return $files;
-	}
+	}*/
 }
 $files=my_scandir('./');
 echo '<pre>';
 print_r($files);
 print_r($_SERVER);
 echo '</pre>';
-phpinfo();
