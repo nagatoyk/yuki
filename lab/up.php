@@ -43,7 +43,7 @@ if(!empty($_FILES['img']['name'])){
 	}
 	if($flag){
 		// 特别注意这里传递给move_uploaded_file的第一个参数为上传到服务器上的临时文件
-		$result=move_uploaded_file($_FILES['img']['tmp_name'], $url);
+		$result=move_uploaded_file($_FILES['img']['tmp_name'], getenv('OPENSHIFT_DATA_DIR').str_replace('../', '', $url));
 		echo '<img src="'.$url.'"><br><a href="?act=del&filename='.$url.'">删除</a>';
 	}
 }
