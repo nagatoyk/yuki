@@ -80,8 +80,7 @@ function my_scandir($dir){
 		return $files;
 	}*/
 }
-$files=my_scandir(getenv('OPENSHIFT_REPO_DIR').'lab/');
+$files=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
 echo '<pre>';
 print_r($files);
-print_r($_SERVER);
 echo '</pre>';

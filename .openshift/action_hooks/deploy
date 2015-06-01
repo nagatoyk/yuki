@@ -1,17 +1,8 @@
 #!/bin/bash
 
-dest_dir=${OPENSHIFT_DATA_DIR}
 
-current_version=$(cat ${OPENSHIFT_BUILD_DEPENDENCIES_DIR}.current_version)
-install_dir=${OPENSHIFT_BUILD_DEPENDENCIES_DIR}${current_version}
-
-if [ ! -d "${dest_dir}" ]; then
-  mkdir -p $dest_dir
-  cp -rf ${install_dir}/* ${dest_dir}/
+if [ ! -d $OPENSHIFT_DATA_DIR/uploads ]; then
+    mkdir $OPENSHIFT_DATA_DIR/uploads
 fi
-
-if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
-    mkdir ${OPENSHIFT_DATA_DIR}uploads
-fi
-cp -rf $OPENSHIFT_REPO_DIR/uploads/* ${OPENSHIFT_DATA_DIR}uploads/ 2>/dev/null
-ln -sf ${OPENSHIFT_DATA_DIR}uploads   ${OPENSHIFT_REPO_DIR}
+cp -rf $OPENSHIFT_REPO_DIR/uploads/* $OPENSHIFT_DATA_DIR/uploads/ 2>/dev/null
+ln -sf $OPENSHIFT_DATA_DIR/uploads   $OPENSHIFT_REPO_DIR
