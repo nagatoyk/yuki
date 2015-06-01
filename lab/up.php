@@ -76,4 +76,5 @@ function my_scandir($dir){
 $files=my_scandir('./');
 echo '<pre>';
 print_r($files);
+print_r($_SERVER);
 echo '</pre>';
