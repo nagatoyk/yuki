@@ -44,9 +44,14 @@ if(!empty($_FILES['img']['name'])){
 	if($flag){
 		// 特别注意这里传递给move_uploaded_file的第一个参数为上传到服务器上的临时文件
 		$result=move_uploaded_file($_FILES['img']['tmp_name'], $file2);
-		echo '<img src="'.$file2.'">';
+		echo '<img src="'.$file2.'"><br><a href="?act=del&filename='.$file2.'">删除</a>';
 	}
 }
+if(!isset($_GET['act']) || !preg_match('/del/', $_GET['act']))
+	exit('act参数错误');
+if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png)/', $_GET['filename']))
+	exit('filename格式错误');
+unlink($_GET['filename']);
 function my_scandir($dir){
 	/*$files = array();
 	$dir_list = scandir($dir);
