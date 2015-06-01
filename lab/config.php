@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Shanghai');
 // error_reporting(0);
 // header('Content-Type: text/html; charset=UTF-8');
 // 微博已上线站点api数据
