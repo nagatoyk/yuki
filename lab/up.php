@@ -64,3 +64,5 @@ function my_scandir($dir){
 $files=my_scandir('./');
 echo '<pre>';
 print($files);
+echo '</pre>';
+phpinfo();
