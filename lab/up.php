@@ -48,7 +48,7 @@ if(!empty($_FILES['img']['name'])){
 	}
 }
 function my_scandir($dir){
-	$files = array();
+	/*$files = array();
 	$dir_list = scandir($dir);
 	foreach($dir_list as $file){
 		if($file!='..'&&$file!='.'){
@@ -59,7 +59,21 @@ function my_scandir($dir){
 			}
 		}
 	}
-	return $files;
+	return $files;*/
+	$files=array();
+	if($handle=opendir($dir)){
+		while(($file = readdir($handle))!==false){
+			if($file!='..'&&$file!='.'){
+				if(is_dir($dir.'/'.$file)){
+					$files[$file]=my_scandir($dir.'/'.$file);
+				}else{
+					$files[]=$file;
+				}
+			}
+		}
+		closedir($handle);
+		return $files;
+	}
 }
 $files=my_scandir('./');
 echo '<pre>';
