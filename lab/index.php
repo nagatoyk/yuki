@@ -6,6 +6,8 @@ $o=new SaeTOAuthV2($wb_id, $wb_key);
 $url=$o->getAuthorizeURL($wb_url, 'code', urlencode('http://'.($_SERVER['HTTP_HOST']=='127.0.0.1'?'127.0.0.1/yuki':$_SERVER['HTTP_HOST']).'/lab/index.php'));
 if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	echo $url;
+	echo '<pre>';
+	print_r($_SERVER);
 }elseif(!empty($_GET['code'])){
 	$user = array();
 	try{
