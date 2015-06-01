@@ -1,7 +1,6 @@
 <?php
-require './config.php';
-require './saetv2.ex.class.php';
 require './fun.php';
+require './saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 if(isset($_GET['code'])){
 	if(isset($_GET['state'])){
@@ -24,7 +23,7 @@ if(isset($_GET['code'])){
 		$user_ar=$kv->get('user');
 		if(!$user_ar[0])
 			$user_ar=array();
-		if(!in_arr($user['id'],$user_ar)){
+		if(!in_arr($user['id'], $user_ar)){
 			$user_ar[]=array($user['id'], $u_msg['name'], $u_msg['profile_image_url'], time());
 			$kv->set('user', $user_ar);
 			session_start();
