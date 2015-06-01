@@ -13,7 +13,7 @@ class SaeKV{
 	}
 	function get($k){
 		$f = 'data/'.$k.'.json';
-		return file_exists($f)?json_decode(file_get_contents($f)):false;
+		return file_exists($f)?json_decode(file_get_contents($f)):null;
 	}
 }
 $kv = new SaeKV();

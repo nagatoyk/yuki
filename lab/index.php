@@ -10,6 +10,7 @@ echo '<pre>';
 print_r($_SESSION);
 echo '</pre>';
 $user_ar=$kv->get('user');
-	if(!$user_ar[0])
-		$user_ar=array();
-	print_r($user_ar);
+if(is_null($user_ar)){
+	$user_ar=array();
+}
+print_r($user_ar);
