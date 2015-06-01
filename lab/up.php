@@ -37,12 +37,8 @@ if(!empty($_FILES['img']['name'])){
 		// 获取时间并赋值给变量
 		$today=date('YmdHis', time());
 		// 图片的完整路径
-<<<<<<< HEAD
 		$file2=$path.$today.$type;
-		$url=str_replace($root, '', $path).$today.$type;
-=======
-		$file2=str_replace($root, '', $path).$today.$type;
->>>>>>> 8a1664802d6e47bf2c42f3e76e8ca3955eede565
+		$url=str_replace($root, '', $file2);
 		// 图片名称
 		$img=$today.$type;
 		$flag=1;
