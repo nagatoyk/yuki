@@ -10,7 +10,7 @@ if(!empty($_FILES['img']['name'])){
 	// 检查是否有该文件夹，如果没有就创建，并给予最高权限
 	file_exists($path)||mkdir($path, 0700);
 	// 允许上传的文件格式
-	$tp=array('image/gif', 'image/pjpeg', 'image/jpeg'):
+	$tp=array('image/gif', 'image/pjpeg', 'image/jpeg');
 	// 检查上传文件是否在允许上传的类型
 	if(!in_array($_FILES['img']['type'], $tp)){
 		echo '<script>alert(\'格式不对\');/*history.go(-1);*/</script>';
