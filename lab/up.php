@@ -6,8 +6,7 @@
 // 提取文件域内容名称，并判断
 if(!empty($_FILES['img']['name'])){
 	// 上传路径
-	$root=getenv('OPENSHIFT_DATA_DIR');
-	$path=$root.'uppic/';
+	$path='uppic/';
 	// 检查是否有该文件夹，如果没有就创建，并给予最高权限
 	file_exists($path)||mkdir($path, 0700);
 	// 允许上传的文件格式
@@ -37,16 +36,15 @@ if(!empty($_FILES['img']['name'])){
 		// 获取时间并赋值给变量
 		$today=date('YmdHis', time());
 		// 图片的完整路径
-		$file2=$path.$today.$type;
-		$url=str_replace($root, '', $file2);
+		$url=$path.$today.$type;
 		// 图片名称
 		$img=$today.$type;
 		$flag=1;
 	}
 	if($flag){
 		// 特别注意这里传递给move_uploaded_file的第一个参数为上传到服务器上的临时文件
-		$result=move_uploaded_file($_FILES['img']['tmp_name'], $file2);
-		echo '<img src="'.$file2.'"><br><a href="?act=del&filename='.$file2.'">删除</a>';
+		$result=move_uploaded_file($_FILES['img']['tmp_name'], $url);
+		echo '<img src="'.$url.'"><br><a href="?act=del&filename='.$url.'">删除</a>';
 	}
 }
 if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
