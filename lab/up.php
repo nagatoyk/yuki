@@ -8,9 +8,9 @@ if(!empty($_FILES['img']['name'])):
 		mkdir($path, 0700);
 	endif;
 	// 允许上传的文件格式
-	$tp=array('image/gif', 'image/pjpeg', 'image/jpeg');
+	$tp=array('image/gif', 'image/pjpeg', 'image/jpeg'):
 	// 检查上传文件是否在允许上传的类型
-	if(!in_array($_FILES['img']['type'], $tp));
+	if(!in_array($_FILES['img']['type'], $tp)):
 		exit('<script>alert(\'格式不对\');/*history.go(-1);*/</script>');
 	endif;
 	$filetype=$_FILES['img']['type'];
