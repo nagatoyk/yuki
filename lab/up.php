@@ -48,7 +48,7 @@ if(!empty($_FILES['img']['name'])){
 	}
 }
 if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
-	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png)/', $_GET['filename'])){
+	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png|json|txt)/', $_GET['filename'])){
 		exit('filename格式错误');
 	}else{
 		file_exists($_GET['finlename']) ? unlink($_GET['filename']) : exit('文件不存在');
