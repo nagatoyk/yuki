@@ -10,7 +10,7 @@ $wb_url = 'https://yuki-yukimax.rhcloud.com/lab/callback.php';
 *
 */
 class KV{
-	private $path = getenv('OPENSHIFT_DATA_DIR').'data/';
+	private $path = $_SERVER['OPENSHIFT_DATA_DIR'].'data/';
 	public function __construct($path){
 		$path = $path != '' ? $path : $this->path;
 		if(!file_exists($path)){
