@@ -10,7 +10,7 @@ $wb_url = 'https://yuki-yukimax.rhcloud.com/lab/callback.php';
 *
 */
 class KV{
-	private $path = $_SERVER['OPENSHIFT_DATA_DIR'].'data/';
+	private $path = './data/';
 	public function __construct($path){
 		$path = $path != '' ? $path : $this->path;
 		if(!file_exists($path)){
@@ -28,7 +28,7 @@ class KV{
 		return file_exists($f)?json_decode(file_get_contents($f)):null;
 	}
 }
-$kv = new KV();
+$kv = new KV(getenv('OPENSHIFT_DATA_DIR').'data/');
 
 function in_arr($val, $arr, $num=0){
 	foreach($arr as $a)
