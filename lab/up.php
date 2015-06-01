@@ -47,11 +47,13 @@ if(!empty($_FILES['img']['name'])){
 		echo '<img src="'.$file2.'"><br><a href="?act=del&filename='.$file2.'">删除</a>';
 	}
 }
-if(!isset($_GET['act']) || !preg_match('/del/', $_GET['act']))
-	exit('act参数错误');
-if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png)/', $_GET['filename']))
-	exit('filename格式错误');
-unlink($_GET['filename']);
+if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
+	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png)/', $_GET['filename'])){
+		exit('filename格式错误');
+	}else{
+		unlink($_GET['filename']);
+	}
+}
 function my_scandir($dir){
 	/*$files = array();
 	$dir_list = scandir($dir);
