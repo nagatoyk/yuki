@@ -67,18 +67,6 @@ function my_scandir($dir){
 		}
 	}
 	return $files;
-	/*$files=array();
-	if($handle=opendir($dir)){
-		while(($file = readdir($handle))!==false){
-			if(is_dir($dir.'/'.$file)&&$file!='..'&&$file!='.'){
-				$files[$file]=my_scandir($dir.'/'.$file);
-			}else{
-				$files[]=$file;
-			}
-		}
-		closedir($handle);
-		return $files;
-	}*/
 }
 $files = array();
 $files[]=my_scandir(getenv('OPENSHIFT_REPO_DIR').'uploads');
