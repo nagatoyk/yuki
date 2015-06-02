@@ -5,11 +5,10 @@
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
 
-if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
-    mkdir ${OPENSHIFT_DATA_DIR}uploads
+if [ ! -d ${OPENSHIFT_DATA_DIR}files ]; then
+    mkdir ${OPENSHIFT_DATA_DIR}files
 fi
 
-ln -sf ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}
 
 # echo "${OPENSHIFT_REPO_DIR}uploads/ ---> ${OPENSHIFT_DATA_DIR}uploads/"
 
