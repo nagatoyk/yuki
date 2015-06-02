@@ -1,35 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <script src="//yukimax.sinaapp.com/i/iTorr.m.js"></script>
-<form action="up.php?act=upload" method="post">
+<form method="post" enctype="multipart/form-data">
 	<input type="file" name="img">
 	<input type="button" value="上传">
 </form>
-<img>
-<script>
-var F = $('form'), img = F.img, img_base;
-img.onchange = function(e) {
-	console.log(this.files[0], F.action);
-	var reader = new FileReader();
-	reader.readAsDataURL(this.files[0]);
-	reader.onload = function() {
-		img_base = this.result;
-		$('img').src = img_base
-	}
-};
-$('input[type=button]').onclick = function(e) {
-	$.x(F.action, 'file=' + img_base.replace('/+/', '%2B'), function(r) {
-		console.log(r)
-	});
-	/*var xhr = new XMLHttpRequest();
-	if (xhr.upload) {
-		xhr.upload.onprogress = function(e) {
-			console.log('width:' + e.loaded / e.total * 100 + '%')
-		}
-	}*/
-	return false
-};
-</script>
 <?php
 if(!empty($_FILES['img']['name'])){
 	$path='../uploads/images';
