@@ -49,7 +49,7 @@ if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 		echo 'filename格式错误';
 		exit();
 	}else{
-		file_exists($_GET['finlename']) ? unlink($_GET['filename']) : exit('文件不存在');
+		file_exists($_GET['filename']) ? unlink($_GET['filename']) : exit('文件不存在');
 	}
 }
 
