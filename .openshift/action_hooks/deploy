@@ -15,8 +15,8 @@ if [ ! -d "${dest_dir}" ]; then
   cp -rf ${install_dir}/* ${dest_dir}/
 fi
 
-if [ -d ${OPENSHIFT_REPO_DIR}uploads ]; then
-  rm -rf ${OPENSHIFT_REPO_DIR}uploads
+if [ -d $OPENSHIFT_REPO_DIR/uploads ]; then
+  rm -rf $OPENSHIFT_REPO_DIR/uploads
 fi
 if [ ! -d $OPENSHIFT_DATA_DIR/uploads ]; then
     mkdir $OPENSHIFT_DATA_DIR/uploads
