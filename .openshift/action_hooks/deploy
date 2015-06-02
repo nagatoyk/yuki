@@ -9,7 +9,7 @@ if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
     mkdir ${OPENSHIFT_DATA_DIR}uploads
 fi
 
-ln -svf ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}uploads
+ln -sf ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}uploads
 
 echo "${OPENSHIFT_REPO_DIR}uploads/ ---> ${OPENSHIFT_DATA_DIR}uploads/"
 
