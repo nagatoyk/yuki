@@ -42,7 +42,7 @@ if(!empty($_FILES['img']['name'])){
 		if(move_uploaded_file($_FILES['img']['tmp_name'], $url)){
 			echo '<img src="'.$url.'"><br><a href="?act=del&filename='.$url.'">删除</a>';
 		}
-	｝
+	}
 }
 if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png|json|txt)/', $_GET['filename'])){
@@ -52,6 +52,7 @@ if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 		file_exists($_GET['finlename']) ? unlink($_GET['filename']) : exit('文件不存在');
 	}
 }
+
 function my_scandir($dir){
 	$files = array();
 	$dir_list = scandir($dir);
