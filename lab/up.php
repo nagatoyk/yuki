@@ -7,7 +7,7 @@
 </form>
 <?php
 if(!empty($_FILES['img']['name'])){
-	$path = '../uploads/images';
+	$path = '../files/images';
 	file_exists($path) || mkdir($path, 0700, true);
 	$tp = array('image/gif', 'image/pjpeg', 'image/jpeg');
 	if(!in_array($_FILES['img']['type'], $tp)){
