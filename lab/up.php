@@ -7,7 +7,7 @@
 </form>
 <?php
 if(!empty($_FILES['img']['name'])){
-	$path = '../uploads/images/';
+	$path = '../uploads/images';
 	file_exists($path) || mkdir($path, 0700, true);
 	$tp = array('image/gif', 'image/pjpeg', 'image/jpeg');
 	if(!in_array($_FILES['img']['type'], $tp)){
@@ -34,7 +34,7 @@ if(!empty($_FILES['img']['name'])){
 	}
 	if($_FILES['img']['name']){
 		$today = date('YmdHis', time());
-		$url = $path.$today.$type;
+		$url = $path.'/'.$today.$type;
 		$img = $today.$type;
 		$flag = 1;
 	}
@@ -68,7 +68,7 @@ function my_scandir($dir){
 	return $files;
 }
 $files = array();
-$files[]=my_scandir(getenv('OPENSHIFT_REPO_DIR').'uploads');
+$files[]=my_scandir('../uploads');
 $files[]=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
 echo '<pre>';
 print_r($files);
