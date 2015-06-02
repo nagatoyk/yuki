@@ -8,6 +8,9 @@
 if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
     mkdir ${OPENSHIFT_DATA_DIR}uploads
 fi
-echo "复制图片 到 ${OPENSHIFT_REPO_DIR}/uploads/"
+
+ln -sfv ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}uploads
+
+echo "复制图片 到 ${OPENSHIFT_REPO_DIR}uploads/"
+
 cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}plugins/ 2>/dev/null
-ln -sf ${OPENSHIFT_DATA_DIR}uploads ${OPENSHIFT_REPO_DIR}uploads/
