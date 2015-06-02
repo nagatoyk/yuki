@@ -3,7 +3,7 @@
 <script src="//yukimax.sinaapp.com/i/iTorr.m.js"></script>
 <form method="post" enctype="multipart/form-data">
 	<input type="file" name="img">
-	<input type="button" value="上传">
+	<input type="submit" value="上传">
 </form>
 <?php
 if(!empty($_FILES['img']['name'])){
