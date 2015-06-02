@@ -68,7 +68,7 @@ function my_scandir($dir){
 	return $files;
 }
 $files = array();
-$files[]=my_scandir('../uploads');
+$files[]=my_scandir('../files');
 $files[]=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
 echo '<pre>';
 print_r($files);
