@@ -11,7 +11,7 @@ fi
 
 ln -sf ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}files/
 
-ln -sf ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}uploads/
+# ln -sf ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}uploads/
 
 # echo "${OPENSHIFT_REPO_DIR}uploads/ ---> ${OPENSHIFT_DATA_DIR}uploads/"
 
