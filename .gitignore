@@ -8,7 +8,6 @@
 bin/
 tmp/
 lab/up - 副本.php
-uploads/
 *.tmp
 *.bak
 *.swp
