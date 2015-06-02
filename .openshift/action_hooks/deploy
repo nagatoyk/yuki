@@ -9,8 +9,9 @@ if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
     mkdir ${OPENSHIFT_DATA_DIR}uploads
 fi
 
-ln -sfv ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}uploads
 
-echo "复制图片 到 ${OPENSHIFT_REPO_DIR}uploads/"
+echo "${OPENSHIFT_REPO_DIR}uploads/ ---> ${OPENSHIFT_DATA_DIR}uploads/"
 
-cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}plugins/ 2>/dev/null
+cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}uploads/ 2>/dev/null
+
+ln -sf ${OPENSHIFT_REPO_DIR}uploads ${OPENSHIFT_DATA_DIR}uploads
