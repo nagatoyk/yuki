@@ -52,24 +52,3 @@ if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 		file_exists($_GET['filename']) ? unlink($_GET['filename']) : exit('文件不存在');
 	}
 }
-
-function my_scandir($dir){
-	$files = array();
-	$dir_list = scandir($dir);
-	foreach($dir_list as $file){
-		if($file!='..'&&$file!='.'){
-			if(is_dir($dir.'/'.$file)){
-				$files[$file]=my_scandir($dir.'/'.$file);
-			}else{
-				$files[]=$file;
-			}
-		}
-	}
-	return $files;
-}
-$files = array();
-$files[]=my_scandir('../files');
-$files[]=my_scandir(getenv('OPENSHIFT_DATA_DIR'));
-echo '<pre>';
-print_r($files);
-echo '</pre>';

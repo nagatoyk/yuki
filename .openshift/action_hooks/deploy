@@ -6,10 +6,16 @@
 # ruby, etc.
 
 if [ ! -d ${OPENSHIFT_DATA_DIR}files ]; then
-    mkdir ${OPENSHIFT_DATA_DIR}files
+	mkdir ${OPENSHIFT_DATA_DIR}files
+fi
+
+if [ ! -d ${OPENSHIFT_DATA_DIR}data ]; then
+	mkdir ${OPENSHIFT_DATA_DIR}data
 fi
 
 ln -sfv ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}
+
+ln -sfv ${OPENSHIFT_DATA_DIR}data ${OPENSHIFT_REPO_DIR}
 
 # ln -sf ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}uploads/
 
