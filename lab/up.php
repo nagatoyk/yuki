@@ -17,17 +17,19 @@ if(!empty($_FILES['img']['name'])){
 	$filetype=$_FILES['img']['type'];
 	$type='';
 	switch($filetype){
-		case 'image/jpeg':
-			$type='.jpg';
-			break;
 		case 'image/jpg':
-			$type = '.jpg';
-			break;
+		case 'image/jpeg':
 		case 'image/pjpeg':
 			$type='.jpg';
 			break;
 		case 'image/gif':
 			$type='.gif';
+			break;
+		case 'image/bmp':
+			$type='.bmp';
+			break;
+		case 'image/png':
+			$type='.png';
 			break;
 	}
 	if($_FILES['img']['name']){
@@ -37,8 +39,7 @@ if(!empty($_FILES['img']['name'])){
 		$flag=1;
 	}
 	if($flag){
-		$result=move_uploaded_file($_FILES['img']['tmp_name'], $url);
-		if($result !== false){
+		if(move_uploaded_file($_FILES['img']['tmp_name'], $url)){
 			echo '<img src="'.$url.'"><br><a href="?act=del&filename='.$url.'">删除</a>';
 		}
 	｝
