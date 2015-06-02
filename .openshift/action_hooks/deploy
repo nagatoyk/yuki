@@ -11,11 +11,11 @@ if [ ! -d "${OPENSHIFT_REPO_DIR}uploads" ]; then
   cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}uploads/
 fi
 
-if [ -d ${OPENSHIFT_REPO_DIR}uploads ]; then
-  rm -rf ${OPENSHIFT_REPO_DIR}uploads
-fi
+# if [ -d ${OPENSHIFT_REPO_DIR}uploads ]; then
+#   rm -rf ${OPENSHIFT_REPO_DIR}uploads
+# fi
 if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
     mkdir ${OPENSHIFT_DATA_DIR}uploads
 fi
 ln -sf ${OPENSHIFT_DATA_DIR}uploads ${OPENSHIFT_REPO_DIR}uploads
-cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}uploads/ 2>/dev/null
+# cp -rf ${OPENSHIFT_REPO_DIR}uploads/* ${OPENSHIFT_DATA_DIR}uploads/ 2>/dev/null
