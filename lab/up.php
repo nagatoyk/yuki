@@ -7,36 +7,36 @@
 </form>
 <?php
 if(!empty($_FILES['img']['name'])){
-	$path='../uploads/images';
-	file_exists($path)||mkdir($path, 0700, true);
-	$tp=array('image/gif', 'image/pjpeg', 'image/jpeg');
+	$path = '../uploads/images/';
+	file_exists($path) || mkdir($path, 0700, true);
+	$tp = array('image/gif', 'image/pjpeg', 'image/jpeg');
 	if(!in_array($_FILES['img']['type'], $tp)){
 		echo '<script>alert(\'类型错误\');/*history.go(-1);*/</script>';
 		exit();
 	}
-	$filetype=$_FILES['img']['type'];
-	$type='';
+	$filetype = $_FILES['img']['type'];
+	$type = '';
 	switch($filetype){
 		case 'image/jpg':
 		case 'image/jpeg':
 		case 'image/pjpeg':
-			$type='.jpg';
+			$type = '.jpg';
 			break;
 		case 'image/gif':
-			$type='.gif';
+			$type = '.gif';
 			break;
 		case 'image/bmp':
-			$type='.bmp';
+			$type = '.bmp';
 			break;
 		case 'image/png':
-			$type='.png';
+			$type = '.png';
 			break;
 	}
 	if($_FILES['img']['name']){
-		$today=date('YmdHis', time());
-		$url=$path.'/'.$today.$type;
-		$img=$today.$type;
-		$flag=1;
+		$today = date('YmdHis', time());
+		$url = $path.$today.$type;
+		$img = $today.$type;
+		$flag = 1;
 	}
 	if($flag){
 		if(move_uploaded_file($_FILES['img']['tmp_name'], $url)){
@@ -46,7 +46,8 @@ if(!empty($_FILES['img']['name'])){
 }
 if(isset($_GET['act']) || preg_match('/del/', $_GET['act'])){
 	if(!isset($_GET['filename']) || !preg_match('/.*\.(jpg|bmp|gif|png|json|txt)/', $_GET['filename'])){
-		exit('filename格式错误');
+		echo 'filename格式错误';
+		exit();
 	}else{
 		file_exists($_GET['finlename']) ? unlink($_GET['filename']) : exit('文件不存在');
 	}
