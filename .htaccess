@@ -2,7 +2,8 @@
 	deny from all
 </Files>
 
-DirectoryIndex index.html index.htm index.php index.asp index.jsp order deny,allow
+DirectoryIndex index.html index.htm index.php
+order deny,allow
 
 <IfModule mod_rewrite.c>
 	Options +FollowSymlinks
