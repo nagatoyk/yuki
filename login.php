@@ -1,6 +1,7 @@
 <?php
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
+require 'r/Mysql.class.php';
 if(isset($_GET['code'])){
 	$o = new SaeTOAuthV2($wb_id, $wb_key);
 	$user = array();
@@ -22,8 +23,6 @@ if(isset($_GET['code'])){
 		$u_msg['url']//'website'=>
 	);
 	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`='.$user['id']);
-	print_r($user_ar);
-	exit();
 	if(!$user_ar[0]){
 		$sql->runSql("INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('".time()."','{$user['id']}','".addslashes(json_encode($user['information']))."')");
 	}
