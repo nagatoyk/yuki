@@ -24,7 +24,7 @@ var $ = function(win, $) {
 				x.abort()
 			}, c * 1000)
 		}
-		x.open(p ? 'POST' : 'GET', '/index.php' + i, 1);
+		x.open(p ? 'POST' : 'GET', i, 1);
 		x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		x.send(p || '');
 		if (f) {
