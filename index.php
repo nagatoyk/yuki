@@ -83,7 +83,8 @@ if(isset($_GET['user'])){
 		$c = new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
 		$msg = $c->upload('我刚刚上传了一张照片'.time(), 'php://input');
 		if($msg['original_pic']){
-			$sql->runSql("INSERT INTO wb_pic (`uid`,`url,`unix`) VALUES ('{$user['id']}','{$msg['original_pic']}','".time()."')");
+			$time = time();
+			$sql->runSql("INSERT INTO wb_pic (`uid`,`url`,`unix`) VALUES ('{$user['id']}','{$msg['original_pic']}','{$time}');");
 			echo $msg['original_pic'];
 			$c->delete($msg['id']);
 		}else{
