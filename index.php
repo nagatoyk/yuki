@@ -10,8 +10,6 @@ if(isset($_GET['login'])){
 	exit();
 }
 if(isset($_GET['user'])){
-	echo $sql->error();
-	exit();
 	if(preg_match('/^[0-9]{8,12}$/', $_GET['user'])){
 		$user_ar = $sql->getData('SELECT `information` FROM `wb_user` WHERE `uid`=\''.$_GET['user'].'\'');
 		$r = $user_ar[0]['information'];
