@@ -23,7 +23,7 @@ if(isset($_GET['code'])){
 	);
 	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`=\''.$user['id'].'\'');
 	if(!$user_ar[0]){
-		$sql->runSql("INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('".time()."','".$user['id']."','".addslashes(json_encode($user['information']))."\')");
+		$sql->runSql("INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('".time()."','".$user['id']."','".addslashes(json_encode($user['information']))."')");
 	}
 	session_start();
 	$_SESSION['user'] = $user;
