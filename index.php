@@ -39,7 +39,7 @@ if(isset($_GET['user'])){
 	if(preg_match('/^[0-9]{1,3}$/u', $_GET['page'])){
 		$start = (int)$_GET['page'] * 30;
 		$limit=' ORDER BY `unix` DESC LIMIT '.$start.',30';
-		if(preg_match('/^[0-9]{8,12}$/u', $_GET['uid'])){
+		if($_GET['uid'] != 0 && preg_match('/^[0-9]{8,12}$/u', $_GET['uid'])){
 			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE uid=\''.$_GET['uid'].'\''.$limit);
 		}elseif(isset($_GET['hide'])){
 			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE `uid`!=\'5343783203\' AND `uid`!=\'5239877849\' AND `uid`!=\'5572630664\' AND `uid`!=\'1833352550\' AND `uid`!=\'1739660870\' AND `uid`!=\'5423367548\' AND `uid`!=\'5285682106\' AND `uid`!=\'1062038223\' AND `uid`!=\'1367128590\' AND `uid`!=\'1945985553\''.$limit);
