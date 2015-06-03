@@ -42,7 +42,7 @@ if(isset($_GET['user'])){
 		if(preg_match('/^[0-9]{8,12}$/u',$_GET['uid'])){
 			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE uid=\''.$_GET['uid'].'\''.$limit);
 		}elseif(isset($_GET['hide'])){
-			$pic_ar = $sql->getData("SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE `uid`!='5343783203' AND `uid`!='5239877849' AND `uid`!='5572630664' AND `uid`!='1833352550' AND `uid`!='1739660870' AND `uid`!='5423367548' AND `uid`!='5285682106' AND `uid`!='1062038223' AND `uid`!='1367128590' AND `uid`!='1945985553'".$limit);
+			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE `uid`!=\'5343783203\' AND `uid`!=\'5239877849\' AND `uid`!=\'5572630664\' AND `uid`!=\'1833352550\' AND `uid`!=\'1739660870\' AND `uid`!=\'5423367548\' AND `uid`!=\'5285682106\' AND `uid`!=\'1062038223\' AND `uid`!=\'1367128590\' AND `uid`!=\'1945985553\''.$limit);
 		}else{
 			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic`'.$limit);
 		}
@@ -90,5 +90,17 @@ if(isset($_GET['user'])){
 		}else{
 			print_r($msg);
 		}
+	}
+}elseif(isset($_GET['img'])){
+	$page = preg_match('/^[0-9]{1,3}$/u', $_GET['page']) ? $_GET['page'] : 0;
+	$start = (int)$page * 30;
+	$limit = ' ORDER BY unix DESC LIMIT '.$start.',30';
+	header('Content-type: application/json');
+	echo json_encode($s->runSql('SELECT * FROM `img` LIMIT ORDER BY `unix` DESC LIMIT '.$start.',30'));
+}elseif(isset($_GET['addVsco'])){
+	if(preg_match('/^[\w]{16,32}$/u', $_GET['addVsco'])){
+		$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix) VALUES (\'10000000\',\'{$_GET['addVsco']}\',\''.time().'\')');
+	}else{
+
 	}
 }

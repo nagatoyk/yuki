@@ -1,7 +1,7 @@
 <?php
 require 'r/fun.php';
+require 'r/saetv2.ex.class.php';
 if(isset($_GET['code'])){
-	require 'r/saetv2.ex.class.php';
 	$o = new SaeTOAuthV2($wb_id, $wb_key);
 	$user = array();
 	try {
@@ -21,7 +21,7 @@ if(isset($_GET['code'])){
 		$u_msg['domain'],//'weibo'=>
 		$u_msg['url']//'website'=>
 	);
-	$user_ar = $sql->getData("SELECT `uid`,`information` FROM `wb_user` WHERE `uid`='{$user['id']}'");
+	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`='.$user['id']);
 	print_r($user_ar);
 	exit();
 	if(!$user_ar[0]){
