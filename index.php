@@ -11,10 +11,10 @@ if(isset($_GET['login'])){
 }
 if(isset($_GET['user'])){
 	if(preg_match('/^[0-9]{8,12}$/', $_GET['user'])){
-		$user_ar = $sql->getData('SELECT information FROM wb_user WHERE uid=\''.$_GET['user'].'\'');
+		$user_ar = $sql->getData('SELECT `information` FROM `wb_user` WHERE `uid`=\''.$_GET['user'].'\'');
 		$r = $user_ar[0]['information'];
 	}else if($_GET['user'] == 'all'){
-		$user_ar = $sql->getData('SELECT information FROM wb_user');
+		$user_ar = $sql->getData('SELECT `information` FROM `wb_user`');
 		$r = array();
 		foreach($user_ar as $user){
 			$r[] = json_decode($user['information']);
