@@ -2,6 +2,7 @@
 defined('__ROOT__') || define('__ROOT__', dirname(__FILE__));
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
+require 'r/Mysql.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 if(isset($_GET['login'])){
 	$url = $o->getAuthorizeURL($wb_url);
@@ -10,11 +11,9 @@ if(isset($_GET['login'])){
 }
 if(isset($_GET['user'])){
 	if(preg_match('/^[0-9]{8,12}$/', $_GET['user'])){
-		require 'r/Mysql.class.php';
 		$user_ar = $sql->getData('SELECT information FROM wb_user WHERE uid=\''.$_GET['user'].'\'');
 		$r = $user_ar[0]['information'];
 	}else if($_GET['user'] == 'all'){
-		require 'r/Mysql.class.php';
 		$user_ar = $sql->getData('SELECT information FROM wb_user');
 		$r = array();
 		foreach($user_ar as $user){
@@ -31,9 +30,65 @@ if(isset($_GET['user'])){
 	}
 	if(isset($_GET['callback'])){
 		header('Content-type: text/javascript');
-		exit($_GET['callback'].'('.$r.')');
+		echo $_GET['callback'].'('.$r.')';
 	}else{
 		header('Content-type: application/json');
-		exit($r);
+		echo $r;
+	}
+}elseif(isset($_GET['photo'])){
+	if(preg_match('/^[0-9]{1,3}$/u',$_GET['page'])){
+		$start=(int)$_GET['page']*30;
+		$limit=' ORDER BY `unix` DESC LIMIT '.$start.',30';
+		if(preg_match('/^[0-9]{8,12}$/u',$_GET['uid'])){
+			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE uid=\''.$_GET['uid'].'\''.$limit);
+		}elseif(isset($_GET['hide'])){
+			$pic_ar = $sql->getData("SELECT `uid`,`unix`,`url` FROM `wb_pic` WHERE `uid`!='5343783203' AND `uid`!='5239877849' AND `uid`!='5572630664' AND `uid`!='1833352550' AND `uid`!='1739660870' AND `uid`!='5423367548' AND `uid`!='5285682106' AND `uid`!='1062038223' AND `uid`!='1367128590' AND `uid`!='1945985553'".$limit);
+		}else{
+			$pic_ar = $sql->getData('SELECT `uid`,`unix`,`url` FROM `wb_pic`'.$limit);
+		}
+		if(isset($_GET['callback'])){
+			header('Content-type: text/javascript');
+			echo $_GET['callback'].'('.json_encode($pic_ar).')';
+		}else{
+			header('Content-type: application/json');
+			echo json_encode($pic_ar);
+		}
+	}elseif($_GET['photo'] == 'rand'){
+		$pic_ar = $sql->getData('SELECT `unix`,`url`,`uid` FROM `wb_pic` ORDER BY RAND() LIMIT '.rand(0,100).',1');
+		if(isset($_GET['callback'])){
+			header('Content-type: text/javascript');
+			echo $_GET['callback'].'('.json_encode($pic_ar).')';
+		}else{
+			header('Content-type: application/json');
+			echo json_encode($pic_ar);
+		}
+	}elseif($_GET['photo'] == 'DELETE' && preg_match('/http\:\/\/ww[0-9]\.sinaimg\.cn\/large\/[\w]{22,32}\.(jpg|png|jpeg|gif)/is', $_GET['d'])){
+		session_start();
+		$user = $_SESSION['user'];
+		if(!$user){
+			header('HTTP/1.0 403 Forbidden');
+			exit();
+		}elseif($user['id'] == '1197780522'){
+			echo $s->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\'');
+		}else{
+			echo $s->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\' AND `uid`=\''.$user['id'].'\'');
+		}
+	}else{
+		session_start();
+		$user = $_SESSION['user'];
+		if(!$user){
+			header('HTTP/1.0 403 Forbidden');
+			exit();
+		}
+		$c = new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
+		$msg = $c->upload('我刚刚上传了一张照片'.time(), 'php://input');
+		if($msg['original_pic']){
+			$sql->runSql('INSERT INTO wb_pic (`uid`,`url,`unix`) VALUES (\''.$user['id'].'","'.$msg['original_pic'].'","'.time().'")');
+			echo $msg['original_pic'];
+			//echo 'INSERT INTO wb_pic (uid,url,unix) VALUES ("'.$user['id'].'","'.$msg['original_pic'].'","'.time().'")';
+			$c->delete($msg['id']);
+		}else{
+			print_r($msg);
+		}
 	}
 }

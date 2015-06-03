@@ -21,12 +21,12 @@ if(isset($_GET['code'])){
 		$u_msg['domain'],//'weibo'=>
 		$u_msg['url']//'website'=>
 	);
-	$user_ar = $sql->getData('SELECT uid,information FROM wb_user WHERE uid="'.$user['id'].'"');
+	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`=\''.$user['id'].'\'');
 	if(!$user_ar[0]){
-		$sql->runSql('INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('.time().','.$user['id'].',\''.addslashes(json_encode($user['information'])).'\')');
+		$sql->runSql("INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('".time()."','".$user['id']."','".addslashes(json_encode($user['information']))."\')");
 	}
 	session_start();
-	$_SESSION['user']=$user;
+	$_SESSION['user'] = $user;
 	$o_url = $_COOKIE['sty_url'];
 	if($o_url){
 		unset($_COOKIE['sty_url']);
