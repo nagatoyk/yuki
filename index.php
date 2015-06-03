@@ -101,7 +101,7 @@ if(isset($_GET['user'])){
 	echo json_encode($s->runSql('SELECT * FROM `img` LIMIT ORDER BY `unix` DESC LIMIT '.$start.',30'));
 }elseif(isset($_GET['addVsco'])){
 	if(preg_match('/^[\w]{16,32}$/u', $_GET['addVsco'])){
-		$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix) VALUES (\'10000000\',\'{$_GET['addVsco']}\',\''.time().'\')');
+		$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix) VALUES (\'10000000\',\''.$_GET['addVsco'].'\',\''.time().'\')');
 	}else{
 
 	}
