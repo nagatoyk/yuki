@@ -1,5 +1,14 @@
-RewriteEngine On
-RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+<Files ~ "^.(htaccess|htpasswd)$">
+	deny from all
+</Files>
+
+DirectoryIndex index.html index.htm index.php index.asp index.jsp order deny,allow
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymlinks
+	RewriteEngine On
+	RewriteCond %{QUERY_STRING} ^(.*)$
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+</IfModule>
