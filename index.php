@@ -1,5 +1,5 @@
 <?php
-defined('__ROOT__') || define('__ROOT__', dirname(__FILE__));
+defined('__ROOT__') or define('__ROOT__', './');
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
 require 'r/Mysql.class.php';
