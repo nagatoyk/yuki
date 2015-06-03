@@ -6,7 +6,7 @@ if(isset($_GET['code'])){
 	$o = new SaeTOAuthV2($wb_id, $wb_key);
 	$user = array();
 	try {
-		$user['token'] = $o->getAccessToken('code', array('code'=>$_GET['code'],'redirect_uri'=>$wb_url));
+		$user['token'] = $o->getAccessToken('code', array('code' => $_GET['code'],'redirect_uri' => $wb_url));
 	} catch (OAuthException $e) {
 		header('Location: /');
 	}
@@ -22,9 +22,9 @@ if(isset($_GET['code'])){
 		$u_msg['domain'],//'weibo'=>
 		$u_msg['url']//'website'=>
 	);
-	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`='.$user['id']);
+	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`=\''.$user['id'].'\'');
 	if(!$user_ar[0]){
-		$sql->runSql("INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES ('".time()."','{$user['id']}','".addslashes(json_encode($user['information']))."')");
+		$sql->runSql('INSERT INTO wb_user (`unix`,`uid`,`information`) VALUES (\''.time().'\',\''.$user['id'].'\',\''.addslashes(json_encode($user['information'])).'\')');
 	}
 	session_start();
 	$_SESSION['user'] = $user;
