@@ -75,7 +75,6 @@ if(isset($_GET['user'])){
 		}
 	}else{
 		session_start();
-		header('Access-Control-Allow-Origin:yukimax.sinaapp.com');
 		$user = $_SESSION['user'];
 		if(!$user){
 			header('HTTP/1.0 403 Forbidden');
