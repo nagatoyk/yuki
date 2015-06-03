@@ -85,7 +85,7 @@ if(isset($_GET['user'])){
 		if($msg['original_pic']){
 			$sql->runSql('INSERT INTO wb_pic (`uid`,`url,`unix`) VALUES (\''.$user['id'].'\',\''.$msg['original_pic'].'\',\''.time().'\')');
 			echo $msg['original_pic'];
-			$c->delete($msg['id']);
+			// $c->delete($msg['id']);
 		}else{
 			print_r($msg);
 		}
