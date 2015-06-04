@@ -167,7 +167,7 @@ var $ = function(win, $) {
 						$('box').innerHTML = '<p class="pic-index">User List</p><ul>' + t + '</ul>';
 						$('new').innerHTML = $('more').innerHTML = ''
 					})
-				} else if (url[0] == 'login' || user[1] != 0) {
+				} else if (url[0] == 'login' || url[1] != 0) {
 					P.login()
 				} else if (url[0] == 'up') {
 					$('box').innerHTML = '<div id="up"><iframe src="box.htm#!https://yuki-yukimax.rhcloud.com/train.htm" scrolling="no" allowtransparency="true"></iframe><ul id="up-list"></ul></div>';
