@@ -38,3 +38,8 @@ function arr_indexOf($val, $arr, $num = 0){
 	}
 	return -1;
 }
+function err($i){
+	header('Content-Type: application/json;charset=utf-8');
+	header('Access-Control-Allow-Origin: *');
+	exit(json_encode(array('error' => $i)));
+}
