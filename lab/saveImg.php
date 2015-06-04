@@ -9,8 +9,8 @@ if(!empty($_POST['imgOpt'])){
 	if(in_array($type, array('jpg', 'png', 'gif'))){
 		$my_token = $kv->get('my_token');
 		$token = $my_token['1687199364'];
-		$info = $sql->runSql('SELECT * FROM `wb_pic` WHERE `pid`=\''.$pid.'\'');
-		if(is_array($info)){
+		$url = $sql->getData('SELECT `url` FROM `wb_pic` WHERE `pid`=\''.$pid.'\'');
+		if(!$url){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
 			if(!isset($msg['error_code'])){
