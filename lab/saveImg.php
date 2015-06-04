@@ -8,6 +8,7 @@ if(!empty($_POST['imgOpt'])){
 	// $finfo = finfo_open(FILEINFO_MIME_TYPE);
 	// $type = finfo_file($finfo, $img);
 	// finfo_close($finfo);
+	$r['name'] = pathinfo($imgurl, PATHINFO_BASENAME);
 	$r['type'] = pathinfo($imgurl, PATHINFO_EXTENSION);
 	header('Content-Type: application/json;charset=utf-8');
 	header('Access-Control-Allow-Origin: *');
