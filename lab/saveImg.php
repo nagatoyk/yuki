@@ -18,7 +18,7 @@ if(!empty($_POST['imgOpt'])){
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`) VALUES (\''.$token['uid'].'\',\''.$img.'\',\''.time().'\',\''.$pid.'\')');
 				$c->delete($msg['id']);
 			}
-			$r = $msg
+			$r = $msg;
 		}else{
 			$r = $info;
 		}
