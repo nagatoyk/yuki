@@ -4,7 +4,7 @@ require '../r/Mysql.class.php';
 require 'saetv2.ex.class.php';
 if(!empty($_POST['imgOpt'])){
 	$imgurl = $_POST['imgOpt']['url'];
-	$pid = $_POST['imgOpt']['pid'];
+	$pid = $_GET['pid'];
 	$type = pathinfo($imgurl, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
 		$my_token = $kv->get('my_token');
