@@ -20,6 +20,15 @@ if(isset($_GET['code'])){
 		$user['id']=$u_msg['id'];
 		$user['name']=$u_msg['name'];
 		$user['pic']=$u_msg['profile_image_url'];
+		$token = array();
+		foreach($user['token'] as $k => $v){
+			$token = array(
+				$user['id'] => array(
+					$k => $v
+				)
+			);
+		}
+		$kv->set('my_token', $token);
 		$user_ar=$kv->get('user');
 		if(!$user_ar[0])
 			$user_ar=array();

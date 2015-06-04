@@ -33,16 +33,11 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	header('Location: index.php');
 	exit();
 }else{
-	$user_ar = array();
-	$token = $_SESSION['user']['token'];
-	$user = array();
-	foreach($token as $k=>$v){
-		$user[$k] = $v;
-	}
-	$kv->set('my_token', $user);
-	$user_ar[] = $kv->get('user');
-	$user_ar[] = $kv->get('my_acc');
+	$user = $kv->get('user');
+	$my_token = $kv->get('my_token');
+	echo $my_token[$user['id']]['access_token'];
 	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
-	print_r($user_ar);
+	print_r($user);
+	print_r($my_token);
 }
