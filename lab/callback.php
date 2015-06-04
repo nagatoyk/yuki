@@ -17,8 +17,15 @@ if(isset($_GET['code'])){
 		if(!$user['token']){
 			exit('error.');
 		}
-		$token = array(array($user['token']['uid'] => $user['token']));
-		$kv->set('my_token', $token);
+		$my_token = $kv->get('my_token');
+		if(!$my_token[$user['token']['uid']]){
+			$my_token = array();
+			foreach($user['token'] as $k => $v){
+				$my_token[$user['token']['uid']][$k] = $v;
+			}
+			$token = array(array($user['token']['uid'] => $my_token));
+			$kv->set('my_token', $token);
+		}
 		$c = new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
 		$u_msg = $c->show_user_by_id($user['token']['uid']);
 		$user['id'] = $u_msg['id'];
