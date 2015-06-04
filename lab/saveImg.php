@@ -1,4 +1,5 @@
 <?php
+require 'fun.php';
 if(!empty($_POST['imgOpt'])){
 	foreach($_POST['imgOpt'] as $k => $v){
 		// echo

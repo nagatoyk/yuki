@@ -20,6 +20,7 @@ if(isset($_GET['code'])){
 		$user['id']=$u_msg['id'];
 		$user['name']=$u_msg['name'];
 		$user['pic']=$u_msg['profile_image_url'];
+		$kv->set('my_acc', $user['token']);
 		$user_ar=$kv->get('user');
 		if(!$user_ar[0])
 			$user_ar=array();
