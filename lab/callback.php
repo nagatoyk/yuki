@@ -15,12 +15,12 @@ if(isset($_GET['code'])){
 			exit();
 		}
 		if(!$user['token'])exit('error.');
+		$kv->set('my_acc', $user['token']);
 		$c=new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
 		$u_msg=$c->show_user_by_id($user['token']['uid']);
 		$user['id']=$u_msg['id'];
 		$user['name']=$u_msg['name'];
 		$user['pic']=$u_msg['profile_image_url'];
-		$kv->set('my_acc', $user['token']);
 		$user_ar=$kv->get('user');
 		if(!$user_ar[0])
 			$user_ar=array();

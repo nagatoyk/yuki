@@ -15,9 +15,9 @@ class KV{
 		$f = $this->path.$k.'.json';
 		return file_put_contents($f, json_encode($v));
 	}
-	function get($k){
+	public function get($k){
 		$f = $this->path.$k.'.json';
-		return file_exists($f)?json_decode(file_get_contents($f)):null;
+		return file_exists($f) ? json_decode(file_get_contents($f)) : null;
 	}
 }
 $kv = new KV();
