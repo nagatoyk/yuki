@@ -15,7 +15,7 @@ if(!empty($_POST['imgOpt'])){
 		$my_token = $kv->get('my_token');
 		$token = $my_token['1687199364'];
 		$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
-		$msg = $c->upload_url_text('我刚刚上传了一张照片'.time(), 'tmp.'.$type);
+		$msg = $c->upload_url_text('我刚刚上传了一张照片'.time(), 'https://yuki-yukimax.rhcloud.com/lab/tmp.'.$type);
 		if($msg['original_pic']){
 			$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\')');
 			$r['url'] = $msg['original_pic'];
