@@ -39,5 +39,5 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
 	print_r($user);
-	print_r($my_token);
+	print_r($my_token[$user[0][0]]);
 }
