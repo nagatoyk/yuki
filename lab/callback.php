@@ -37,5 +37,5 @@ if(isset($_GET['code'])){
 		exit();
 	}
 }else{
-	echo 456;
+	echo $o->getAuthorizeURL($wb_url, 'code', urlencode($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.($_SERVER['HTTP_HOST'] == '127.0.0.1'?'127.0.0.1/yuki':$_SERVER['HTTP_HOST']).'/lab/index.php'));
 }
