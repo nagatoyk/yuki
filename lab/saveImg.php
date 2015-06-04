@@ -1,5 +1,6 @@
 <?php
 require 'fun.php';
+require '../r/Mysql.class.php';
 require 'saetv2.ex.class.php';
 if(!empty($_POST['imgOpt'])){
 	$imgurl = $_POST['imgOpt']['url'];
@@ -15,10 +16,10 @@ if(!empty($_POST['imgOpt'])){
 		$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
 		if($msg['original_pic']){
 			$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\')');
-			$r['url'] = $msg['original_pic'];
+			$r['imgurl'] = $msg['original_pic'];
 			// $c->delete($msg['id']);
 		}else{
-			err($msg);
+			$r['error'] = $msg;
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
