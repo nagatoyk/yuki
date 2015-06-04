@@ -22,9 +22,8 @@ if(isset($_GET['code'])){
 			$my_token = array();
 			foreach($user['token'] as $k => $v){
 				$my_token[$user['token']['uid']][$k] = $v;
-			}
-			$token = array(array($user['token']['uid'] => $my_token));
-			$kv->set('my_token', $token);
+			};
+			$kv->set('my_token', $my_token);
 		}
 		$c = new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
 		$u_msg = $c->show_user_by_id($user['token']['uid']);
