@@ -15,7 +15,6 @@ if(isset($_GET['code'])){
 			exit();
 		}
 		if(!$user['token'])exit('error.');
-		$kv->set('my_acc', $user['token']);
 		$c=new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
 		$u_msg=$c->show_user_by_id($user['token']['uid']);
 		$user['id']=$u_msg['id'];
