@@ -10,7 +10,7 @@ if(!empty($_POST['imgOpt'])){
 		$my_token = $kv->get('my_token');
 		$token = $my_token['1687199364'];
 		$url = $sql->runSql('SELECT `url` FROM `wb_pic` WHERE `pid`=\''.$pid.'\'');
-		if($url === NULL){
+		if(is_null($url)){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
 			if(!isset($msg['error_code'])){
