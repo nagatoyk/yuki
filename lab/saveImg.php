@@ -15,7 +15,7 @@ if(!empty($_POST['imgOpt'])){
 			$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
 			if(!isset($msg['error_code'])){
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\',\''.$pid.'\')');
-				$r['imgurl'] = $msg['original_pic'];
+				$r = $msg;
 				$c->delete($msg['id']);
 			}else{
 				$r['error'] = $msg;
