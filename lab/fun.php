@@ -16,7 +16,7 @@ class KV{
 	}
 	public function get($k){
 		$f = '../data/'.$k.'.json';
-		return file_exists($f) ? json_decode(file_get_contents($f)) : null;
+		return file_exists($f) ? json_decode(file_get_contents($f), true) : null;
 	}
 }
 $kv = new KV();
