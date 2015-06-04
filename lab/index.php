@@ -33,7 +33,9 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	header('Location: index.php');
 	exit();
 }else{
-	$user_ar = $kv->get('user');
+	$user_ar = array();
+	$user_ar[] = $kv->get('user');
+	$user_ar[] = $kv->get('my_acc');
 	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
 	print_r($user_ar);
