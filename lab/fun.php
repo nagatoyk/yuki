@@ -11,14 +11,6 @@ $wb_url = 'https://yuki-yukimax.rhcloud.com/lab/callback.php';
 */
 class KV{
 	private $path = '../data/';
-	public function __construct($path){
-		$path = $path != '' ? $path : $this->path;
-		if(!file_exists($path)){
-			is_dir($path) || mkdir($path);
-			chmod($path, 0777);
-		}
-		$this->path = $path;
-	}
 	public function set($k, $v){
 		$f = $this->path.$k.'.json';
 		return file_put_contents($f, json_encode($v));
@@ -30,15 +22,20 @@ class KV{
 }
 $kv = new KV();
 
-function in_arr($val, $arr, $num=0){
-	foreach($arr as $a)
-		if($a[$num]==$val)return true;
+function in_arr($val, $arr, $num = 0){
+	foreach($arr as $a){
+		if($a[$num] == $val){
+			return true;
+		}
+	}
 	return false;
 }
 
 function arr_indexOf($val, $arr, $num=0){
-	for($i=0, $l=count($arr); $i<$l;$i++)
-		if($arr[$i][$num]===$val)
+	for($i = 0, $l = count($arr); $i < $l; $i++){
+		if($arr[$i][$num] === $val){
 			return $i;
+		}
+	}
 	return -1;
 }
