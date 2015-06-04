@@ -124,7 +124,7 @@ var $ = function(win, $) {
 						$('more').innerHTML = '<span>加载中...</span>'
 					}
 					_nowId = url[2];
-					var URL = '/index.php?photo&uid=' + url[1] + '&page=' + url[2] + '&hide=1';
+					var URL = 'index.php?photo&uid=' + url[1] + '&page=' + url[2] + '&hide=1';
 					/*
 					if ($('up-btn').className != 'hide') {
 						URL = '/index.php?photo&uid=' + url[1] + '&page=' + url[2]
@@ -158,7 +158,7 @@ var $ = function(win, $) {
 						}
 					});
 				} else if (url[0] == 'user') {
-					$.ajax('/index.php?user=all', 0, function(uArr) {
+					$.ajax('index.php?user=all', 0, function(uArr) {
 						uArr = JSON.parse(uArr);
 						document.title = '【用户列表】';
 						for (var i = 0, l = uArr.length, t = ''; i < l; i++) {
@@ -167,7 +167,7 @@ var $ = function(win, $) {
 						$('box').innerHTML = '<p class="pic-index">User List</p><ul>' + t + '</ul>';
 						$('new').innerHTML = $('more').innerHTML = ''
 					})
-				} else if (url[0] == 'login' || url[1] != 0) {
+				} else if (url[0] == 'login') {
 					P.login()
 				} else if (url[0] == 'up') {
 					$('box').innerHTML = '<div id="up"><iframe src="box.htm#!https://yuki-yukimax.rhcloud.com/train.htm" scrolling="no" allowtransparency="true"></iframe><ul id="up-list"></ul></div>';
@@ -184,7 +184,7 @@ var $ = function(win, $) {
 				}
 			},
 			login: function() {
-				$.ajax('/index.php?user', 0, function(user) {
+				$.ajax('index.php?user', 0, function(user) {
 					if (!user) {
 						$.P.ad();
 						return
@@ -203,7 +203,7 @@ var $ = function(win, $) {
 					return
 				}
 				var u = $.c(o.parentNode, 'img')[0].src.replace('thumb150', 'large');
-				$.ajax('/index.php?photo=DELETE&d=' + u, 0, function(txt) {
+				$.ajax('index.php?photo=DELETE&d=' + u, 0, function(txt) {
 					if (txt == '1') {
 						alert('删除完成')
 					}

@@ -1,14 +1,14 @@
 <?php
-require 'r/fun.php';
-require 'r/saetv2.ex.class.php';
-require 'r/Mysql.class.php';
+require '../r/fun.php';
+require '...r/saetv2.ex.class.php';
+require '...r/Mysql.class.php';
 if(isset($_GET['code'])){
 	$o = new SaeTOAuthV2($wb_id, $wb_key);
 	$user = array();
 	try {
 		$user['token'] = $o->getAccessToken('code', array('code' => $_GET['code'],'redirect_uri' => $wb_url));
 	} catch (OAuthException $e) {
-		header('Location: /');
+		header('Location: /p/');
 	}
 	if(!$user['token'])exit('error.');
 	$c = new SaeTClientV2($wb_id, $wb_key, $user['token']['access_token']);
@@ -33,6 +33,6 @@ if(isset($_GET['code'])){
 		unset($_COOKIE['sty_url']);
 		header('Location: '.$o_url);
 	}else{
-		header('Location: /');
+		header('Location: /p/');
 	}
 }
