@@ -10,12 +10,17 @@ $wb_url = 'https://yuki-yukimax.rhcloud.com/lab/callback.php';
 *
 */
 class KV{
+	private $path;
+	private function __construct(){
+		$this->path = '../data';
+		file_exists($this->path) or mkdir($this->path, 0700);
+	}
 	public function set($k, $v){
-		$f = '../data/'.$k.'.json';
+		$f = $this->path.'/'.$k.'.json';
 		return file_put_contents($f, json_encode($v));
 	}
 	public function get($k){
-		$f = '../data/'.$k.'.json';
+		$f = $this->path.'/'.$k.'.json';
 		return file_exists($f) ? json_decode(file_get_contents($f)) : null;
 	}
 }
