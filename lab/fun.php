@@ -13,7 +13,7 @@ class KV{
 	private $path;
 	private function __construct(){
 		$this->path = '../data';
-		file_exists($this->path) or mkdir($this->path, 0700);
+		file_exists($this->path) || mkdir($this->path, 0700);
 	}
 	public function set($k, $v){
 		$f = $this->path.'/'.$k.'.json';
