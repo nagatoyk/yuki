@@ -4,12 +4,8 @@ require '../r/Mysql.class.php';
 require 'saetv2.ex.class.php';
 if(!empty($_POST['imgOpt'])){
 	$imgurl = $_POST['imgOpt']['url'];
-	// $r = $_POST['imgOpt'];
-	// $r['name'] = pathinfo($imgurl, PATHINFO_BASENAME);
 	$type = pathinfo($imgurl, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
-		// $img = file_get_contents($imgurl);
-		// file_put_contents('tmp.'.$type, $img);
 		$my_token = $kv->get('my_token');
 		$token = $my_token['1687199364'];
 		$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
@@ -17,7 +13,7 @@ if(!empty($_POST['imgOpt'])){
 		if($msg['original_pic']){
 			$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\')');
 			$r['imgurl'] = $msg['original_pic'];
-			// $c->delete($msg['id']);
+			$c->delete($msg['id']);
 		}else{
 			$r['error'] = $msg;
 		}
