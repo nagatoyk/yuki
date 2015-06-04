@@ -35,7 +35,7 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 }else{
 	$user = $kv->get('user');
 	$my_token = $kv->get('my_token');
-	echo $my_token[$user['id']]['access_token'];
+	// echo $my_token[$user['id']]['access_token'];
 	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
 	print_r($user);
