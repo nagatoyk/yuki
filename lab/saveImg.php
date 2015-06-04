@@ -10,7 +10,7 @@ if(!empty($_POST['imgOpt'])){
 		$token = $my_token['1687199364'];
 		$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 		$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
-		if($msg['original_pic']){
+		if(!isset($msg['error_code'])){
 			$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\')');
 			$r['imgurl'] = $msg['original_pic'];
 			$c->delete($msg['id']);
