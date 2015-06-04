@@ -15,13 +15,11 @@ if(!empty($_POST['imgOpt'])){
 			$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
 			if(!isset($msg['error_code'])){
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',\''.time().'\',\''.$pid.'\')');
-				$r = $msg;
+				$r['original_pic'] = $msg['original_pic'];
 				$c->delete($msg['id']);
 			}else{
 				$r['error'] = $msg;
 			}
-		}else{
-			$r = $url;
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
