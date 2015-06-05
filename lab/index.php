@@ -46,6 +46,6 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	echo '</pre>';
 	$api = $rate['api_rate_limits'];
 	foreach($api as $k => $v){
-		echo '<p>api:&nbsp;'.$v['api'].'&nbsp;limit:&nbsp;'.$v['limit'].'&nbsp;limit_time_unit:&nbsp;'.$v['limit_time_unit'].'$nbsp;remaining_hits:&nbsp;'.$v['remaining_hits'].'</p>';
+		echo '<p><b>api</b>:&nbsp;'.$v['api'].'&nbsp;<b>limit</b>:&nbsp;'.$v['limit'].'&nbsp;<b>limit_time_unit</b>:&nbsp;'.$v['limit_time_unit'].'&nbsp;<b>remaining_hits</b>:&nbsp;'.$v['remaining_hits'].'</p>';
 	}
 }
