@@ -46,6 +46,18 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	echo '</pre>';
 	$api = $rate['api_rate_limits'];
 	foreach($api as $k => $v){
-		echo '<p><b>api</b>:&nbsp;'.$v['api'].'&nbsp;<b>limit</b>:&nbsp;'.$v['limit'].'&nbsp;<b>limit_time_unit</b>:&nbsp;'.$v['limit_time_unit'].'&nbsp;<b>remaining_hits</b>:&nbsp;'.$v['remaining_hits'].'</p>';
+		$limit_time_unit = $v['limit_time_unit'];
+		switch ($limit_time_unit) {
+			case 'MINUTES':
+				$limit_time_unit = '分';
+				break;
+			case 'HOURS':
+				$limit_time_unit = '时';
+				break;
+			case 'DAYS':
+				$limit_time_unit = '日';
+				break;
+		}
+		echo '<p><b>api</b>:&nbsp;'.$v['api'].'&nbsp;<b>limit</b>:&nbsp;'.$v['limit'].'&nbsp;<b>limit_time_unit</b>:&nbsp;'.$limit_time_unit.'&nbsp;<b>remaining_hits</b>:&nbsp;'.$v['remaining_hits'].'</p>';
 	}
 }
