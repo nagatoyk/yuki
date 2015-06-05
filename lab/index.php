@@ -40,7 +40,7 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	echo '<pre>';
 	print_r($user);
 	print_r($my_token[$user[0][0]]);
-	$c = new SaeTClientV2($wb_id, $wb_key, $my_token[$user[0][0]]);
+	$c = new SaeTClientV2($wb_id, $wb_key, $my_token[$user[0][0]]['access_token']);
 	$rate = $c->rate_limit_status();
 	print_r($rate);
 }
