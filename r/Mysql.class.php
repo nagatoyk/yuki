@@ -4,8 +4,8 @@ class Mysql{
 
 	/*运行Sql语句,不返回结果集*/
 	public function runSql($sql){
-		$db=$this->db();
-		$result=mysql_query($sql, $db);
+		$db = $this->db();
+		$result = mysql_query($sql, $db);
 		$this->save_error($db);
 		return $result;
 	}
