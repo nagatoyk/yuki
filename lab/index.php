@@ -1,5 +1,6 @@
 <?php
 session_start();
+header('Content-Type:text/html;charset=utf-8');
 require './fun.php';
 require './saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
@@ -35,7 +36,6 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 }else{
 	$user = $kv->get('user');
 	$my_token = $kv->get('my_token');
-	// echo $my_token[$user['id']]['access_token'];
 	echo getenv('OPENSHIFT_DATA_DIR');
 	echo '<pre>';
 	print_r($user);
