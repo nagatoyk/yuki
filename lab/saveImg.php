@@ -13,7 +13,7 @@ if(!empty($_POST['imgOpt'])){
 		if(!isset($info['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片'.time(), $imgurl);
-			if($msg !== NULL){
+			if(!empty($msg)){
 				if($msg['original_pic']){
 					$img = $msg['original_pic'];
 					$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`) VALUES (\''.$token['uid'].'\',\''.$img.'\',\''.time().'\',\''.$pid.'\')');
