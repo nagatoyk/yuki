@@ -73,7 +73,7 @@ var $ = function(win, $) {
 			return p.appendChild(i)
 		},
 		b: function(p, i) {
-			p.insertBefore(i,p.childNodes[0])
+			p.insertBefore(i, p.childNodes[0])
 		}
 	};
 	if (!win.JSON) {
@@ -139,7 +139,7 @@ var $ = function(win, $) {
 						for (var i = 0, l = pArr.length, t = ''; i < l; i++) {
 							t += '<li><a href="' + pArr[i].url + '" target="_blank"><img src="' + pArr[i].url.replace('large', 'thumb150') + '"></a><i onclick="$.P.del(this)">×</i></li>'
 						}
-						$('box').innerHTML = '<form id="indexForm"><input class="pic-index" name="i" value="' + (parseInt(_nowId) + 1) + '"></form><ul>' + t + '</ul>';
+						$('box').innerHTML = '<form id="indexForm"><input class="pic-index" name="i" value="' + _nowId + '"></form><ul>' + t + '</ul>';
 						$('indexForm').onsubmit = function() {
 							if (this.i.value.match(/[0-9]{1,}/)) {
 								location.hash = '#!' + url[0] + '/' + url[1] + '/' + this.i.value
@@ -156,7 +156,7 @@ var $ = function(win, $) {
 						} else {
 							$('new').innerHTML = '<span>已是最前</span>'
 						}
-					});
+					})
 				} else if (url[0] == 'user') {
 					$.ajax('index.php?user=all', 0, function(uArr) {
 						uArr = JSON.parse(uArr);
@@ -212,7 +212,7 @@ var $ = function(win, $) {
 			}
 		};
 		return P
-	}();
+	} ();
 	var DA;
 	// 当前是弹出窗口
 	if ((DA = window.dialogArguments) && DA.action == 'login') {
