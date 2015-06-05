@@ -4,10 +4,9 @@ require '../r/Mysql.class.php';
 require '../r/saetv2.ex.class.php';
 if(!empty($_POST['imgOpt'])){
 	$url = urldecode($_POST['imgOpt']['url']);
-	$host = parse_url($url);
 	$dir = pathinfo($url, PATHINFO_DIRNAME);
 	$filename = pathinfo($url, PATHINFO_BASENAME);
-	$imgurl = $host['scheme'].'://'.$host['host'].'/'.$dir.'/'.$filename;
+	$imgurl = $dir.'/'.$filename;
 	$pid = $_GET['pid'];
 	$type = pathinfo($imgurl, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
