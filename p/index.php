@@ -65,6 +65,7 @@ if(isset($_GET['user'])){
 	}elseif($_GET['photo'] == 'DELETE' && preg_match('/http\:\/\/ww[0-9]\.sinaimg\.cn\/large\/[\w]{22,32}\.(jpg|png|jpeg|gif)/is', $_GET['d'])){
 		session_start();
 		$user = $_SESSION['user'];
+		echo json_encode($user);
 		if(!$user){
 			header('HTTP/1.0 403 Forbidden');
 			exit();
