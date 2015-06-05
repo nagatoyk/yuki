@@ -65,14 +65,13 @@ if(isset($_GET['user'])){
 	}elseif($_GET['photo'] == 'DELETE' && preg_match('/http\:\/\/ww[0-9]\.sinaimg\.cn\/large\/[\w]{22,32}\.(jpg|png|jpeg|gif)/is', $_GET['d'])){
 		session_start();
 		$user = $_SESSION['user'];
-		echo json_encode($user);
 		if(!$user){
 			header('HTTP/1.0 403 Forbidden');
 			exit();
 		}elseif($user['id'] == '1687199364'){
-			echo $s->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\'');
+			echo $sql->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\'');
 		}else{
-			echo $s->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\' AND `uid`=\''.$user['id'].'\'');
+			echo $sql->runSql('DELETE FROM `wb_pic` WHERE `url`=\''.$_GET['d'].'\' AND `uid`=\''.$user['id'].'\'');
 		}
 	}else{
 		session_start();
