@@ -1,7 +1,7 @@
 <?php
 require '../r/fun.php';
-require '...r/saetv2.ex.class.php';
-require '...r/Mysql.class.php';
+require '../r/saetv2.ex.class.php';
+require '../r/Mysql.class.php';
 if(isset($_GET['code'])){
 	$o = new SaeTOAuthV2($wb_id, $wb_key);
 	$user = array();
