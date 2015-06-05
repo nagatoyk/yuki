@@ -43,4 +43,9 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	$c = new SaeTClientV2($wb_id, $wb_key, $my_token[$user[0][0]]['access_token']);
 	$rate = $c->rate_limit_status();
 	print_r($rate);
+	echo '</pre>';
+	$api = $rate['api_rate_limits'];
+	foreach($api as $k => $v){
+		echo '<p>api:&nbsp;'.$v['api'].'&nbsp;limit:&nbsp;'.$v['limit'].'&nbsp;limit_time_unit:&nbsp;'.$v['limit_time_unit'].'$nbsp;remaining_hits:&nbsp;'.$v['remaining_hits'].'</p>';
+	}
 }
