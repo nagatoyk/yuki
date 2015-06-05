@@ -2,7 +2,7 @@
 require '../r/fun.php';
 require '../r/Mysql.class.php';
 require '../r/saetv2.ex.class.php';
-$data = $sql->getData('SELECT `url` AS `imgurl`,FROM_UNIXTIME(unix, \'%Y-%m-%d %H:%i:%s\') AS time FROM `wb_pic` ORDER BY `unix` DESC');
+$data = $sql->getData('SELECT `id` AS `wPid`,`uid` AS `sUid`,`url` AS `sinaimg`,FROM_UNIXTIME(unix, \'%Y-%m-%d %H:%i:%s\') AS `addtime`,`pid` AS `kPid` FROM `wb_pic` ORDER BY `unix` DESC');
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,13 @@ $data = $sql->getData('SELECT `url` AS `imgurl`,FROM_UNIXTIME(unix, \'%Y-%m-%d %
 <body>
 <table>
 	<?php foreach($data as $k => $v): ?>
-	<tr><td><img src="<?php echo str_replace('large', 'thumb150', $v['imgurl']); ?>"></td><td><?php echo $v['time']; ?></td></tr>
+	<tr>
+		<td><?php echo $v['wPid']; ?></td>
+		<td><?php echo $v['sUid']; ?></td>
+		<td><img src="<?php echo str_replace('large', 'thumb150', $v['sinaimg']); ?>"></td>
+		<td><?php echo $v['time']; ?></td>
+		<td><?php echo $v['kPid'] ?></td>
+	</tr>
 	<?php endforeach; ?>
 </table>
 </body>
