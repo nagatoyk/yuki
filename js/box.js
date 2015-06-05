@@ -53,7 +53,7 @@ pp = {
 		var img = new Image();
 		img.onload = function() {
 			pp.train_parent(this.src + '|' + this.width + '|' + this.height)
-		}
+		};
 		img.src = i;
 		/*c($('box'), 'img')[0].onload = function() {
 		// console.log('载入成功');
