@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type:text/html;charset=utf-8');
 require './fun.php';
-require './saetv2.ex.class.php';
+require '../r/saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 $url = $o->getAuthorizeURL($wb_url, 'code', urlencode($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.($_SERVER['HTTP_HOST'] == '127.0.0.1'?'127.0.0.1/yuki':$_SERVER['HTTP_HOST']).'/lab/callback.php'));
 if(!isset($_SESSION['user']) && !isset($_GET['code'])){

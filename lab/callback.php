@@ -1,6 +1,6 @@
 <?php
 require './fun.php';
-require './saetv2.ex.class.php';
+require '../r/saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 if(isset($_GET['code'])){
 	if(isset($_GET['state'])){
