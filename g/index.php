@@ -9,9 +9,13 @@ $data = $sql->getData('SELECT `id` AS `wPid`,`uid` AS `sUid`,`url` AS `sinaimg`,
 <head>
 	<meta charset="utf-8">
 	<title>图片管理</title>
+	<style>
+		table{width:100%;border:solid #add9c0;border-width:1px 0px 0px 1px}
+		td{border:solid #add9c0;border-width:0px 1px 1px 0px;padding:10px 0px}
+	</style>
 </head>
 <body>
-<table style="width:100%;boder:1px">
+<table>
 	<?php foreach($data as $k => $v): ?>
 	<tr>
 		<td><?php echo $v['wPid']; ?></td>
