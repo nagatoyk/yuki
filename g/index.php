@@ -11,12 +11,13 @@ $data = $sql->getData('SELECT `id` AS `wPid`,`uid` AS `sUid`,`url` AS `sinaimg`,
 	<title>图片管理</title>
 </head>
 <body>
-<table>
+<table style="width:100%;boder:1px">
 	<?php foreach($data as $k => $v): ?>
 	<tr>
 		<td><?php echo $v['wPid']; ?></td>
 		<td><?php echo $v['sUid']; ?></td>
 		<td><img src="<?php echo str_replace('large', 'thumb150', $v['sinaimg']); ?>"></td>
+		<td><a href="<?php echo $v['sinaimg']; ?>" target="_blank">原图</a></td>
 		<td><?php echo $v['time']; ?></td>
 		<td><?php echo $v['kPid'] ?></td>
 	</tr>
