@@ -6,7 +6,7 @@ require '../r/saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 $url = $o->getAuthorizeURL($wb_url, 'code', urlencode($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.($_SERVER['HTTP_HOST'] == '127.0.0.1'?'127.0.0.1/yuki':$_SERVER['HTTP_HOST']).'/lab/callback.php'));
 if(!isset($_SESSION['user']) && !isset($_GET['code'])){
-	echo $url;
+	echo '<a href="'.$url.'">登录授权</a>';
 }elseif(!empty($_GET['code'])){
 	$user = array();
 	try{

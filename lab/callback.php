@@ -11,12 +11,10 @@ if(isset($_GET['code'])){
 		try{
 			$user['token'] = $o->getAccessToken('code', array('code' => $_GET['code'], 'redirect_uri'=>'https://yuki-yukimax.rhcloud.com/lab/callback.php'));
 		}catch(OAuthException $e){
-			header('Location: index.php');
+			header('Location: /lab/index.php');
 			exit();
 		}
-		if(!$user['token']){
-			exit('error.');
-		}
+		if(!$user['token'])exit('error.');
 		$my_token = $kv->get('my_token');
 		if(!$my_token[$user['token']['uid']]){
 			$my_token = array();
@@ -43,7 +41,7 @@ if(isset($_GET['code'])){
 			session_start();
 			$_SESSION['user'] = $user;
 		}
-		header('Location: index.php');
+		header('Location: /lab/index.php');
 		exit();
 	}
 }else{
