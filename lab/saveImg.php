@@ -3,7 +3,7 @@ require 'fun.php';
 require '../r/Mysql.class.php';
 require '../r/saetv2.ex.class.php';
 if(!empty($_POST['imgOpt'])){
-	$imgurl = $_POST['imgOpt']['url'];
+	$imgurl = urldecode($_POST['imgOpt']['url']);
 	$pid = $_GET['pid'];
 	$type = pathinfo($imgurl, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
