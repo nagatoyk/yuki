@@ -16,14 +16,22 @@ $data = $sql->getData('SELECT `id` AS `wPid`,`uid` AS `sUid`,`url` AS `sinaimg`,
 </head>
 <body>
 <table>
+	<tr>
+		<th>序号</th>
+		<th>用户ID</th>
+		<th>预览图(150px)</th>
+		<th>原图链接</th>
+		<th>记录时间</th>
+		<th>konachan(源)</th>
+	</tr>
 	<?php foreach($data as $k => $v): ?>
 	<tr>
 		<td><?php echo $v['wPid']; ?></td>
 		<td><?php echo $v['sUid']; ?></td>
 		<td><img src="<?php echo str_replace('large', 'thumb150', $v['sinaimg']); ?>"></td>
 		<td><a href="<?php echo $v['sinaimg']; ?>" target="_blank">原图</a></td>
-		<td><?php echo $v['time']; ?></td>
-		<td><?php echo $v['kPid'] ?></td>
+		<td><?php echo $v['addtime']; ?></td>
+		<td><?php echo $v['kPid'] != 0 ? '<a href="//konachan.com/post/'.$v['kPid'].'" target="_blank">konachan.com</a>' : '本地'; ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>
