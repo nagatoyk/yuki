@@ -22,7 +22,13 @@ if(!empty($_POST['imgOpt'])){
 				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
-				$r = $c->user_timeline_by_id($token['uid'], 1, 1);
+				$u = $c->user_timeline_by_id($token['uid'], 1, 1);
+				$img = $u['statuses'][0]['original_pic'];
+				if($img){
+					$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`) VALUES (\''.$token['uid'].'\',\''.$img.'\',\''.time().'\',\''.$pid.'\')');
+					$c->delete($u['statuses'][0]['id']);
+					$r = $u['statuses'][0];
+				}
 			}
 		}else{
 			$r = $info;
