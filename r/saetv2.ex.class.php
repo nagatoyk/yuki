@@ -635,7 +635,7 @@ class SaeTClientV2{
 	 */
 	public function user_timeline_by_id($uid = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
 		$params = array();
-		$params['uid']=$uid;
+		$params['uid'] = $uid;
 		if($since_id){
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;

@@ -22,7 +22,7 @@ if(!empty($_POST['imgOpt'])){
 				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
-				$r = array('url' => $imgurl);
+				$r = $c->user_timeline_by_id($token['uid'], 1, 1);
 			}
 		}else{
 			$r = $info;
