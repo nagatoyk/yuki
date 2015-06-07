@@ -24,9 +24,9 @@ if(isset($_GET['code'])){
 <meta charset="utf-8">
 <script>
 if(window.location.href.indexOf('vcode') >= 0){
-	var vcode = window.location.href.match(/vcode=(\w{1,})/)[1];
+	var vcode = window.location.href.split('vcode=')[1];
 	if(window.opener){
-		window.opener.localStorage.accessToken = vcode;
+		window.opener.setToken(vcode);
 		window.close()
 	}else{
 		prompt('请复制下面的验证码并贴入播放页指定文本框以完成验证', vcode);
