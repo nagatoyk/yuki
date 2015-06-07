@@ -6,10 +6,10 @@ if(isset($_GET['code'])){
 	$code = $_GET['code'];
 	$user = array();
 	try{
-		$user['token'] = $o->getAccessToken('code', array('code' => $_GET['code'], 'redirect_uri'=>'https://yuki-yukimax.rhcloud.com/lab/xiami.php'));
+		$user['token'] = $o->getAccessToken('code', array('code' => $code, 'redirect_uri'=>'https://yuki-yukimax.rhcloud.com/lab/xiami.php'));
 		session_start();
 		$_SESSION['user'] = $user;
-		header('Location: /lab/xiami.php?vcode='.$user['token']['access_tokne']);
+		header('Location: /lab/xiami.php?vcode='.$user['token']['access_token']);
 		exit();
 	}catch(OAuthException $e){
 		header('Location: /lab/err.php?e='.json_encode($e));
