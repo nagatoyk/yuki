@@ -6,7 +6,7 @@ if(isset($_GET['code'])){
 	$code = $_GET['code'];
 	$user = array();
 	try{
-		$user['token'] = $o->getAccessToken('code', array('code' => $code, 'redirect_uri'=>'https://yuki-yukimax.rhcloud.com/lab/xiami.php'));
+		$user['token'] = $o->getAccessToken('code', array('code' => $code, 'redirect_uri'=>'http://lab.loli-yuki.tk/lab/xiami.php'));
 		session_start();
 		$_SESSION['user'] = $user;
 		header('Location: /lab/xiami.php?vcode='.$user['token']['access_token']);
@@ -16,7 +16,7 @@ if(isset($_GET['code'])){
 		exit();
 	}
 }elseif(isset($_GET['login'])){
-	header('Location: '.$o->getAuthorizeURL('https://yuki-yukimax.rhcloud.com/lab/xiami.php'));
+	header('Location: '.$o->getAuthorizeURL('http://lab.loli-yuki.tk/lab/xiami.php'));
 	exit();
 }
 ?>
