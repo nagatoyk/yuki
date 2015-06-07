@@ -16,7 +16,7 @@ if(isset($_GET['code'])){
 		exit();
 	}
 }elseif(isset($_GET['login'])){
-	header('Location: '.$o->getAuthorizeURL('https://yuki-yukimax.rhcloud.com/lab/xiami.php');
+	header('Location: '.$o->getAuthorizeURL('https://yuki-yukimax.rhcloud.com/lab/xiami.php'));
 	exit();
 }
 ?>
