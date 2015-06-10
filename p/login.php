@@ -20,7 +20,8 @@ if(isset($_GET['code'])){
 		$u_msg['description'],//'des'=>
 		$u_msg['profile_image_url'],//'avatar'=>
 		$u_msg['domain'],//'weibo'=>
-		$u_msg['url']//'website'=>
+		$u_msg['url'],//'website'=>
+		$user['token']['access_token']//'access_token'
 	);
 	$user_ar = $sql->getData('SELECT `uid`,`information` FROM `wb_user` WHERE `uid`=\''.$user['id'].'\'');
 	if(!$user_ar[0]){
