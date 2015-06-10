@@ -5,5 +5,6 @@
 </head>
 <body>
 	<h1>准备中</h1>
+	<?php echo time(); ?>
 </body>
 </html>
