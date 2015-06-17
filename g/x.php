@@ -1,5 +1,6 @@
 <?php
 require '../r/fun.php';
+require '../r/Mysql.class.php';
 if(isset($_GET['del']) && preg_match('/^[0-9]{1,}$/u', $_GET['id'])){
 	echo $sql->runSql('DELETE FROM `wb_pic` WHERE `id`=\''.$_GET['id'].'\'');
 }
