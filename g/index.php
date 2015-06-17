@@ -1,5 +1,8 @@
 <?php
+
 require '../r/fun.php';
+require '../r/Mysql.class.php';
+
 $size = 10;
 $s = (int)(isset($_GET['p']) ? $_GET['p'] - 1 : 0) * $size;
 $data = $sql->getData('SELECT `id` AS `wPid`,`uid` AS `sUid`,`url` AS `sinaimg`,FROM_UNIXTIME(unix, \'%Y-%m-%d %H:%i:%s\') AS `addtime`,`source`,`pid` AS `kPid` FROM `wb_pic` ORDER BY `unix` DESC LIMIT '.$s.','.$size);
