@@ -20,6 +20,11 @@ $pmax = ceil($dmax['max'] / $size);
 </style>
 <table>
 	<tr>
+		<td colspan="9">
+			<textarea cols="10" rows="5" name="url" onchange="javascript:addUrl(this)"></textarea>
+		</td>
+	</tr>
+	<tr>
 		<th width="50px">序号</th>
 		<th width="100px">用户ID</th>
 		<th width="155px">预览图(150px)</th>
@@ -77,7 +82,15 @@ $pmax = ceil($dmax['max'] / $size);
 </table>
 <script src="//yukimax.sinaapp.com/f/iTorr.js"></script>
 <script>
-var del = function(id) {
+var addUrl = function(ele) {
+	console.log(ele);
+	$.x('x.php?addUrl', ele.name '=' + ele.value, function(r) {
+		if (r == 1) {
+			location.reload(true)
+		}
+	})
+},
+del = function(id) {
 	console.log(id);
 	$.x('x.php?del&id=' + id, function(r) {
 		if (r == 1) {
