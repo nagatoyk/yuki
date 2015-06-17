@@ -84,19 +84,19 @@ $pmax = ceil($dmax['max'] / $size);
 <script>
 var addUrl = function(ele) {
 	console.log(ele);
-	$.x('x.php?addUrl', ele.name '=' + ele.value, function(r) {
+	$.x('x.php?addUrl', ele.name + '=' + ele.value, function(r) {
 		if (r == 1) {
-			location.reload(true)
+			location.reload(true);
 		}
-	})
+	});
 },
 del = function(id) {
 	console.log(id);
 	$.x('x.php?del&id=' + id, function(r) {
 		if (r == 1) {
-			location.reload(true)
+			location.reload(true);
 		}
-	})
+	});
 },
 update = function(ele) {
 	$.x('x.php?update&id=' + ele.id, ele.name + '=' + ele.value, function(r) {
@@ -104,9 +104,9 @@ update = function(ele) {
 			console.log('修改成功(' + ele.name + '=' + ele.value + ')');
 			$('#' + ele.name + ele.id).href = ele.value;
 			if (ele.name == 'url') {
-				$('#img' + ele.id).src = ele.value.replace(/large/g, 'thumb150')
+				$('#img' + ele.id).src = ele.value.replace(/large/g, 'thumb150');
 			}
 		}
-	})
+	});
 };
 </script>
