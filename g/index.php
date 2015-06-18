@@ -87,6 +87,8 @@ var addUrl = function(ele) {
 	$.x('x.php?addUrl', ele.name + '=' + ele.value, function(r) {
 		if (r == 1) {
 			location.reload(true);
+		} else if (r == 0) {
+			ele.value = '';
 		}
 	});
 },

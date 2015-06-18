@@ -2,7 +2,12 @@
 require '../r/fun.php';
 require '../r/Mysql.class.php';
 if(isset($_GET['addUrl']) && isset($_POST['url'])){
-	echo $sql->runSql('INSERT INTO `wb_pic` (`id`, `uid`, `url`, `unix`, `source`, `pid`) VALUES (NULL, \'1687199364\', \''.$_POST['url'].'\', UNIX_TIMESTAMP(), NULL, \'0\');');
+	$url = $sql->getLine('SELECT `url` FROM `wb_pic` WHERE `url`=\''.$_POST['url'].'\'');
+	if(!isset($url['url'])){
+		echo $sql->runSql('INSERT INTO `wb_pic` (`id`, `uid`, `url`, `unix`, `source`, `pid`) VALUES (NULL, \'1687199364\', \''.$_POST['url'].'\', UNIX_TIMESTAMP(), NULL, \'0\');');
+	}else{
+		echo 0;
+	}
 }
 if(isset($_GET['del']) && preg_match('/^[0-9]{1,}$/u', $_GET['id'])){
 	echo $sql->runSql('DELETE FROM `wb_pic` WHERE `id`=\''.$_GET['id'].'\'');
