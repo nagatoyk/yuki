@@ -18,7 +18,7 @@ if(isset($_POST['imgOpt'])){
 				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
-				$u = $c->user_timeline_by_id($my_token['uid'], 1, 1);
+				$u = $c->user_timeline_by_id(1687199364, 1, 1);
 				if($u['statuses']){
 					$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 					if(!isset($info['url'])){
