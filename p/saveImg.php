@@ -8,8 +8,8 @@ if(isset($_POST['imgOpt'])){
 	if(in_array($type, array('jpg', 'png', 'gif'))){
 		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
-		$pid = $sql->getLine('SELECT `pid` FROM `wb_pic` WHERE `pid`=\''.(int)$_GET['pid'].'\'');
-		if(!isset($pid['pid'])){
+		$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `pid`=\''.(int)$_GET['pid'].'\'');
+		if(!isset($info['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片---'.(int)$_GET['pid'].'------'.time(), $url);
 			if($msg['original_pic']){
@@ -26,12 +26,12 @@ if(isset($_POST['imgOpt'])){
 						$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 						$c->delete($u['statuses'][0]['id']);
 					}else{
-						$r = $pid;
+						$r = $info;
 					}
 				}
 			}
 		}else{
-			$r = $pid;
+			$r = $info;
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
