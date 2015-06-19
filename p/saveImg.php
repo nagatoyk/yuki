@@ -18,6 +18,7 @@ if(isset($_POST['imgOpt'])){
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 				$r = $msg;
 			}else{
+				sleep(2);
 				$u = $c->user_timeline_by_id(1687199364, 1, 1);
 				if($u['statuses']){
 					$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
@@ -30,7 +31,7 @@ if(isset($_POST['imgOpt'])){
 					}
 				}
 			}
-			// $c->delete($msg['id']);
+			$c->delete($msg['id']);
 		}else{
 			$r = $info;
 		}
