@@ -16,7 +16,6 @@ if(isset($_POST['imgOpt'])){
 			if($msg['original_pic']){
 				$img = $msg['original_pic'];
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
-				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
 				$u = $c->user_timeline_by_id(1687199364, 1, 1);
@@ -31,6 +30,7 @@ if(isset($_POST['imgOpt'])){
 					}
 				}
 			}
+			// $c->delete($msg['id']);
 		}else{
 			$r = $info;
 		}
