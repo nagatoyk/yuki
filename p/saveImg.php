@@ -9,7 +9,7 @@ if(isset($_POST['imgOpt'])){
 		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
 		$pid = $sql->getLine('SELECT `pid` FROM `wb_pic` WHERE `pid`=\''.(int)$_GET['pid'].'\'');
-		if(!isset($pid['pid']))
+		if(!isset($pid['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片---'.(int)$_GET['pid'].'------'.time(), $imgurl);
 			if($msg['original_pic']){
