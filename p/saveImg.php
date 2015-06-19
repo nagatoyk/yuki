@@ -11,7 +11,7 @@ if(isset($_POST['imgOpt'])){
 		$pid = $sql->getLine('SELECT `pid` FROM `wb_pic` WHERE `pid`=\''.(int)$_GET['pid'].'\'');
 		if(!isset($pid['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
-			$msg = $c->upload('我刚刚上传了一张照片---'.(int)$_GET['pid'].'------'.time(), $imgurl);
+			$msg = $c->upload('我刚刚上传了一张照片---'.(int)$_GET['pid'].'------'.time(), $url);
 			if($msg['original_pic']){
 				$img = $msg['original_pic'];
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
