@@ -4,7 +4,7 @@ require '../r/Mysql.class.php';
 require '../r/saetv2.ex.class.php';
 if(isset($_POST['imgOpt'])){
 	$url = $_POST['imgOpt']['url'];
-	$pid = intval($_GET['pid']);
+	$pid = sprintf('%d', $_GET['pid']);
 	$type = pathinfo($url, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
 		$my_token = $kv->get('my_token');
@@ -15,7 +15,7 @@ if(isset($_POST['imgOpt'])){
 			$msg = $c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
 			if($msg['original_pic']){
 				$img = $msg['original_pic'];
-				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',\''.time().'\',\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
+				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
@@ -23,7 +23,7 @@ if(isset($_POST['imgOpt'])){
 				if($u['statuses']){
 					$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 					if(!isset($info['url'])){
-						$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$u['statuses'][0]['original_pic'].'\',\''.time().'\',\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
+						$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 						$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 						$c->delete($u['statuses'][0]['id']);
 					}else{

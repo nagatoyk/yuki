@@ -419,13 +419,7 @@ class SaeTOAuthV2{
 		curl_setopt($ci, CURLOPT_URL, $url);
 		curl_setopt($ci, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
-		// 初始版本
-		// $response = curl_exec($ci);
-		// 修改后
-		ob_start();
-		curl_exec($ci);
-		$response = ob_get_contents();
-		ob_end_clean();
+		$response = curl_exec($ci);
 		$this->http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
 		$this->http_info = array_merge($this->http_info, curl_getinfo($ci));
 		$this->url = $url;
