@@ -18,7 +18,7 @@ if(isset($_POST['imgOpt'])){
 				if(strpos($u['statuses'][0]['text'], $pid) !== false){
 					$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 					$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
-					$c->delete($u['statuses'][0]['id']);
+					// $c->delete($u['statuses'][0]['id']);
 				}
 			}
 		}else{
