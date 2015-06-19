@@ -13,7 +13,7 @@ if(isset($_POST['imgOpt'])){
 		$info = $sql->getLine("SELECT * FROM `wb_pic` WHERE `pid`='{$pid}'");
 		if(!isset($info['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
-			$c->set_debug(true);
+			// $c->set_debug(true);
 			$c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
 			$u = $c->user_timeline_by_id($token['uid'], 1, 1);
 			if($u['statuses']){
