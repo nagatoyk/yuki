@@ -6,7 +6,7 @@ if(isset($_POST['imgOpt'])){
 	$url = $_POST['imgOpt']['url'];
 	$type = pathinfo($url, PATHINFO_EXTENSION);
 	if(in_array($type, array('jpg', 'png', 'gif'))){
-		$my_token = json_decode($kv->get('my_token'), true);
+		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
 		$pid = $sql->getLine('SELECT `pid` FROM `wb_pic` WHERE `pid`=\''.(int)$_GET['pid'].'\'');
 		if(!isset($pid['pid']))
