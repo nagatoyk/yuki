@@ -15,7 +15,7 @@ if(isset($_POST['imgOpt'])){
 			if($msg['original_pic']){
 				$img = $msg['original_pic'];
 				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$img.'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
-				$c->delete($msg['id']);
+				// $c->delete($msg['id']);
 				$r = $msg;
 			}else{
 				$u = $c->user_timeline_by_id($my_token['uid'], 1, 1);
@@ -24,14 +24,14 @@ if(isset($_POST['imgOpt'])){
 					if(!isset($info['url'])){
 						$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$u['statuses'][0]['original_pic'].'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
 						$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
-						$c->delete($u['statuses'][0]['id']);
+						// $c->delete($u['statuses'][0]['id']);
 					}else{
 						$r = $info;
 					}
 				}
 			}
 		}else{
-			$r = $info;
+			$r = $pid;
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
