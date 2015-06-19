@@ -35,6 +35,6 @@ if(isset($_POST['imgOpt'])){
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
-		echo isset($_GET['cb']) ? $_GET['cb'].'('.json_encode($r).')' : json_encode($r);
+		echo isset($_GET['callback']) ? $_GET['callback'].'('.json_encode($r).')' : json_encode($r);
 	}
 }
