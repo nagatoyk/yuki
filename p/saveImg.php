@@ -17,7 +17,12 @@ if(isset($_POST['imgOpt'])){
 			if($u['statuses']){
 				if(strpos($u['statuses'][0]['text'], $pid) !== false){
 					$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
-					$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
+					$m = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
+					if(isset($m['pid'])){
+						$r = $m;
+					}else{
+						$r = array('error' => '插入失败');
+					}
 					// $c->delete($u['statuses'][0]['id']);
 				}
 			}
