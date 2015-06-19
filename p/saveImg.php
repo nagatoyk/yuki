@@ -13,7 +13,7 @@ if(isset($_POST['imgOpt'])){
 		if(!isset($info['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
-			if(!$msg['original_pic']){
+			if(!isset($msg['original_pic'])){
 				exec('sleep 3');
 				$u = $c->user_timeline_by_id(1687199364, 1, 1);
 				if($u['statuses']){
