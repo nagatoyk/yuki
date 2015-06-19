@@ -14,7 +14,7 @@ if(isset($_POST['imgOpt'])){
 			$msg = $c->upload('我刚刚上传了一张照片---'.(int)$_GET['pid'].'------'.time(), $imgurl);
 			if($msg['original_pic']){
 				$img = $msg['original_pic'];
-				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$my_token['uid'].'\',\''.$img.'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
+				$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$img.'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
 				$c->delete($msg['id']);
 				$r = $msg;
 			}else{
@@ -22,7 +22,7 @@ if(isset($_POST['imgOpt'])){
 				if($u['statuses']){
 					$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 					if(!isset($info['url'])){
-						$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$my_token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
+						$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',\''.time().'\',\''.(int)$_GET['pid'].'\',\''.$_POST['imgOpt']['source'].'\')');
 						$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 						$c->delete($u['statuses'][0]['id']);
 					}else{
