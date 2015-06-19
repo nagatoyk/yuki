@@ -13,12 +13,10 @@ if(isset($_POST['imgOpt'])){
 		if(!isset($info['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
-			time_sleep_until(time() + 5);
-			$u = $c->user_timeline_by_id(1687199364, 1, 1);
+			$u = $c->user_timeline_by_id($token['uid'], 1, 1);
 			if($u['statuses']){
-				$info = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
-				if(!isset($info['url'])){
-					$sql->runSql('INSERT INTO wb_pic (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\'1687199364\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
+				if(strpos($u['statuses'][0]['text'], $pid) !== false){
+					$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 					$r = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 					$c->delete($u['statuses'][0]['id']);
 				}
