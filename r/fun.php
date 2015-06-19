@@ -2,3 +2,14 @@
 $wb_id = '1093396876';
 $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
 $wb_url = 'https://yuki-yukimax.rhcloud.com/login.php';
+class KV{
+	public function set($k, $v){
+		$f = '../data/'.$k.'.json';
+		return file_put_contents($f, json_encode($v));
+	}
+	public function get($k){
+		$f = '../data/'.$k.'.json';
+		return file_exists($f) ? json_decode(file_get_contents($f), true) : null;
+	}
+}
+$kv = new KV();
