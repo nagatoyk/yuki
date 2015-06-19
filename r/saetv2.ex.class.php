@@ -359,7 +359,6 @@ class SaeTOAuthV2{
 					$body = self::build_http_query_multi($parameters);
 					$headers[] = "Content-Type: multipart/form-data; boundary=" . self::$boundary;
 				}
-				echo $body;
 				return $this->http($url, $method, $body, $headers);
 		}
 	}
