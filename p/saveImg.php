@@ -11,21 +11,15 @@ if(isset($_POST['imgOpt'])){
 		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
 		$p = $sql->getLine('SELECT pid FROM wb_pic WHERE pid='.$pid);
-		$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 		if(!isset($p['pid'])){
-			$c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
-			$u = $c->user_timeline_by_id($token['uid'], 1, 1);
-			if($u['statuses']){
-				if(strpos($u['statuses'][0]['text'], $pid) !== false){
-					$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
-					$m = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
-					if(isset($m['pid'])){
-						$r = $m;
-					}else{
-						$r = array('error' => '插入失败');
-					}
-					// $c->delete($u['statuses'][0]['id']);
-				}
+			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
+			$msg = $c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
+			if($msg['original_pic']){
+				$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['sourec'].'\')');
+				$r = $msg;
+				$c->delete($msg['id']);
+			}else{
+				$r = array('error' => 'API没有返回数据');
 			}
 		}else{
 			$r = $p;
