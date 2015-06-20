@@ -473,7 +473,10 @@ class SaeTOAuthV2{
 		foreach ($params as $parameter => $value){
 			if(in_array($parameter, array('pic', 'image')) && $value{0} == '@'){
 				$url = ltrim($value, '@');
-				$content = file_get_contents($url);
+				// 原获取方式
+				// $content = file_get_contents($url);
+				// 新获取方式
+				$content = self::get_image_file($url);
 				$array = explode('?', basename($url));
 				$filename = $array[0];
 				$multipartbody .= $MPboundary . "\r\n";
@@ -488,6 +491,26 @@ class SaeTOAuthV2{
 		}
 		$multipartbody .= $endMPboundary;
 		return $multipartbody;
+	}
+	/**
+	 * 个人新增获取图片数据方式
+	 *
+	 * @access private
+	 * @param string $url
+	 * @return mixed
+	 * @ignore
+	 */
+	private static function get_image_file($url){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		// 以数据流的方式返回数据,当为false是直接显示出来
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+		$imgdata = curl_exec($ch);
+		curl_close($ch);
+		return $imgdata;
 	}
 }
 /**
