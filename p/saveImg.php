@@ -10,15 +10,15 @@ if(isset($_POST['imgOpt'])){
 		$r = array();
 		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
-		$pid = $sql->getLine("SELECT `pid` FROM `wb_pic` WHERE `pid`='$pid'");
+		$p = $sql->getLine('SELECT pid FROM wb_pic WHERE pid='.$pid);
 		$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
-		if(!isset($pid['pid'])){
+		if(!isset($p['pid'])){
 			$c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
 			$u = $c->user_timeline_by_id($token['uid'], 1, 1);
 			if($u['statuses']){
 				if(strpos($u['statuses'][0]['text'], $pid) !== false){
-					$sql->runSql("INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES ('$token['uid']','$u['statuses'][0]['original_pic']',UNIX_TIMESTAMP(),'$pid','$_POST['imgOpt']['source']')");
-					$m = $sql->getLine("SELECT * FROM `wb_pic` WHERE `url`='$u['statuses'][0]['original_pic']'");
+					$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$u['statuses'][0]['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
+					$m = $sql->getLine('SELECT * FROM `wb_pic` WHERE `url`=\''.$u['statuses'][0]['original_pic'].'\'');
 					if(isset($m['pid'])){
 						$r = $m;
 					}else{
@@ -28,7 +28,7 @@ if(isset($_POST['imgOpt'])){
 				}
 			}
 		}else{
-			$r = $info;
+			$r = $p;
 		}
 		header('Content-Type: application/json;charset=utf-8');
 		header('Access-Control-Allow-Origin: *');
