@@ -10,7 +10,7 @@ if(isset($_POST['imgOpt'])){
 		$r = array();
 		$my_token = $kv->get('my_token');
 		$token = $my_token[1687199364];
-		$p = $sql->getLine('SELECT pid FROM wb_pic WHERE pid='.$pid);
+		$p = $sql->getLine('SELECT `pid` FROM `wb_pic` WHERE `pid`=\''.$pid.'\'');
 		if(!isset($p['pid'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
