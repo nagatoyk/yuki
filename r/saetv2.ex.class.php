@@ -473,19 +473,7 @@ class SaeTOAuthV2{
 		foreach ($params as $parameter => $value){
 			if(in_array($parameter, array('pic', 'image')) && $value{0} == '@'){
 				$url = ltrim($value, '@');
-				// 原获取方式
-				// $content = file_get_contents($url);
-				// 新获取方式
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $url);
-				curl_setopt($ch, CURLOPT_HEADER, 0);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				// 以数据流的方式返回数据,当为false是直接显示出来
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-				$imagedata = curl_exec($ch);
-				curl_close($ch);
-				$content = $imagedata;
+				$content = file_get_contents($url);
 				$array = explode('?', basename($url));
 				$filename = $array[0];
 				$multipartbody .= $MPboundary."\r\n";
