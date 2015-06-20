@@ -476,7 +476,7 @@ class SaeTOAuthV2{
 				// 原获取方式
 				// $content = file_get_contents($url);
 				// 新获取方式
-				$content = self::get_image_file($url);
+				$content = $this->get_image_file($url);
 				$array = explode('?', basename($url));
 				$filename = $array[0];
 				$multipartbody .= $MPboundary."\r\n";
@@ -500,7 +500,7 @@ class SaeTOAuthV2{
 	 * @return mixed
 	 * @ignore
 	 */
-	private static function get_image_file($url){
+	public function get_image_file($url){
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
