@@ -11,6 +11,7 @@
 class OAuthException extends Exception{
 	// pass
 }
+
 /**
  * 新浪微博 OAuth 认证类(OAuth2)
  *
@@ -54,7 +55,7 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $host = "https://api.weibo.com/2/";
+	public $host = 'https://api.weibo.com/2/';
 	/**
 	 * Set timeout default.
 	 *
@@ -72,13 +73,13 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $ssl_verifypeer = FALES;
+	public $ssl_verifypeer = FALSE;
 	/**
 	 * Respons format.
 	 *
 	 * @ignore
 	 */
-	public $format = "json";
+	public $format = 'json';
 	/**
 	 * Decode returned json data.
 	 *
@@ -96,20 +97,20 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $useragent = "Sae T OAuth2 v0.1";
+	public $useragent = 'Sae T OAuth2 v0.1';
 
 	/**
 	 * print the debug info
 	 *
 	 * @ignore
 	 */
-	public $debug = FALES;
+	public $debug = FALSE;
 
 	/**
 	 * boundary of multipart
 	 * @ignore
 	 */
-	public static $boundary = "";
+	public static $boundary = '';
 
 	/**
 	 * Set API URLS
@@ -120,7 +121,7 @@ class SaeTOAuthV2{
 	 * @return string
 	 */
 	private function accessTokenURL(){
-		return "https://api.weibo.com/oauth2/access_token";
+		return 'https://api.weibo.com/oauth2/access_token';
 	}
 	/**
 	 * @ignore
@@ -128,7 +129,7 @@ class SaeTOAuthV2{
 	 * @return string
 	 */
 	private function authorizeURL(){
-		return "https://api.weibo.com/oauth2/authorize";
+		return 'https://api.weibo.com/oauth2/authorize';
 	}
 
 	/**
@@ -161,14 +162,14 @@ class SaeTOAuthV2{
 	 *  - apponweibo    站内应用专用,站内应用不传display参数,并且response_type为token时,默认使用改display.授权后不会返回access_token，只是输出js刷新站内应用父框架
 	 * @return array
 	 */
-	public function getAuthorizeURL($url, $response_type = "code", $state = NULL, $display = NULL){
+	public function getAuthorizeURL($url, $response_type = 'code', $state = NULL, $display = NULL){
 		$params = array();
-		$params["client_id"] = $this->client_id;
-		$params["redirect_uri"] = $url;
-		$params["response_type"] = $response_type;
-		$params["state"] = $state;
-		$params["display"] = $display;
-		return $this->authorizeURL()."?".http_build_query($params);
+		$params['client_id'] = $this->client_id;
+		$params['redirect_uri'] = $url;
+		$params['response_type'] = $response_type;
+		$params['state'] = $state;
+		$params['display'] = $display;
+		return $this->authorizeURL().'?'.http_build_query($params);
 	}
 
 	/**
@@ -179,36 +180,36 @@ class SaeTOAuthV2{
 	 * @access public
 	 * @param string $type 请求的类型,可以为:code, password, token
 	 * @param array $keys 其他参数：
-	 *  - 当$type为code时： array("code"=>..., "redirect_uri"=>...)
-	 *  - 当$type为password时： array("username"=>..., "password"=>...)
-	 *  - 当$type为token时： array("refresh_token"=>...)
+	 *  - 当$type为code时： array('code'=>..., 'redirect_uri'=>...)
+	 *  - 当$type为password时： array('username'=>..., 'password'=>...)
+	 *  - 当$type为token时： array('refresh_token'=>...)
 	 * @return array
 	 */
-	public function getAccessToken($type = "code", $keys){
+	public function getAccessToken($type = 'code', $keys){
 		$params = array();
-		$params["client_id"] = $this->client_id;
-		$params["client_secret"] = $this->client_secret;
-		if($type === "token"){
-			$params["grant_type"] = "refresh_token";
-			$params["refresh_token"] = $keys["refresh_token"];
-		}elseif($type === "code"){
-			$params["grant_type"] = "authorization_code";
-			$params["code"] = $keys["code"];
-			$params["redirect_uri"] = $keys["redirect_uri"];
-		}elseif($type === "password"){
-			$params["grant_type"] = "password";
-			$params["username"] = $keys["username"];
-			$params["password"] = $keys["password"];
+		$params['client_id'] = $this->client_id;
+		$params['client_secret'] = $this->client_secret;
+		if($type === 'token'){
+			$params['grant_type'] = 'refresh_token';
+			$params['refresh_token'] = $keys['refresh_token'];
+		}elseif($type === 'code'){
+			$params['grant_type'] = 'authorization_code';
+			$params['code'] = $keys['code'];
+			$params['redirect_uri'] = $keys['redirect_uri'];
+		}elseif($type === 'password'){
+			$params['grant_type'] = 'password';
+			$params['username'] = $keys['username'];
+			$params['password'] = $keys['password'];
 		}else{
 			throw new OAuthException("wrong auth type");
 		}
-		$response = $this->oAuthRequest($this->accessTokenURL(), "POST", $params);
-		$token = json_decode($response, TRUE);
-		if(is_array($token) && !isset($token["error"])){
-			$this->access_token = $token["access_token"];
-			// $this->refresh_token = $token["refresh_token"];
+		$response = $this->oAuthRequest($this->accessTokenURL(), 'POST', $params);
+		$token = json_decode($response, true);
+		if(is_array($token) && !isset($token['error'])){
+			$this->access_token = $token['access_token'];
+			//$this->refresh_token = $token['refresh_token'];
 		}else{
-			throw new OAuthException("get access token failed.".$token["error"]);
+			throw new OAuthException('get access token failed.'.$token['error']);
 		}
 		return $token;
 	}
@@ -222,12 +223,14 @@ class SaeTOAuthV2{
 	 * @return array
 	 */
 	public function parseSignedRequest($signed_request){
-		list($encoded_sig, $payload) = explode(".", $signed_request, 2);
+		list($encoded_sig, $payload) = explode('.', $signed_request, 2);
 		$sig = self::base64decode($encoded_sig) ;
-		$data = json_decode(self::base64decode($payload), TRUE);
-		if(strtoupper($data["algorithm"]) !== "HMAC-SHA256") return "-1";
-		$expected_sig = hash_hmac("sha256", $payload, $this->client_secret, TRUE);
-		return ($sig !== $expected_sig) ? "-2" : $data;
+		$data = json_decode(self::base64decode($payload), true);
+		if(strtoupper($data['algorithm']) !== 'HMAC-SHA256'){
+			return '-1';
+		}
+		$expected_sig = hash_hmac('sha256', $payload, $this->client_secret, true);
+		return ($sig !== $expected_sig) ? '-2' : $data;
 	}
 
 	/**
@@ -237,28 +240,28 @@ class SaeTOAuthV2{
 	 * @return string
 	 */
 	private static function base64decode($str){
-		return base64_decode(strtr($str.str_repeat("=", (4 - strlen($str) % 4)), "-_", "+/"));
+		return base64_decode(strtr($str.str_repeat('=', (4 - strlen($str) % 4)), '-_', '+/'));
 	}
 
 	/**
 	 * 读取jssdk授权信息，用于和jssdk的同步登录
 	 *
 	 * @access public
-	 * @return array 成功返回array("access_token"=>"value", "refresh_token"=>"value"); 失败返回FALES
+	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
 	 */
 	public function getTokenFromJSSDK(){
-		$key = "weibojs_" . $this->client_id;
+		$key = 'weibojs_'.$this->client_id;
 		if(isset($_COOKIE[$key]) && $cookie = $_COOKIE[$key]){
 			parse_str($cookie, $token);
-			if(isset($token["access_token"]) && isset($token["refresh_token"])){
-				$this->access_token = $token["access_token"];
-				$this->refresh_token = $token["refresh_token"];
+			if(isset($token['access_token']) && isset($token['refresh_token'])){
+				$this->access_token = $token['access_token'];
+				$this->refresh_token = $token['refresh_token'];
 				return $token;
 			}else{
-				return FALES;
+				return false;
 			}
 		}else{
-			return FALES;
+			return false;
 		}
 	}
 
@@ -268,18 +271,18 @@ class SaeTOAuthV2{
 	 *
 	 * @access public
 	 * @param array $arr 存有access_token和secret_token的数组
-	 * @return array 成功返回array("access_token"=>"value", "refresh_token"=>"value"); 失败返回FALES
+	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
 	 */
 	public function getTokenFromArray($arr){
-		if(isset($arr["access_token"]) && $arr["access_token"]){
+		if(isset($arr['access_token']) && $arr['access_token']){
 			$token = array();
-			$this->access_token = $token["access_token"] = $arr["access_token"];
-			if(isset($arr["refresh_token"]) && $arr["refresh_token"]){
-				$this->refresh_token = $token["refresh_token"] = $arr["refresh_token"];
+			$this->access_token = $token['access_token'] = $arr['access_token'];
+			if(isset($arr['refresh_token']) && $arr['refresh_token']){
+				$this->refresh_token = $token['refresh_token'] = $arr['refresh_token'];
 			}
 			return $token;
 		}else{
-			return FALES;
+			return false;
 		}
 	}
 
@@ -292,9 +295,9 @@ class SaeTOAuthV2{
 	 * @return mixed
 	 */
 	public function get($url, $parameters = array()){
-		$response = $this->oAuthRequest($url, "GET", $parameters);
-		if($this->format === "json" && $this->decode_json){
-			return json_decode($response, TRUE);
+		$response = $this->oAuthRequest($url, 'GET', $parameters);
+		if($this->format === 'json' && $this->decode_json){
+			return json_decode($response, true);
 		}
 		return $response;
 	}
@@ -308,10 +311,10 @@ class SaeTOAuthV2{
 	 * @param boolean $multi 是否上传附件
 	 * @return mixed
 	 */
-	public function post($url, $parameters = array(), $multi = FALES){
-		$response = $this->oAuthRequest($url, "POST", $parameters, $multi);
-		if($this->format === "json" && $this->decode_json){
-			return json_decode($response, TRUE);
+	public function post($url, $parameters = array(), $multi = false){
+		$response = $this->oAuthRequest($url, 'POST', $parameters, $multi);
+		if($this->format === 'json' && $this->decode_json){
+			return json_decode($response, true);
 		}
 		return $response;
 	}
@@ -325,9 +328,9 @@ class SaeTOAuthV2{
 	 * @return mixed
 	 */
 	public function delete($url, $parameters = array()){
-		$response = $this->oAuthRequest($url, "DELETE", $parameters);
-		if($this->format === "json" && $this->decode_json){
-			return json_decode($response, TRUE);
+		$response = $this->oAuthRequest($url, 'DELETE', $parameters);
+		if($this->format === 'json' && $this->decode_json){
+			return json_decode($response, true);
 		}
 		return $response;
 	}
@@ -343,21 +346,21 @@ class SaeTOAuthV2{
 	 * @return string
 	 * @ignore
 	 */
-	private function oAuthRequest($url, $method, $parameters, $multi = FALES){
-		if(strrpos($url, "http://") !== 0 && strrpos($url, "https://") !== 0){
-			$url = "{$this->host}{$url}.{$this->format}";
+	private function oAuthRequest($url, $method, $parameters, $multi = false){
+		if(strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0){
+			$url = $this->host.$url.'.'.$this->format;
 		}
 		switch ($method){
-			case "GET":
-				$url = $url."?".http_build_query($parameters);
-				return $this->http($url, "GET");
+			case 'GET':
+				$url = $url.'?'.http_build_query($parameters);
+				return $this->http($url, 'GET');
 			default:
 				$headers = array();
 				if(!$multi && (is_array($parameters) || is_object($parameters))){
 					$body = http_build_query($parameters);
 				}else{
 					$body = self::build_http_query_multi($parameters);
-					$headers[] = "Content-Type: multipart/form-data; boundary=".self::$boundary;
+					$headers[] = 'Content-Type: multipart/form-data; boundary='.self::$boundary;
 				}
 				return $this->http($url, $method, $body, $headers);
 		}
@@ -383,37 +386,37 @@ class SaeTOAuthV2{
 		curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, $this->connecttimeout);
 		curl_setopt($ci, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ci, CURLOPT_ENCODING, "");
+		curl_setopt($ci, CURLOPT_ENCODING, '');
 		curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
 		curl_setopt($ci, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, "getHeader"));
-		curl_setopt($ci, CURLOPT_HEADER, FALES);
+		curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
+		curl_setopt($ci, CURLOPT_HEADER, FALSE);
 		switch ($method){
-			case "POST":
+			case 'POST':
 				curl_setopt($ci, CURLOPT_POST, TRUE);
 				if(!empty($postfields)){
 					curl_setopt($ci, CURLOPT_POSTFIELDS, $postfields);
 					$this->postdata = $postfields;
 				}
 				break;
-			case "DELETE":
-				curl_setopt($ci, CURLOPT_CUSTOMREQUEST, "DELETE");
+			case 'DELETE':
+				curl_setopt($ci, CURLOPT_CUSTOMREQUEST, 'DELETE');
 				if(!empty($postfields)){
-					$url = "{$url}?{$postfields}";
+					$url = $url.'?'.$postfields;
 				}
 		}
-		if(isset($this->access_token) && $this->access_token)
-			$headers[] = "Authorization: OAuth2 ".$this->access_token;
-
+		if(isset($this->access_token) && $this->access_token){
+			$headers[] = 'Authorization: OAuth2 '.$this->access_token;
+		}
 		if(!empty($this->remote_ip)){
-			if(defined("SAE_ACCESSKEY")){
-				$headers[] = "SaeRemoteIP: ".$this->remote_ip;
+			if(defined('SAE_ACCESSKEY')){
+				$headers[] = 'SaeRemoteIP: '.$this->remote_ip;
 			}else{
-				$headers[] = "API-RemoteIP: ".$this->remote_ip;
+				$headers[] = 'API-RemoteIP: '.$this->remote_ip;
 			}
 		}else{
-			if(!defined("SAE_ACCESSKEY")){
-				$headers[] = "API-RemoteIP: ".$_SERVER["REMOTE_ADDR"];
+			if(!defined('SAE_ACCESSKEY')){
+				$headers[] = 'API-RemoteIP: '.$_SERVER['REMOTE_ADDR'];
 			}
 		}
 		curl_setopt($ci, CURLOPT_URL, $url);
@@ -424,13 +427,13 @@ class SaeTOAuthV2{
 		$this->http_info = array_merge($this->http_info, curl_getinfo($ci));
 		$this->url = $url;
 		if($this->debug){
-			echo "=====post data======\r\n";
+			echo '=====post data======'."\r\n";
 			var_dump($postfields);
-			echo "=====headers======\r\n";
+			echo '=====headers======'."\r\n";
 			print_r($headers);
-			echo "=====request info=====\r\n";
+			echo '=====request info====='."\r\n";
 			print_r(curl_getinfo($ci));
-			echo "=====response=====\r\n";
+			echo '=====response====='."\r\n";
 			print_r($response);
 		}
 		curl_close($ci);
@@ -447,9 +450,9 @@ class SaeTOAuthV2{
 	 * @ignore
 	 */
 	private function getHeader($ch, $header){
-		$i = strpos($header, ":");
+		$i = strpos($header, ':');
 		if(!empty($i)){
-			$key = str_replace("-", "_", strtolower(substr($header, 0, $i)));
+			$key = str_replace('-', '_', strtolower(substr($header, 0, $i)));
 			$value = trim(substr($header, $i + 2));
 			$this->http_header[$key] = $value;
 		}
@@ -463,26 +466,26 @@ class SaeTOAuthV2{
 	 * @ignore
 	 */
 	private static function build_http_query_multi($params){
-		if(!$params) return "";
-		uksort($params, "strcmp");
+		if(!$params) return '';
+		uksort($params, 'strcmp');
 		$pairs = array();
-		self::$boundary = $boundary = uniqid("------------------");
-		$MPboundary = "--".$boundary;
-		$endMPboundary = $MPboundary."--";
-		$multipartbody = "";
+		self::$boundary = $boundary = uniqid('------------------');
+		$MPboundary = '--'.$boundary;
+		$endMPboundary = $MPboundary.'--';
+		$multipartbody = '';
 		foreach($params as $parameter => $value){
-			if(in_array($parameter, array("pic", "image")) && $value{0} == "@"){
-				$url = ltrim($value, "@");
+			if(in_array($parameter, array('pic', 'image')) && $value{0} == '@'){
+				$url = ltrim($value, '@');
 				$content = file_get_contents($url);
-				$array = explode("?", basename($url));
+				$array = explode('?', basename($url));
 				$filename = $array[0];
 				$multipartbody .= $MPboundary."\r\n";
-				$multipartbody .= "Content-Disposition: form-data; name=\"{$parameter}\"; filename=\"{$filename}\"\r\n";
-				$multipartbody .= "Content-Type: image/unknown\r\n\r\n";
+				$multipartbody .= 'Content-Disposition: form-data; name="'.$parameter.'"; filename="'.$filename.'"'."\r\n";
+				$multipartbody .= 'Content-Type: image/unknown'."\r\n\r\n";
 				$multipartbody .= $content."\r\n";
 			}else{
 				$multipartbody .= $MPboundary."\r\n";
-				$multipartbody .= "content-disposition: form-data; name=\"{$parameter}\"\r\n\r\n";
+				$multipartbody .= 'content-disposition: form-data; name="'.$parameter.'"'."\r\n\r\n";
 				$multipartbody .= $value."\r\n";
 			}
 		}
@@ -530,18 +533,18 @@ class SaeTClientV2{
 	/**
 	 * 设置用户IP
 	 *
-	 * SDK默认将会通过$_SERVER["REMOTE_ADDR"]获取用户IP，在请求微博API时将用户IP附加到Request Header中。但某些情况下$_SERVER["REMOTE_ADDR"]取到的IP并非用户IP，而是一个固定的IP（例如使用SAE的Cron或TaskQueue服务时），此时就有可能会造成该固定IP达到微博API调用频率限额，导致API调用失败。此时可使用本方法设置用户IP，以避免此问题。
+	 * SDK默认将会通过$_SERVER['REMOTE_ADDR']获取用户IP，在请求微博API时将用户IP附加到Request Header中。但某些情况下$_SERVER['REMOTE_ADDR']取到的IP并非用户IP，而是一个固定的IP（例如使用SAE的Cron或TaskQueue服务时），此时就有可能会造成该固定IP达到微博API调用频率限额，导致API调用失败。此时可使用本方法设置用户IP，以避免此问题。
 	 *
 	 * @access public
 	 * @param string $ip 用户IP
-	 * @return bool IP为非法IP字符串时，返回FALES，否则返回TRUE
+	 * @return bool IP为非法IP字符串时，返回false，否则返回true
 	 */
 	public function set_remote_ip($ip){
-		if(ip2long($ip) !== FALES){
+		if(ip2long($ip) !== false){
 			$this->oauth->remote_ip = $ip;
-			return TRUE;
+			return true;
 		}else{
-			return FALES;
+			return false;
 		}
 	}
 
@@ -558,10 +561,10 @@ class SaeTClientV2{
 	 */
 	public function public_timeline($page = 1, $count = 50, $base_app = 0){
 		$params = array();
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["base_app"] = intval($base_app);
-		return $this->oauth->get("statuses/public_timeline", $params);//可能是接口的bug不能补全
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['base_app'] = intval($base_app);
+		return $this->oauth->get('statuses/public_timeline', $params);//可能是接口的bug不能补全
 	}
 
 	/**
@@ -583,18 +586,17 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["base_app"] = intval($base_app);
-		$params["feature"] = intval($feature);
-
-		return $this->oauth->get("statuses/home_timeline", $params);
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['base_app'] = intval($base_app);
+		$params['feature'] = intval($feature);
+		return $this->oauth->get('statuses/home_timeline', $params);
 	}
 
 	/**
@@ -635,21 +637,21 @@ class SaeTClientV2{
 	 */
 	public function user_timeline_by_id($uid = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
 		$params = array();
-		$params["uid"] = $uid;
+		$params['uid'] = $uid;
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["base_app"] = intval($base_app);
-		$params["feature"] = intval($feature);
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["trim_user"] = intval($trim_user);
-		return $this->oauth->get("statuses/user_timeline", $params);
+		$params['base_app'] = intval($base_app);
+		$params['feature'] = intval($feature);
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['trim_user'] = intval($trim_user);
+		return $this->oauth->get('statuses/user_timeline', $params);
 	}
 
 	/**
@@ -671,22 +673,21 @@ class SaeTClientV2{
 	 */
 	public function user_timeline_by_name($screen_name = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
 		$params = array();
-		$params["screen_name"] = $screen_name;
+		$params['screen_name'] = $screen_name;
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["base_app"] = intval($base_app);
-		$params["feature"] = intval($feature);
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["trim_user"] = intval($trim_user);
-
-		return $this->oauth->get("statuses/user_timeline", $params);
+		$params['base_app'] = intval($base_app);
+		$params['feature'] = intval($feature);
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['trim_user'] = intval($trim_user);
+		return $this->oauth->get('statuses/user_timeline', $params);
 	}
 
 	/**
@@ -705,15 +706,15 @@ class SaeTClientV2{
 	public function timeline_batch_by_name($screen_name, $page = 1, $count = 50, $feature = 0, $base_app = 0){
 		$params = array();
 		if(is_array($screen_name) && !empty($screen_name)){
-			$params["screen_name"] = join(",", $screen_name);
+			$params['screen_name'] = join(',', $screen_name);
 		}else{
-			$params["screen_name"] = $screen_name;
+			$params['screen_name'] = $screen_name;
 		}
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["base_app"] = intval($base_app);
-		$params["feature"] = intval($feature);
-		return $this->oauth->get("statuses/timeline_batch", $params);
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['base_app'] = intval($base_app);
+		$params['feature'] = intval($feature);
+		return $this->oauth->get('statuses/timeline_batch', $params);
 	}
 
 	/**
@@ -735,15 +736,15 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		$params["count"] = intval($count);
-		$params["page"] = intval($page);
-		$params["base_app"] = intval($base_app);
-		$params["feature"] = intval($feature);
-		return $this->oauth->get("statuses/timeline_batch", $params);
+		$params['count'] = intval($count);
+		$params['page'] = intval($page);
+		$params['base_app'] = intval($base_app);
+		$params['feature'] = intval($feature);
+		return $this->oauth->get('statuses/timeline_batch', $params);
 	}
 
 
@@ -764,17 +765,17 @@ class SaeTClientV2{
 	public function repost_timeline($sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0){
 		$this->id_format($sid);
 		$params = array();
-		$params["id"] = $sid;
+		$params['id'] = $sid;
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["filter_by_author"] = intval($filter_by_author);
-		return $this->request_with_pager("statuses/repost_timeline", $page, $count, $params);
+		$params['filter_by_author'] = intval($filter_by_author);
+		return $this->request_with_pager('statuses/repost_timeline', $page, $count, $params);
 	}
 
 	/**
@@ -793,13 +794,13 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		return $this->request_with_pager("statuses/repost_by_me", $page, $count, $params);
+		return $this->request_with_pager('statuses/repost_by_me', $page, $count, $params);
 	}
 
 	/**
@@ -822,16 +823,16 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["filter_by_author"] = $filter_by_author;
-		$params["filter_by_source"] = $filter_by_source;
-		$params["filter_by_type"] = $filter_by_type;
-		return $this->request_with_pager("statuses/mentions", $page, $count, $params);
+		$params['filter_by_author'] = $filter_by_author;
+		$params['filter_by_source'] = $filter_by_source;
+		$params['filter_by_type'] = $filter_by_type;
+		return $this->request_with_pager('statuses/mentions', $page, $count, $params);
 	}
 
 	/**
@@ -847,8 +848,8 @@ class SaeTClientV2{
 	public function show_status($id){
 		$this->id_format($id);
 		$params = array();
-		$params["id"] = $id;
-		return $this->oauth->get("statuses/show", $params);
+		$params['id'] = $id;
+		return $this->oauth->get('statuses/show', $params);
 	}
 
 	/**
@@ -866,11 +867,11 @@ class SaeTClientV2{
 			foreach($ids as $k => $v){
 				$this->id_format($ids[$k]);
 			}
-			$params["ids"] = join(",", $ids);
+			$params['ids'] = join(',', $ids);
 		}else{
-			$params["ids"] = $ids;
+			$params['ids'] = $ids;
 		}
-		return $this->oauth->get("statuses/show_batch", $params);
+		return $this->oauth->get('statuses/show_batch', $params);
 	}
 
 	/**
@@ -886,10 +887,10 @@ class SaeTClientV2{
 	 */
 	public function querymid($id, $type = 1, $is_batch = 0){
 		$params = array();
-		$params["id"] = $id;
-		$params["type"] = intval($type);
-		$params["is_batch"] = intval($is_batch);
-		return $this->oauth->get("statuses/querymid", $params);
+		$params['id'] = $id;
+		$params['type'] = intval($type);
+		$params['is_batch'] = intval($is_batch);
+		return $this->oauth->get('statuses/querymid', $params);
 	}
 
 	/**
@@ -907,12 +908,12 @@ class SaeTClientV2{
 	 */
 	public function queryid($mid, $type = 1, $is_batch = 0, $inbox = 0, $isBase62 = 0){
 		$params = array();
-		$params["mid"] = $mid;
-		$params["type"] = intval($type);
-		$params["is_batch"] = intval($is_batch);
-		$params["inbox"] = intval($inbox);
-		$params["isBase62"] = intval($isBase62);
-		return $this->oauth->get("statuses/queryid", $params);
+		$params['mid'] = $mid;
+		$params['type'] = intval($type);
+		$params['is_batch'] = intval($is_batch);
+		$params['inbox'] = intval($inbox);
+		$params['isBase62'] = intval($isBase62);
+		return $this->oauth->get('statuses/queryid', $params);
 	}
 
 	/**
@@ -927,9 +928,9 @@ class SaeTClientV2{
 	 */
 	public function repost_daily($count = 20, $base_app = 0){
 		$params = array();
-		$params["count"] = intval($count);
-		$params["base_app"] = intval($base_app);
-		return $this->oauth->get("statuses/hot/repost_daily", $params);
+		$params['count'] = intval($count);
+		$params['base_app'] = intval($base_app);
+		return $this->oauth->get('statuses/hot/repost_daily', $params);
 	}
 
 	/**
@@ -944,9 +945,9 @@ class SaeTClientV2{
 	 */
 	public function repost_weekly($count = 20, $base_app = 0){
 		$params = array();
-		$params["count"] = intval($count);
-		$params["base_app"] = intval($base_app);
-		return $this->oauth->get("statuses/hot/repost_weekly", $params);
+		$params['count'] = intval($count);
+		$params['base_app'] = intval($base_app);
+		return $this->oauth->get('statuses/hot/repost_weekly', $params);
 	}
 
 	/**
@@ -961,9 +962,9 @@ class SaeTClientV2{
 	 */
 	public function comments_daily($count = 20, $base_app = 0){
 		$params =  array();
-		$params["count"] = intval($count);
-		$params["base_app"] = intval($base_app);
-		return $this->oauth->get("statuses/hot/comments_daily", $params);
+		$params['count'] = intval($count);
+		$params['base_app'] = intval($base_app);
+		return $this->oauth->get('statuses/hot/comments_daily', $params);
 	}
 
 	/**
@@ -978,9 +979,9 @@ class SaeTClientV2{
 	 */
 	public function comments_weekly($count = 20, $base_app = 0){
 		$params =  array();
-		$params["count"] = intval($count);
-		$params["base_app"] = intval($base_app);
-		return $this->oauth->get("statuses/hot/comments_weekly", $params);
+		$params['count'] = intval($count);
+		$params['base_app'] = intval($base_app);
+		return $this->oauth->get('statuses/hot/comments_weekly', $params);
 	}
 
 	/**
@@ -998,12 +999,12 @@ class SaeTClientV2{
 	public function repost($sid, $text = NULL, $is_comment = 0){
 		$this->id_format($sid);
 		$params = array();
-		$params["id"] = $sid;
-		$params["is_comment"] = $is_comment;
+		$params['id'] = $sid;
+		$params['is_comment'] = $is_comment;
 		if($text){
-			$params["status"] = $text;
+			$params['status'] = $text;
 		}
-		return $this->oauth->post("statuses/repost", $params);
+		return $this->oauth->post('statuses/repost', $params);
 	}
 
 	/**
@@ -1033,15 +1034,15 @@ class SaeTClientV2{
 	public function destroy($id){
 		$this->id_format($id);
 		$params = array();
-		$params["id"] = $id;
-		return $this->oauth->post("statuses/destroy", $params);
+		$params['id'] = $id;
+		return $this->oauth->post('statuses/destroy', $params);
 	}
 
 	/**
 	 * 发表微博
 	 *
 	 * 发布一条微博信息。
-	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=TRUE时候地理位置信息才有效。
+	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=true时候地理位置信息才有效。
 	 * <br />注意：为防止重复提交，当用户发布的微博消息与上次成功发布的微博消息内容一样时，将返回400错误，给出错误提示：“40025:Error: repeated weibo text!“。
 	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/update statuses/update}
 	 *
@@ -1049,31 +1050,31 @@ class SaeTClientV2{
 	 * @param string $status 要更新的微博信息。信息内容不超过140个汉字, 为空返回400错误。
 	 * @param float $lat 纬度，发表当前微博所在的地理位置，有效范围 -90.0到+90.0, +表示北纬。可选。
 	 * @param float $long 经度。有效范围-180.0到+180.0, +表示东经。可选。
-	 * @param mixed $annotations 可选参数。元数据，主要是为了方便第三方应用记录一些适合于自己使用的信息。每条微博可以包含一个或者多个元数据。请以json字串的形式提交，字串长度不超过512个字符，或者数组方式，要求json_encode后字串长度不超过512个字符。具体内容可以自定。例如："[{"type2":123},{"a":"b", "c":"d"}]"或array(array("type2"=>123), array("a"=>"b", "c"=>"d"))。
+	 * @param mixed $annotations 可选参数。元数据，主要是为了方便第三方应用记录一些适合于自己使用的信息。每条微博可以包含一个或者多个元数据。请以json字串的形式提交，字串长度不超过512个字符，或者数组方式，要求json_encode后字串长度不超过512个字符。具体内容可以自定。例如：'[{"type2":123},{"a":"b", "c":"d"}]'或array(array("type2"=>123), array("a"=>"b", "c"=>"d"))。
 	 * @return array
 	 */
 	public function update($status, $lat = NULL, $long = NULL, $annotations = NULL){
 		$params = array();
-		$params["status"] = $status;
+		$params['status'] = $status;
 		if($lat){
-			$params["lat"] = floatval($lat);
+			$params['lat'] = floatval($lat);
 		}
 		if($long){
-			$params["long"] = floatval($long);
+			$params['long'] = floatval($long);
 		}
 		if(is_string($annotations)){
-			$params["annotations"] = $annotations;
+			$params['annotations'] = $annotations;
 		}elseif(is_array($annotations)){
-			$params["annotations"] = json_encode($annotations);
+			$params['annotations'] = json_encode($annotations);
 		}
-		return $this->oauth->post("statuses/update", $params);
+		return $this->oauth->post('statuses/update', $params);
 	}
 
 	/**
 	 * 发表图片微博
 	 *
 	 * 发表图片微博消息。目前上传图片大小限制为<5M。
-	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=TRUE时候地理位置信息才有效。
+	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=true时候地理位置信息才有效。
 	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/upload statuses/upload}
 	 *
 	 * @access public
@@ -1085,15 +1086,15 @@ class SaeTClientV2{
 	 */
 	public function upload($status, $pic_path, $lat = NULL, $long = NULL){
 		$params = array();
-		$params["status"] = $status;
-		$params["pic"] = "@".$pic_path;
+		$params['status'] = $status;
+		$params['pic'] = '@'.$pic_path;
 		if($lat){
-			$params["lat"] = floatval($lat);
+			$params['lat'] = floatval($lat);
 		}
 		if($long){
-			$params["long"] = floatval($long);
+			$params['long'] = floatval($long);
 		}
-		return $this->oauth->post("statuses/upload", $params, TRUE);
+		return $this->oauth->post('statuses/upload', $params, true);
 	}
 
 	/**
@@ -1108,9 +1109,9 @@ class SaeTClientV2{
 	 */
 	public function upload_url_text($status, $url){
 		$params = array();
-		$params["status"] = $status;
-		$params["url"] = $url;
-		return $this->oauth->post("statuses/upload", $params, TRUE);
+		$params['status'] = $status;
+		$params['url'] = $url;
+		return $this->oauth->post('statuses/upload', $params, true);
 	}
 
 	/**
@@ -1124,11 +1125,11 @@ class SaeTClientV2{
 	 * @param string $language 语言类别，"cnname"简体，"twname"繁体。默认为"cnname"。可选
 	 * @return array
 	 */
-	public function emotions($type = "face", $language = "cnname"){
+	public function emotions($type = 'face', $language = 'cnname'){
 		$params = array();
-		$params["type"] = $type;
-		$params["language"] = $language;
-		return $this->oauth->get("emotions", $params);
+		$params['type'] = $type;
+		$params['language'] = $language;
+		return $this->oauth->get('emotions', $params);
 	}
 
 	/**
@@ -1148,19 +1149,19 @@ class SaeTClientV2{
 	public function get_comments_by_sid($sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0){
 		$params = array();
 		$this->id_format($sid);
-		$params["id"] = $sid;
+		$params['id'] = $sid;
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["filter_by_author"] = $filter_by_author;
-		return $this->oauth->get("comments/show", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['filter_by_author'] = $filter_by_author;
+		return $this->oauth->get('comments/show', $params);
 	}
 
 	/**
@@ -1180,16 +1181,16 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["filter_by_source"] = $filter_by_source;
-		return $this->oauth->get("comments/by_me", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['filter_by_source'] = $filter_by_source;
+		return $this->oauth->get('comments/by_me', $params);
 	}
 
 	/**
@@ -1210,17 +1211,17 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["filter_by_author"] = $filter_by_author;
-		$params["filter_by_source"] = $filter_by_source;
-		return $this->oauth->get("comments/to_me", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['filter_by_author'] = $filter_by_author;
+		$params['filter_by_source'] = $filter_by_source;
+		return $this->oauth->get('comments/to_me', $params);
 	}
 
 	/**
@@ -1240,13 +1241,13 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		return $this->request_with_pager("comments/timeline", $page, $count, $params);
+		return $this->request_with_pager('comments/timeline', $page, $count, $params);
 	}
 
 	/**
@@ -1265,13 +1266,13 @@ class SaeTClientV2{
 	 */
 	public function comments_mentions($page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0){
 		$params = array();
-		$params["since_id"] = $since_id;
-		$params["max_id"] = $max_id;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["filter_by_author"] = $filter_by_author;
-		$params["filter_by_source"] = $filter_by_source;
-		return $this->oauth->get("comments/mentions", $params);
+		$params['since_id'] = $since_id;
+		$params['max_id'] = $max_id;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['filter_by_author'] = $filter_by_author;
+		$params['filter_by_source'] = $filter_by_source;
+		return $this->oauth->get('comments/mentions', $params);
 	}
 
 	/**
@@ -1289,11 +1290,11 @@ class SaeTClientV2{
 			foreach($cids as $k => $v){
 				$this->id_format($cids[$k]);
 			}
-			$params["cids"] = join(",", $cids);
+			$params['cids'] = join(',', $cids);
 		}else{
-			$params["cids"] = $cids;
+			$params['cids'] = $cids;
 		}
-		return $this->oauth->get("comments/show_batch", $params);
+		return $this->oauth->get('comments/show_batch', $params);
 	}
 
 	/**
@@ -1309,11 +1310,11 @@ class SaeTClientV2{
 	 */
 	public function send_comment($id, $comment, $comment_ori = 0){
 		$params = array();
-		$params["comment"] = $comment;
+		$params['comment'] = $comment;
 		$this->id_format($id);
-		$params["id"] = $id;
-		$params["comment_ori"] = $comment_ori;
-		return $this->oauth->post("comments/create", $params);
+		$params['id'] = $id;
+		$params['comment_ori'] = $comment_ori;
+		return $this->oauth->post('comments/create', $params);
 	}
 
 	/**
@@ -1328,8 +1329,8 @@ class SaeTClientV2{
 	 */
 	public function comment_destroy($cid){
 		$params = array();
-		$params["cid"] = $cid;
-		return $this->oauth->post("comments/destroy", $params);
+		$params['cid'] = $cid;
+		return $this->oauth->post('comments/destroy', $params);
 	}
 
 	/**
@@ -1348,11 +1349,11 @@ class SaeTClientV2{
 			foreach($ids as $k => $v){
 				$this->id_format($ids[$k]);
 			}
-			$params["cids"] = join(",", $ids);
+			$params['cids'] = join(',', $ids);
 		}else{
-			$params["cids"] = $ids;
+			$params['cids'] = $ids;
 		}
-		return $this->oauth->post("comments/destroy_batch", $params);
+		return $this->oauth->post('comments/destroy_batch', $params);
 	}
 
 	/**
@@ -1373,13 +1374,12 @@ class SaeTClientV2{
 		$this->id_format($sid);
 		$this->id_format($cid);
 		$params = array();
-		$params["id"] = $sid;
-		$params["comment"] = $text;
-		$params["cid"] = $cid;
-		$params["without_mention"] = $without_mention;
-		$params["comment_ori"] = $comment_ori;
-		return $this->oauth->post("comments/reply", $params);
-
+		$params['id'] = $sid;
+		$params['comment'] = $text;
+		$params['cid'] = $cid;
+		$params['without_mention'] = $without_mention;
+		$params['comment_ori'] = $comment_ori;
+		return $this->oauth->post('comments/reply', $params);
 	}
 
 	/**
@@ -1396,9 +1396,9 @@ class SaeTClientV2{
 		$params=array();
 		if($uid !== NULL){
 			$this->id_format($uid);
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}
-		return $this->oauth->get("users/show", $params);
+		return $this->oauth->get('users/show', $params);
 	}
 
 	/**
@@ -1413,8 +1413,8 @@ class SaeTClientV2{
 	 */
 	public function show_user_by_name($screen_name){
 		$params = array();
-		$params["screen_name"] = $screen_name;
-		return $this->oauth->get("users/show", $params);
+		$params['screen_name'] = $screen_name;
+		return $this->oauth->get('users/show', $params);
 	}
 
 	/**
@@ -1428,8 +1428,8 @@ class SaeTClientV2{
 	 */
 	public function domain_show($domain){
 		$params = array();
-		$params["domain"] = $domain;
-		return $this->oauth->get("users/domain_show", $params);
+		$params['domain'] = $domain;
+		return $this->oauth->get('users/domain_show', $params);
 	}
 
 	 /**
@@ -1447,11 +1447,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->get("users/show_batch", $params);
+		return $this->oauth->get('users/show_batch', $params);
 	}
 
 	/**
@@ -1466,11 +1466,11 @@ class SaeTClientV2{
 	public function users_show_batch_by_name($screen_name){
 		$params = array();
 		if(is_array($screen_name) && !empty($screen_name)){
-			$params["screen_name"] = join(",", $screen_name);
+			$params['screen_name'] = join(',', $screen_name);
 		}else{
-			$params["screen_name"] = $screen_name;
+			$params['screen_name'] = $screen_name;
 		}
-		return $this->oauth->get("users/show_batch", $params);
+		return $this->oauth->get('users/show_batch', $params);
 	}
 
 
@@ -1488,10 +1488,10 @@ class SaeTClientV2{
 	 */
 	public function friends_by_id($uid, $cursor = 0, $count = 50){
 		$params = array();
-		$params["cursor"] = $cursor;
-		$params["count"] = $count;
-		$params["uid"] = $uid;
-		return $this->oauth->get("friendships/friends", $params);
+		$params['cursor'] = $cursor;
+		$params['count'] = $count;
+		$params['uid'] = $uid;
+		return $this->oauth->get('friendships/friends', $params);
 	}
 
 	/**
@@ -1508,10 +1508,10 @@ class SaeTClientV2{
 	 */
 	public function friends_by_name($screen_name, $cursor = 0, $count = 50){
 		$params = array();
-		$params["cursor"] = $cursor;
-		$params["count"] = $count;
-		$params["screen_name"] = $screen_name;
-		return $this->oauth->get("friendships/friends", $params);
+		$params['cursor'] = $cursor;
+		$params['count'] = $count;
+		$params['screen_name'] = $screen_name;
+		return $this->oauth->get('friendships/friends', $params);
 	}
 
 	/**
@@ -1528,11 +1528,11 @@ class SaeTClientV2{
 	 */
 	public function friends_in_common($uid, $suid = NULL, $page = 1, $count = 50){
 		$params = array();
-		$params["uid"] = $uid;
-		$params["suid"] = $suid;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("friendships/friends/in_common", $params);
+		$params['uid'] = $uid;
+		$params['suid'] = $suid;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('friendships/friends/in_common', $params);
 	}
 
 	/**
@@ -1549,11 +1549,11 @@ class SaeTClientV2{
 	 **/
 	public function bilateral($uid, $page = 1, $count = 50, $sort = 0){
 		$params = array();
-		$params["uid"] = $uid;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["sort"] = $sort;
-		return $this->oauth->get("friendships/friends/bilateral", $params);
+		$params['uid'] = $uid;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['sort'] = $sort;
+		return $this->oauth->get('friendships/friends/bilateral', $params);
 	}
 
 	/**
@@ -1570,11 +1570,11 @@ class SaeTClientV2{
 	 **/
 	public function bilateral_ids($uid, $page = 1, $count = 50, $sort = 0){
 		$params = array();
-		$params["uid"] = $uid;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		$params["sort"] = $sort;
-		return $this->oauth->get("friendships/friends/bilateral/ids", $params);
+		$params['uid'] = $uid;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		$params['sort'] = $sort;
+		return $this->oauth->get('friendships/friends/bilateral/ids', $params);
 	}
 
 	/**
@@ -1592,10 +1592,10 @@ class SaeTClientV2{
 	public function friends_ids_by_id($uid, $cursor = 0, $count = 500){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		$params["cursor"] = $cursor;
-		$params["count"] = $count;
-		return $this->oauth->get("friendships/friends/ids", $params);
+		$params['uid'] = $uid;
+		$params['cursor'] = $cursor;
+		$params['count'] = $count;
+		return $this->oauth->get('friendships/friends/ids', $params);
 	}
 
 	/**
@@ -1612,10 +1612,10 @@ class SaeTClientV2{
 	 */
 	public function friends_ids_by_name($screen_name, $cursor = 0, $count = 500){
 		$params = array();
-		$params["cursor"] = $cursor;
-		$params["count"] = $count;
-		$params["screen_name"] = $screen_name;
-		return $this->oauth->get("friendships/friends/ids", $params);
+		$params['cursor'] = $cursor;
+		$params['count'] = $count;
+		$params['screen_name'] = $screen_name;
+		return $this->oauth->get('friendships/friends/ids', $params);
 	}
 
 	/**
@@ -1633,11 +1633,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->get("friendships/friends/remark_batch", $params);
+		return $this->oauth->get('friendships/friends/remark_batch', $params);
 	}
 
 	/**
@@ -1648,16 +1648,16 @@ class SaeTClientV2{
 	 * @access public
 	 * @param int $uid  需要查询的用户UID
 	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int $cursor FALES 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param int $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
 	public function followers_by_id($uid, $cursor = 0, $count = 50){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		$params["count"] = $count;
-		$params["cursor"] = $cursor;
-		return $this->oauth->get("friendships/followers", $params);
+		$params['uid'] = $uid;
+		$params['count'] = $count;
+		$params['cursor'] = $cursor;
+		return $this->oauth->get('friendships/followers', $params);
 	}
 
 	/**
@@ -1668,15 +1668,15 @@ class SaeTClientV2{
 	 * @access public
 	 * @param string $screen_name  需要查询的用户的昵称
 	 * @param int  $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int  $cursor FALES 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param int  $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
 	public function followers_by_name($screen_name, $cursor = 0, $count = 50){
 		$params = array();
-		$params["screen_name"] = $screen_name;
-		$params["count"] = $count;
-		$params["cursor"] = $cursor;
-		return $this->oauth->get("friendships/followers", $params);
+		$params['screen_name'] = $screen_name;
+		$params['count'] = $count;
+		$params['cursor'] = $cursor;
+		return $this->oauth->get('friendships/followers', $params);
 	}
 
 	/**
@@ -1693,10 +1693,10 @@ class SaeTClientV2{
 	public function followers_ids_by_id($uid, $cursor = 0, $count = 50){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		$params["count"] = $count;
-		$params["cursor"] = $cursor;
-		return $this->oauth->get("friendships/followers/ids", $params);
+		$params['uid'] = $uid;
+		$params['count'] = $count;
+		$params['cursor'] = $cursor;
+		return $this->oauth->get('friendships/followers/ids', $params);
 	}
 
 	/**
@@ -1712,10 +1712,10 @@ class SaeTClientV2{
 	 **/
 	public function followers_ids_by_name($screen_name, $cursor = 0, $count = 50){
 		$params = array();
-		$params["screen_name"] = $screen_name;
-		$params["count"] = $count;
-		$params["cursor"] = $cursor;
-		return $this->oauth->get("friendships/followers/ids", $params);
+		$params['screen_name'] = $screen_name;
+		$params['count'] = $count;
+		$params['cursor'] = $cursor;
+		return $this->oauth->get('friendships/followers/ids', $params);
 	}
 
 	/**
@@ -1731,9 +1731,9 @@ class SaeTClientV2{
 	public function followers_active($uid, $count = 20){
 		$param = array();
 		$this->id_format($uid);
-		$param["uid"] = $uid;
-		$param["count"] = $count;
-		return $this->oauth->get("friendships/followers/active", $param);
+		$param['uid'] = $uid;
+		$param['count'] = $count;
+		return $this->oauth->get('friendships/followers/active', $param);
 	}
 
 	/**
@@ -1750,10 +1750,10 @@ class SaeTClientV2{
 	public function friends_chain_followers($uid, $page = 1, $count = 50){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("friendships/friends_chain/followers", $params);
+		$params['uid'] = $uid;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('friendships/friends_chain/followers', $params);
 	}
 
 	/**
@@ -1770,12 +1770,12 @@ class SaeTClientV2{
 	public function is_followed_by_id($target_id, $source_id = NULL){
 		$params = array();
 		$this->id_format($target_id);
-		$params["target_id"] = $target_id;
+		$params['target_id'] = $target_id;
 		if($source_id != NULL){
 			$this->id_format($source_id);
-			$params["source_id"] = $source_id;
+			$params['source_id'] = $source_id;
 		}
-		return $this->oauth->get("friendships/show", $params);
+		return $this->oauth->get('friendships/show', $params);
 	}
 
 	/**
@@ -1791,11 +1791,11 @@ class SaeTClientV2{
 	 */
 	public function is_followed_by_name($target_name, $source_name = NULL){
 		$params = array();
-		$params["target_screen_name"] = $target_name;
+		$params['target_screen_name'] = $target_name;
 		if($source_name != NULL){
-			$params["source_screen_name"] = $source_name;
+			$params['source_screen_name'] = $source_name;
 		}
-		return $this->oauth->get("friendships/show", $params);
+		return $this->oauth->get('friendships/show', $params);
 	}
 
 	/**
@@ -1811,8 +1811,8 @@ class SaeTClientV2{
 	public function follow_by_id($uid){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		return $this->oauth->post("friendships/create", $params);
+		$params['uid'] = $uid;
+		return $this->oauth->post('friendships/create', $params);
 	}
 
 	/**
@@ -1827,8 +1827,8 @@ class SaeTClientV2{
 	 */
 	public function follow_by_name($screen_name){
 		$params = array();
-		$params["screen_name"] = $screen_name;
-		return $this->oauth->post("friendships/create", $params);
+		$params['screen_name'] = $screen_name;
+		return $this->oauth->post('friendships/create', $params);
 	}
 
 	/**
@@ -1846,11 +1846,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->post("friendships/create_batch", $params);
+		return $this->oauth->post('friendships/create_batch', $params);
 	}
 
 	/**
@@ -1866,8 +1866,8 @@ class SaeTClientV2{
 	public function unfollow_by_id($uid){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		return $this->oauth->post("friendships/destroy", $params);
+		$params['uid'] = $uid;
+		return $this->oauth->post('friendships/destroy', $params);
 	}
 
 	/**
@@ -1882,8 +1882,8 @@ class SaeTClientV2{
 	 */
 	public function unfollow_by_name($screen_name){
 		$params = array();
-		$params["screen_name"] = $screen_name;
-		return $this->oauth->post("friendships/destroy", $params);
+		$params['screen_name'] = $screen_name;
+		return $this->oauth->post('friendships/destroy', $params);
 	}
 
 	/**
@@ -1900,9 +1900,9 @@ class SaeTClientV2{
 	public function update_remark($uid, $remark){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
-		$params["remark"] = $remark;
-		return $this->oauth->post("friendships/remark/update", $params);
+		$params['uid'] = $uid;
+		$params['remark'] = $remark;
+		return $this->oauth->post('friendships/remark/update', $params);
 	}
 
 	/**
@@ -1922,13 +1922,13 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		return $this->request_with_pager("direct_messages", $page, $count, $params);
+		return $this->request_with_pager('direct_messages', $page, $count, $params);
 	}
 
 	/**
@@ -1948,13 +1948,14 @@ class SaeTClientV2{
 		$params = array();
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		return $this->request_with_pager("direct_messages/sent", $page, $count, $params);
+
+		return $this->request_with_pager('direct_messages/sent', $page, $count, $params);
 	}
 
 	/**
@@ -1969,9 +1970,9 @@ class SaeTClientV2{
 	 */
 	public function dm_user_list($count = 20, $cursor = 0){
 		$params = array();
-		$params["count"] = $count;
-		$params["cursor"] = $cursor;
-		return $this->oauth->get("direct_messages/user_list", $params);
+		$params['count'] = $count;
+		$params['cursor'] = $cursor;
+		return $this->oauth->get('direct_messages/user_list', $params);
 	}
 
 	/**
@@ -1990,18 +1991,18 @@ class SaeTClientV2{
 	public function dm_conversation($uid, $page = 1, $count = 50, $since_id = 0, $max_id = 0){
 		$params = array();
 		$this->id_format($uid);
-		$params["uid"] = $uid;
+		$params['uid'] = $uid;
 		if($since_id){
 			$this->id_format($since_id);
-			$params["since_id"] = $since_id;
+			$params['since_id'] = $since_id;
 		}
 		if($max_id){
 			$this->id_format($max_id);
-			$params["max_id"] = $max_id;
+			$params['max_id'] = $max_id;
 		}
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("direct_messages/conversation", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('direct_messages/conversation', $params);
 	}
 
 	/**
@@ -2019,11 +2020,11 @@ class SaeTClientV2{
 			foreach($dmids as $k => $v){
 				$this->id_format($dmids[$k]);
 			}
-			$params["dmids"] = join(",", $dmids);
+			$params['dmids'] = join(',', $dmids);
 		}else{
-			$params["dmids"] = $dmids;
+			$params['dmids'] = $dmids;
 		}
-		return $this->oauth->get("direct_messages/show_batch", $params);
+		return $this->oauth->get('direct_messages/show_batch', $params);
 	}
 
 	/**
@@ -2041,13 +2042,13 @@ class SaeTClientV2{
 	public function send_dm_by_id($uid, $text, $id = NULL){
 		$params = array();
 		$this->id_format($uid);
-		$params["text"] = $text;
-		$params["uid"] = $uid;
+		$params['text'] = $text;
+		$params['uid'] = $uid;
 		if($id){
 			$this->id_format($id);
-			$params["id"] = $id;
+			$params['id'] = $id;
 		}
-		return $this->oauth->post("direct_messages/new", $params);
+		return $this->oauth->post('direct_messages/new', $params);
 	}
 
 	/**
@@ -2064,13 +2065,13 @@ class SaeTClientV2{
 	 */
 	public function send_dm_by_name($screen_name, $text, $id = NULL){
 		$params = array();
-		$params["text"] = $text;
-		$params["screen_name"] = $screen_name;
+		$params['text'] = $text;
+		$params['screen_name'] = $screen_name;
 		if($id){
 			$this->id_format($id);
-			$params["id"] = $id;
+			$params['id'] = $id;
 		}
-		return $this->oauth->post("direct_messages/new", $params);
+		return $this->oauth->post('direct_messages/new', $params);
 	}
 
 	/**
@@ -2086,8 +2087,8 @@ class SaeTClientV2{
 	public function delete_dm($did){
 		$this->id_format($did);
 		$params = array();
-		$params["id"] = $did;
-		return $this->oauth->post("direct_messages/destroy", $params);
+		$params['id'] = $did;
+		return $this->oauth->post('direct_messages/destroy', $params);
 	}
 
 	/**
@@ -2106,11 +2107,11 @@ class SaeTClientV2{
 			foreach($dids as $k => $v){
 				$this->id_format($dids[$k]);
 			}
-			$params["ids"] = join(",", $dids);
+			$params['ids'] = join(',', $dids);
 		}else{
-			$params["ids"] = $dids;
+			$params['ids'] = $dids;
 		}
-		return $this->oauth->post("direct_messages/destroy_batch", $params);
+		return $this->oauth->post('direct_messages/destroy_batch', $params);
 	}
 
 	/**
@@ -2126,9 +2127,9 @@ class SaeTClientV2{
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}
-		return $this->oauth->get("account/profile/basic", $params);
+		return $this->oauth->get('account/profile/basic', $params);
 	}
 
 	/**
@@ -2144,9 +2145,9 @@ class SaeTClientV2{
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}
-		return $this->oauth->get("account/profile/education", $params);
+		return $this->oauth->get('account/profile/education', $params);
 	}
 
 	/**
@@ -2164,11 +2165,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->get("account/profile/education_batch", $params);
+		return $this->oauth->get('account/profile/education_batch', $params);
 	}
 
 	/**
@@ -2184,9 +2185,9 @@ class SaeTClientV2{
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}
-		return $this->oauth->get("account/profile/career", $params);
+		return $this->oauth->get('account/profile/career', $params);
 	}
 
 	/**
@@ -2204,11 +2205,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->get("account/profile/career_batch", $params);
+		return $this->oauth->get('account/profile/career_batch', $params);
 	}
 
 	/**
@@ -2220,7 +2221,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function get_privacy(){
-		return $this->oauth->get("account/get_privacy");
+		return $this->oauth->get('account/get_privacy');
 	}
 
 	/**
@@ -2229,7 +2230,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/school_list account/profile/school_list}
 	 *
 	 * @access public
-	 * @param array $query 搜索选项。格式：array("key0"=>"value0", "key1"=>"value1", ....)。支持的key:
+	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
 	 *  - province    int        省份范围，省份ID。
 	 *  - city        int        城市范围，城市ID。
 	 *  - area        int        区域范围，区ID。
@@ -2243,7 +2244,7 @@ class SaeTClientV2{
 	 */
 	public function school_list($query){
 		$params = $query;
-		return $this->oauth->get("account/profile/school_list", $params);
+		return $this->oauth->get('account/profile/school_list', $params);
 	}
 
 	/**
@@ -2255,7 +2256,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function rate_limit_status(){
-		return $this->oauth->get("account/rate_limit_status");
+		return $this->oauth->get('account/rate_limit_status');
 	}
 
 	/**
@@ -2267,7 +2268,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function get_uid(){
-		return $this->oauth->get("account/get_uid");
+		return $this->oauth->get('account/get_uid');
 	}
 
 	/**
@@ -2276,14 +2277,14 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/basic_update account/profile/basic_update}
 	 *
 	 * @access public
-	 * @param array $profile 要修改的资料。格式：array("key1"=>"value1", "key2"=>"value2", .....)。
+	 * @param array $profile 要修改的资料。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
 	 * 支持修改的项：
 	 *  - screen_name        string    用户昵称，不可为空。
 	 *  - gender    i        string    用户性别，m：男、f：女，不可为空。
 	 *  - real_name            string    用户真实姓名。
 	 *  - real_name_visible    int        真实姓名可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - province    TRUE    int        省份代码ID，不可为空。
-	 *  - city    TRUE        int        城市代码ID，不可为空。
+	 *  - province    true    int        省份代码ID，不可为空。
+	 *  - city    true        int        城市代码ID，不可为空。
 	 *  - birthday            string    用户生日，格式：yyyy-mm-dd。
 	 *  - birthday_visible    int        生日可见范围，0：保密、1：只显示月日、2：只显示星座、3：所有人可见。
 	 *  - qq                string    用户QQ号码。
@@ -2305,7 +2306,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function update_profile($profile){
-		return $this->oauth->post("account/profile/basic_update", $profile);
+		return $this->oauth->post('account/profile/basic_update', $profile);
 	}
 
 	/**
@@ -2314,7 +2315,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/edu_update account/profile/edu_update}
 	 *
 	 * @access public
-	 * @param array $edu_update 要修改的学校信息。格式：array("key1"=>"value1", "key2"=>"value2", .....)。
+	 * @param array $edu_update 要修改的学校信息。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
 	 * 支持设置的项：
 	 *  - type            int        学校类型，1：大学、2：高中、3：中专技校、4：初中、5：小学，默认为1。必填参数
 	 *  - school_id    `    int        学校代码，必填参数
@@ -2325,7 +2326,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function edu_update($edu_update){
-		return $this->oauth->post("account/profile/edu_update", $edu_update);
+		return $this->oauth->post('account/profile/edu_update', $edu_update);
 	}
 
 	/**
@@ -2340,8 +2341,8 @@ class SaeTClientV2{
 	public function edu_destroy($id){
 		$this->id_format($id);
 		$params = array();
-		$params["id"] = $id;
-		return $this->oauth->post("account/profile/edu_destroy", $params);
+		$params['id'] = $id;
+		return $this->oauth->post('account/profile/edu_destroy', $params);
 	}
 
 	/**
@@ -2350,7 +2351,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/car_update account/profile/car_update}
 	 *
 	 * @access public
-	 * @param array $car_update 要修改的职业信息。格式：array("key1"=>"value1", "key2"=>"value2", .....)。
+	 * @param array $car_update 要修改的职业信息。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
 	 * 支持设置的项：
 	 *  - id            string    需要更新的职业信息ID。
 	 *  - start            int        进入公司年份，最小为1900，最大为当年年份。
@@ -2365,7 +2366,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function car_update($car_update){
-		return $this->oauth->post("account/profile/car_update", $car_update);
+		return $this->oauth->post('account/profile/car_update', $car_update);
 	}
 
 	/**
@@ -2380,8 +2381,8 @@ class SaeTClientV2{
 	public function car_destroy($id){
 		$this->id_format($id);
 		$params = array();
-		$params["id"] = $id;
-		return $this->oauth->post("account/profile/car_destroy", $params);
+		$params['id'] = $id;
+		return $this->oauth->post('account/profile/car_destroy', $params);
 	}
 
 	/**
@@ -2395,8 +2396,8 @@ class SaeTClientV2{
 	 */
 	public function update_profile_image($image_path){
 		$params = array();
-		$params["image"] = "@{$image_path}";
-		return $this->oauth->post("account/avatar/upload", $params);
+		$params['image'] = "@{$image_path}";
+		return $this->oauth->post('account/avatar/upload', $params);
 	}
 
 	/**
@@ -2405,7 +2406,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/account/update_privacy account/update_privacy}
 	 *
 	 * @access public
-	 * @param array $privacy_settings 要修改的隐私设置。格式：array("key1"=>"value1", "key2"=>"value2", .....)。
+	 * @param array $privacy_settings 要修改的隐私设置。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
 	 * 支持设置的项：
 	 *  - comment    int    是否可以评论我的微博，0：所有人、1：关注的人，默认为0。
 	 *  - geo        int    是否开启地理信息，0：不开启、1：开启，默认为1。
@@ -2417,7 +2418,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function update_privacy($privacy_settings){
-		return $this->oauth->post("account/update_privacy", $privacy_settings);
+		return $this->oauth->post('account/update_privacy', $privacy_settings);
 	}
 
 	/**
@@ -2433,9 +2434,9 @@ class SaeTClientV2{
 	 */
 	public function get_favorites($page = 1, $count = 50){
 		$params = array();
-		$params["page"] = intval($page);
-		$params["count"] = intval($count);
-		return $this->oauth->get("favorites", $params);
+		$params['page'] = intval($page);
+		$params['count'] = intval($count);
+		return $this->oauth->get('favorites', $params);
 	}
 
 	/**
@@ -2451,8 +2452,8 @@ class SaeTClientV2{
 	public function favorites_show($id){
 		$params = array();
 		$this->id_format($id);
-		$params["id"] = $id;
-		return $this->oauth->get("favorites/show", $params);
+		$params['id'] = $id;
+		return $this->oauth->get('favorites/show', $params);
 	}
 
 	/**
@@ -2461,17 +2462,17 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/by_tags favorites/by_tags}
 	 *
 	 * @access public
-	 * @param int $tid  需要查询的标签ID。"
+	 * @param int $tid  需要查询的标签ID。'
 	 * @param int $count 单页返回的记录条数，默认为50。
 	 * @param int $page 返回结果的页码，默认为1。
 	 * @return array
 	 */
 	public function favorites_by_tags($tid, $page = 1, $count = 50){
 		$params = array();
-		$params["tid"] = $tid;
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("favorites/by_tags", $params);
+		$params['tid'] = $tid;
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('favorites/by_tags', $params);
 	}
 
 	/**
@@ -2486,9 +2487,9 @@ class SaeTClientV2{
 	 */
 	public function favorites_tags($page = 1, $count = 50){
 		$params = array();
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("favorites/tags", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('favorites/tags', $params);
 	}
 
 	/**
@@ -2503,8 +2504,8 @@ class SaeTClientV2{
 	public function add_to_favorites($sid){
 		$this->id_format($sid);
 		$params = array();
-		$params["id"] = $sid;
-		return $this->oauth->post("favorites/create", $params);
+		$params['id'] = $sid;
+		return $this->oauth->post('favorites/create', $params);
 	}
 
 	/**
@@ -2519,8 +2520,8 @@ class SaeTClientV2{
 	public function remove_from_favorites($id){
 		$this->id_format($id);
 		$params = array();
-		$params["id"] = $id;
-		return $this->oauth->post("favorites/destroy", $params);
+		$params['id'] = $id;
+		return $this->oauth->post('favorites/destroy', $params);
 	}
 
 	/**
@@ -2539,11 +2540,11 @@ class SaeTClientV2{
 			foreach($fids as $k => $v){
 				$this->id_format($fids[$k]);
 			}
-			$params["ids"] = join(",", $fids);
+			$params['ids'] = join(',', $fids);
 		}else{
-			$params["ids"] = $fids;
+			$params['ids'] = $fids;
 		}
-		return $this->oauth->post("favorites/destroy_batch", $params);
+		return $this->oauth->post('favorites/destroy_batch', $params);
 	}
 
 	/**
@@ -2558,16 +2559,16 @@ class SaeTClientV2{
 	 */
 	public function favorites_tags_update($id, $tags){
 		$params = array();
-		$params["id"] = $id;
+		$params['id'] = $id;
 		if(is_array($tags) && !empty($tags)){
 			foreach($tags as $k => $v){
 				$this->id_format($tags[$k]);
 			}
-			$params["tags"] = join(",", $tags);
+			$params['tags'] = join(',', $tags);
 		}else{
-			$params["tags"] = $tags;
+			$params['tags'] = $tags;
 		}
-		return $this->oauth->post("favorites/tags/update", $params);
+		return $this->oauth->post('favorites/tags/update', $params);
 	}
 
 	/**
@@ -2582,9 +2583,9 @@ class SaeTClientV2{
 	 */
 	public function favorites_update_batch($tid, $tag){
 		$params = array();
-		$params["tid"] = $tid;
-		$params["tag"] = $tag;
-		return $this->oauth->post("favorites/tags/update_batch", $params);
+		$params['tid'] = $tid;
+		$params['tag'] = $tag;
+		return $this->oauth->post('favorites/tags/update_batch', $params);
 	}
 
 	/**
@@ -2599,8 +2600,8 @@ class SaeTClientV2{
 	 */
 	public function favorites_tags_destroy_batch($tid){
 		$params = array();
-		$params["tid"] = $tid;
-		return $this->oauth->post("favorites/tags/destroy_batch", $params);
+		$params['tid'] = $tid;
+		return $this->oauth->post('favorites/tags/destroy_batch', $params);
 	}
 
 	/**
@@ -2617,15 +2618,15 @@ class SaeTClientV2{
 	public function get_trends($uid = NULL, $page = 1, $count = 10){
 		$params = array();
 		if($uid){
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}else{
 			$user_info = $this->get_uid();
-			$params["uid"] = $user_info["uid"];
+			$params['uid'] = $user_info['uid'];
 		}
-		$this->id_format($params["uid"]);
-		$params["page"] = $page;
-		$params["count"] = $count;
-		return $this->oauth->get("trends", $params);
+		$this->id_format($params['uid']);
+		$params['page'] = $page;
+		$params['count'] = $count;
+		return $this->oauth->get('trends', $params);
 	}
 
 	/**
@@ -2639,8 +2640,8 @@ class SaeTClientV2{
 	 */
 	public function trends_is_follow($trend_name){
 		$params = array();
-		$params["trend_name"] = $trend_name;
-		return $this->oauth->get("trends/is_follow", $params);
+		$params['trend_name'] = $trend_name;
+		return $this->oauth->get('trends/is_follow', $params);
 	}
 
 	/**
@@ -2654,8 +2655,8 @@ class SaeTClientV2{
 	 */
 	public function hourly_trends($base_app = 0){
 		$params = array();
-		$params["base_app"] = $base_app;
-		return $this->oauth->get("trends/hourly", $params);
+		$params['base_app'] = $base_app;
+		return $this->oauth->get('trends/hourly', $params);
 	}
 
 	/**
@@ -2669,8 +2670,8 @@ class SaeTClientV2{
 	 */
 	public function daily_trends($base_app = 0){
 		$params = array();
-		$params["base_app"] = $base_app;
-		return $this->oauth->get("trends/daily", $params);
+		$params['base_app'] = $base_app;
+		return $this->oauth->get('trends/daily', $params);
 	}
 
 	/**
@@ -2684,8 +2685,8 @@ class SaeTClientV2{
 	 */
 	public function weekly_trends($base_app = 0){
 		$params = array();
-		$params["base_app"] = $base_app;
-		return $this->oauth->get("trends/weekly", $params);
+		$params['base_app'] = $base_app;
+		return $this->oauth->get('trends/weekly', $params);
 	}
 
 	/**
@@ -2699,8 +2700,8 @@ class SaeTClientV2{
 	 */
 	public function follow_trends($trend_name){
 		$params = array();
-		$params["trend_name"] = $trend_name;
-		return $this->oauth->post("trends/follow", $params);
+		$params['trend_name'] = $trend_name;
+		return $this->oauth->post('trends/follow', $params);
 	}
 
 	/**
@@ -2715,8 +2716,8 @@ class SaeTClientV2{
 	public function unfollow_trends($tid){
 		$this->id_format($tid);
 		$params = array();
-		$params["trend_id"] = $tid;
-		return $this->oauth->post("trends/destroy", $params);
+		$params['trend_id'] = $tid;
+		return $this->oauth->post('trends/destroy', $params);
 	}
 
 	/**
@@ -2733,15 +2734,15 @@ class SaeTClientV2{
 	public function get_tags($uid = NULL, $page = 1, $count = 20){
 		$params = array();
 		if($uid){
-			$params["uid"] = $uid;
+			$params['uid'] = $uid;
 		}else{
 			$user_info = $this->get_uid();
-			$params["uid"] = $user_info["uid"];
+			$params['uid'] = $user_info['uid'];
 		}
-		$this->id_format($params["uid"]);
-		$params["page"] = $page;
-		$params["count"] = $count;
-		return $this->oauth->get("tags", $params);
+		$this->id_format($params['uid']);
+		$params['page'] = $page;
+		$params['count'] = $count;
+		return $this->oauth->get('tags', $params);
 	}
 
 	/**
@@ -2759,11 +2760,11 @@ class SaeTClientV2{
 			foreach($uids as $k => $v){
 				$this->id_format($uids[$k]);
 			}
-			$params["uids"] = join(",", $uids);
+			$params['uids'] = join(',', $uids);
 		}else{
-			$params["uids"] = $uids;
+			$params['uids'] = $uids;
 		}
-		return $this->oauth->get("tags/tags_batch", $params);
+		return $this->oauth->get('tags/tags_batch', $params);
 	}
 
 	/**
@@ -2777,8 +2778,8 @@ class SaeTClientV2{
 	 */
 	public function get_suggest_tags($count = 10){
 		$params = array();
-		$params["count"] = intval($count);
-		return $this->oauth->get("tags/suggestions", $params);
+		$params['count'] = intval($count);
+		return $this->oauth->get('tags/suggestions', $params);
 	}
 
 	/**
@@ -2793,11 +2794,11 @@ class SaeTClientV2{
 	public function add_tags($tags){
 		$params = array();
 		if(is_array($tags) && !empty($tags)){
-			$params["tags"] = join(",", $tags);
+			$params['tags'] = join(',', $tags);
 		}else{
-			$params["tags"] = $tags;
+			$params['tags'] = $tags;
 		}
-		return $this->oauth->post("tags/create", $params);
+		return $this->oauth->post('tags/create', $params);
 	}
 
 	/**
@@ -2811,8 +2812,8 @@ class SaeTClientV2{
 	 */
 	public function delete_tag($tag_id){
 		$params = array();
-		$params["tag_id"] = $tag_id;
-		return $this->oauth->post("tags/destroy", $params);
+		$params['tag_id'] = $tag_id;
+		return $this->oauth->post('tags/destroy', $params);
 	}
 
 	/**
@@ -2827,11 +2828,11 @@ class SaeTClientV2{
 	public function delete_tags($ids){
 		$params = array();
 		if(is_array($ids) && !empty($ids)){
-			$params["ids"] = join(",", $ids);
+			$params['ids'] = join(',', $ids);
 		}else{
-			$params["ids"] = $ids;
+			$params['ids'] = $ids;
 		}
-		return $this->oauth->post("tags/destroy_batch", $params);
+		return $this->oauth->post('tags/destroy_batch', $params);
 	}
 
 	/**
@@ -2845,8 +2846,8 @@ class SaeTClientV2{
 	 */
 	public function verify_nickname($nickname){
 		$params = array();
-		$params["nickname"] = $nickname;
-		return $this->oauth->get("register/verify_nickname", $params);
+		$params['nickname'] = $nickname;
+		return $this->oauth->get('register/verify_nickname', $params);
 	}
 
 	/**
@@ -2861,9 +2862,9 @@ class SaeTClientV2{
 	 */
 	public function search_users($q, $count = 10){
 		$params = array();
-		$params["q"] = $q;
-		$params["count"] = $count;
-		return $this->oauth->get("search/suggestions/users", $params);
+		$params['q'] = $q;
+		$params['count'] = $count;
+		return $this->oauth->get('search/suggestions/users', $params);
 	}
 
 	/**
@@ -2878,9 +2879,9 @@ class SaeTClientV2{
 	 */
 	public function search_statuses($q, $count = 10){
 		$params = array();
-		$params["q"] = $q;
-		$params["count"] = $count;
-		return $this->oauth->get("search/suggestions/statuses", $params);
+		$params['q'] = $q;
+		$params['count'] = $count;
+		return $this->oauth->get('search/suggestions/statuses', $params);
 	}
 
 	/**
@@ -2896,10 +2897,10 @@ class SaeTClientV2{
 	 */
 	public function search_schools($q, $count = 10, $type = 1){
 		$params = array();
-		$params["q"] = $q;
-		$params["count"] = $count;
-		$params["type"] = $type;
-		return $this->oauth->get("search/suggestions/schools", $params);
+		$params['q'] = $q;
+		$params['count'] = $count;
+		$params['type'] = $type;
+		return $this->oauth->get('search/suggestions/schools', $params);
 	}
 
 	/**
@@ -2914,9 +2915,9 @@ class SaeTClientV2{
 	 */
 	public function search_companies($q, $count = 10){
 		$params = array();
-		$params["q"] = $q;
-		$params["count"] = $count;
-		return $this->oauth->get("search/suggestions/companies", $params);
+		$params['q'] = $q;
+		$params['count'] = $count;
+		return $this->oauth->get('search/suggestions/companies', $params);
 	}
 
 	/**
@@ -2933,11 +2934,11 @@ class SaeTClientV2{
 	 */
 	public function search_at_users($q, $count = 10, $type=0, $range = 2){
 		$params = array();
-		$params["q"] = $q;
-		$params["count"] = $count;
-		$params["type"] = $type;
-		$params["range"] = $range;
-		return $this->oauth->get("search/suggestions/at_users", $params);
+		$params['q'] = $q;
+		$params['count'] = $count;
+		$params['type'] = $type;
+		$params['range'] = $range;
+		return $this->oauth->get('search/suggestions/at_users', $params);
 	}
 
 	/**
@@ -2946,7 +2947,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/search/statuses search/statuses}
 	 *
 	 * @access public
-	 * @param array $query 搜索选项。格式：array("key0"=>"value0", "key1"=>"value1", ....)。支持的key:
+	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
 	 *  - q                string    搜索的关键字，必须进行URLencode。
 	 *  - filter_ori    int        过滤器，是否为原创，0：全部、1：原创、2：转发，默认为0。
 	 *  - filter_pic    int        过滤器。是否包含图片，0：全部、1：包含、2：不包含，默认为0。
@@ -2957,14 +2958,14 @@ class SaeTClientV2{
 	 *  - endtime        int        结束时间，Unix时间戳。
 	 *  - count            int        单页返回的记录条数，默认为10。
 	 *  - page            int        返回结果的页码，默认为1。
-	 *  - needcount        boolean    返回结果中是否包含返回记录数，TRUE：返回、FALES：不返回，默认为FALES。
+	 *  - needcount        boolean    返回结果中是否包含返回记录数，true：返回、false：不返回，默认为false。
 	 *  - base_app        int        是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * needcount参数不同，会导致相应的返回值结构不同
 	 * 以上参数全部选填
 	 * @return array
 	 */
 	public function search_statuses_high($query){
-		return $this->oauth->get("search/statuses", $query);
+		return $this->oauth->get('search/statuses', $query);
 	}
 
 	/**
@@ -2973,7 +2974,7 @@ class SaeTClientV2{
 	 * 对应API：{@link http://open.weibo.com/wiki/2/search/users search/users}
 	 *
 	 * @access public
-	 * @param array $query 搜索选项。格式：array("key0"=>"value0", "key1"=>"value1", ....)。支持的key:
+	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
 	 *  - q            string    搜索的关键字，必须进行URLencode。
 	 *  - snick        int        搜索范围是否包含昵称，0：不包含、1：包含。
 	 *  - sdomain    int        搜索范围是否包含个性域名，0：不包含、1：包含。
@@ -2991,7 +2992,7 @@ class SaeTClientV2{
 	 * @return array
 	 */
 	public function search_users_keywords($query){
-		return $this->oauth->get("search/users", $query);
+		return $this->oauth->get('search/users', $query);
 	}
 
 	/**
@@ -3017,10 +3018,10 @@ class SaeTClientV2{
 	 *  - stockplayer:炒股高手
 	 * @return array
 	 */
-	public function hot_users($category = "default"){
+	public function hot_users($category = 'default'){
 		$params = array();
-		$params["category"] = $category;
-		return $this->oauth->get("suggestions/users/hot", $params);
+		$params['category'] = $category;
+		return $this->oauth->get('suggestions/users/hot', $params);
 	}
 
 	/**
@@ -3036,9 +3037,9 @@ class SaeTClientV2{
 	 */
 	public function suggestions_may_interested($page = 1, $count = 10){
 		$params = array();
-		$params["page"] = $page;
-		$params["count"] = $count;
-		return $this->oauth->get("suggestions/users/may_interested", $params);
+		$params['page'] = $page;
+		$params['count'] = $count;
+		return $this->oauth->get('suggestions/users/may_interested', $params);
 	}
 
 	/**
@@ -3053,9 +3054,9 @@ class SaeTClientV2{
 	 */
 	public function suggestions_users_by_status($content, $num = 10){
 		$params = array();
-		$params["content"] = $content;
-		$params["num"] = $num;
-		return $this->oauth->get("suggestions/users/by_status", $params);
+		$params['content'] = $content;
+		$params['num'] = $num;
+		return $this->oauth->get('suggestions/users/by_status', $params);
 	}
 
 	/**
@@ -3070,9 +3071,9 @@ class SaeTClientV2{
 	 */
 	public function hot_favorites($page = 1, $count = 20){
 		$params = array();
-		$params["count"] = $count;
-		$params["page"] = $page;
-		return $this->oauth->get("suggestions/favorites/hot", $params);
+		$params['count'] = $count;
+		$params['page'] = $page;
+		return $this->oauth->get('suggestions/favorites/hot', $params);
 	}
 
 	/**
@@ -3086,8 +3087,8 @@ class SaeTClientV2{
 	 */
 	public function put_users_not_interested($uid){
 		$params = array();
-		$params["uid"] = $uid;
-		return $this->oauth->post("suggestions/users/not_interested", $params);
+		$params['uid'] = $uid;
+		return $this->oauth->post('suggestions/users/not_interested', $params);
 	}
 
 	// =========================================
@@ -3095,12 +3096,12 @@ class SaeTClientV2{
 	/**
 	 * @ignore
 	 */
-	protected function request_with_pager($url, $page = FALES, $count = FALES, $params = array()){
+	protected function request_with_pager($url, $page = false, $count = false, $params = array()){
 		if($page){
-			$params["page"] = $page;
+			$params['page'] = $page;
 		}
 		if($count){
-			$params["count"] = $count;
+			$params['count'] = $count;
 		}
 		return $this->oauth->get($url, $params);
 	}
@@ -3108,27 +3109,26 @@ class SaeTClientV2{
 	/**
 	 * @ignore
 	 */
-	protected function request_with_uid($url, $uid_or_name, $page = FALES, $count = FALES, $cursor = FALES, $post = FALES, $params = array()){
+	protected function request_with_uid($url, $uid_or_name, $page = false, $count = false, $cursor = false, $post = false, $params = array()){
 		if($page){
-			$params["page"] = $page;
+			$params['page'] = $page;
 		}
 		if($count){
-			$params["count"] = $count;
+			$params['count'] = $count;
 		}
 		if($cursor){
-			$params["cursor"] = $cursor;
+			$params['cursor'] = $cursor;
 		}
 		if($post){
-			$method = "post";
+			$method = 'post';
 		}else{
-			$method = "get";
+			$method = 'get';
 		}
 		if($uid_or_name !== NULL){
 			$this->id_format($uid_or_name);
-			$params["id"] = $uid_or_name;
+			$params['id'] = $uid_or_name;
 		}
 		return $this->oauth->$method($url, $params);
-
 	}
 
 	/**
@@ -3136,7 +3136,7 @@ class SaeTClientV2{
 	 */
 	protected function id_format(&$id){
 		if(is_float($id)){
-			$id = number_format($id, 0, "", "");
+			$id = number_format($id, 0, '', '');
 		}elseif(is_string($id)){
 			$id = trim($id);
 		}
