@@ -112,13 +112,6 @@ class SaeTOAuthV2{
 	public static $boundary = '';
 
 	/**
-	 * imagedata of file
-	 *
-	 * @ignore
-	 */
-	public static $imagedata;
-
-	/**
 	 * Set API URLS
 	 */
 	/**
@@ -488,11 +481,11 @@ class SaeTOAuthV2{
 				curl_setopt($ch, CURLOPT_HEADER, 0);
 				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 				// 以数据流的方式返回数据,当为false是直接显示出来
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+				// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 				$imagedata = curl_exec($ch);
 				curl_close($ch);
-				$content = self::$imagedata = $imagedata;
+				$content = $imagedata;
 				$array = explode('?', basename($url));
 				$filename = $array[0];
 				$multipartbody .= $MPboundary."\r\n";
