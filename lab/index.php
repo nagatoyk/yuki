@@ -74,15 +74,18 @@ if(empty($_POST['url'])){
 </script>
 <?php
 }else{
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $_POST['url']);
-	// curl_setopt($ch, CURLOPT_FILE, $fp);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	// 以数据流的方式返回数据,当为false是直接显示出来
-	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-	$imgdata = curl_exec($ch);
-	curl_close($ch);
-	echo $imgdata;
+	function get_imgdata($url){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		// curl_setopt($ch, CURLOPT_FILE, $fp);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		// 以数据流的方式返回数据,当为false是直接显示出来
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+		$imgdata = curl_exec($ch);
+		curl_close($ch);
+		return $imgdata;
+	}
+	echo get_imgdata($_POST['url']);
 }
