@@ -15,7 +15,7 @@ if(isset($_POST['imgOpt'])){
 			$c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 			$msg = $c->upload('我刚刚上传了一张照片---'.$pid.'------'.time(), $url);
 			if($msg['original_pic']){
-				$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['sourec'].'\')');
+				$sql->runSql('INSERT INTO `wb_pic` (`uid`,`url`,`unix`,`pid`,`source`) VALUES (\''.$token['uid'].'\',\''.$msg['original_pic'].'\',UNIX_TIMESTAMP(),\''.$pid.'\',\''.$_POST['imgOpt']['source'].'\')');
 				$r = $msg;
 				$c->delete($msg['id']);
 			}else{
