@@ -37,13 +37,13 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 	$user = $kv->get('user');
 	$my_token = $kv->get('my_token');
 	echo getenv('OPENSHIFT_DATA_DIR');
-	echo '<pre>';
-	print_r($user);
-	print_r($my_token[$user[0][0]]);
+	// echo '<pre>';
+	// print_r($user);
+	// print_r($my_token[$user[0][0]]);
 	$c = new SaeTClientV2($wb_id, $wb_key, $my_token[$user[0][0]]['access_token']);
 	$rate = $c->rate_limit_status();
-	print_r($rate);
-	echo '</pre>';
+	// print_r($rate);
+	// echo '</pre>';
 	$api = $rate['api_rate_limits'];
 	foreach($api as $k => $v){
 		$limit_time_unit = $v['limit_time_unit'];
@@ -60,4 +60,37 @@ if(!isset($_SESSION['user']) && !isset($_GET['code'])){
 		}
 		echo '<p><b>api</b>:&nbsp;'.$v['api'].'&nbsp;<b>limit</b>:&nbsp;'.$v['limit'].'&nbsp;<b>limit_time_unit</b>:&nbsp;'.$limit_time_unit.'&nbsp;<b>remaining_hits</b>:&nbsp;'.$v['remaining_hits'].'</p>';
 	}
+}
+?>
+<script src="//yukimax.sinaapp.com/f/iTorr.js"></script>
+<form>
+	<input type="text" name="url">
+	<input type="button" value="提交">
+</form>
+<div class="filedata"></div>
+<script>
+(function($) {
+	$('input[type=button]').onclick = function() {
+		$.x('index.php', 'url=' + $('input[name=url]').value, function(r) {
+			$('.filedta').innerHTML = r
+		});
+	};
+}) (iTorr);
+</script>
+<?php
+function get_filedata($url){
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	// curl_setopt($ch, CURLOPT_FILE, $fp);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	// 以数据流的方式返回数据,当为false是直接显示出来
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	$imgdata = curl_exec($ch);
+	curl_close($ch);
+	return $imgdata;
+}
+if(isset($_POST) && !empty($_POST['url'])){
+	echo get_filedata($_POST['url']);
 }

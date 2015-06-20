@@ -72,7 +72,7 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $ssl_verifypeer = FALSE;
+	public $ssl_verifypeer = false;
 	/**
 	 * Respons format.
 	 *
@@ -84,7 +84,7 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $decode_json = TRUE;
+	public $decode_json = true;
 	/**
 	 * Contains the last HTTP headers returned.
 	 *
@@ -103,7 +103,7 @@ class SaeTOAuthV2{
 	 *
 	 * @ignore
 	 */
-	public $debug = FALSE;
+	public $debug = false;
 
 	/**
 	 * boundary of multipart
@@ -135,7 +135,7 @@ class SaeTOAuthV2{
 	 * construct WeiboOAuth object
 	 * @access public
 	 */
-	public function __construct($client_id, $client_secret, $access_token = NULL, $refresh_token = NULL){
+	public function __construct($client_id, $client_secret, $access_token = null, $refresh_token = null){
 		$this->client_id = $client_id;
 		$this->client_secret = $client_secret;
 		$this->access_token = $access_token;
@@ -161,14 +161,14 @@ class SaeTOAuthV2{
 	 *  - apponweibo    站内应用专用,站内应用不传display参数,并且response_type为token时,默认使用改display.授权后不会返回access_token，只是输出js刷新站内应用父框架
 	 * @return array
 	 */
-	public function getAuthorizeURL($url, $response_type = 'code', $state = NULL, $display = NULL){
+	public function getAuthorizeURL($url, $response_type = 'code', $state = null, $display = null){
 		$params = array();
 		$params['client_id'] = $this->client_id;
 		$params['redirect_uri'] = $url;
 		$params['response_type'] = $response_type;
 		$params['state'] = $state;
 		$params['display'] = $display;
-		return $this->authorizeURL() . "?" . http_build_query($params);
+		return $this->authorizeURL().'?'.http_build_query($params);
 	}
 
 	/**
@@ -208,7 +208,7 @@ class SaeTOAuthV2{
 			$this->access_token = $token['access_token'];
 			//$this->refresh_token = $token['refresh_token'];
 		}else{
-			throw new OAuthException("get access token failed." . $token['error']);
+			throw new OAuthException('get access token failed.'.$token['error']);
 		}
 		return $token;
 	}
@@ -227,7 +227,7 @@ class SaeTOAuthV2{
 		$data = json_decode(self::base64decode($payload), true);
 		if(strtoupper($data['algorithm']) !== 'HMAC-SHA256') return '-1';
 		$expected_sig = hash_hmac('sha256', $payload, $this->client_secret, true);
-		return ($sig !== $expected_sig)? '-2':$data;
+		return ($sig !== $expected_sig) ? '-2': $data;
 	}
 
 	/**
@@ -247,7 +247,7 @@ class SaeTOAuthV2{
 	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
 	 */
 	public function getTokenFromJSSDK(){
-		$key = "weibojs_" . $this->client_id;
+		$key = 'weibojs_'.$this->client_id;
 		if(isset($_COOKIE[$key]) && $cookie = $_COOKIE[$key]){
 			parse_str($cookie, $token);
 			if(isset($token['access_token']) && isset($token['refresh_token'])){
@@ -345,11 +345,11 @@ class SaeTOAuthV2{
 	 */
 	private function oAuthRequest($url, $method, $parameters, $multi = false){
 		if(strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0){
-			$url = "{$this->host}{$url}.{$this->format}";
+			$url = $this->host.$url.'.'.$this->format;
 		}
 		switch ($method){
 			case 'GET':
-				$url = $url . '?' . http_build_query($parameters);
+				$url = $url.'?'.http_build_query($parameters);
 				return $this->http($url, 'GET');
 			default:
 				$headers = array();
@@ -357,7 +357,7 @@ class SaeTOAuthV2{
 					$body = http_build_query($parameters);
 				}else{
 					$body = self::build_http_query_multi($parameters);
-					$headers[] = "Content-Type: multipart/form-data; boundary=" . self::$boundary;
+					$headers[] = 'Content-Type: multipart/form-data; boundary='.self::$boundary;
 				}
 				return $this->http($url, $method, $body, $headers);
 		}
@@ -374,7 +374,7 @@ class SaeTOAuthV2{
 	 * @return string API results
 	 * @ignore
 	 */
-	private function http($url, $method, $postfields = NULL, $headers = array()){
+	private function http($url, $method, $postfields = null, $headers = array()){
 		$this->http_info = array();
 		$ci = curl_init();
 		/* Curl settings */
@@ -382,15 +382,15 @@ class SaeTOAuthV2{
 		curl_setopt($ci, CURLOPT_USERAGENT, $this->useragent);
 		curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, $this->connecttimeout);
 		curl_setopt($ci, CURLOPT_TIMEOUT, $this->timeout);
-		curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ci, CURLOPT_ENCODING, "");
+		curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ci, CURLOPT_ENCODING, '');
 		curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
 		curl_setopt($ci, CURLOPT_SSL_VERIFYHOST, 2);
 		curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
-		curl_setopt($ci, CURLOPT_HEADER, FALSE);
+		curl_setopt($ci, CURLOPT_HEADER, false);
 		switch ($method){
 			case 'POST':
-				curl_setopt($ci, CURLOPT_POST, TRUE);
+				curl_setopt($ci, CURLOPT_POST, true);
 				if(!empty($postfields)){
 					curl_setopt($ci, CURLOPT_POSTFIELDS, $postfields);
 					$this->postdata = $postfields;
@@ -399,34 +399,34 @@ class SaeTOAuthV2{
 			case 'DELETE':
 				curl_setopt($ci, CURLOPT_CUSTOMREQUEST, 'DELETE');
 				if(!empty($postfields)){
-					$url = "{$url}?{$postfields}";
+					$url = $url.'?'.$postfields;
 				}
 		}
 		if(isset($this->access_token) && $this->access_token)
-			$headers[] = "Authorization: OAuth2 ".$this->access_token;
+			$headers[] = 'Authorization: OAuth2 '.$this->access_token;
 
 		if(!empty($this->remote_ip)){
 			if(defined('SAE_ACCESSKEY')){
-				$headers[] = "SaeRemoteIP: " . $this->remote_ip;
+				$headers[] = 'SaeRemoteIP: '.$this->remote_ip;
 			}else{
-				$headers[] = "API-RemoteIP: " . $this->remote_ip;
+				$headers[] = 'API-RemoteIP: '.$this->remote_ip;
 			}
 		}else{
 			if(!defined('SAE_ACCESSKEY')){
-				$headers[] = "API-RemoteIP: " . $_SERVER['REMOTE_ADDR'];
+				$headers[] = 'API-RemoteIP: '.$_SERVER['REMOTE_ADDR'];
 			}
 		}
 		curl_setopt($ci, CURLOPT_URL, $url);
 		curl_setopt($ci, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
+		curl_setopt($ci, CURLINFO_HEADER_OUT, true);
 		$response = curl_exec($ci);
 		$this->http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
 		$this->http_info = array_merge($this->http_info, curl_getinfo($ci));
 		$this->url = $url;
 		if($this->debug){
-			echo "=====post data======\r\n";
+			echo '=====post data======'."\r\n";
 			var_dump($postfields);
-			echo "=====headers======\r\n";
+			echo '=====headers======'."\r\n";
 			print_r($headers);
 			echo '=====request info====='."\r\n";
 			print_r(curl_getinfo($ci));
@@ -479,13 +479,13 @@ class SaeTOAuthV2{
 				$content = $this->get_image_file($url);
 				$array = explode('?', basename($url));
 				$filename = $array[0];
-				$multipartbody .= $MPboundary . "\r\n";
-				$multipartbody .= 'Content-Disposition: form-data; name="' . $parameter . '"; filename="' . $filename . '"'. "\r\n";
-				$multipartbody .= "Content-Type: image/unknown\r\n\r\n";
-				$multipartbody .= $content. "\r\n";
+				$multipartbody .= $MPboundary."\r\n";
+				$multipartbody .= 'Content-Disposition: form-data; name="'.$parameter.'"; filename="'.$filename.'"'."\r\n";
+				$multipartbody .= 'Content-Type: image/unknown'."\r\n\r\n";
+				$multipartbody .= $content."\r\n";
 			}else{
-				$multipartbody .= $MPboundary . "\r\n";
-				$multipartbody .= 'content-disposition: form-data; name="' . $parameter . "\"\r\n\r\n";
+				$multipartbody .= $MPboundary."\r\n";
+				$multipartbody .= 'content-disposition: form-data; name="'.$parameter.'"'."\r\n\r\n";
 				$multipartbody .= $value."\r\n";
 			}
 		}
@@ -533,7 +533,7 @@ class SaeTClientV2{
 	 * @param mixed $refresh_token OAuth认证返回的token secret
 	 * @return void
 	 */
-	public function __construct($akey, $skey, $access_token, $refresh_token = NULL){
+	public function __construct($akey, $skey, $access_token, $refresh_token = null){
 		$this->oauth = new SaeTOAuthV2($akey, $skey, $access_token, $refresh_token);
 	}
 
@@ -656,7 +656,7 @@ class SaeTClientV2{
 	 * @param int $trim_user 返回值中user信息开关，0：返回完整的user信息、1：user字段仅返回uid，默认为0。
 	 * @return array
 	 */
-	public function user_timeline_by_id($uid = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
+	public function user_timeline_by_id($uid = null, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
 		$params = array();
 		$params['uid'] = $uid;
 		if($since_id){
@@ -692,7 +692,7 @@ class SaeTClientV2{
 	 * @param int $base_app 是否基于当前应用来获取数据。1为限制本应用微博，0为不做限制。默认为0。
 	 * @return array
 	 */
-	public function user_timeline_by_name($screen_name = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
+	public function user_timeline_by_name($screen_name = null, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0){
 		$params = array();
 		$params['screen_name'] = $screen_name;
 		if($since_id){
@@ -1020,7 +1020,7 @@ class SaeTClientV2{
 	 * @param int $is_comment 是否在转发的同时发表评论，0：否、1：评论给当前微博、2：评论给原微博、3：都评论，默认为0。
 	 * @return array
 	 */
-	public function repost($sid, $text = NULL, $is_comment = 0){
+	public function repost($sid, $text = null, $is_comment = 0){
 		$this->id_format($sid);
 		$params = array();
 		$params['id'] = $sid;
@@ -1075,7 +1075,7 @@ class SaeTClientV2{
 	 * @param mixed $annotations 可选参数。元数据，主要是为了方便第三方应用记录一些适合于自己使用的信息。每条微博可以包含一个或者多个元数据。请以json字串的形式提交，字串长度不超过512个字符，或者数组方式，要求json_encode后字串长度不超过512个字符。具体内容可以自定。例如：'[{"type2":123},{"a":"b", "c":"d"}]'或array(array("type2"=>123), array("a"=>"b", "c"=>"d"))。
 	 * @return array
 	 */
-	public function update($status, $lat = NULL, $long = NULL, $annotations = NULL){
+	public function update($status, $lat = null, $long = null, $annotations = null){
 		$params = array();
 		$params['status'] = $status;
 		if($lat){
@@ -1106,7 +1106,7 @@ class SaeTClientV2{
 	 * @param float $long 可选参数，经度。有效范围-180.0到+180.0, +表示东经。可选。
 	 * @return array
 	 */
-	public function upload($status, $pic_path, $lat = NULL, $long = NULL){
+	public function upload($status, $pic_path, $lat = null, $long = null){
 		$params = array();
 		$params['status'] = $status;
 		$params['pic'] = '@'.$pic_path;
@@ -1147,7 +1147,7 @@ class SaeTClientV2{
 	 * @param string $language 语言类别，"cnname"简体，"twname"繁体。默认为"cnname"。可选
 	 * @return array
 	 */
-	public function emotions($type = "face", $language = "cnname"){
+	public function emotions($type = 'face', $language = 'cnname'){
 		$params = array();
 		$params['type'] = $type;
 		$params['language'] = $language;
@@ -1417,7 +1417,7 @@ class SaeTClientV2{
 	 */
 	public function show_user_by_id($uid){
 		$params=array();
-		if($uid !== NULL){
+		if($uid !== null){
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
@@ -1549,7 +1549,7 @@ class SaeTClientV2{
 	 * @param int $page  返回结果的页码，默认为1。
 	 * @return array
 	 */
-	public function friends_in_common($uid, $suid = NULL, $page = 1, $count = 50){
+	public function friends_in_common($uid, $suid = null, $page = 1, $count = 50){
 		$params = array();
 		$params['uid'] = $uid;
 		$params['suid'] = $suid;
@@ -1790,12 +1790,12 @@ class SaeTClientV2{
 	 * @param mixed $source_id 源用户UID，可选，默认为当前的用户
 	 * @return array
 	 */
-	public function is_followed_by_id($target_id, $source_id = NULL){
+	public function is_followed_by_id($target_id, $source_id = null){
 		$params = array();
 		$this->id_format($target_id);
 		$params['target_id'] = $target_id;
 
-		if($source_id != NULL){
+		if($source_id != null){
 			$this->id_format($source_id);
 			$params['source_id'] = $source_id;
 		}
@@ -1813,11 +1813,11 @@ class SaeTClientV2{
 	 * @param mixed $source_name 源用户的微博昵称，可选，默认为当前的用户
 	 * @return array
 	 */
-	public function is_followed_by_name($target_name, $source_name = NULL){
+	public function is_followed_by_name($target_name, $source_name = null){
 		$params = array();
 		$params['target_screen_name'] = $target_name;
 
-		if($source_name != NULL){
+		if($source_name != null){
 			$params['source_screen_name'] = $source_name;
 		}
 		return $this->oauth->get('friendships/show', $params);
@@ -2064,7 +2064,7 @@ class SaeTClientV2{
 	 * @param int $id 需要发送的微博ID。
 	 * @return array
 	 */
-	public function send_dm_by_id($uid, $text, $id = NULL){
+	public function send_dm_by_id($uid, $text, $id = null){
 		$params = array();
 		$this->id_format($uid);
 		$params['text'] = $text;
@@ -2088,7 +2088,7 @@ class SaeTClientV2{
 	 * @param int $id 需要发送的微博ID。
 	 * @return array
 	 */
-	public function send_dm_by_name($screen_name, $text, $id = NULL){
+	public function send_dm_by_name($screen_name, $text, $id = null){
 		$params = array();
 		$params['text'] = $text;
 		$params['screen_name'] = $screen_name;
@@ -2148,7 +2148,7 @@ class SaeTClientV2{
 	 * @param int $uid  需要获取基本信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	public function account_profile_basic($uid = NULL){
+	public function account_profile_basic($uid = null){
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
@@ -2166,7 +2166,7 @@ class SaeTClientV2{
 	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	public function account_education($uid = NULL){
+	public function account_education($uid = null){
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
@@ -2206,7 +2206,7 @@ class SaeTClientV2{
 	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	public function account_career($uid = NULL){
+	public function account_career($uid = null){
 		$params = array();
 		if($uid){
 			$this->id_format($uid);
@@ -2421,7 +2421,7 @@ class SaeTClientV2{
 	 */
 	public function update_profile_image($image_path){
 		$params = array();
-		$params['image'] = "@{$image_path}";
+		$params['image'] = '@'.$image_path;
 		return $this->oauth->post('account/avatar/upload', $params);
 	}
 
@@ -2640,7 +2640,7 @@ class SaeTClientV2{
 	 * @param int $count 单页大小。缺省值10。可选。
 	 * @return array
 	 */
-	public function get_trends($uid = NULL, $page = 1, $count = 10){
+	public function get_trends($uid = null, $page = 1, $count = 10){
 		$params = array();
 		if($uid){
 			$params['uid'] = $uid;
@@ -2756,7 +2756,7 @@ class SaeTClientV2{
 	 * @param int $count 单页大小。缺省值20，最大值200。可选。
 	 * @return array
 	 */
-	public function get_tags($uid = NULL, $page = 1, $count = 20){
+	public function get_tags($uid = null, $page = 1, $count = 20){
 		$params = array();
 		if($uid){
 			$params['uid'] = $uid;
@@ -3136,7 +3136,7 @@ class SaeTClientV2{
 		if($cursor) $params['cursor'] = $cursor;
 		if($post) $method = 'post';
 		else $method = 'get';
-		if($uid_or_name !== NULL){
+		if($uid_or_name !== null){
 			$this->id_format($uid_or_name);
 			$params['id'] = $uid_or_name;
 		}
