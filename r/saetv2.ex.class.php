@@ -481,7 +481,7 @@ class SaeTOAuthV2{
 				curl_setopt($ch, CURLOPT_HEADER, 0);
 				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 				// 以数据流的方式返回数据,当为false是直接显示出来
-				// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 				$imagedata = curl_exec($ch);
 				curl_close($ch);
