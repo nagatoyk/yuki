@@ -3,6 +3,7 @@
 session_start();
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
+echo $wb_id.'<br/>'.$wb_key;
 if(!empty($_POST['submit'])){
 	echo '<pre>';
 	print_r($_POST);
