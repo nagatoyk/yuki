@@ -22,7 +22,7 @@ if(isset($_GET['upload']) && isset($_POST['submit'])){
 	session_start();
 	echo '<pre>';
 	print_r($_POST);
-	$c = new SaeTClientV2('1093396876', 'd126f1302a7f1b7e36536f4ad84622a0', $_POST['file']['token']);
-	$res = $c->upload('我刚刚上传了一张照片'.time(), $_POST['file']['image']);
+	$c = new SaeTClientV2('1093396876', 'd126f1302a7f1b7e36536f4ad84622a0', $_POST['token']);
+	$res = $c->upload('我刚刚上传了一张照片'.time(), $_POST['image']);
 	print_r($res);
 }
