@@ -466,7 +466,6 @@ class SaeTOAuthV2{
 	 * @ignore
 	 */
 	private static function build_http_query_multi($params){
-		print_r($params);
 		if(!$params) return '';
 		uksort($params, 'strcmp');
 		$pairs = array();
@@ -478,8 +477,21 @@ class SaeTOAuthV2{
 			if(in_array($parameter, array('pic', 'image')) && $value{0} == '@'){
 				$url = ltrim($value, '@');
 				$content = file_get_contents($url);
-				$array = explode('?', basename($url));
-				$filename = $array[0];
+				$filename = '';
+				if(strpos($url, 'data:image/') === false){
+					$array = explode('?', basename($url));
+					$filename = $array[0];
+				}else{
+					preg_match('/^data\:image\/(.*)\;base64$/', $url, $res);
+					switch($res[1]){
+						case 'jpeg':
+						case 'jpg'
+							$format = 'jpg';
+							break;
+					}
+					$filename = time().$format;
+				}
+				echo $filename;
 				$multipartbody .= $MPboundary."\r\n";
 				$multipartbody .= 'Content-Disposition: form-data; name="'.$parameter.'"; filename="'.$filename.'"'."\r\n";
 				$multipartbody .= 'Content-Type: image/unknown'."\r\n\r\n";
