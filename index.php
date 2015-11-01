@@ -1,14 +1,15 @@
 
 <?php
+session_start();
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
 if(isset($_GET['upload']) && isset($_POST['submit'])){
-	session_start();
 	echo '<pre>';
 	print_r($_POST);
 	$c = new SaeTClientV2($wb_id, $wb_key, $_POST['token']);
 	$res = $c->upload('我刚刚上传了一张照片'.time(), $_POST['image']);
 	print_r($res);
+	echo '</pre>';
 }
 ?>
 <!DOCTYPE html>
