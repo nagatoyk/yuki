@@ -18,9 +18,9 @@
 require 'r/saetv2.ex.class.php';
 $wb_id = '1093396876';
 $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
-if (isset($_GET['upload']) && isset($_POST['file'])) {
+if(isset($_GET['upload']) && isset($_POST['file'])){
+	session_start();
 	echo '<pre>';
-	// print_r($_POST);
 	$c = new SaeTClientV2($wb_id, $wb_key, $_POST['file']['token']);
 	$res = $c->upload('我刚刚上传了一张照片'.time(), $_POST['file']['image']);
 	print_r($res);
