@@ -3,7 +3,7 @@
 session_start();
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
-if(isset($_GET['upload']) && isset($_POST['submit'])){
+if(!empty($_POST['submit'])){
 	echo '<pre>';
 	print_r($_POST);
 	$c = new SaeTClientV2($wb_id, $wb_key, $_POST['token']);
@@ -20,7 +20,7 @@ if(isset($_GET['upload']) && isset($_POST['submit'])){
 <body>
 	<h1>准备中</h1>
 	<?php echo time(); ?>
-	<form action="?upload" method="post">
+	<form action="" method="post">
 		<p><input type="text" name="filename" value="<?php echo time(); ?>.jpg"></p>
 		<p><textarea name="image"></textarea></p>
 		<input type="hidden" name="token" value="2.00yc_LqBLaBBXB73a1204f1e08OWQX">
