@@ -129,6 +129,7 @@ class SaeTOAuthV2 {
 	 * construct WeiboOAuth object
 	 */
 	function __construct($client_id, $client_secret, $access_token = NULL, $refresh_token = NULL) {
+		echo $client_id;
 		$this->client_id = $client_id;
 		$this->client_secret = $client_secret;
 		$this->access_token = $access_token;
@@ -289,6 +290,7 @@ class SaeTOAuthV2 {
 	 * @return mixed
 	 */
 	function post($url, $parameters = array(), $multi = false) {
+		print_r($parameters);
 		$response = $this->oAuthRequest($url, 'POST', $parameters, $multi );
 		if ($this->format === 'json' && $this->decode_json) {
 			return json_decode($response, true);
