@@ -482,7 +482,9 @@ class SaeTOAuthV2{
 					$array = explode('?', basename($url));
 					$filename = $array[0];
 				}else{
+					echo $url.'<br/>';
 					preg_match('/^data\:image\/(.*)\;base64$/', $url, $res);
+					print_r($res);
 					switch($res[1]){
 						case 'jpeg':
 						case 'jpg':
