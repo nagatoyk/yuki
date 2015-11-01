@@ -497,6 +497,7 @@ class SaeTClientV2
 	 */
 	function __construct( $akey, $skey, $access_token, $refresh_token = NULL)
 	{
+		echo $akey;
 		$this->oauth = new SaeTOAuthV2( $akey, $skey, $access_token, $refresh_token );
 	}
 
