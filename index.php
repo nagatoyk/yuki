@@ -16,13 +16,15 @@
 </html>
 <?php
 require 'r/saetv2.ex.class.php';
-$wb_id = '1093396876';
-$wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
+// $wb_id = '1093396876';
+define('AK', '1093396876');
+define('SK', 'd126f1302a7f1b7e36536f4ad84622a0');
+// $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
 if(isset($_GET['upload']) && isset($_POST['submit'])){
 	session_start();
 	echo '<pre>';
 	print_r($_POST);
-	$c = new SaeTClientV2('1093396876', 'd126f1302a7f1b7e36536f4ad84622a0', $_POST['token']);
+	$c = new SaeTClientV2(AK, SK, $_POST['token']);
 	$res = $c->upload('我刚刚上传了一张照片'.time(), $_POST['image']);
 	print_r($res);
 }
