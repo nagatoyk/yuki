@@ -10,6 +10,7 @@
 		<p><input type="text" name="file[token]"></p>
 		<p><input type="text" name="file[filename]" value="<?php echo time(); ?>.jpg"></p>
 		<p><textarea name="file[image]"></textarea></p>
+		<p><input type="submit" value="提交"></p>
 	</form>
 </body>
 </html>
