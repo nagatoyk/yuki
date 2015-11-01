@@ -502,7 +502,6 @@ class SaeTOAuthV2{
 			}
 		}
 		$multipartbody .= $endMPboundary;
-		echo $multipartbody;
 		return $multipartbody;
 	}
 }
