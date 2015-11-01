@@ -485,7 +485,7 @@ class SaeTOAuthV2{
 					preg_match('/^data\:image\/(.*)\;base64$/', $url, $res);
 					switch($res[1]){
 						case 'jpeg':
-						case 'jpg'
+						case 'jpg':
 							$format = 'jpg';
 							break;
 					}
