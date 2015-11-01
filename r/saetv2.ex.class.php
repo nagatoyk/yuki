@@ -482,18 +482,15 @@ class SaeTOAuthV2{
 					$array = explode('?', basename($url));
 					$filename = $array[0];
 				}else{
-					echo $url.'<br/>';
 					preg_match('#data\:image/(.*?)\;base64#i', $url, $res);
-					print_r($res);
 					switch($res[1]){
 						case 'jpeg':
 						case 'jpg':
 							$format = 'jpg';
 							break;
 					}
-					$filename = time().$format;
+					$filename = time().'.'.$format;
 				}
-				echo $filename;
 				$multipartbody .= $MPboundary."\r\n";
 				$multipartbody .= 'Content-Disposition: form-data; name="'.$parameter.'"; filename="'.$filename.'"'."\r\n";
 				$multipartbody .= 'Content-Type: image/unknown'."\r\n\r\n";
@@ -505,6 +502,7 @@ class SaeTOAuthV2{
 			}
 		}
 		$multipartbody .= $endMPboundary;
+		echo $multipartbody;
 		return $multipartbody;
 	}
 }
