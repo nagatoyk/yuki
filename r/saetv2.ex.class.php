@@ -347,7 +347,6 @@ class SaeTOAuthV2{
 	 * @ignore
 	 */
 	private function oAuthRequest($url, $method, $parameters, $multi = false){
-		print_r($parameters);
 		if(strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0){
 			$url = $this->host.$url.'.'.$this->format;
 		}
@@ -467,6 +466,7 @@ class SaeTOAuthV2{
 	 * @ignore
 	 */
 	private static function build_http_query_multi($params){
+		print_r($params);
 		if(!$params) return '';
 		uksort($params, 'strcmp');
 		$pairs = array();
