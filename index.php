@@ -40,10 +40,17 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
 foreach(glob('files/images/*') as $filename){
-	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
+	echo '<p><a href="/'.$filename.'">'.$filename.'</a> -- <a href="?delete='.$filename.'"></a></p>';
 }
 foreach(glob('files/images/Kancolle/*') as $filename){
 	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
+}
+if(!empty($_GET['delete'])){
+	if(unlink($_GET['delete'])){
+		echo 'Del Done';
+	}else{
+		echo 'Del Error';
+	}
 }
 ?>
 </body>
