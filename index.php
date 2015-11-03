@@ -45,6 +45,9 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 foreach(glob('files/images/*') as $filename){
 	echo '<p>'.$filename.'</p>';
 }
+foreach(glob('files/images/Kancolle/*') as $filename){
+	echo '<p>'.$filename.'</p>';
+}
 ?>
 </body>
 </html>
