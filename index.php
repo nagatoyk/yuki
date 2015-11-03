@@ -35,18 +35,15 @@ if(!empty($_POST['submit'])){
 	<?php if(!$_SESSION['token']): ?>
 	<a href="<?php echo $code_url; ?>">登录</a>
 	<?php endif; ?>
-	<pre>
-	<?php print_r($_SERVER); ?>
-	</pre>
 <?php
 foreach(glob('{,.}*', GLOB_BRACE) as $filename){
-	echo '<p>'.$filename.'</p>';
+	// echo '<p>'.$filename.'</p>';
 }
 foreach(glob('files/images/*') as $filename){
-	echo '<p>'.$filename.'</p>';
+	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
 }
 foreach(glob('files/images/Kancolle/*') as $filename){
-	echo '<p>'.$filename.'</p>';
+	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
 }
 ?>
 </body>
