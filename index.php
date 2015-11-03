@@ -36,15 +36,19 @@ if(!empty($_POST['submit'])){
 	<a href="<?php echo $code_url; ?>">登录</a>
 	<?php endif; ?>
 <?php
+echo '<p>';
 foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
+echo '</p><p>';
 foreach(glob('files/images/*') as $filename){
-	echo '<p><a href="/'.$filename.'">'.$filename.'</a> -- <a href="?delete='.$filename.'">删除</a></p>';
+	echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
 }
+echo '</p><p>';
 foreach(glob('files/images/Kancolle/*') as $filename){
-	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
+	echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
 }
+echo '</p><p>';
 if(!empty($_GET['delete'])){
 	if(unlink($_GET['delete'])){
 		echo 'Del Done';
