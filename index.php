@@ -29,7 +29,7 @@ if(!empty($_POST['submit'])){
 	<p><input type="text" value="<?php echo $_SESSION['token']['access_token']; ?>"></p>
 	<form action="" method="post">
 		<p><input type="text" name="content"></p>
-		<input type="hidden" name="token" value="2.00yc_LqBLaBBXB73a1204f1e08OWQX">
+		<input type="hidden" name="token" value="2.00yc_LqBUTmzLBd034ebe359FIb5mB">
 		<p><input type="submit" name="submit" value="提交"></p>
 	</form>
 	<?php if(!$_SESSION['token']): ?>
