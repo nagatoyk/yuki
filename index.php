@@ -11,6 +11,7 @@ $code_url = $o->getAuthorizeURL($wb_url);
 if(!empty($_POST['submit'])){
 	echo '<pre>';
 	print_r($_POST);
+	$_SESSION['token'] = $_POST['token'];
 	$c = new SaeTClientV2($wb_id, $wb_key, $_POST['token']);
 	$c->set_debug(true);
 	$res = $c->update($_POST['content'].time());
@@ -56,6 +57,17 @@ if(!empty($_GET['delete'])){
 		echo 'Del Error';
 	}
 }
+$c = new SaeTClientV2($wb_id, $wb_key, $_SESSION['token']);
+$ms = $c->home_timeline();
+if(is_array($ms['statuses'])){
+	foreach($ms['statuses'] as $item){
+		echo '<div style="padding:10px;margin:5px;border:1px solid #ccc">'.$item['text'].'</div>';
+	}
+}
+
+
+
+
 ?>
 </body>
 </html>
