@@ -42,7 +42,7 @@ if(!empty($_POST['submit'])){
 foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	echo '<p>'.$filename.'</p>';
 }
-foreach(glob('files/') as $filename){
+foreach(glob('files/*') as $filename){
 	echo '<p>'.$filename.'</p>';
 }
 ?>
