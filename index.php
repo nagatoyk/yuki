@@ -40,7 +40,7 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
 foreach(glob('files/images/*') as $filename){
-	echo '<p><a href="/'.$filename.'">'.$filename.'</a> -- <a href="?delete='.$filename.'"></a></p>';
+	echo '<p><a href="/'.$filename.'">'.$filename.'</a> -- <a href="?delete='.$filename.'">删除</a></p>';
 }
 foreach(glob('files/images/Kancolle/*') as $filename){
 	echo '<p><a href="/'.$filename.'">'.$filename.'</a></p>';
