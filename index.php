@@ -41,11 +41,11 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
 echo '</p><p>';
-foreach(glob('files/images/*') as $filename){
+foreach(glob('files/images/*.(jpg|jpg|png|bmp|gif)') as $filename){
 	echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
 }
 echo '</p><p>';
-foreach(glob('files/images/Kancolle/*') as $filename){
+foreach(glob('files/images/Kancolle/*.(jpg|jpg|png|bmp|gif)') as $filename){
 	echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
 }
 echo '</p><p>';
