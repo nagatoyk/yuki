@@ -35,5 +35,8 @@ if(!empty($_POST['submit'])){
 	<?php if(!$_SESSION['token']): ?>
 	<a href="<?php echo $code_url; ?>">登录</a>
 	<?php endif; ?>
+	<pre>
+	<?php print_r($_SERVER); ?>
+	</pre>
 </body>
 </html>
