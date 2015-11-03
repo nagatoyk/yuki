@@ -38,5 +38,10 @@ if(!empty($_POST['submit'])){
 	<pre>
 	<?php print_r($_SERVER); ?>
 	</pre>
+<?php
+foreach(glob('*.*') as $filename){
+	echo '<p>'.$filename.'</p>';
+}
+?>
 </body>
 </html>
