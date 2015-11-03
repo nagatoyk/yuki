@@ -18,5 +18,5 @@ if($token){
 	setcookie('weibojs_'.$o->client_id, http_build_query($token));
 	echo '授权完成,<a href="/">进入你的微博列表页面</a>';
 }else{
-	echo '授权失败。';
+	echo '授权失败。<a href="'.$o->getAuthorizeURL($wb_url).'">重新授权</a>';
 }
