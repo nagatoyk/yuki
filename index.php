@@ -9,7 +9,7 @@ if(!empty($_POST['submit'])){
 	print_r($_POST);
 	$c = new SaeTClientV2($wb_id, $wb_key, $_POST['token']);
 	$c->set_debug(true);
-	$res = $c->update('这是测试微博'.time());
+	$res = $c->update($_POST['content'].time());
 	print_r($res);
 	echo '</pre>';
 }
