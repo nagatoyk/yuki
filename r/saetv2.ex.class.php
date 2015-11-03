@@ -323,7 +323,7 @@ class SaeTOAuthV2 {
 	private function oAuthRequest($url, $method, $parameters, $multi = false){
 
 		if(strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0){
-			$url = $this->host.$url.$this->format;
+			$url = $this->host.$url.'.'.$this->format;
 		}
 
 		switch($method){
