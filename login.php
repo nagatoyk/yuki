@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-require 'fun.php';
-require 'saetv2.ex.class.php';
+require 'r/fun.php';
+require 'r/saetv2.ex.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 if(isset($_REQUEST['code'])){
 	$keys = array();
