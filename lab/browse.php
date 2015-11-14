@@ -35,5 +35,6 @@ if(!empty($_POST['sub'])){
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 	$file_contents = curl_exec($ch);
 	curl_close($ch);
-	echo $file_contents;
+	$out_html = preg_replace('/<(title)>(.+)<\/\\1>/is', "<$1>$2</$1><base href=\"http://zh.moegirl.org/\">", $file_contents);
+	echo $out_html;
 }
