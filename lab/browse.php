@@ -36,9 +36,10 @@ if(!empty($_POST['sub'])){
 	$file_contents = curl_exec($ch);
 	curl_close($ch);
 	// $file_contents = preg_replace('/<title>(.*?)<\/title>/', "<title>$1</title>\n\r<base href=\"http://zh.moegirl.org/\">", $file_contents);
-	$file_contents = preg_replace('/(?m)^(\/\/bits\.moegirl\.org\/zh\/load\.php.*?)\"$/', "/lab/load.php?l=$1", $file_contents);
 
-	preg_match_all('/(?m)(\/\/bits\.moegirl\.org\/zh\/load\.php.*?)\"$/', $file_contents, $mat);
+	// $file_contents = preg_replace('/(?m)^(\/\/bits\.moegirl\.org\/zh\/load\.php.*?)\"$/', "/lab/load.php?l=$1", $file_contents);
+
+	preg_match_all('/^(\/\/bits\.moegirl\.org\/zh\/load\.php.*?)\"$/', $file_contents, $mat);
 	echo '<pre>';
 	print_r($mat);
 	echo '</pre>';
