@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET)){
-	if(isset($_GET['only'])) require false;
+	if(isset($_GET['only'])) return false;
 	switch($_GET['only']){
 		case 'styles':
 			header('Content-Type:text/css;charset=utf-8');
