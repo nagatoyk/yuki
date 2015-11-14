@@ -39,10 +39,7 @@ if(!empty($_POST['sub'])){
 
 	$file_contents = str_replace('/index.php', '/lab/get.php', $file_contents);
 	$file_contents = str_replace('//bits.moegirl.org/zh/load.php', '/lab/load.php', $file_contents);
+	$file_contents = preg_replace('/(http\:.*?\.(jpg|png))/', "/lab/img.php?url=$1", $file_contents);
 
-	preg_match_all('/^href=\"(\/\/bits\.moegirl\.org\/zh\/load\.php.*?)\"$/', $file_contents, $mat);
-	echo '<pre>';
-	print_r($mat);
-	echo '</pre>';
 	echo $file_contents;
 }
