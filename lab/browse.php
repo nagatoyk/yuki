@@ -21,6 +21,7 @@ echo $getIP::serverIP();
 if(!empty($_POST['sub'])){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $_POST['url']);
+	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0');
 	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
