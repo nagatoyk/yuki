@@ -36,6 +36,6 @@ if(!empty($_POST['sub'])){
 	$file_contents = curl_exec($ch);
 	curl_close($ch);
 	$file_contents = preg_replace('/<title>(.*?)<\/title>/', "<title>$1</title>\n\r<base href=\"http://zh.moegirl.org/\">", $file_contents);
-	$out_html = preg_replace('/^href="\/$/', 'href="//zh.moegirl.org/', $file_contents);
+	$out_html = preg_replace('/^href=\"\/$/', 'href="//zh.moegirl.org/', $file_contents);
 	echo $out_html;
 }
