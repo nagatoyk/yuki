@@ -37,10 +37,9 @@ if(!empty($_POST['sub'])){
 	curl_close($ch);
 	$file_contents = preg_replace('/<title>(.*?)<\/title>/', "<title>$1</title>\n\r<base href=\"http://zh.moegirl.org/\">", $file_contents);
 	preg_match_all('/^(href="\/)$/', $file_contents, $mat);
-	$out_html = '';
 	for($i = 0; $i < count($mat[1]); $i++){
-		$out_html .= str_replace($mat[1][$i], 'href="//zh.moegirl.org/', $file_contents);
+		$file_contents .= str_replace($mat[1][$i], 'href="//zh.moegirl.org/', $file_contents);
 	}
 	// $out_html = str_replace('href="/', 'href="//zh.moegirl.org/', $file_contents);
-	echo $out_html;
+	echo $file_contents;
 }
