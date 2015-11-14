@@ -13,10 +13,11 @@ class getIP{
 		return $cIP;
 	}
 	public static function serverIP(){
-		return gethostbyname($_SERVER["SERVER_NAME"]);
+		return gethostbyname($_SERVER['SERVER_NAME']);
 	}
 }
 $getIP = new getIP();
+echo $getIP::serverIP();
 if(!empty($_POST['sub'])){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $_POST['url']);
