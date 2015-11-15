@@ -22,55 +22,55 @@ function getFromPool(name,path) {
 }
 
 var loader = PIXI.loader;
-loader.add('BG1','/lab/file/_assets/82_res.images.ImgBackgroundDay.jpg')
-	.add('BG2','/lab/file/_assets/83_res.images.ImgBackgroundNight.jpg')
-	.add('shutter1','/lab/file/_assets/513_res.common.ImgShutterTopDark.png')
-	.add('shutter2','/lab/file/_assets/511_res.common.ImgShutterBottomDark.png')
-	.add('radar','/lab/file/_assets/375_res.battle.images.ImgRaderBG.png')
-	.add('nmiss','/lab/file/_assets/Nmiss.png')
-	.add('ccrit','/lab/file/_assets/Ccrit.png')
+loader.add('BG1','/lab/file/assets/82_res.images.ImgBackgroundDay.jpg')
+	.add('BG2','/lab/file/assets/83_res.images.ImgBackgroundNight.jpg')
+	.add('shutter1','/lab/file/assets/513_res.common.ImgShutterTopDark.png')
+	.add('shutter2','/lab/file/assets/511_res.common.ImgShutterBottomDark.png')
+	.add('radar','/lab/file/assets/375_res.battle.images.ImgRaderBG.png')
+	.add('nmiss','/lab/file/assets/Nmiss.png')
+	.add('ccrit','/lab/file/assets/Ccrit.png')
 	.add('dminor','/lab/file/assets/d383.png')
 	.add('dmedium','/lab/file/assets/d385.png')
 	.add('dmajor','/lab/file/assets/d387.png')
-	.add('938','/lab/file/_assets/938.png')
-	.add('914','/lab/file/_assets/914.png')
-	.add('916','/lab/file/_assets/916.png')
-	.add('918','/lab/file/_assets/918.png')
-	.add('920','/lab/file/_assets/920.png')
-	.add('922','/lab/file/_assets/922.png')
-	.add('924','/lab/file/_assets/924.png')
-	.add('926','/lab/file/_assets/926.png')
-	.add('440','/lab/file/_assets/440.png')
-	.add('445','/lab/file/_assets/445.png')
-	.add('447','/lab/file/_assets/447.png')
-	.add('449','/lab/file/_assets/449.png')
-	.add('433','/lab/file/_assets/433.png')
-	.add('488','/lab/file/_assets/488.png')
-	.add('493','/lab/file/_assets/493.png')
-	.add('498','/lab/file/_assets/498.png')
-	.add('465','/lab/file/_assets/465.png')
-	.add('467','/lab/file/_assets/467.png')
-	.add('469','/lab/file/_assets/469.png')
-	.add('471','/lab/file/_assets/471.png')
-	.add('473','/lab/file/_assets/473.png')
-	.add('216','/lab/file/_assets/216.png')
-	.add('aaci1','/lab/file/_assets/aaci1.png')
-	.add('aaci2','/lab/file/_assets/aaci2.png');
-for (var i=389; i <= 417; i+=2) loader.add(i.toString(),'/lab/file/_assets/'+i+'.png');
-for (var i=0; i<=9; i++) loader.add('C'+i,'/lab/file/_assets/C'+i+'.png');
-for (var i=0; i<=9; i++) loader.add('N'+i,'/lab/file/_assets/N'+i+'.png');
+	.add('938','/lab/file/assets/938.png')
+	.add('914','/lab/file/assets/914.png')
+	.add('916','/lab/file/assets/916.png')
+	.add('918','/lab/file/assets/918.png')
+	.add('920','/lab/file/assets/920.png')
+	.add('922','/lab/file/assets/922.png')
+	.add('924','/lab/file/assets/924.png')
+	.add('926','/lab/file/assets/926.png')
+	.add('440','/lab/file/assets/440.png')
+	.add('445','/lab/file/assets/445.png')
+	.add('447','/lab/file/assets/447.png')
+	.add('449','/lab/file/assets/449.png')
+	.add('433','/lab/file/assets/433.png')
+	.add('488','/lab/file/assets/488.png')
+	.add('493','/lab/file/assets/493.png')
+	.add('498','/lab/file/assets/498.png')
+	.add('465','/lab/file/assets/465.png')
+	.add('467','/lab/file/assets/467.png')
+	.add('469','/lab/file/assets/469.png')
+	.add('471','/lab/file/assets/471.png')
+	.add('473','/lab/file/assets/473.png')
+	.add('216','/lab/file/assets/216.png')
+	.add('aaci1','/lab/file/assets/aaci1.png')
+	.add('aaci2','/lab/file/assets/aaci2.png');
+for (var i=389; i <= 417; i+=2) loader.add(i.toString(),'/lab/file/assets/'+i+'.png');
+for (var i=0; i<=9; i++) loader.add('C'+i,'/lab/file/assets/C'+i+'.png');
+for (var i=0; i<=9; i++) loader.add('N'+i,'/lab/file/assets/N'+i+'.png');
 var ALLLOADED = false;
 loader.load(function() { ALLLOADED = true; });
 
 // create a new Sprite using the texture
-var bg = PIXI.Sprite.fromImage('/lab/file/_assets/82_res.images.ImgBackgroundDay.jpg');
-var bg2 = PIXI.Sprite.fromImage('/lab/file/_assets/83_res.images.ImgBackgroundNight.jpg');
+var bg = PIXI.Sprite.fromImage('/lab/file/assets/82_res.images.ImgBackgroundDay.jpg');
+var bg2 = PIXI.Sprite.fromImage('/lab/file/assets/83_res.images.ImgBackgroundNight.jpg');
 
 // stage.addChild(bunny);
 stage.addChild(bg);
 
 var frames_exp = [];
-for (var i=389; i <= 417; i+=2) frames_exp.push(PIXI.Texture.fromImage('/lab/file/_assets/'+i+'.png'));
+for (var i=389; i <= 417; i+=2) frames_exp.push(PIXI.Texture.fromImage('/lab/file/assets/'+i+'.png'));
 
 var COMBINED = false;
 
@@ -93,13 +93,13 @@ var allfleets2 = [];
 var GEngage = 0, GAP1 = 0, GAP2 = 0;
 
 
-var radar1 = PIXI.Sprite.fromImage('/lab/file/_assets/375_res.battle.images.ImgRaderBG.png');
+var radar1 = PIXI.Sprite.fromImage('/lab/file/assets/375_res.battle.images.ImgRaderBG.png');
 radar1.position.set(75,402);
 radar1.anchor.set(.5);
 radar1.scale.set(0);
 stage.addChild(radar1);
 
-var radar2 = PIXI.Sprite.fromImage('/lab/file/_assets/375_res.battle.images.ImgRaderBG.png');
+var radar2 = PIXI.Sprite.fromImage('/lab/file/assets/375_res.battle.images.ImgRaderBG.png');
 radar2.position.set(725,78);
 radar2.anchor.set(.5);
 radar2.scale.set(0);
@@ -116,8 +116,8 @@ stage.addChild(dots2);
 
 function createDots(container,form,num,side) {
 	var name, path;
-	if (side) { name = 'dotRed'; path = '/lab/file/_assets/467.png'; } //change path
-	else { name = 'dotGreen'; path = '/lab/file/_assets/465.png'; }
+	if (side) { name = 'dotRed'; path = '/lab/file/assets/467.png'; } //change path
+	else { name = 'dotGreen'; path = '/lab/file/assets/465.png'; }
 	form = parseInt(form);
 	switch(form) {
 		case 0:
@@ -179,14 +179,14 @@ function createDots(container,form,num,side) {
 		case 11:
 			var coords = [[5,0],[10,30],[10,-30],[20,15],[20,-15],[30,0]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','/lab/file/_assets/473.png');
+				var dot = getFromPool('dotGreenC','/lab/file/assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[-10,23],[-10,7],[-10,-7],[-10,-23],[-24,7],[-24,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/_assets/469.png':'/lab/file/_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/assets/469.png':'/lab/file/assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -197,14 +197,14 @@ function createDots(container,form,num,side) {
 		case 13:
 			var coords = [[32,0],[-32,0],[14,30],[14,-30],[-14,30],[-14,-30]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','/lab/file/_assets/473.png');
+				var dot = getFromPool('dotGreenC','/lab/file/assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[0,7],[0,-7],[-14,7],[-14,-7],[14,7],[14,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/_assets/469.png':'/lab/file/_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/assets/469.png':'/lab/file/assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -213,14 +213,14 @@ function createDots(container,form,num,side) {
 		case 14:
 			var coords = [[12,7],[12,-7],[24,17],[24,0],[24,-17],[36,0]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','/lab/file/_assets/473.png');
+				var dot = getFromPool('dotGreenC','/lab/file/assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[0,0],[-12,0],[-24,7],[-24,-7],[-36,7],[-36,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/_assets/469.png':'/lab/file/_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'/lab/file/assets/469.png':'/lab/file/assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -229,8 +229,8 @@ function createDots(container,form,num,side) {
 	}
 }
 
-var shutterTop = PIXI.Sprite.fromImage('/lab/file/_assets/513_res.common.ImgShutterTopDark.png');
-var shutterBottom = PIXI.Sprite.fromImage('/lab/file/_assets/511_res.common.ImgShutterBottomDark.png');
+var shutterTop = PIXI.Sprite.fromImage('/lab/file/assets/513_res.common.ImgShutterTopDark.png');
+var shutterBottom = PIXI.Sprite.fromImage('/lab/file/assets/511_res.common.ImgShutterBottomDark.png');
 
 
 var eventqueue = [];
@@ -241,27 +241,27 @@ function createShip(data,side,i) {
 	var ship = new ShipG(i+(side==1)?10:0,side,parseInt(data[1]));
 	var graphic = new PIXI.Container();
 	var sdata = SHIPDATA[parseInt(data[0])];
-	var portrait = PIXI.Sprite.fromImage('/lab/file/_assets/icons/'+sdata.image);
+	var portrait = PIXI.Sprite.fromImage('/lab/file/assets/icons/'+sdata.image);
 	portrait.position.set((side==1)?11:-3,2);
 	var hpbar = new PIXI.Graphics();
 	hpbar.beginFill(0x00ff00);
 	hpbar.drawRect((side==1)?3:161,3,5,38);
 	hptxt = new PIXI.Text(data[1]+'/'+data[1],{font:'13px "Arno Pro Semibold"',fill:'#ffffff'});
 	hptxt.position.set((side==1)?-7-hptxt.width:177,12);
-	var hpbarback = PIXI.Sprite.fromImage('/lab/file/_assets/433.png');
+	var hpbarback = PIXI.Sprite.fromImage('/lab/file/assets/433.png');
 	hpbarback.position.set((side==1)?2:160,2);
 	graphic.addChild(hpbarback);
 	graphic.addChild(hpbar);
 	graphic.addChild(portrait);
 	if (i==0) {
-		var box = PIXI.Sprite.fromImage('/lab/file/_assets/'+((side==1)?'449':'445')+'.png');
+		var box = PIXI.Sprite.fromImage('/lab/file/assets/'+((side==1)?'449':'445')+'.png');
 		box.y -= 5;
 		graphic.addChild(box);
-	} else graphic.addChild(PIXI.Sprite.fromImage('/lab/file/_assets/'+((side==1)?'447':'440')+'.png'));
+	} else graphic.addChild(PIXI.Sprite.fromImage('/lab/file/assets/'+((side==1)?'447':'440')+'.png'));
 	graphic.addChild(hptxt);
 	graphic.position.set((side==1)?FLEET2ORIGIN+220:-220,((side==1)?144:77)+45*i);
 	ship.graphic = graphic;
-	// var mask = PIXI.Sprite.fromImage('/lab/file/_assets/mask.png');
+	// var mask = PIXI.Sprite.fromImage('/lab/file/assets/mask.png');
 	// graphic.addChild(mask);
 	// mask.blendMode = PIXI.blendModes.ADD;
 
@@ -323,7 +323,7 @@ function processAPI(root) {
 			fleet1C.push(createShip(d,0,i));
 			fleet1C[i].hasonlytorp = hasonlytorp;
 			fleet1C[i].xorigin = 152; fleet1C[i].graphic.x = 152;
-			var mask = new PIXI.Sprite.fromImage('/lab/file/_assets/mask.png');
+			var mask = new PIXI.Sprite.fromImage('/lab/file/assets/mask.png');
 			fleet1C[i].graphic.mask = mask;
 			fleet1C[i].graphic.addChild(mask);
 			fleet1C[i].escort = true;
@@ -752,7 +752,7 @@ function createNumber(x,y,number) {
 	var ng = new PIXI.Container;
 	number = number.toString();
 	if (number <= 0) {
-		var sprite = getFromPool('Nmiss','/lab/file/_assets/Nmiss.png');
+		var sprite = getFromPool('Nmiss','/lab/file/assets/Nmiss.png');
 		sprite.position.set(0);
 		sprite.anchor.set(.5);
 		sprite.vspeed = -2.5; sprite.bounce = 2; //updates.push([moveNumber,[sprite]]);
@@ -761,7 +761,7 @@ function createNumber(x,y,number) {
 		for (i=0; i<number.length; i++) {
 			var j = 0;
 			addTimeout(function(){
-				var sprite = getFromPool('N'+number[j],'/lab/file/_assets/N'+number[j]+'.png');
+				var sprite = getFromPool('N'+number[j],'/lab/file/assets/N'+number[j]+'.png');
 				sprite.x = -(number.length-1)*7 + j*14; sprite.y = 0;
 				sprite.anchor.set(.5);
 				sprite.vspeed = -2.5; sprite.bounce = 2; //updates.push([moveNumber,[sprite]]);
@@ -773,7 +773,7 @@ function createNumber(x,y,number) {
 		for (i=0; i<number.length; i++) {
 			var j = 0;
 			addTimeout(function(){
-				var sprite = getFromPool('C'+number[j],'/lab/file/_assets/C'+number[j]+'.png');
+				var sprite = getFromPool('C'+number[j],'/lab/file/assets/C'+number[j]+'.png');
 				sprite.x = -(number.length-1)*7 + j*14;
 				sprite.anchor.set(.5);
 				sprite.y = -5;
@@ -782,7 +782,7 @@ function createNumber(x,y,number) {
 				j++;
 			}, i*100);
 		}
-		var crit = getFromPool('Ccrit','/lab/file/_assets/Ccrit.png');
+		var crit = getFromPool('Ccrit','/lab/file/assets/Ccrit.png');
 		crit.x = -10;
 		crit.y = 10;
 		crit.iscrit = true;
@@ -830,7 +830,7 @@ function moveNumber(numbers) {
 
 function createTorp(ship,target,speed,big) {
 	if (!speed) speed = 4;
-	var torp = (big)? getFromPool('torpedoBig','/lab/file/_assets/493.png') : getFromPool('torpedo','/lab/file/_assets/498.png');
+	var torp = (big)? getFromPool('torpedoBig','/lab/file/assets/493.png') : getFromPool('torpedo','/lab/file/assets/498.png');
 	torp.pivot.set(0,(big)? 13:8);//torp.pivot.set(281,8);
 	var x1 = (ship.side==1) ? 657 : (ship.escort||target.escort)? 295 : 143;
 	var x2 = (target.side==1) ? 657 : (ship.escort||target.escort)? 295 : 143;
@@ -1185,7 +1185,7 @@ function createPlane(x,y,planetypes,shots) {
 	var planes = new PIXI.Container();
 	if (num == 3) {
 		for (var i=0; i<3; i++) {
-			var plane = PIXI.Sprite.fromImage('/lab/file/_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
+			var plane = PIXI.Sprite.fromImage('/lab/file/assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
 			plane.x = i*25-25;
 			plane.y = (i==1) ? -15 : 15;
 			plane.scale.set(.8);
@@ -1194,7 +1194,7 @@ function createPlane(x,y,planetypes,shots) {
 		}
 	} else if (num == 2) {
 		for (var i=0; i<2; i++) {
-			var plane = PIXI.Sprite.fromImage('/lab/file/_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
+			var plane = PIXI.Sprite.fromImage('/lab/file/assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
 			plane.x = i*30-15;
 			plane.y = (i==1) ? -15 : 15;
 			plane.scale.set(.8);
@@ -1202,7 +1202,7 @@ function createPlane(x,y,planetypes,shots) {
 			if (shots) plane.shot = shots[i];
 		}
 	} else if (num == 1) {
-		var plane = PIXI.Sprite.fromImage('/lab/file/_assets/'+PLANESPRITES[planetypes[0]-1]+'.png');
+		var plane = PIXI.Sprite.fromImage('/lab/file/assets/'+PLANESPRITES[planetypes[0]-1]+'.png');
 		plane.scale.set(.8);
 		planes.addChild(plane);
 		if (shots) plane.shot = shots[0];
@@ -1341,7 +1341,7 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 }
 
 function createAAfire(x,y,angle) {
-	var fire = PIXI.Sprite.fromImage('/lab/file/_assets/216.png');
+	var fire = PIXI.Sprite.fromImage('/lab/file/assets/216.png');
 	fire.pivot.y = 5;
 	fire.position.set(x,y);
 	fire.rotation = -angle+Math.PI;
@@ -1372,8 +1372,8 @@ function moveAAfire(fire,angle) {
 }
 
 function createAACIfire(x,y) {
-	var firefront = PIXI.Sprite.fromImage('/lab/file/_assets/aaci1.png');
-	var fireback = PIXI.Sprite.fromImage('/lab/file/_assets/aaci2.png');
+	var firefront = PIXI.Sprite.fromImage('/lab/file/assets/aaci1.png');
+	var fireback = PIXI.Sprite.fromImage('/lab/file/assets/aaci2.png');
 	firefront.position.set(x,y);
 	fireback.position.set(x,y);
 	firefront.pivot.set(178,322);
@@ -1423,7 +1423,7 @@ function GSupportPhase(ships,damages) {
 }
 
 function createSupportShell(x,y,angle) {
-	var shell = getFromPool('supportShell','/lab/file/_assets/488.png');
+	var shell = getFromPool('supportShell','/lab/file/assets/488.png');
 	shell.alpha = 1;
 	shell.scale.set(.5);
 	shell.position.set(x,y);
