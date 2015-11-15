@@ -3428,7 +3428,7 @@ var SHIPDATA = {
     },
     185: {
         name: 'Ryuuhou',
-        image: 'KRyuuhou',
+        image: 'KRyuuhou.png',
         type: 'CVL',
         HP: 39,
         FP: 20,

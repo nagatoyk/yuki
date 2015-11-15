@@ -10,6 +10,7 @@
 	<script src="file/js/pixi.js"></script>
 	<script src="file/js/steganography.js"></script>
 	<script>
+		$('#code').val(APIsample);
 		var previewFile = function() {
 			var preview = document.querySelector('img');
 			var file    = document.querySelector('input[type=file]').files[0];
@@ -79,7 +80,7 @@
 		<br>
 		<input id="codeb" type="button" value="Load" onClick="loadCode()" />
 		<input type="button" value="Paste Sample Code 1" onclick="$('#code').val(APIsample);"/>
-		<input type="button" value="Paste Sample Code 2" onclick="$('#code').val(APIsample2);"/>
+		<!-- <input type="button" value="Paste Sample Code 2" onclick="$('#code').val(APIsample2);"/> -->
 		<br><span id="error" style="color:red;width:100px"></span>
 
 	</div>
