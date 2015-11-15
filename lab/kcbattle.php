@@ -10,7 +10,10 @@
 	<script src="file/js/pixi.js"></script>
 	<script src="file/js/steganography.js"></script>
 	<script>
-		$('#code').val(APIsample);
+		$(function(){
+			$('#code').val(APIsample);
+			loadCode();
+		});
 		var previewFile = function() {
 			var preview = document.querySelector('img');
 			var file    = document.querySelector('input[type=file]').files[0];
