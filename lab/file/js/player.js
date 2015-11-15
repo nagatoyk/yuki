@@ -29,9 +29,9 @@ loader.add('BG1','/lab/file/_assets/82_res.images.ImgBackgroundDay.jpg')
 	.add('radar','/lab/file/_assets/375_res.battle.images.ImgRaderBG.png')
 	.add('nmiss','/lab/file/_assets/Nmiss.png')
 	.add('ccrit','/lab/file/_assets/Ccrit.png')
-	.add('dminor','/lab/file/_assets/d383.png')
-	.add('dmedium','/lab/file/_assets/d385.png')
-	.add('dmajor','/lab/file/_assets/d387.png')
+	.add('dminor','/lab/file/assets/d383.png')
+	.add('dmedium','/lab/file/assets/d385.png')
+	.add('dmajor','/lab/file/assets/d387.png')
 	.add('938','/lab/file/_assets/938.png')
 	.add('914','/lab/file/_assets/914.png')
 	.add('916','/lab/file/_assets/916.png')
@@ -885,7 +885,7 @@ function shipSetHP(ship,hp) {
 		if (ship.status != 0) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
 			for (i=0; i<5; i++) ship.graphic.getChildAt(i).filters = [new PIXI.filters.GrayFilter()];
-			var dam = PIXI.Sprite.fromImage('/lab/file/_assets/d389.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('/lab/file/assets/d389.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -894,7 +894,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax/4) {
 		if (ship.status != 1) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('/lab/file/_assets/d387.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('/lab/file/assets/d387.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -903,7 +903,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax/2) {
 		if (ship.status != 2) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('/lab/file/_assets/d385.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('/lab/file/assets/d385.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -912,7 +912,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax*.75) {
 		if (ship.status != 3) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('/lab/file/_assets/d383.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('/lab/file/assets/d383.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
