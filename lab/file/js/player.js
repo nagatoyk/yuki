@@ -22,55 +22,55 @@ function getFromPool(name,path) {
 }
 
 var loader = PIXI.loader;
-loader.add('BG1','_assets/82_res.images.ImgBackgroundDay.jpg')
-	.add('BG2','_assets/83_res.images.ImgBackgroundNight.jpg')
-	.add('shutter1','_assets/513_res.common.ImgShutterTopDark.png')
-	.add('shutter2','_assets/511_res.common.ImgShutterBottomDark.png')
-	.add('radar','_assets/375_res.battle.images.ImgRaderBG.png')
-	.add('nmiss','_assets/Nmiss.png')
-	.add('ccrit','_assets/Ccrit.png')
-	.add('dminor','_assets/d383.png')
-	.add('dmedium','_assets/d385.png')
-	.add('dmajor','_assets/d387.png')
-	.add('938','_assets/938.png')
-	.add('914','_assets/914.png')
-	.add('916','_assets/916.png')
-	.add('918','_assets/918.png')
-	.add('920','_assets/920.png')
-	.add('922','_assets/922.png')
-	.add('924','_assets/924.png')
-	.add('926','_assets/926.png')
-	.add('440','_assets/440.png')
-	.add('445','_assets/445.png')
-	.add('447','_assets/447.png')
-	.add('449','_assets/449.png')
-	.add('433','_assets/433.png')
-	.add('488','_assets/488.png')
-	.add('493','_assets/493.png')
-	.add('498','_assets/498.png')
-	.add('465','_assets/465.png')
-	.add('467','_assets/467.png')
-	.add('469','_assets/469.png')
-	.add('471','_assets/471.png')
-	.add('473','_assets/473.png')
-	.add('216','_assets/216.png')
-	.add('aaci1','_assets/aaci1.png')
-	.add('aaci2','_assets/aaci2.png');
-for (var i=389; i <= 417; i+=2) loader.add(i.toString(),'_assets/'+i+'.png');
-for (var i=0; i<=9; i++) loader.add('C'+i,'_assets/C'+i+'.png');
-for (var i=0; i<=9; i++) loader.add('N'+i,'_assets/N'+i+'.png');
+loader.add('BG1','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/82_res.images.ImgBackgroundDay.jpg')
+	.add('BG2','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/83_res.images.ImgBackgroundNight.jpg')
+	.add('shutter1','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/513_res.common.ImgShutterTopDark.png')
+	.add('shutter2','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/511_res.common.ImgShutterBottomDark.png')
+	.add('radar','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/375_res.battle.images.ImgRaderBG.png')
+	.add('nmiss','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/Nmiss.png')
+	.add('ccrit','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/Ccrit.png')
+	.add('dminor','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d383.png')
+	.add('dmedium','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d385.png')
+	.add('dmajor','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d387.png')
+	.add('938','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/938.png')
+	.add('914','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/914.png')
+	.add('916','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/916.png')
+	.add('918','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/918.png')
+	.add('920','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/920.png')
+	.add('922','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/922.png')
+	.add('924','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/924.png')
+	.add('926','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/926.png')
+	.add('440','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/440.png')
+	.add('445','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/445.png')
+	.add('447','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/447.png')
+	.add('449','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/449.png')
+	.add('433','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/433.png')
+	.add('488','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/488.png')
+	.add('493','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/493.png')
+	.add('498','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/498.png')
+	.add('465','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/465.png')
+	.add('467','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/467.png')
+	.add('469','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/469.png')
+	.add('471','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/471.png')
+	.add('473','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/473.png')
+	.add('216','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/216.png')
+	.add('aaci1','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/aaci1.png')
+	.add('aaci2','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/aaci2.png');
+for (var i=389; i <= 417; i+=2) loader.add(i.toString(),'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+i+'.png');
+for (var i=0; i<=9; i++) loader.add('C'+i,'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/C'+i+'.png');
+for (var i=0; i<=9; i++) loader.add('N'+i,'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/N'+i+'.png');
 var ALLLOADED = false;
 loader.load(function() { ALLLOADED = true; });
 
 // create a new Sprite using the texture
-var bg = PIXI.Sprite.fromImage('_assets/82_res.images.ImgBackgroundDay.jpg');
-var bg2 = PIXI.Sprite.fromImage('_assets/83_res.images.ImgBackgroundNight.jpg');
+var bg = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/82_res.images.ImgBackgroundDay.jpg');
+var bg2 = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/83_res.images.ImgBackgroundNight.jpg');
 
 // stage.addChild(bunny);
 stage.addChild(bg);
 
 var frames_exp = [];
-for (var i=389; i <= 417; i+=2) frames_exp.push(PIXI.Texture.fromImage('_assets/'+i+'.png'));
+for (var i=389; i <= 417; i+=2) frames_exp.push(PIXI.Texture.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+i+'.png'));
 
 var COMBINED = false;
 
@@ -93,13 +93,13 @@ var allfleets2 = [];
 var GEngage = 0, GAP1 = 0, GAP2 = 0;
 
 
-var radar1 = PIXI.Sprite.fromImage('_assets/375_res.battle.images.ImgRaderBG.png');
+var radar1 = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/375_res.battle.images.ImgRaderBG.png');
 radar1.position.set(75,402);
 radar1.anchor.set(.5);
 radar1.scale.set(0);
 stage.addChild(radar1);
 
-var radar2 = PIXI.Sprite.fromImage('_assets/375_res.battle.images.ImgRaderBG.png');
+var radar2 = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/375_res.battle.images.ImgRaderBG.png');
 radar2.position.set(725,78);
 radar2.anchor.set(.5);
 radar2.scale.set(0);
@@ -116,8 +116,8 @@ stage.addChild(dots2);
 
 function createDots(container,form,num,side) {
 	var name, path;
-	if (side) { name = 'dotRed'; path = '_assets/467.png'; } //change path
-	else { name = 'dotGreen'; path = '_assets/465.png'; }
+	if (side) { name = 'dotRed'; path = 'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/467.png'; } //change path
+	else { name = 'dotGreen'; path = 'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/465.png'; }
 	form = parseInt(form);
 	switch(form) {
 		case 0:
@@ -179,14 +179,14 @@ function createDots(container,form,num,side) {
 		case 11:
 			var coords = [[5,0],[10,30],[10,-30],[20,15],[20,-15],[30,0]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','_assets/473.png');
+				var dot = getFromPool('dotGreenC','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[-10,23],[-10,7],[-10,-7],[-10,-23],[-24,7],[-24,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'_assets/469.png':'_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/469.png':'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -197,14 +197,14 @@ function createDots(container,form,num,side) {
 		case 13:
 			var coords = [[32,0],[-32,0],[14,30],[14,-30],[-14,30],[-14,-30]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','_assets/473.png');
+				var dot = getFromPool('dotGreenC','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[0,7],[0,-7],[-14,7],[-14,-7],[14,7],[14,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'_assets/469.png':'_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/469.png':'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -213,14 +213,14 @@ function createDots(container,form,num,side) {
 		case 14:
 			var coords = [[12,7],[12,-7],[24,17],[24,0],[24,-17],[36,0]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool('dotGreenC','_assets/473.png');
+				var dot = getFromPool('dotGreenC','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/473.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
 			}
 			coords = [[0,0],[-12,0],[-24,7],[-24,-7],[-36,7],[-36,-7]];
 			for (var i=0; i<coords.length; i++) {
-				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'_assets/469.png':'_assets/471.png');
+				var dot = getFromPool((COMBINED==2)?'dotYellow':'dotBlue',(COMBINED==2)?'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/469.png':'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/471.png');
 				dot.position.set(coords[i][0],coords[i][1]);
 				dot.anchor.set(.5);
 				container.addChild(dot);
@@ -229,8 +229,8 @@ function createDots(container,form,num,side) {
 	}
 }
 
-var shutterTop = PIXI.Sprite.fromImage('_assets/513_res.common.ImgShutterTopDark.png');
-var shutterBottom = PIXI.Sprite.fromImage('_assets/511_res.common.ImgShutterBottomDark.png');
+var shutterTop = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/513_res.common.ImgShutterTopDark.png');
+var shutterBottom = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/511_res.common.ImgShutterBottomDark.png');
 
 
 var eventqueue = [];
@@ -241,27 +241,27 @@ function createShip(data,side,i) {
 	var ship = new ShipG(i+(side==1)?10:0,side,parseInt(data[1]));
 	var graphic = new PIXI.Container();
 	var sdata = SHIPDATA[parseInt(data[0])];
-	var portrait = PIXI.Sprite.fromImage('_assets/icons/'+sdata.image);
+	var portrait = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/icons/'+sdata.image);
 	portrait.position.set((side==1)?11:-3,2);
 	var hpbar = new PIXI.Graphics();
 	hpbar.beginFill(0x00ff00);
 	hpbar.drawRect((side==1)?3:161,3,5,38);
 	hptxt = new PIXI.Text(data[1]+'/'+data[1],{font:'13px "Arno Pro Semibold"',fill:'#ffffff'});
 	hptxt.position.set((side==1)?-7-hptxt.width:177,12);
-	var hpbarback = PIXI.Sprite.fromImage('_assets/433.png');
+	var hpbarback = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/433.png');
 	hpbarback.position.set((side==1)?2:160,2);
 	graphic.addChild(hpbarback);
 	graphic.addChild(hpbar);
 	graphic.addChild(portrait);
 	if (i==0) {
-		var box = PIXI.Sprite.fromImage('_assets/'+((side==1)?'449':'445')+'.png');
+		var box = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+((side==1)?'449':'445')+'.png');
 		box.y -= 5;
 		graphic.addChild(box);
-	} else graphic.addChild(PIXI.Sprite.fromImage('_assets/'+((side==1)?'447':'440')+'.png'));
+	} else graphic.addChild(PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+((side==1)?'447':'440')+'.png'));
 	graphic.addChild(hptxt);
 	graphic.position.set((side==1)?FLEET2ORIGIN+220:-220,((side==1)?144:77)+45*i);
 	ship.graphic = graphic;
-	// var mask = PIXI.Sprite.fromImage('_assets/mask.png');
+	// var mask = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/mask.png');
 	// graphic.addChild(mask);
 	// mask.blendMode = PIXI.blendModes.ADD;
 
@@ -273,7 +273,7 @@ function createShip(data,side,i) {
 	ship.issub = (sdata.type == 'SS' || sdata.type == 'SSV');
 	ship.isinstall = (sdata.type == 'Installation');
 	ship.isCV = (sdata.type == 'CV' || sdata.type == 'CVL' || sdata.type == 'CVN' || sdata.type == 'CVB' || (sdata.type=='AO'&&ship.hasbomber));
-	//ship.hasWG = 
+	//ship.hasWG =
 	return ship;
 }
 
@@ -286,7 +286,7 @@ function processAPI(root) {
 	}
 	console.log(root);
 	COMBINED = root.combined;
-	
+
 	//load friendly ships
 	var fleet = 'fleet'+root.fleetnum;
 	var fships = [], fequips = [], fshipsC = [], fequipsC = [];
@@ -318,12 +318,12 @@ function processAPI(root) {
 					if (hasonlytorp == undefined && g.type == TORPEDO) hasonlytorp = true;
 					if ([MAINGUNS,MAINGUNM,MAINGUNL].indexOf(g.type) != -1) hasonlytorp = false;
 				}
-				
+
 			}
 			fleet1C.push(createShip(d,0,i));
 			fleet1C[i].hasonlytorp = hasonlytorp;
 			fleet1C[i].xorigin = 152; fleet1C[i].graphic.x = 152;
-			var mask = new PIXI.Sprite.fromImage('_assets/mask.png');
+			var mask = new PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/mask.png');
 			fleet1C[i].graphic.mask = mask;
 			fleet1C[i].graphic.addChild(mask);
 			fleet1C[i].escort = true;
@@ -344,13 +344,13 @@ function processAPI(root) {
 				if (hasonlytorp == undefined && g.type == TORPEDO) hasonlytorp = true;
 				if ([MAINGUNS,MAINGUNM,MAINGUNL].indexOf(g.type) != -1) hasonlytorp = false;
 			}
-			
+
 		}
 		fleet1.push(createShip(d,0,i));
 		fleet1[i].hasonlytorp = hasonlytorp;
 		stage.addChild(fleet1[i].graphic);
 	}
-	
+
 	for (var b=0; b<root.battles.length; b++) {
 		// console.log(root.battles[b]);
 		data = root.battles[b].data;
@@ -386,11 +386,11 @@ function processAPI(root) {
 		}
 		eventqueue.push([battleStart,[battledata,f2]]);
 		allfleets2.push(f2);
-		
+
 		//for reading air phase
 		var processKouku = function(kouku) {
 			if (kouku && (kouku.api_plane_from[0][0] != -1 || kouku.api_plane_from[1][0] != -1)) {
-			
+
 				//air state
 				var AS1 = {0:0,1:2,2:1,3:-1,4:-2}[kouku.api_stage1.api_disp_seiku];
 				if (AS1 > 2) AS1 = -AS1+2;
@@ -415,11 +415,11 @@ function processAPI(root) {
 						var dam = parseInt(kouku.api_stage3.api_fdam[i+1]);  //remember later, .1 = protect
 						var hit = (kouku.api_stage3.api_frai_flag[i+1] || kouku.api_stage3.api_fbak_flag[i+1]);
 						if (hit) { shots.push([-1,fleet1[i],(dam>0)? dam:0,-1,-1,-1]); show=true; }
-						
+
 						dam = parseInt(kouku.api_stage3.api_edam[i+1]);
 						hit = (kouku.api_stage3.api_erai_flag[i+1] || kouku.api_stage3.api_ebak_flag[i+1]);
 						if (hit) { shots.push([-1,f2[i],(dam>0)? dam:0,-1,-1,-1]); show = true; }
-						
+
 						if (COMBINED) {
 							var dam = parseInt(kouku.api_stage3_combined.api_fdam[i+1]);  //remember later, .1 = protect
 							var hit = (kouku.api_stage3_combined.api_frai_flag[i+1] || kouku.api_stage3_combined.api_fbak_flag[i+1]);
@@ -433,7 +433,7 @@ function processAPI(root) {
 				}
 			}
 		};
-		
+
 		//for reading torpedo phase
 		var processRaigeki = function(rai,f1) {
 			var shots = [];
@@ -454,7 +454,7 @@ function processAPI(root) {
 				eventqueue.push([GTorpedoPhase,[shots]]);
 			}
 		};
-		
+
 		//for reading shelling phase
 		var processHougeki = function(hou,f1) {
 			for (var j=1; j<hou.api_at_list.length; j++) {
@@ -462,7 +462,7 @@ function processAPI(root) {
 				d.push( (hou.api_at_list[j]>6)? f2[hou.api_at_list[j]-7] : f1[hou.api_at_list[j]-1] ); //attacker
 				d.push( (hou.api_df_list[j][0]>6)? f2[hou.api_df_list[j][0]-7] : f1[hou.api_df_list[j][0]-1] ); //target
 				for (var k=0; k<hou.api_damage[j].length; k++) d.push(parseInt(hou.api_damage[j][k])); //damage
-				
+
 				switch(hou.api_at_type[j]) {
 					case 0:
 						if (d[1].issub) {
@@ -482,15 +482,15 @@ function processAPI(root) {
 					case 6:
 						eventqueue.push([shootCutIn,d]); break;
 				}
-				
+
 			}
 		};
-		
+
 		//air phase
 		if (data.api_kouku) processKouku(data.api_kouku);
 		//if air node, second air phase
 		if (data.api_kouku2) processKouku(data.api_kouku2);
-		
+
 		//support phase
 		if (data.api_support_info) {
 			if (data.api_support_info.api_support_hourai) {
@@ -503,26 +503,26 @@ function processAPI(root) {
 				eventqueue.push([GSupportPhase,[[],damages]]);
 			}
 		}
-		
+
 		//opening torp
 		var f = (COMBINED)? fleet1C : fleet1;
 		if (data.api_opening_atack) processRaigeki(data.api_opening_atack,f);
-		
+
 		//shelling 1, 2, 3
 		f = (COMBINED == 1)? fleet1C : fleet1;
 		if (data.api_hougeki1) processHougeki(data.api_hougeki1,f);
 		//CTF does closing torpedo
 		if (COMBINED == 1 && data.api_raigeki) processRaigeki(data.api_raigeki,f);
-		
+
 		if (data.api_hougeki2) processHougeki(data.api_hougeki2,fleet1); //always main fleet
 		f = (COMBINED == 1)? fleet1 : fleet1C;
 		if (COMBINED == 2) eventqueue.push([wait,[1000]]); //short pause between main and escort shelling if STF
 		if (data.api_hougeki3) processHougeki(data.api_hougeki3,f);
-		
+
 		//closing torp (if not CTF)
 		f = (COMBINED)? fleet1C : fleet1;
 		if (COMBINED != 1 && data.api_raigeki) processRaigeki(data.api_raigeki,f);
-		
+
 		//night battle
 		var f1 = (COMBINED)? fleet1C : fleet1;
 		var yasen = (data.api_hougeki)? data : root.battles[b].yasen;
@@ -538,7 +538,7 @@ function processAPI(root) {
 				d.push( (hou.api_at_list[j]>6)? f2[hou.api_at_list[j]-7] : f1[hou.api_at_list[j]-1] ); //attacker
 				d.push( (hou.api_df_list[j][0]>6)? f2[hou.api_df_list[j][0]-7] : f1[hou.api_df_list[j][0]-1] ); //target
 				for (var k=0; k<hou.api_damage[j].length; k++) d.push(parseInt(hou.api_damage[j][k])); //damage
-				
+
 				switch(hou.api_sp_list[j]) {
 					case 0:
 						if (d[0].isCV) eventqueue.push([shootPlane,d]);
@@ -557,11 +557,11 @@ function processAPI(root) {
 						d[2] += d[3];
 						eventqueue.push([shootBigGun,d]); break;
 				}
-				
+
 			}
 		}
 	}
-	
+
 	stage.addChild(shutterTop); stage.addChild(shutterBottom);
 	shutterTop.y = -246; shutterTop.alpha = .25;
 	shutterBottom.y = 456; shutterBottom.alpha = .25;
@@ -576,7 +576,7 @@ function setup() {
 		return;
 	}
 	console.log(code);
-	
+
 	var phases = code.split('~');
 
 	var ships1 = phases[1].split('|');
@@ -590,14 +590,14 @@ function setup() {
 		fleet2.push(createShip(ships2[i].split(','),1,i));
 		stage.addChild(fleet2[i].graphic);
 	}
-	
+
 	var s = phases[0].split(',');
 	GEngage = s[0].replace('B:',''); GAP1 = s[3]; GAP2 = s[4];
 	createDots(dots1,s[1],ships1.length,0);
 	createDots(dots2,s[2],ships2.length,1);
 	var NBonly = parseInt(s[5]);
 	if (NBonly) { stage.removeChild(bg); stage.addChildAt(bg2,0); }
-	
+
 	var HP1 = [];
 	var HP2 = [];
 	var s = phases[1].split('|');
@@ -669,11 +669,11 @@ function setup() {
 	eventqueue.push([battleEnd,[],{e:eventqueue.length,HP1:HP1.slice(),HP2:HP2.slice()}]);
 	// console.log(eventqueue);
 	// ecomplete = true;
-	
+
 	stage.addChild(shutterTop); stage.addChild(shutterBottom);
 	shutterTop.y = -246; shutterTop.alpha = .25;
 	shutterBottom.y = 456; shutterBottom.alpha = .25;
-	
+
 	animate();
 }
 
@@ -693,9 +693,9 @@ var prevtime = Date.now(), currtime = Date.now(), timeelapsed = 0, frameselapsed
 function animate() {
 	if (END) return;
     requestAnimationFrame(animate);
-	
+
 	if (!ALLLOADED) return; //??????
-	
+
 	frameselapsed++;
 	currtime = Date.now();
 	timeelapsed += currtime - prevtime;
@@ -705,19 +705,19 @@ function animate() {
 		frameselapsed = 0;
 	}
 	prevtime = currtime;
-	
+
 	if (PAUSE) return;
-	
+
 	if (ecomplete && e < eventqueue.length) {
 		eventqueue[e][0].apply(null,eventqueue[e][1]);
 		e++;
 		ecomplete = false;
 	}
-	
+
 	for (i=0; i<updates.length; i++) {
 		if( updates[i][0].apply(null,updates[i][1]) ) updates.splice(i,1);
 	}
-	
+
 	for (var i=0; i<timeouts.length; i++) {
 		timeouts[i][1] -= 1000/60;
 		if (timeouts[i][1] <= 0) {
@@ -726,7 +726,7 @@ function animate() {
 			f();
 		}
 	}
-	
+
     renderer.render(stage);
 }
 
@@ -752,7 +752,7 @@ function createNumber(x,y,number) {
 	var ng = new PIXI.Container;
 	number = number.toString();
 	if (number <= 0) {
-		var sprite = getFromPool('Nmiss','_assets/Nmiss.png');
+		var sprite = getFromPool('Nmiss','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/Nmiss.png');
 		sprite.position.set(0);
 		sprite.anchor.set(.5);
 		sprite.vspeed = -2.5; sprite.bounce = 2; //updates.push([moveNumber,[sprite]]);
@@ -761,7 +761,7 @@ function createNumber(x,y,number) {
 		for (i=0; i<number.length; i++) {
 			var j = 0;
 			addTimeout(function(){
-				var sprite = getFromPool('N'+number[j],'_assets/N'+number[j]+'.png');
+				var sprite = getFromPool('N'+number[j],'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/N'+number[j]+'.png');
 				sprite.x = -(number.length-1)*7 + j*14; sprite.y = 0;
 				sprite.anchor.set(.5);
 				sprite.vspeed = -2.5; sprite.bounce = 2; //updates.push([moveNumber,[sprite]]);
@@ -773,7 +773,7 @@ function createNumber(x,y,number) {
 		for (i=0; i<number.length; i++) {
 			var j = 0;
 			addTimeout(function(){
-				var sprite = getFromPool('C'+number[j],'_assets/C'+number[j]+'.png');
+				var sprite = getFromPool('C'+number[j],'https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/C'+number[j]+'.png');
 				sprite.x = -(number.length-1)*7 + j*14;
 				sprite.anchor.set(.5);
 				sprite.y = -5;
@@ -782,7 +782,7 @@ function createNumber(x,y,number) {
 				j++;
 			}, i*100);
 		}
-		var crit = getFromPool('Ccrit','_assets/Ccrit.png');
+		var crit = getFromPool('Ccrit','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/Ccrit.png');
 		crit.x = -10;
 		crit.y = 10;
 		crit.iscrit = true;
@@ -794,7 +794,7 @@ function createNumber(x,y,number) {
 	ng.notpersistent = true;
 	updates.push([moveNumber,[ng]]);
 	stage.addChild(ng);
-	
+
 	// addTimeout(function(){ stage.removeChild(ng); }, 1000);
 }
 
@@ -830,7 +830,7 @@ function moveNumber(numbers) {
 
 function createTorp(ship,target,speed,big) {
 	if (!speed) speed = 4;
-	var torp = (big)? getFromPool('torpedoBig','_assets/493.png') : getFromPool('torpedo','_assets/498.png');
+	var torp = (big)? getFromPool('torpedoBig','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/493.png') : getFromPool('torpedo','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/498.png');
 	torp.pivot.set(0,(big)? 13:8);//torp.pivot.set(281,8);
 	var x1 = (ship.side==1) ? 657 : (ship.escort||target.escort)? 295 : 143;
 	var x2 = (target.side==1) ? 657 : (ship.escort||target.escort)? 295 : 143;
@@ -843,7 +843,7 @@ function createTorp(ship,target,speed,big) {
 	torp.alpha = 0;
 	torp.notpersistent = true;
 	stage.addChildAt(torp,1);
-	
+
 	updates.push([moveTorp,[torp,(ship.side==0) ? speed : -speed]]);
 }
 
@@ -851,7 +851,7 @@ function moveTorp(torp,speed) {
 	torp.x += speed;
 	torp.y += speed*Math.tan(torp.rotation);
 	if (torp.alpha < 1) torp.alpha += .05;
-	
+
 	if ( (speed > 0) ? (torp.x-torp.width > 657) : (torp.x+torp.width < 143) ) {
 		recycle(torp);
 		return true;
@@ -862,7 +862,7 @@ function moveTorp(torp,speed) {
 function shipSetHP(ship,hp) {
 	if (hp > ship.hpmax) hp = ship.hpmax;
 	if (hp < 0) hp = 0;
-	
+
 	if (ship.side==0) { HPnow1 -= ship.hp-hp; setHPBar(1,1-HPnow1/HPtotal1); } //update HP bars
 	else { HPnow2 -= ship.hp-hp; setHPBar(0,1-HPnow2/HPtotal2); }
 
@@ -875,17 +875,17 @@ function shipSetHP(ship,hp) {
 	hpbar.beginFill(c);
 	if (ship.side == 0) hpbar.drawRect(161,3+38*(1-percent),5,38*percent);
 	else hpbar.drawRect(3,3+38*(1-percent),5,38*percent);
-	
+
 	ship.hp = hp;
 	var dtext = ship.graphic.getChildAt(4);
 	dtext.text = hp+'/'+ship.hpmax;  //change text
 	if (ship.side == 1) dtext.x  = -7-dtext.width;
-	
+
 	if (hp <= 0) {
 		if (ship.status != 0) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
 			for (i=0; i<5; i++) ship.graphic.getChildAt(i).filters = [new PIXI.filters.GrayFilter()];
-			var dam = PIXI.Sprite.fromImage('_assets/d389.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d389.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -894,7 +894,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax/4) {
 		if (ship.status != 1) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('_assets/d387.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d387.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -903,7 +903,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax/2) {
 		if (ship.status != 2) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('_assets/d385.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d385.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -912,7 +912,7 @@ function shipSetHP(ship,hp) {
 	} else if (hp <= ship.hpmax*.75) {
 		if (ship.status != 3) {
 			if (ship.status < 4) ship.graphic.removeChildAt(5);
-			var dam = PIXI.Sprite.fromImage('_assets/d383.png'); dam.y += 2;
+			var dam = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/d383.png'); dam.y += 2;
 			ship.graphic.addChild(dam);
 			ship.damg = dam;
 			if (ship.side == 1) ship.graphic.getChildAt(5).x += 10;
@@ -974,7 +974,7 @@ function battleStart(battledata,newships) {
 	GEngage = battledata[0];
 	GAP1 = battledata[3];
 	GAP2 = battledata[4];
-	
+
 	dots1.alpha = dots2.alpha = 0;
 	radar1.scale.set(0); radar2.scale.set(0);
 	updates.push([radarGrow,[radar1]]);
@@ -983,14 +983,14 @@ function battleStart(battledata,newships) {
 	updates.push([dotAppear,[dots2]]);
 
 	addTimeout(function() { showEngage(GEngage); }, 500);
-	
+
 	HPtotal1 = HPtotal2 = 0;
 	for (var i=0; i<fleet1.length; i++) HPtotal1 += fleet1[i].hp;
 	for (var i=0; i<fleet1C.length; i++) HPtotal1 += fleet1C[i].hp;
 	for (var i=0; i<fleet2.length; i++) HPtotal2 += fleet2[i].hp;
 	HPnow1 = HPtotal1; HPnow2 = HPtotal2;
 	clearHPBar(0); clearHPBar(1);
-	
+
 	var j = 0;
 	for (var i=0; i<fleet1.length; i++) {
 		addTimeout(function(){
@@ -1014,7 +1014,7 @@ function battleStart(battledata,newships) {
 			},1000+100*i);
 		}
 	}
-	
+
 	addTimeout(function(){ ecomplete = true; }, 2500);
 }
 
@@ -1025,7 +1025,7 @@ function shipEscortEnter(ship,targety) {
 		ship.graphic.y -= (ship.graphic.y - targety) * .1;
 		if (ship.graphic.y - targety < 1) ship.graphic.y = targety;
 	}
-	
+
 	return (ship.graphic.y - targety <= 1);
 }
 
@@ -1097,12 +1097,12 @@ function shootDA(ship,target,damage1,damage2) {
 
 function shootPlane(ship,target,damage) {
 	var planes = createPlane(ship.graphic.x+85,ship.graphic.y+22,ship.planetypes);
-	
+
 	var angle = Math.atan((ship.graphic.y-target.graphic.y)/(ship.graphic.x-target.graphic.x));
 	updates.push([movePlane,[planes,angle,(ship.side==0) ? 5 : -5, (ship.escort||target.escort)]]);
-	
+
 	addTimeout(function(){ standardHit(target,damage); }, (ship.escort||target.escort)? 1600 : 2200);
-	
+
 	addTimeout(function(){stage.removeChild(planes); ecomplete=true;},3000);
 }
 
@@ -1166,7 +1166,7 @@ function shootTorp(ship,target,damage) {
 	shipShake(ship,2,0,600);
 	addTimeout(function(){ createTorp(ship,target,6); }, 500);
 	addTimeout(function(){ standardHit(target,damage); },1900);
-	
+
 	addTimeout(function(){ ecomplete = true; }, 2600);
 }
 
@@ -1174,18 +1174,18 @@ function shootBigTorp(ship,target,damage) {
 	shipShake(ship,2,0,600);
 	addTimeout(function(){ createTorp(ship,target,12,true); }, 500);
 	addTimeout(function(){ standardHit(target,damage); },1300);
-	
+
 	addTimeout(function(){ ecomplete = true; }, 2200);
 }
 
 var PLANESPRITES = ['938','914','916','918','920','922','924','926'];
 function createPlane(x,y,planetypes,shots) {
 	var num = Math.min(3,planetypes.length);
-	
+
 	var planes = new PIXI.Container();
 	if (num == 3) {
 		for (var i=0; i<3; i++) {
-			var plane = PIXI.Sprite.fromImage('_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
+			var plane = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
 			plane.x = i*25-25;
 			plane.y = (i==1) ? -15 : 15;
 			plane.scale.set(.8);
@@ -1194,7 +1194,7 @@ function createPlane(x,y,planetypes,shots) {
 		}
 	} else if (num == 2) {
 		for (var i=0; i<2; i++) {
-			var plane = PIXI.Sprite.fromImage('_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
+			var plane = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+PLANESPRITES[planetypes[i]-1]+'.png');
 			plane.x = i*30-15;
 			plane.y = (i==1) ? -15 : 15;
 			plane.scale.set(.8);
@@ -1202,7 +1202,7 @@ function createPlane(x,y,planetypes,shots) {
 			if (shots) plane.shot = shots[i];
 		}
 	} else if (num == 1) {
-		var plane = PIXI.Sprite.fromImage('_assets/'+PLANESPRITES[planetypes[0]-1]+'.png');
+		var plane = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/'+PLANESPRITES[planetypes[0]-1]+'.png');
 		plane.scale.set(.8);
 		planes.addChild(plane);
 		if (shots) plane.shot = shots[0];
@@ -1231,7 +1231,7 @@ function movePlane(planes,angle,speed,withescort) {
 			planes.removeChild(plane);
 		}
 	}
-	
+
 	return (speed > 0) ? (planes.x > 900) : (planes.x < -100);
 }
 
@@ -1248,7 +1248,7 @@ function GTorpedoPhase(shots) {
 			j++;
 		}, 500);
 	}
-	
+
 	var k = 0;
 	for (i=0; i<targets.length; i++) {
 		addTimeout(function(){
@@ -1256,7 +1256,7 @@ function GTorpedoPhase(shots) {
 			k++;
 		},(COMBINED)? 2600 : 2700);
 	}
-	
+
 	addTimeout(function(){ ecomplete = true; }, 4000);
 }
 
@@ -1277,7 +1277,7 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 		}
 		// if (defender && defenders.indexOf(defender) == -1) defenders.push(defender);  //decide what to do with defenders, show them shooting or those with AA equips shooting?
 	}
-	
+
 	for (var i=0; i<attackers.length; i++) {
 		var ship = attackers[i];
 		var planes = createPlane(ship.graphic.x+85,ship.graphic.y+22,ship.planetypes,statuses[i]);
@@ -1287,9 +1287,9 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 		}
 		allplanes.push(planes);
 	}
-	
+
 	if (aaci1 > -1 || aaci2 > -1) {  //AACI freeze
-		addTimeout(function() {  
+		addTimeout(function() {
 			var temp = [updates.slice(),timeouts.slice()];
 			updates = [];
 			timeouts = [];
@@ -1315,7 +1315,7 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 			}
 		},800);
 	}
-	
+
 	addTimeout(function() {
 		for (var i=0; i<defenders.length; i++) {
 			createAAfire(defenders[i].graphic.position.x+70,defenders[i].graphic.position.y+15,(defenders[i].side==0)? Math.PI/6 : 5*Math.PI/6);
@@ -1328,7 +1328,7 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 		}
 		if (AS1 && AS2) showAS(AS1,AS2);
 	}, 900);
-	
+
 	var k = 0;
 	for (var i=0; i<targets.length; i++) {
 		addTimeout(function(){
@@ -1336,12 +1336,12 @@ function GAirPhase(shots,aaci1,aaci2,contact1,contact2,AS1,AS2) {
 			k++;
 		},2700);
 	}
-	
+
 	addTimeout(function(){ for(var i=0; i<allplanes.length; i++) stage.removeChild(allplanes[i]); ecomplete = true; }, 3700);
 }
 
 function createAAfire(x,y,angle) {
-	var fire = PIXI.Sprite.fromImage('_assets/216.png');
+	var fire = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/216.png');
 	fire.pivot.y = 5;
 	fire.position.set(x,y);
 	fire.rotation = -angle+Math.PI;
@@ -1356,14 +1356,14 @@ function createAAfire(x,y,angle) {
 	stage.addChild(msk);
 	fire.notpersistent = true;
 	stage.addChild(fire);
-	
+
 	updates.push([moveAAfire,[fire,angle]]);
 }
 
 function moveAAfire(fire,angle) {
 	fire.x += Math.cos(angle)*15;
 	fire.y -= Math.sin(angle)*15;
-	
+
 	if (fire.x < 0 || fire.x > 1000) {
 		stage.removeChild(fire);
 		return true;
@@ -1372,8 +1372,8 @@ function moveAAfire(fire,angle) {
 }
 
 function createAACIfire(x,y) {
-	var firefront = PIXI.Sprite.fromImage('_assets/aaci1.png');
-	var fireback = PIXI.Sprite.fromImage('_assets/aaci2.png');
+	var firefront = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/aaci1.png');
+	var fireback = PIXI.Sprite.fromImage('https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/aaci2.png');
 	firefront.position.set(x,y);
 	fireback.position.set(x,y);
 	firefront.pivot.set(178,322);
@@ -1382,7 +1382,7 @@ function createAACIfire(x,y) {
 	fireback.scale.set(0);
 	firefront.rotation = -Math.PI/4;
 	fireback.rotation = -Math.PI/4;
-	 
+
 	updates.push([moveAACIfire,[firefront,.1]]);
 	addTimeout(function() { updates.push([moveAACIfire,[fireback,.025]]); }, 100);
 	firefront.notpersistent = true;
@@ -1390,14 +1390,14 @@ function createAACIfire(x,y) {
 	stage.addChild(fireback);
 	stage.addChild(firefront);
 }
- 
+
 function moveAACIfire(fire,fade) {
 	if (fire.scale.x < .8) fire.scale.set(fire.scale.x+.05);
 	else {
 		fire.alpha -= fade;
 		fire.scale.set(fire.scale.x+.01);
 	}
-	 
+
 	if (fire.alpha <= 0) {
 		stage.removeChild(fire);
 		return true;
@@ -1412,18 +1412,18 @@ function GSupportPhase(ships,damages) {
 			createSupportShell(200,-20,Math.PI*(.15+.1*Math.random()));
 		}, 100+i*50);
 	}
-	
+
 	addTimeout(function() {
 		for (var i=0; i<damages.length; i++) {
 			standardHit(fleet2[i],damages[i]);
 		}
 	}, 1000);
-	
+
 	addTimeout(function() { ecomplete = true; }, 2000);
 }
 
 function createSupportShell(x,y,angle) {
-	var shell = getFromPool('supportShell','_assets/488.png');
+	var shell = getFromPool('supportShell','https://dl.dropboxusercontent.com/u/79056688/kcbattleplayer/_assets/488.png');
 	shell.alpha = 1;
 	shell.scale.set(.5);
 	shell.position.set(x,y);
@@ -1495,17 +1495,17 @@ function shuttersNextBattle(battledata, newships) {
 		// var ind = stage.children.indexOf(fleet2[0].graphic);
 		// console.log(ind);
 		for (var i=0; i<fleet2.length; i++) stage.removeChild(fleet2[i].graphic);
-		
+
 		dots1.removeChildren(); dots2.removeChildren();
 		dots1.alpha = dots2.alpha = 0;
 		radar1.scale.set(0); radar2.scale.set(0);
-		
+
 		$('#plEngage').text('');
 		$('#plEngageT').text('');
 		$('#plAS1').text('');
 		$('#plAS2').text('');
 		if (battledata[5]=='1') { stage.removeChild(bg); stage.addChildAt(bg2,0); } //must be done ahead of time if shutters going up
-		
+
 		updates.push([openShutters,[]]);
 	},1000);
 	addTimeout(function(){ ecomplete = true; }, 1500);
@@ -1521,7 +1521,7 @@ function shutters() {
 		stage.addChildAt(bg2,0);
 		updates.push([openShutters,[]]);
 	},1000);
-	
+
 	addTimeout(function(){ ecomplete = true; }, 2000);
 }
 
@@ -1624,15 +1624,15 @@ function showAS(AS1,AS2) {
 	$('#plAS1').css('opacity','0');
 	$('#plAS2').text(['AD','AI','AP','AS','AS+'][AS2+2]);
 	$('#plAS2').css('opacity','0');
-	
+
 	if (AS1 > 0) $('#plAS1').css('color','green');
 	else if (AS1 < 0) $('#plAS1').css('color','red');
 	else $('#plAS1').css('color','black');
-	
+
 	if (AS2 > 0) $('#plAS2').css('color','green');
 	else if (AS2 < 0) $('#plAS2').css('color','red');
 	else $('#plAS2').css('color','black');
-	
+
 	var pid = setInterval(function() {
         var alph = parseFloat($('#plAS1').css('opacity'));
         if (alph >= 1) { clearInterval(pid); return; }
@@ -1649,7 +1649,7 @@ function showEngage(engage) {
 	switch(parseFloat(engage)) {
 		case 1:
 			txt = 'Parallel'; break;
-		case 0.8: 
+		case 0.8:
 		case 2:
 			txt = 'Head-on'; break;
 		case 0.6:
@@ -1708,7 +1708,7 @@ function clickedBack() {
 		ecomplete = true;
 		// addTimeout(function() { ecomplete = true; }, 100);
 		PAUSE = false;
-		
+
 		for (var i=0; i<stage.children.length; i++) {
 			if (stage.getChildAt(i).notpersistent) { recycle(stage.getChildAt(i)); i--; }
 		}
@@ -1721,7 +1721,7 @@ function clickedBack() {
 			fleet2[i].graphic.x = fleet2[i].xorigin;
 			if (fleet2[i].shakepid) clearInterval(fleet2[i].shakepid);
 		}
-		
+
 		if (END) { END = false; animate(); }
 	}, 100);
 }
@@ -1737,8 +1737,8 @@ function loadCode(fromOwn) {
 	CANRESET = false;
 	$('#error').text('Loading');
 	setTimeout(function() {
-		try { 
-			// setup(); 
+		try {
+			// setup();
 			if (!fromOwn) API = JSON.parse(document.getElementById("code").value);
 			processAPI(API);
 		} catch(e) {
@@ -1751,8 +1751,8 @@ function loadCode(fromOwn) {
 		started = true;
 		CANRESET = true;
 	}, 600);
-	
-	
+
+
 }
 
 
