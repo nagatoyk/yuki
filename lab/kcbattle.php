@@ -11,7 +11,7 @@
 	<script src="file/js/steganography.js"></script>
 	<script>
 		$(function(){
-			$('#code').val(APIsample);
+			$('#code').val(APIsample2);
 			loadCode();
 		});
 		var previewFile = function() {
