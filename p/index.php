@@ -5,7 +5,7 @@ require '../r/saetv2.ex.class.php';
 require '../r/Mysql.class.php';
 $o = new SaeTOAuthV2($wb_id, $wb_key);
 if(isset($_GET['login'])){
-	$url = $o->getAuthorizeURL('https://yuki-yukimax.rhcloud.com/p/login.php');
+	$url = $o->getAuthorizeURL('http://kloli.tk/p/login.php');
 	header('Location: '.$url);
 	exit();
 }
