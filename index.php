@@ -21,6 +21,7 @@ if(!empty($_POST['submit'])){
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>准备中....</title>
 </head>
 <body>
