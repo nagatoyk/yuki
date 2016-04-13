@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+header('Content-type: text/html; charset=utf-8');
 require 'r/fun.php';
 require 'r/saetv2.ex.class.php';
 
