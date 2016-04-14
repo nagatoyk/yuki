@@ -48,15 +48,15 @@ foreach(glob('./data/*') as $filename){
 }
 echo '</p><p>';
 function globfile($dir){
-	// is_dir($dir) || return false;
-	foreach(glob($dir.'{,.}*', GLOB_BRACE) as $filename){
-		if(is_dir($filename)){
-			globfile($filename);
-		}else{
-			$list[] = $filename;
+	$dir .= substr($dir, -1) == '/' ? '' : '/';
+	$dirInfo = array();
+	foreach(glob($dir.'*') as $v){
+		$dirInfo[] = $v;
+		if(is_dir($v)){
+			$dirInfo = array_merge($dirInfo, globfile($v));
 		}
 	}
-	return $list;
+	return $dirInfo;
 }
 $list = globfile('./files/images');
 print_r($list);
