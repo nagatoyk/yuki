@@ -43,11 +43,11 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
 echo '</p><p>';
-foreach(glob('./data/*.*') as $filename){
+foreach(glob('./data/*') as $filename){
 	echo $filename.'</p><p>';
 }
 echo '</p><p>';
-foreach(glob('./files/images/*.*') as $filename){
+foreach(glob('./files/images/*') as $filename){
 	echo $filename.'</p><p>';
 }
 echo '</p><p>';
