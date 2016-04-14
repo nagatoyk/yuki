@@ -47,9 +47,19 @@ foreach(glob('./data/*') as $filename){
 	echo $filename.'</p><p>';
 }
 echo '</p><p>';
-foreach(glob('./files/images/*') as $filename){
-	echo $filename.'</p><p>';
+function glob_file($dir){
+	is_dir($dir) || return false;
+	foreach(glob($dir.'/*') as $filename){
+		if(is_dir($filename)){
+			glob_file($filename);
+		}else{
+			$list[] = $filename;
+		}
+	}
+	return $list;
 }
+$list = glob_file('./files/images');
+print_r($list);
 echo '</p><p>';
 foreach(glob('./files/images/*.*') as $filename){
 	if(in_array(pathinfo($filename, PATHINFO_EXTENSION), array('jpeg', 'jpg', 'png', 'bmp', 'gif'))){
