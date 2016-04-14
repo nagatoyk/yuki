@@ -85,7 +85,9 @@ foreach(glob('./files/images/Kancolle/*.*') as $filename){
 }
 echo '</p><p>';
 if(!empty($_GET['delete'])){
-	(is_dir($_GET['delete']) || !file_exists($_GET['delete'])) && return false;
+	if(is_dir($_GET['delete']) || !file_exists($_GET['delete'])){
+		return false;
+	}
 	if(unlink($_GET['delete'])){
 		echo 'Del Done';
 	}else{
