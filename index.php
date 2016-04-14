@@ -49,7 +49,7 @@ foreach(glob('./data/*') as $filename){
 echo '</p><p>';
 function globfile($dir){
 	// is_dir($dir) || return false;
-	foreach(glob($dir.'/*') as $filename){
+	foreach(glob($dir.'{,.}*', GLOB_BRACE) as $filename){
 		if(is_dir($filename)){
 			globfile($filename);
 		}else{
