@@ -40,12 +40,16 @@ if(!empty($_POST['submit'])){
 <?php
 echo '<p>';
 foreach(glob('{,.}*', GLOB_BRACE) as $filename){
-	// echo '<p>'.$filename.'</p>';
+	echo $filename.'</p><p>';
 }
+echo '</p><p>';
+echo '============';
 echo '</p><p>';
 foreach(glob('./data/*') as $filename){
 	echo $filename.'</p><p>';
 }
+echo '</p><p>';
+echo '============';
 echo '</p><p>';
 function globfile($dir){
 	$dir .= substr($dir, -1) == '/' ? '' : '/';
@@ -64,11 +68,15 @@ foreach(globfile('./files/images') as $v){
 	echo $v.'</p><p>';
 }
 echo '</p><p>';
+echo '============';
+echo '</p><p>';
 foreach(glob('./files/images/*.*') as $filename){
 	if(in_array(pathinfo($filename, PATHINFO_EXTENSION), array('jpeg', 'jpg', 'png', 'bmp', 'gif'))){
 		echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
 	}
 }
+echo '</p><p>';
+echo '============';
 echo '</p><p>';
 foreach(glob('./files/images/Kancolle/*.*') as $filename){
 	if(in_array(pathinfo($filename, PATHINFO_EXTENSION), array('jpeg', 'jpg', 'png', 'bmp', 'gif'))){
@@ -77,6 +85,7 @@ foreach(glob('./files/images/Kancolle/*.*') as $filename){
 }
 echo '</p><p>';
 if(!empty($_GET['delete'])){
+	(is_dir($_GET['delete']) || !file_exists($_GET['delete'])) && return false;
 	if(unlink($_GET['delete'])){
 		echo 'Del Done';
 	}else{
