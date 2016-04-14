@@ -45,12 +45,6 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 echo '</p><p>';
 echo '============';
 echo '</p><p>';
-foreach(glob('./data/*') as $filename){
-	echo $filename.'</p><p>';
-}
-echo '</p><p>';
-echo '============';
-echo '</p><p>';
 function globfile($dir){
 	$dir .= substr($dir, -1) == '/' ? '' : '/';
 	$dirInfo = array();
@@ -62,8 +56,12 @@ function globfile($dir){
 	}
 	return $dirInfo;
 }
-// $list = globfile('./files/images');
-// print_r($list);
+foreach(globfile('./data') as $v){
+	echo $v.'</p><p>';
+}
+echo '</p><p>';
+echo '============';
+echo '</p><p>';
 foreach(globfile('./files/images') as $v){
 	echo $v.'</p><p>';
 }
