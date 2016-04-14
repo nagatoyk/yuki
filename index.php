@@ -43,6 +43,10 @@ foreach(glob('{,.}*', GLOB_BRACE) as $filename){
 	// echo '<p>'.$filename.'</p>';
 }
 echo '</p><p>';
+foreach(glob('./data/*.*') as $filename){
+	echo $filename.'</p><p>';
+}
+echo '</p><p>';
 foreach(glob('./files/images/*.*') as $filename){
 	if(in_array(pathinfo($filename, PATHINFO_EXTENSION), array('jpeg', 'jpg', 'png', 'bmp', 'gif'))){
 		echo '<a href="/'.$filename.'" target="_blank"><img src="'.$filename.'" width="300px" height="auto"></a> -- <a href="?delete='.$filename.'">删除</a>';
