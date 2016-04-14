@@ -58,8 +58,11 @@ function globfile($dir){
 	}
 	return $dirInfo;
 }
-$list = globfile('./files/images');
-print_r($list);
+// $list = globfile('./files/images');
+// print_r($list);
+foreach(globfile('./files/images') as $v){
+	echo $v.'</p><p>';
+}
 echo '</p><p>';
 foreach(glob('./files/images/*.*') as $filename){
 	if(in_array(pathinfo($filename, PATHINFO_EXTENSION), array('jpeg', 'jpg', 'png', 'bmp', 'gif'))){
