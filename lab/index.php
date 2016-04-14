@@ -11,7 +11,7 @@ if(empty($_POST['url'])){
 	}elseif(!empty($_GET['code'])){
 		$user = array();
 		try{
-			$user['token'] = $o->getAccessToken('code', array('code'=>$_GET['code'], 'redirect_uri'=>$_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.($_SERVER['HTTP_HOST'].'/lab/callback.php'));
+			$user['token'] = $o->getAccessToken('code', array('code'=>$_GET['code'], 'redirect_uri'=>$_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.$_SERVER['HTTP_HOST'].'/lab/callback.php'));
 		}catch(OAuthException $e){
 			header('Location: index.php');
 			exit();
