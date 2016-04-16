@@ -130,9 +130,9 @@ class SaeMysql{
 			$user=MYSQL_USERNAME;
 			$pwd=MYSQL_PASSWORD;
 		}else{
-			$dbname='imouto';
-			$user='root';
-			$pwd='root';
+			$dbname='yuki';
+			$user='adminLhHI8F8';
+			$pwd='CB3dA4rmTtKQ';
 		}
 
 		$db=mysql_connect($host,$user,$pwd,true);
