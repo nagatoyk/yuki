@@ -4,6 +4,9 @@ $out = array();
 if($_GET['a'] == 'radio'){
 	$url .= '&perpage=3';
 	$json = json_decode(file_get_contents($url));
+	echo '<pre>';
+	print_r($json);
+	echo '</pre>';
 	$data = $json['response']['playlist'];
 	foreach($data as $key => $val){
 		$out[] = array(
