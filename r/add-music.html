@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>添加音乐</title>
+<link rel="stylesheet" href="../i/i.css">
+
+<link rel="stylesheet" href="../i/md/md.css">
+<link rel="stylesheet" href="r.css">
+
+<ul class="header">
+	<li><a href="/" target="_blank">前台</a></li>
+	<li><a href="add-music.html" class="a">添加音乐</a></li>
+	<li><a href="add-post.html">写文章</a></li>
+	<li><a href="index.html">管理文章</a></li>
+</ul>
+<form action="x.php?a=am" method="post"><!--autocomplete="off"-->
+	<div class="enbox">
+		<div class="entry">
+			<div class="em"><input class="text" name="url" placeholder="专辑链接"></div>
+		</div>
+	</div>
+	<div class="entype">
+		<div class="em"><button class="text b" type="submit">确认添加</button></div>
+	</div>
+</form>
+
+
+<script src="../inf.js"></script>
+<script src="../i/itorr.m.js"></script>
+
+<script>
+
+var F = $('form'),
+box = $('.entry'),
+In = $('input[name="url"]');
+$.onsubmit(F, function(r) {
+	if (r.error)
+		return alert(r.error);
+	if (r.albumid) {
+		console.log(r);
+		alert('添加' + r.albumid + '成功');
+		setTimeout(function() {
+			window.location.reload();
+		}, 500);
+	}
+});
+In.onfocus = function() {
+	this.value = '';
+};
+$.x('x.php?a=gm', function(r) {
+	console.log(r);
+	h = '<div class="em"><table style="width:100%">';
+	for(i in r)
+		// h += '<div class="em"><input class="text" name="info" value="' + r[i].albumid + '|' + r[i].title + '|' + r[i].artist + '|' + r[i].cover + '" readonly></div>'
+		h += '<tr><td><img src="http://img.xiami.net/images/album/' + r[i].cover + '"></td><td style="text-algin:centent"><a href="http://www.xiami.com/album/' + r[i].albumid + '">' + r[i].title + ' - ' + r[i].artist + '</td></tr>';
+	box.innerHTML = box.innerHTML + h + '</table></div>';
+});
+</script>
