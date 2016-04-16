@@ -253,7 +253,7 @@ fm=function(win,doc){
 			if(_img.complete)
 				setTimeout(_img.onload,10);
 
-			if(win.dm)
+			if(win.dm && fm.rid != 12)
 				dm.load(M.xid);
 
 			if(win.lrc && fm.rid != 12)
@@ -261,7 +261,7 @@ fm=function(win,doc){
 
 
 			/*判断当前是否喜欢这首曲子*/
-			if(win.U)
+			if(win.U && fm.rid != 12)
 				U.iflike(M.xid,function(r){
 					$('#like').className=r?'a':'';
 				});
