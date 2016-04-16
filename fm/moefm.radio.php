@@ -21,6 +21,7 @@ if($_GET['a'] == 'radio'){
 }elseif($_GET['a'] == 'song'){
 	$url .= '&song='.(int)$_GET['id'];
 	$json = json_decode(file_get_contents($url));
+	$data = $json['response']['playlist'][0];
 	$out[] = array(
 		'xid' => $data['sub_id'],
 		'title'=>htmlspecialchars_decode($data['sub_title'], ENT_QUOTES),
