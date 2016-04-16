@@ -293,7 +293,7 @@ fm=function(win,doc){
 			if(list[i]){
 				f(list[i]);
 			}else
-				x('x/?a=song&id='+i+'&_r='+Math.random(),function(r){
+				x((fm.rid==12?'moefm.radio.php':'x/')+'?a=song&id='+i+'&_r='+Math.random(),function(r){
 					if(r.error){
 						alert(r.error);
 						return add();
