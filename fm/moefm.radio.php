@@ -1,12 +1,10 @@
 <?php
+header('Content-type: application/json;charset=utf-8');
 $url = 'http://moe.fm/listen/playlist?api=json&api_key=18f95c02504fb5a0fdd83b205e7e1aee05421a58b&_='.time();
 $out = array();
 if($_GET['a'] == 'radio'){
 	$url .= '&perpage=3';
 	$json = json_decode(file_get_contents($url), true);
-	echo '<pre>';
-	print_r($json);
-	echo '</pre>';
 	$data = $json['response']['playlist'];
 	foreach($data as $key => $val){
 		$out[] = array(
@@ -37,5 +35,4 @@ if($_GET['a'] == 'radio'){
 		'play'=>1
 	);
 }
-header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);

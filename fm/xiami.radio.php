@@ -1,4 +1,5 @@
 <?php
+header('Content-type: application/json;charset=utf-8');
 $out = array();
 require '../getid3/getid3.php';
 function getTime($url){
@@ -90,5 +91,4 @@ if($_GET['a'] == 'radio'){
 		);
 	}
 }
-header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
