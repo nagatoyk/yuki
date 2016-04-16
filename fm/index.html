@@ -186,7 +186,7 @@ fm=function(win,doc){
 		return _n
 	},
 	add=function(i){
-		x((fm.rid>10?'xiami.radio.php':'x/')+'?a=radio&rid='+fm.rid+'&_r='+Math.random(),function(r){
+		x((fm.rid==11?'xiami.radio.php':fm.rid==12?'moefm.radio.php':'x/')+'?a=radio&rid='+fm.rid+'&_r='+Math.random(),function(r){
 			for(var l=r.length,i=0;i<l;i++){
 				//list=list.concat(r);
 				list[r[i].xid]=r[i];

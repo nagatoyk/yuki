@@ -3,7 +3,7 @@ $url = 'http://moe.fm/listen/playlist?api=json&api_key=18f95c02504fb5a0fdd83b205
 $out = array();
 if($_GET['a'] == 'radio'){
 	$url .= '&perpage=3';
-	$json = json_decode(file_get_contents($url));
+	$json = json_decode(file_get_contents($url), true);
 	echo '<pre>';
 	print_r($json);
 	echo '</pre>';
@@ -23,7 +23,7 @@ if($_GET['a'] == 'radio'){
 	}
 }elseif($_GET['a'] == 'song'){
 	$url .= '&song='.(int)$_GET['id'];
-	$json = json_decode(file_get_contents($url));
+	$json = json_decode(file_get_contents($url), true);
 	$data = $json['response']['playlist'][0];
 	$out[] = array(
 		'xid' => $data['sub_id'],
