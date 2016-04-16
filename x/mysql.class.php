@@ -125,14 +125,15 @@ class SaeMysql{
 
 	private function connect(){
 		$host='localhost';
-		if(defined('MYSQL_DATABASE')){
-			$dbname=MYSQL_DATABASE;
-			$user=MYSQL_USERNAME;
-			$pwd=MYSQL_PASSWORD;
+		if(getenv('OPENSHIFT_APP_NAME')){
+			$host = getenv('OPENSHIFT_MYSQL_DB_HOST').':'.getenv('OPENSHIFT_MYSQL_DB_PORT');
+			$dbname = getenv('OPENSHIFT_APP_NAME');
+			$user = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+			$pwd = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 		}else{
-			$dbname='yuki';
-			$user='adminLhHI8F8';
-			$pwd='CB3dA4rmTtKQ';
+			$dbname='imouto';
+			$user='root';
+			$pwd='root';
 		}
 
 		$db=mysql_connect($host,$user,$pwd,true);
