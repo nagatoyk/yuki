@@ -15,7 +15,7 @@ foreach(array(
 	$r[$key]=$_POST[$key];
 }
 
-$p=$sql->getLine('SELECT pid FROM tp_post WHERE pid='.$_POST['pid']);
+$p=$sql->getLine('SELECT pid FROM imouto_article WHERE pid='.$_POST['pid']);
 if(!isset($p['pid']))
 	err('您评论的文章不存在！');
 
@@ -35,7 +35,7 @@ foreach($r as $i=>$p){
 	$w[]=is_string($p)?addslashes($p):$p;
 }
 
-$sql->runSql('INSERT INTO tp_comments ('.implode(',',$n).') VALUES (\''.implode('\',\'',$w).'\');');
+$sql->runSql('INSERT INTO imouto_comments ('.implode(',',$n).') VALUES (\''.implode('\',\'',$w).'\');');
 
 //exit();
 

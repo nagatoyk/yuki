@@ -28,7 +28,7 @@ if(!isset($_POST['pid'])||!preg_match('/^[0-9]{1,15}$/',$_POST['pid']))
 $pid=$_POST['pid'];
 unset($_POST['pid']);
 
-$p=$sql->getLine('SELECT pid FROM tp_post WHERE pid='.$pid);
+$p=$sql->getLine('SELECT pid FROM imouto_article WHERE pid='.$pid);
 
 if(!isset($p['pid']))
 	err('您要修改的文章不存在');
@@ -42,6 +42,6 @@ foreach($_POST as $i=>$p){
 	$n[]=$i.'=\''.(is_string($p)?$sql->escape($p):$p).'\'';
 }
 
-$sql->runSql('UPDATE tp_post SET '.implode(',',$n).' WHERE pid='.$pid);
+$sql->runSql('UPDATE imouto_article SET '.implode(',',$n).' WHERE pid='.$pid);
 
 $r['pid']=$pid;

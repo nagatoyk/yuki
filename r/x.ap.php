@@ -30,7 +30,7 @@ foreach($_POST as $i=>$p){
 	$n[]=$i;
 	$w[]=is_string($p)?$sql->escape($p):$p;
 }
-$sql->runSql('INSERT INTO tp_post ('.implode(',',$n).') VALUES (\''.implode('\',\'',$w).'\');');
+$sql->runSql('INSERT INTO imouto_article ('.implode(',',$n).') VALUES (\''.implode('\',\'',$w).'\');');
 
 
 $r=array(

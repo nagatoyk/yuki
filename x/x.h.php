@@ -22,7 +22,7 @@ $w=implode(' && ',$w);
 if($w)
 	$w=' WHERE '.$w;
 
-$r=$sql->getData('SELECT * FROM tp_post'.$w.' ORDER BY created DESC LIMIT 0,'.$n);
+$r=$sql->getData('SELECT * FROM imouto_article'.$w.' ORDER BY created DESC LIMIT 0,'.$n);
 
 if($r)
 	$r=array_map(function($o){
