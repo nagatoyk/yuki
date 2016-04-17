@@ -80,7 +80,7 @@ $pmax = ceil($dmax['max'] / $size);
 		</th>
 	</tr>
 </table>
-<script src="//yukimax.sinaapp.com/f/iTorr.js"></script>
+<script src="/i/itorr.m.js"></script>
 <script>
 var addUrl = function(ele) {
 	console.log(ele);
