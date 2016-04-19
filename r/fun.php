@@ -11,5 +11,8 @@ class KV{
 		$f = '../data/'.$k.'.json';
 		return file_exists($f) ? json_decode(file_get_contents($f), true) : null;
 	}
+	public function delete($filename){
+		return file_exists($filename) ? unlink($filename) : false;
+	}
 }
 $kv = new KV();
