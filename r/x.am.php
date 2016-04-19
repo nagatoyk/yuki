@@ -19,6 +19,8 @@ function getLen($id){
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
 // $f = new SaeFetchurl();
 // $file = $f->fetch($u[0]);
+echo $u[0];
+exit();
 $file = file_get_contents($u[0]);
 preg_match_all('/<(table)[^>]*class="track_list">(.*?)<\/\\1>/is', $file, $tbody);
 
