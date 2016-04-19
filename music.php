@@ -1,17 +1,16 @@
 <?php
-$kv = new SaeKV();
-$kv->init();
-$sql = new SaeMysql();
-$kv->delete('music_xiami_list');
-$r = json_decode($kv->get('music_xiami_list'), true);
+require 'r/fun.php';
+require 'x/Mysql.class.php';
+$r = $kv->get('music_xiami_list');
 if(!$r){
 	$arr = array();
-	$data = $sql->getData('SELECT `albumid`,`title`,`artist`,`cover`,`list` FROM `wb_music` ORDER BY `albumid` DESC');
+	$data = $sql->getData('SELECT `albumId`,`title`,`artist`,`cover`,`list` FROM `music_list` ORDER BY `albumId` DESC');
 	if($data){
 		foreach($data as $k => $v){
-			$list = json_decode($v['list'], true);
+			$list = unserialize($v['list']);
+			// $list = json_decode($v['list'], true);
 			if(count($list) > 0){
-				$arr[$v['albumid']] = array(
+				$arr[$v['albumId']] = array(
 					$v['title'],
 					$v['artist'],
 					$v['cover'],
@@ -20,7 +19,7 @@ if(!$r){
 			}
 		}
 	}
-	$kv->set('music_xiami_list', json_encode($arr));
+	$kv->set('music_xiami_list', $arr);
 	$r = $arr;
 }
 header('Content-type: application/json');
