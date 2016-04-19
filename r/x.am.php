@@ -19,12 +19,13 @@ function getLen($id){
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
 // $f = new SaeFetchurl();
 // $file = $f->fetch($u[0]);
-echo $u[0];
-exit();
 $file = file_get_contents($u[0]);
 preg_match_all('/<(table)[^>]*class="track_list">(.*?)<\/\\1>/is', $file, $tbody);
 
-preg_match_all('/<td[^>]*class="song_name">[^>]*<a[^>]*href="\/song\/([0-9]{5,12})"/is', $tbody[2][0], $data);
+preg_match_all('/<td[^>]*class="song_name">[^>]*<a[^>]*href="\/song\/([\d]+)"/is', $tbody[2][0], $data);
+
+print_r($data);
+exit();
 
 preg_match_all('/<img[^>]*class="cdCover185"[^>]*src="http\:\/\/img\.xiami\.net\/images\/album\/(img[0-9\/_]{1,}\.(jpg|png|bmp|gif))"[^>]*alt="(.*?)"\/>/', $file, $cover);
 
