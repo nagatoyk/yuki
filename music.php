@@ -1,6 +1,6 @@
 <?php
 require 'r/fun.php';
-require 'x/Mysql.class.php';
+require 'x/mysql.class.php';
 $r = $kv->get('music_xiami_list');
 if(!$r){
 	$arr = array();
