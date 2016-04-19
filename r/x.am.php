@@ -17,13 +17,13 @@ function getLen($id){
 }
 
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
-print_r($u);
 // $f = new SaeFetchurl();
 // $file = $f->fetch($u[0]);
-$file = file_get_contents($u[0]);
-preg_match_all('/<(table)[^>]*class="track_list">(.*?)<\/\\1>/is', $file, $tbody);
-
-preg_match_all('/<td[^>]*class="song_name">[^>]*<a[^>]*href="\/song\/([\d]+)"/is', $tbody[2][0], $data);
+$url = 'http://www.xiami.com/web/album/id/'.$u[1];
+$file = file_get_contents($url);
+preg_match_all('/<(div)[^>]*class="s_list">(.*?)<\/\\1>/is', $file, $tbody);
+print_r($tbody);
+preg_match_all('/<li><a[^>]*href="\/song\/([0-9]{5,12})"/is', $tbody[2][0], $data);
 
 exit();
 
