@@ -12,6 +12,7 @@ if(defined('SAE_MYSQL_DB')){
 	$kv=new SaeKV();
 	$kv->init();
 }else
+	require 'fun.php';
 	require '../x/mysql.class.php';
 
 $r=array();
