@@ -51,7 +51,7 @@ $.x('x.php?a=gm', function(r) {
 	h = '<div class="em"><table style="width:100%">';
 	for(i in r)
 		// h += '<div class="em"><input class="text" name="info" value="' + r[i].albumid + '|' + r[i].title + '|' + r[i].artist + '|' + r[i].cover + '" readonly></div>'
-		h += '<tr><td><img src="http://img.xiami.net/images/album/' + r[i].cover + '"></td><td style="text-algin:centent"><a href="http://www.xiami.com/album/' + r[i].albumid + '">' + r[i].title + ' - ' + r[i].artist + '</td></tr>';
+		h += '<tr><td><img src="http://img.xiami.net/images/album/' + r[i].cover + '"></td><td style="text-algin:centent"><a href="http://www.xiami.com/album/' + r[i].albumId + '">' + r[i].title + ' - ' + r[i].artist + '</td></tr>';
 	box.innerHTML = box.innerHTML + h + '</table></div>';
 });
 </script>
