@@ -21,6 +21,7 @@ preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], 
 // $file = $f->fetch($u[0]);
 $url = 'http://www.xiami.com/web/album/id/'.$u[1];
 $file = file_get_contents($url);
+echo $file;
 preg_match_all('/<(div)[^>]*class="s_list">(.*?)<\/\\1>/', $file, $tbody);
 print_r($tbody);
 preg_match_all('/<li><a[^>]*href="\/song\/([0-9]{5,12})"/is', $tbody[2][0], $data);
