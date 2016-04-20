@@ -1,9 +1,9 @@
-<Files ~ "^.(htaccess|htpasswd)$">
-	deny from all
-</Files>
+#<Files ~ "^.(htaccess|htpasswd)$">
+#	deny from all
+#</Files>
 
-DirectoryIndex index.html index.htm index.php
-order deny,allow
+#DirectoryIndex index.html index.htm index.php
+#order deny,allow
 
 <IfModule mod_rewrite.c>
 	Options +FollowSymlinks
