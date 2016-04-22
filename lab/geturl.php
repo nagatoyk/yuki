@@ -12,9 +12,10 @@ if($url){
 	fputs($fp, 'Host: '.$info['host']."\r\n");
 	fputs($fp, 'Connection: close'."\r\n\r\n");
 	$rewrite = '';
+	echo '<p>';
 	while(!feof($fp)){
 		$line = fgets($fp);
-		echo $line;
+		echo str_replace("\r\n", '</p><p>', $line);
 		if($line != "\r\n"){
 			if(strpos($line, 'Location:') !== false){
 				$rewrite = str_replace(array("\r", "\n", 'Location: '),'', $line);
@@ -23,5 +24,6 @@ if($url){
 			break;
 		}
 	}
+	echo '</p>';
 	echo $rewrite;
 }
