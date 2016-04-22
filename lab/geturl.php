@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/
 <form method="post">
 	<input type="text" name="u">
 	<input type="submit" value="提交">
