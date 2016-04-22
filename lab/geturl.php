@@ -7,7 +7,7 @@ if($url){
 	echo '<pre>';
 	print_r($info);
 	echo '</pre>';
-	$fp = fsockopen($info['host'], 80, $errno, $errstr, 30);
+	$fp = fsockopen($info['host'], 443, $errno, $errstr, 30);
 	fputs($fp, 'GET '.$info['path'].'?'.$info['query'].' HTTP/1.1'."\r\n");
 	fputs($fp, 'Host: '.$info['host']."\r\n");
 	fputs($fp, 'Connection: close'."\r\n\r\n");
