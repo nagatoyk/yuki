@@ -1,19 +1,21 @@
 <?php
 // $url = "http://www.baidu.com/link?url=NG5rRHoP_U6OF55nvq5Ok_6P7FQFTeKtJ1S0kVK8l68gFfeeOauHg-xNhIjWHYNs";
-function curl_post_302($url/*, $vars = null*/){
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+function curl_302($url){
+	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_URL, $url);
-	// if(!is_null($vars))
-	// 	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // 302 redirect
-	// if(!is_null($vars))
-	// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+	curl_setopt($ch, CURLOPT_VERBOSE, true);
+	curl_setopt($ch, CURLOPT_HEADER, true);
+	curl_setopt($ch, CURLOPT_NOBODY, true);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	$data = curl_exec($ch);
-	$Headers =  curl_getinfo($ch);
+	$Headers = curl_getinfo($ch);
 	curl_close($ch);
 	if($data != $Headers){
-		return  $Headers['url'];
+		return $Headers['url'];
 	}else{
 		return false;
 	}
@@ -24,7 +26,7 @@ if($url){
 	$info = parse_url($url);
 	echo '<pre>';
 	print_r($info);
-	print_r(curl_post_302($url));
+	print_r(curl_302($url));
 	echo '</pre>';
 
 	/*$fp = fsockopen($info['host'], 80, $errno, $errstr, 30);
