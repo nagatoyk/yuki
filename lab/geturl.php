@@ -1,3 +1,7 @@
+<form method="post">
+	<input type="text" name="u">
+	<input type="submit" value="提交">
+</form>
 <?php
 // $url = "http://www.baidu.com/link?url=NG5rRHoP_U6OF55nvq5Ok_6P7FQFTeKtJ1S0kVK8l68gFfeeOauHg-xNhIjWHYNs";
 function curl_302($url){
