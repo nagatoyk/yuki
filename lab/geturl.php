@@ -7,7 +7,6 @@ if($url){
 	echo '<pre>';
 	print_r($info);
 	echo '</pre>';
-	exit();
 	$fp = fsockopen($info['host'], 80, $errno, $errstr, 30);
 	fputs($fp, 'GET '.$info['path'].'?'.$info['query'].' HTTP/1.1'."\r\n");
 	fputs($fp, 'Host: '.$info['host']."\r\n");
@@ -15,6 +14,7 @@ if($url){
 	$rewrite = '';
 	while(!feof($fp)){
 		$line = fgets($fp);
+		echo $line;
 		if($line != "\r\n"){
 			if(strpos($line, 'Location:') !== false){
 				$rewrite = str_replace(array("\r", "\n", 'Location: '),'', $line);
