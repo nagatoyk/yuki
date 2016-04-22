@@ -1,6 +1,6 @@
 <?php
 // $url = "http://www.baidu.com/link?url=NG5rRHoP_U6OF55nvq5Ok_6P7FQFTeKtJ1S0kVK8l68gFfeeOauHg-xNhIjWHYNs";
-$url = $_POST['url'];
+$url = isset($_POST['u']) ? $_POST['u'] : isset($_GET['u']) ? $_GET['u'] : null;
 if(!empty($url)){
 	$info = parse_url($url);
 
