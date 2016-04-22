@@ -3,14 +3,14 @@
 function curl_302($url){
 	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_VERBOSE, true);
-	curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_NOBODY, true);
+	curl_setopt($ch, CURLOPT_VERBOSE, 1);
+	curl_setopt($ch, CURLOPT_HEADER, 1);
+	curl_setopt($ch, CURLOPT_NOBODY, 1);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 	$data = curl_exec($ch);
 	$Headers = curl_getinfo($ch);
 	curl_close($ch);
