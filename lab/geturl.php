@@ -1,14 +1,14 @@
 <?php
 // $url = "http://www.baidu.com/link?url=NG5rRHoP_U6OF55nvq5Ok_6P7FQFTeKtJ1S0kVK8l68gFfeeOauHg-xNhIjWHYNs";
-function curl_post_302($url, $vars = null){
+function curl_post_302($url/*, $vars = null*/){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_URL, $url);
-	if(!is_null($vars))
-		curl_setopt($ch, CURLOPT_POST, 1);
+	// if(!is_null($vars))
+	// 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // 302 redirect
-	if(!is_null($vars))
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+	// if(!is_null($vars))
+	// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
 	$data = curl_exec($ch);
 	$Headers =  curl_getinfo($ch);
 	curl_close($ch);
