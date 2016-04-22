@@ -4,10 +4,10 @@ function curl_post_302($url, $vars = null){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_URL, $url);
-	if(is_null($vars))
+	if(!is_null($vars))
 		curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // 302 redirect
-	if(is_null($vars))
+	if(!is_null($vars))
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
 	$data = curl_exec($ch);
 	$Headers =  curl_getinfo($ch);
