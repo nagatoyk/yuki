@@ -37,14 +37,14 @@ if(!empty($_POST['sub'])){
 	curl_close($ch);
 	// $file_contents = preg_replace('/<title>(.*?)<\/title>/', "<title>$1</title>\n\r<base href=\"http://zh.moegirl.org/\">", $file_contents);
 
-	$file_contents = str_replace('/index.php', '/lab/get.php', $file_contents);
-	$file_contents = str_replace('//bits.moegirl.org/zh/load.php', '/lab/load.php', $file_contents);
+	// $file_contents = str_replace('/index.php', '/lab/get.php', $file_contents);
+	// $file_contents = str_replace('//bits.moegirl.org/zh/load.php', '/lab/load.php', $file_contents);
 	// $file_contents = str_replace('http://static.video.qq.com/TPout.swf', '/lab/TPout.swf', $file_contents);
 
 	// http://tp3.sinaimg.cn/1142809842/50/5719861539/0
-	$file_contents = preg_replace('/(http\:\/\/tp[\d]\.sinaimg\.cn\/\d{1,10}\/\d{1,2}\/\d{1,10}\/\d)/', "/lab/img.php?url=$1", $file_contents);
+	// $file_contents = preg_replace('/(http\:\/\/tp[\d]\.sinaimg\.cn\/\d{1,10}\/\d{1,2}\/\d{1,10}\/\d)/', "/lab/img.php?url=$1", $file_contents);
 	// http://static.mengniang.org/
-	$file_contents = preg_replace('/(http\:\/\/static\.mengniang\.org\/.*?\.[jpg|png])/', "/lab/img.php?url=$1", $file_contents);
+	// $file_contents = preg_replace('/(http\:\/\/static\.mengniang\.org\/.*?\.[jpg|png])/', "/lab/img.php?url=$1", $file_contents);
 	// $file_contents = preg_replace('/(http\:.*?\.(jpg|png))/', "/lab/img.php?url=$1", $file_contents);
 
 	echo $file_contents;
