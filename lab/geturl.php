@@ -14,7 +14,7 @@ $token = $my_token['1687199364'];
 $url = $_POST['u'];
 if(!empty($url)){
 	// echo file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url);
-	$ch = curl_init('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url);
+	$ch = curl_init('https://api.weibo.com/2/short_url/shorten.json?access_token='.$token['access_token'].'&url_short='.$url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 	$data = curl_exec($ch);
