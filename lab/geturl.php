@@ -11,6 +11,7 @@ require '../r/Mysql.class.php';
 $my_token = $kv->get('my_token');
 $token = $my_token['1687199364'];
 echo '<pre>';
+print_r($_SESSION['user']);
 print_r($my_token);
 echo '</pre>';
 // $c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
