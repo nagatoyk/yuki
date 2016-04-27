@@ -13,8 +13,14 @@ $token = $my_token['1687199364'];
 // $c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 $url = $_POST['u'];
 if(!empty($url)){
-	echo file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url);
-	$json = json_decode(file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url), true);
+	// echo file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url);
+	$ch = curl_init('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	echo $data;
+	// $json = json_decode(file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id.'&url_short='.$url), true);
 	echo '<pre>';
-	print_r($json);
+	// print_r($json);
 }
