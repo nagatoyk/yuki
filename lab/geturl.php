@@ -6,14 +6,14 @@
 <?php
 // $url = "http://www.baidu.com/link?url=NG5rRHoP_U6OF55nvq5Ok_6P7FQFTeKtJ1S0kVK8l68gFfeeOauHg-xNhIjWHYNs";
 require 'fun.php';
-// require '../r/Mysql.class.php';
+require '../r/Mysql.class.php';
 // require '../r/saetv2.ex.class.php';
 $my_token = $kv->get('my_token');
 $token = $my_token['1687199364'];
 // $c = new SaeTClientV2($wb_id, $wb_key, $token['access_token']);
 $url = $_POST['u'];
 if(!empty($url)){
-	$json = json_decode(file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$token['access_token'].'&url_short='.urlencode($url)), true);
+	$json = json_decode(file_get_contents('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_key.'&url_short='.urlencode($url)), true);
 	echo '<pre>';
 	print_r($json);
 }
