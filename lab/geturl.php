@@ -21,7 +21,7 @@ if(!empty($_POST)){
 	print_r($_POST);
 	echo '</pre>';
 	$url = $_POST['u'];
-	$ch = curl_init('https://api.weibo.com/2/short_url/shorten.json?access_token='.$_SESSION['usre']['token']['access_token'].'&url_short='.$url.'&_='.time());
+	$ch = curl_init('https://api.weibo.com/2/short_url/shorten.json?access_token='.$wb_id/*$_SESSION['usre']['token']['access_token']*/.'&url_short='.$url.'&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 	$data = curl_exec($ch);
