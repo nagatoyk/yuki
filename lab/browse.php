@@ -18,6 +18,8 @@ class getIP{
 }
 $getIP = new getIP();
 echo $getIP::serverIP();
+echo '<p>====</p>';
+echo $getIP::clientIP();
 if(!empty($_POST['sub'])){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC); //代理认证模式
