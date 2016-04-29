@@ -124,7 +124,6 @@ class SaeMysql{
 	}
 
 	private function connect(){
-		$host='localhost';
 		if(getenv('OPENSHIFT_APP_NAME')){
 			$host = getenv('OPENSHIFT_MYSQL_DB_HOST').':'.getenv('OPENSHIFT_MYSQL_DB_PORT');
 			$dbname = getenv('OPENSHIFT_APP_NAME');
