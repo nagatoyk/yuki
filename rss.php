@@ -6,7 +6,7 @@ if(defined('SAE_MYSQL_DB'))
 else
 	require './x/mysql.class.php';
 
-$list = $sql->getData("SELECT * FROM `{$config['post']}` ORDER BY `created` DESC LIMIT 0,15");
+$list = $sql->getData("SELECT * FROM `imouto_article` ORDER BY `created` DESC LIMIT 0,15");
 
 $h = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
 '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n".
