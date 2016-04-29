@@ -16,3 +16,8 @@ class KV{
 	}
 }
 $kv = new KV();
+$config = array(
+	'title' => '小熊\'博客',
+	'url' => 'http://kloli.tk',
+	'description' => '小熊的博客'
+);
