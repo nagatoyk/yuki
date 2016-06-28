@@ -34,5 +34,7 @@ $h .= '</channel>'."\n".
 
 // header('Content-type: application/rss+xml;charset=utf-8');
 header('Content-Type:text/xml;charset=utf-8');
+// exit($h);
+echo $h;
+
 file_put_contents('rss.xml', $h);
-exit($h);
