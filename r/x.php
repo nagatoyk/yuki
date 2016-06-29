@@ -7,13 +7,9 @@ function err($i){
 	exit(json_encode(array('error'=>$i)));
 }
 
-if(defined('SAE_MYSQL_DB')){
-	$sql=new SaeMysql();
-	$kv=new SaeKV();
-	$kv->init();
-}else
-	require 'fun.php';
-	require '../x/mysql.class.php';
+
+require 'fun.php';
+require '../x/mysql.class.php';
 
 $r=array();
 

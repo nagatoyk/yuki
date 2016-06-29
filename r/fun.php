@@ -15,7 +15,12 @@ class KV{
 		return file_exists($filename) ? unlink($filename) : false;
 	}
 }
-$kv = new KV();
+if(defined('SAE_MYSQL_DB')){
+	$kv=new SaeKV();
+	$kv->init();
+}else{
+	$kv = new KV();
+}
 $config = array(
 	'title' => '小熊\'博客',
 	'url' => 'http://kloli.tk',
