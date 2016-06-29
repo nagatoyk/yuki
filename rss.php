@@ -1,10 +1,6 @@
 <?php
 require './r/fun.php';
-
-if(defined('SAE_MYSQL_DB'))
-	$sql = new SaeMysql();
-else
-	require './x/mysql.class.php';
+require './x/mysql.class.php';
 
 $list = $sql->getData("SELECT * FROM `imouto_article` ORDER BY `created` DESC LIMIT 0,15");
 
@@ -34,7 +30,7 @@ $h .= '</channel>'."\n".
 
 // header('Content-type: application/rss+xml;charset=utf-8');
 header('Content-Type:text/xml;charset=utf-8');
-// exit($h);
-echo $h;
+exit($h);
+// echo $h;
 
 file_put_contents('rss.xml', $h);

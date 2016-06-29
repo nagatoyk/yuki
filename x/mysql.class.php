@@ -30,4 +30,8 @@ if(defined('MYSQL_DATABASE')){
 }
 
 $driver = 'DB_'.$db_driver;
-$sql = new $driver($host, $port, $user, $pwd, $dbname);
+if(defined('SAE_MYSQL_DB')){
+	$sql = new SaeMysql();
+}else{
+	$sql = new $driver($host, $port, $user, $pwd, $dbname);
+}
