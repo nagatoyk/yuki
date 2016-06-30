@@ -1,15 +1,13 @@
 <?php
 if(!isset($_POST['url']) && !preg_match('/http\:\/\/www\.xiami\.com\/album\/[0-9]{5,12}/', $_POST['url']))
 	err('参数错误');
-function getName($id){
+function getSongInfo($id){
 	$url = 'http://m.xiami.com/song/playlist/id/'.$id.'/object_name/default/object_id/0/cat/json?_='.time();
 	$json = json_decode(file_get_contents($url), true);
-	return $json['data']['trackList'][0]['title'];
-}
-function getLen($id){
-	$url = 'http://m.xiami.com/song/playlist/id/'.$id.'/object_name/default/object_id/0/cat/json?_='.time();
-	$json = json_decode(file_get_contents($url), true);
-	return $json['data']['trackList'][0]['length'];
+	return array(
+		$json['data']['trackList'][0]['title'],
+		$json['data']['trackList'][0]['length']
+	);
 }
 
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
@@ -21,12 +19,8 @@ preg_match('/<meta[^>]*property="og\:music\:artist" content="(.*?)"\/>/', $file,
 preg_match_all('/<img[^>]*class="cdCover185"[^>]*src="http\:\/\/img\.xiami\.net\/images\/album\/(img[0-9\/_]{1,}\.(jpg|png|bmp|gif))"[^>]*alt="(.*?)"\/>/', $file, $cover);
 $list = array();
 for($i = 0; $i < count($data[1]); $i++){
-	$song_name = getName($data[1][$i]);
 	if(!is_null($song_name)){
-		$list[$data[1][$i]] = array(
-			$song_name,
-			getLen($data[1][$i])
-		);
+		$list[$data[1][$i]] = getSongInfo($data[1][$i]);
 	}
 }
 $s = $sql->getLine('SELECT * FROM `music_list` WHERE `albumId`=\''.$u[1].'\'');
