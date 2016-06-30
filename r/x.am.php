@@ -33,7 +33,7 @@ for($i = 0; $i < count($data[1]); $i++){
 $s = $sql->getLine('SELECT * FROM `music_list` WHERE `albumId`=\''.$u[1].'\'');
 if($s['albumId']){
 	// $l = str_replace('\\', '\\\\', json_encode($list));
-	$sql->runSql('UPDATE `music_list` SET `list`=\''.serialize($list).'\' AND `title`=\''.$title[1].'\' AND `artist`=\''.$artist[1].'\' AND `cover`=\''.$cover[1][0].'\' WHERE `albumId`=\''.$u[1].'\'');
+	$sql->runSql('UPDATE `music_list` SET `list`=\''.serialize($list).'\',`title`=\''.$title[1].'\',`artist`=\''.$artist[1].'\',`cover`=\''.$cover[1][0].'\' WHERE `albumId`=\''.$u[1].'\'');
 }else{
 	/*array(
 						'albumId'=>$u[1],
