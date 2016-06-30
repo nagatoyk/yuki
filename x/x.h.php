@@ -3,13 +3,13 @@
 $w=array();
 
 if(isset($_GET['s'])&&preg_match('/^[0-9]{10}$/',$_GET['s']))
-	$w[]='created<'.$_GET['s'];
+	$w[]='`created`<\''.$_GET['s'].'\'';
 
 if(isset($_GET['c'])&&preg_match('/^[\w]{1,10}$/',$_GET['c']))
-	$w[]='category="'.$_GET['c'].'"';
+	$w[]='`category`=\''.$_GET['c'].'\'';
 
 if(isset($_GET['u'])&&preg_match('/^[\w]{1,10}$/',$_GET['u']))
-	$w[]='authorId="'.$_GET['u'].'"';
+	$w[]='`authorId`=\''.$_GET['u'].'\'';
 
 
 $n='5';

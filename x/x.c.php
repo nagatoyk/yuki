@@ -2,7 +2,7 @@
 if(!isset($_GET['id'])||!preg_match('/^[0-9]{0,10}$/',$_GET['id']))
 	err('恶意请求');
 
-$r=$sql->getData('SELECT * FROM tp_comments WHERE pid='.$_GET['id']);
+$r=$sql->getData('SELECT * FROM tp_comments WHERE `pid`=\''.$_GET['id'].'\'');
 
 
 if($r)
