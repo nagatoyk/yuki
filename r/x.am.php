@@ -16,9 +16,9 @@ function file_get($url){
 	$ch = curl_init();
 	// 设置选项，包括URL
 	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_HEADER, 1);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_INTERFACE, '27.159.109.159');
+	// curl_setopt($ch, CURLOPT_INTERFACE, '27.159.109.159');
 	//执行并获取HTML文档内容
 	$output = curl_exec($ch);
 	//释放curl句柄
