@@ -17,6 +17,7 @@ function file_get($url){
 	// 设置选项，包括URL
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_HEADER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-FORWARDED-FOR:114.114.114.114', 'CLIENT-IP:114.114.114.114'));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	// curl_setopt($ch, CURLOPT_INTERFACE, '27.159.109.159');
 	//执行并获取HTML文档内容
