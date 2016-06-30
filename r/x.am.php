@@ -13,7 +13,7 @@ function getLen($id){
 }
 
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
-$url = 'http://www.xiami.com/album/'.$u[1];
+echo $url = 'http://www.xiami.com/album/'.$u[1];
 $file = file_get_contents($url);
 preg_match_all('/<a[^>]*href="\/song\/([0-9]{5,12})"[^>]*title/is', $file, $data);
 preg_match('/<meta[^>]*property="og\:title" content="(.*?)"\/>/is', $file, $title);
