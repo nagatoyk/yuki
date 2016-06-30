@@ -22,7 +22,7 @@
 <script>
 var oTime=2000000000,
 loadMore=function(){
-	$('#more').className='';
+	$('#more').className='h';
 	$.x('../x/?a=h&n=20&s='+oTime,function(_o){
 		var o,h='';
 		for(var i in _o){
@@ -42,11 +42,11 @@ loadMore=function(){
 		if(oTime>o.created)
 			oTime=o.created;
 
+		$('#more').className='';
+
 		if(_o.length!=20){
 			$.D.d($('#more'));
 		}
-
-		// $('#more').className='';
 	});
 };
 loadMore();
