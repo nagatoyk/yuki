@@ -52,9 +52,8 @@ if($data){
 }
 $kv->delete('music_xiami_list');
 $kv->set('music_xiami_list', $arr);
-$res = $sql->getLine('SELECT * FROM `music_list` WHERE `albumId`=\''.$u[1].'\'');
 $r = array(
-	'albumId' => $res['albumId'],//$sql->lastId()
-	'list' => unserialize($res['list'])
+	'albumId' => $u[1],//$sql->lastId()
+	'list' => $list
 );
 
