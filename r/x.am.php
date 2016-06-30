@@ -11,10 +11,27 @@ function getLen($id){
 	$json = json_decode(file_get_contents($url), true);
 	return $json['data']['trackList'][0]['length'];
 }
+function file_get($url){
+	// 初始化
+	$ch = curl_init();
+	// 设置选项，包括URL
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_INTERFACE, '27.159.109.159');
+	//执行并获取HTML文档内容
+	$output = curl_exec($ch);
+	//释放curl句柄
+	curl_close($ch);
+	//打印获得的数据
+	return $output;
+}
 
 preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], $u);
 $url = 'http://www.xiami.com/album/'.$u[1];
-$file = file_get_contents($url);
+// $file = file_get_contents($url);
+$file = file_get($url);
+
 echo $file;
 preg_match_all('/<a[^>]*href="\/song\/([0-9]{5,12})"[^>]*title/is', $file, $data);
 preg_match('/<meta[^>]*property="og\:title" content="(.*?)"\/>/is', $file, $title);
