@@ -35,8 +35,14 @@ if($s['albumId']){
 	// $l = str_replace('\\', '\\\\', json_encode($list));
 	$sql->runSql('UPDATE `music_list` SET `list`=\''.serialize($list).'\' WHERE `albumId`=\''.$u[1].'\'');
 }else{
+	/*array(
+						'albumId'=>$u[1],
+						'title'=>$title[1],
+						'artist'=>$artist[1],
+						'cover'=>$cover[1][0],
+						'list'=>serialize($list))*/
 	// $l = str_replace('\\', '\\\\', json_encode($list));
-	$sql->runSql('INSERT INTO `music_list` (`albumId`,`title`,`artist`,`cover`,`list`) VALUES (\''.$u[1].'\',\''.$cover[3][0].'\',\''.$artist[2][0].'\',\''.$cover[1][0].'\',\''.serialize($list).'\')');
+	$sql->runSql('INSERT INTO `music_list` (`albumId`,`title`,`artist`,`cover`,`list`) VALUES (\''.$u[1].'\',\''.$title[1].'\',\''.$artist[1].'\',\''.$cover[1][0].'\',\''.serialize($list).'\')');
 }
 $arr = array();
 $data = $sql->getData('SELECT `albumId`,`title`,`artist`,`cover`,`list` FROM `music_list` ORDER BY `albumId` DESC');
