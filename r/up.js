@@ -78,7 +78,8 @@ var UP=function($){
 
 					var I=$('textarea[name="text"]');
 
-					I.value+=(I.value?'\n':'')+'http://ww2.sinaimg.cn/large/'+xhr.responseText.match(/[\w]{24,32}/)+'\n';
+					// I.value+=(I.value?'\n':'')+'http://ww2.sinaimg.cn/large/'+xhr.responseText.match(/[\w]{24,32}/)+'\n';
+					I.value+=(I.value?'\n':'')+xhr.responseText+'\n';
 
 					I.onkeydown();
 					
