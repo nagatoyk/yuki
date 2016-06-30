@@ -13,7 +13,7 @@ require '../x/mysql.class.php';
 
 $r=array();
 
-if(preg_match('/^(?:ep|ap|dp|am|gm)$/',$_GET['a']))
+if(preg_match('/^(?:ep|ap|dp|am|dm|gm)$/',$_GET['a']))
 	require 'x.'.$_GET['a'].'.php';
 
 

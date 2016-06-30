@@ -23,4 +23,5 @@ if(!$r){
 	$r = $arr;
 }
 header('Content-type: application/json');
-echo str_replace('&amp;', '&', str_replace('&#039;', '\'', json_encode($r)));
+// echo str_replace('&amp;', '&', str_replace('&#039;', '\'', json_encode($r)));
+echo json_encode($r);
