@@ -4,6 +4,8 @@ require 'x/mysql.class.php';
 if(isset($_GET['m']) && $_GET['m'] = 'del')
 	$kv->delete('music_xiami_list');
 $r = $kv->get('music_xiami_list');
+print_r($r);
+die();
 if(!$r){
 	$arr = array();
 	$data = $sql->getData('SELECT `albumId`,`title`,`artist`,`cover`,`list` FROM `music_list` ORDER BY `albumId` DESC');
