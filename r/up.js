@@ -96,7 +96,7 @@ var UP=function($){
 				}
 			};
 			// xhr.open('POST','http://x.mouto.org/wb/x.php?up&_r='+Math.random(),1);
-			xhr.open('POST', '/lab/x.php?up&_r='+Math.random(), 1);
+			xhr.open('POST', '/lab/up.php?up&_r='+Math.random(), 1);
 			//xhr.setRequestHeader('X_FILENAME',encodeURIComponent(file.name));
 			xhr.send(file);
 			
