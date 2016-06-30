@@ -29,7 +29,8 @@ for($i = 0; $i < count($data[1]); $i++){
 		);
 	}
 }
-
+echo json_encode($list);
+die();
 $s = $sql->getLine('SELECT * FROM `music_list` WHERE `albumId`=\''.$u[1].'\'');
 if($s['albumId']){
 	// $l = str_replace('\\', '\\\\', json_encode($list));
