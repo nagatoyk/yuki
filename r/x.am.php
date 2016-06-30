@@ -17,10 +17,8 @@ function file_get($url){
 	// 设置选项，包括URL
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_HEADER, 1);
-	// curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-FORWARDED-FOR:114.114.114.114', 'CLIENT-IP:114.114.114.114'));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-FORWARDED-FOR:114.114.114.114', 'CLIENT-IP:114.114.114.114', 'User-Agent:Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16'));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	// curl_setopt($ch, CURLOPT_PROXY, '180.149.132.47');
-	curl_setopt($ch, CURLOPT_INTERFACE, '180.149.132.47');
 	//执行并获取HTML文档内容
 	$output = curl_exec($ch);
 	//释放curl句柄
