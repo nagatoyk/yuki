@@ -357,7 +357,7 @@ Q=function($,win,doc){
 			}
 		},100);
 	}
-	$.j('http://tajs.qq.com/stats?sId=37471835');
+	// $.j('http://tajs.qq.com/stats?sId=37471835');
 	console.log('ヾ(≧∇≦)〃可能是世界最快博客 v2 @卜卜口<mouto.sinaapp.com> 2014/08/30');
 	return Q;
 }(iTorr,window,document);
