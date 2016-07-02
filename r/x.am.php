@@ -14,7 +14,7 @@ preg_match('/http\:\/\/www\.xiami\.com\/album\/([0-9]{5,12})/s', $_POST['url'], 
 $url = 'http://www.xiami.com/album/'.$u[1].'?_='.time();
 $file = file_get_contents($url);
 preg_match_all('/<a[^>]*href="\/song\/([0-9]{5,12})"[^>]*title/is', $file, $data);
-// if(count($data[1]) < 1)
+if(count($data[1]) == 0)
 	err('无数据!--->'.count($data[1]));
 preg_match('/<meta[^>]*property="og\:title" content="(.*?)"\/>/is', $file, $title);
 preg_match('/<meta[^>]*property="og\:music\:artist" content="(.*?)"\/>/', $file, $artist);
