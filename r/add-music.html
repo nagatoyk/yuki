@@ -49,6 +49,9 @@ In.onfocus = function() {
 del = function(albumId){
 	$.x('x.php?a=dm', 'albumId=' + albumId, function(r){
 		alert(r.msg);
+		setTimeout(function() {
+			window.location.reload();
+		}, 500);
 	});
 };
 $.x('x.php?a=gm', function(r) {
