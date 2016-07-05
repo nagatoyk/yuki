@@ -322,7 +322,7 @@ fm=function(win,doc){
 
 	$.j('i/plan.js');
 	A.addEventListener('ended',function(e){
-		x('log.php','pid='+location.hash.match(/[\d]+/)+'&from='+fm.rid,function(r){
+		x('log.php','pid='+location.hash.match(/[\d]+/)+'&rid='+fm.rid,function(r){
 			console.log(r);
 		});
 	},false);
