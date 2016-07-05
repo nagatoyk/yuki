@@ -45,7 +45,7 @@ function getLocation($location){
 	return $loc_9;
 }
 function get_xml($url){
-	$cookie_file = tempnam('./temp', 'cookie');
+	$cookie_file = tempnam('../temp', 'cookie');
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_VERBOSE, true);
