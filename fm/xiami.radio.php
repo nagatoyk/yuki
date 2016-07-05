@@ -49,6 +49,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    // 要求结果为字符串且输出到屏幕上
 	curl_setopt($ch, CURLOPT_HEADER, 0); // 不要http header 加快效率
+	curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.19 Safari/537.36');
 	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 	$output = curl_exec($ch);
