@@ -44,23 +44,6 @@ function getLocation($location){
 	$loc_9 = str_replace('^', 0, urldecode($loc_8));
 	return $loc_9;
 }
-function join_cookie($cook){
-	foreach($cook as $k=<$v){
-		$d[] =$k.'='.$v;
-	}
-	$data = implode(';', $d);
-	return $data;
-}
-function pase_cookie($cookFile, $encode = true){
-	$cookie = file_get_contents($cookFile);
-	$citem = explode("*\n", $cookie);
-	foreach($citem as $c){
-		list($ckey, $cvalue) = explode("\n", $c);
-		if($ckey != '')
-			$cook[$ckey] = $cvalue;
-	}
-	return $cook;
-}
 function get_xml($url){
 	// $cookie_file = tempnam('../temp', 'cookie');
 	$ch = curl_init();
@@ -75,7 +58,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	// curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
-	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6;')
+	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6;');
 	$output = curl_exec($ch);
 	$info = curl_getinfo($ch);
 	curl_close($ch);
