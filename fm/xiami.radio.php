@@ -50,7 +50,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_VERBOSE, true);
 	curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
+	// curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
 	curl_setopt($ch, CURLOPT_NOBODY, true);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
