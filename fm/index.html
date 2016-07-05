@@ -197,7 +197,7 @@ fm=function(win,doc){
 				setTimeout(function(){
 					$('#ctrl').className='';
 				},3e3);
-				$('#next').href='#!'+playList[0];
+				$('#next').href='#!'+fm.rid+'/'+playList[0];
 			}else{
 				$('#ctrl').className='';
 			}
@@ -274,7 +274,7 @@ fm=function(win,doc){
 			setTimeout(function(){
 				if(playList.length){
 					$('#ctrl').className='';
-					$('#next').href='#!'+playList[0];
+					$('#next').href='#!'+fm.rid+'/'+playList[0];
 				}else{
 					$('#ctrl').className='h load';
 				}
@@ -379,7 +379,7 @@ fm=function(win,doc){
 	UA.match(/iphone/i)?'width=520,user-scalable=no,minimal-ui':
 	'width=720';
 
-	fm.rid=localStorage.getItem('rid')||0;
+	fm.rid=localStorage.getItem('rid')||12;
 
 	var laHash='简直惨惨惨OAQ',popstate=function(){
 		var lash=location.hash.substring(2);
