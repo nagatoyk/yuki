@@ -63,7 +63,7 @@ function get_xml($url){
 }
 
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
-	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722?_='.time();
+	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722';
 	print_r(get_xml($url));
 	die();
 	$doc = new DOMDocument();
