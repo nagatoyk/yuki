@@ -1,5 +1,4 @@
 <?php
-header('Content-type: application/json;charset=utf-8');
 require '../r/fun.php';
 require '../x/mysql.class.php';
 function get_playcount($sql, $pid){
@@ -66,4 +65,5 @@ if($_GET['a'] == 'radio'){
 		'play'=>get_playcount($sql, $val['sub_id'])
 	);
 }
+header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
