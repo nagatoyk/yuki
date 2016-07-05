@@ -86,7 +86,7 @@ if($_GET['a'] == 'radio'){
 			'album_name'=>htmlspecialchars_decode($album_name, ENT_QUOTES),
 			'artist'=>htmlspecialchars_decode($artist, ENT_QUOTES),
 			'album_id'=>$album_id,
-			'length'=>(int)($length > 0 ? $length : getTime(getLocation($location))),
+			'length'=>$length,
 			'play'=>1
 		);
 	}
