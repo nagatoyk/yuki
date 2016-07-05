@@ -1,5 +1,22 @@
 <?php
 header('Content-type: application/json;charset=utf-8');
+require '../r/fun.php';
+require '../x/mysql.class.php';
+function get_playcount($sql, $pid){
+	$data = $sql->getLine('SELECT * FROM imouto_playcount WHERE pid=\''.$pid.'\' AND rid=\'12\'');
+	if($data['pcount']){
+		return $data['pcount'];
+	}else{
+		return 0;
+	}
+}
+function time2sec($time){
+	// $t = split(':', $time);
+	// $m = preg_replace('/^0+/', '', $t[0]);
+	// $s = preg_replace('/^0+/', '', $t[1]);
+	$t = strtotime($time);
+	return $t;
+}
 $url = 'http://moe.fm/listen/playlist?api=json&api_key=18f95c02504fb5a0fdd83b205e7e1aee05421a58b&_='.time();
 $out = array();
 if($_GET['a'] == 'radio'){
@@ -15,8 +32,8 @@ if($_GET['a'] == 'radio'){
 			'album_name'=>htmlspecialchars_decode($val['wiki_title'], ENT_QUOTES),
 			'artist'=>htmlspecialchars_decode($val['artist'], ENT_QUOTES),
 			'album_id'=>$val['wiki_id'],
-			'length'=>$val['stream_time'],
-			'play'=>1
+			'length'=>time2sec($val['stream_time']),
+			'play'=>get_playcount($sql, $val['sub_id'])
 		);
 	}
 }elseif($_GET['a'] == 'song'){
@@ -31,8 +48,8 @@ if($_GET['a'] == 'radio'){
 		'album_name'=>htmlspecialchars_decode($data['wiki_title'], ENT_QUOTES),
 		'artist'=>htmlspecialchars_decode($data['artist'], ENT_QUOTES),
 		'album_id'=>$data['wiki_id'],
-		'length'=>$data['stream_time'],
-		'play'=>1
+		'length'=>time2sec($data['stream_time']),
+		'play'=>get_playcount($sql, $val['sub_id'])
 	);
 }
 echo json_encode($out);
