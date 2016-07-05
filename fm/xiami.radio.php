@@ -67,8 +67,10 @@ function get_xml($url){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	// curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
-	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6');
+	// curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6');
 	$output = curl_exec($ch);
+	preg_match_all('/Set-Cookie:(.*)/i', $output, $results);
+	var_dump($results);
 	curl_close($ch);
 	return array($output);
 }
