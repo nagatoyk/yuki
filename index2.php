@@ -61,6 +61,11 @@ foreach(globfile('./data') as $v){
 }
 echo '</p><p>';
 echo '============';
+foreach(globfile('./temp') as $v){
+	echo $v.'</p><p>';
+}
+echo '</p><p>';
+echo '============';
 echo '</p><p>';
 foreach(globfile('./files/images') as $v){
 	echo $v.'</p><p>';
