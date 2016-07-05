@@ -2,7 +2,7 @@
 <script>
 with (location) {
 	if (protocol == 'https:' || search) {
-		<!-- href = 'http://itorr.sinaapp.com/fm/' + hash -->
+		// href = 'http://itorr.sinaapp.com/fm/' + hash
 		href = 'http://kloli.tk/fm/' + hash
 	}
 }
@@ -321,7 +321,11 @@ fm=function(win,doc){
 	};
 
 	$.j('i/plan.js');
-
+	A.addEventListener('ended',function(e){
+		x('log.php','pid='+location.hash.match(/[\d]+/),function(r){
+			console.log(r);
+		});
+	},false);
 	$('#play').onclick=function(){
 		if(A.paused){
 			A.play();
