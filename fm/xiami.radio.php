@@ -45,17 +45,19 @@ function getLocation($location){
 	return $loc_9;
 }
 function get_xml($url){
+	$cookie_file = tempnam('./temp', 'cookie');
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url); 
-	curl_setopt($ch, CURLOPT_VERBOSE, true); 
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_VERBOSE, true);
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
 	curl_setopt($ch, CURLOPT_NOBODY, true);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-	curl_setopt($ch, CURLOPT_TIMEOUT, 60); 
-	curl_setopt($ch, CURLOPT_AUTOREFERER, true); 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
 	$output = curl_exec($ch);
 	$info = curl_getinfo($ch);
 	curl_close($ch);
