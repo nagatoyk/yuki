@@ -47,17 +47,22 @@ function getLocation($location){
 	$loc_9 = str_replace('^', 0, urldecode($loc_8));
 	return $loc_9;
 }
+function get_xml($url){
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    // 要求结果为字符串且输出到屏幕上
+	curl_setopt($ch, CURLOPT_HEADER, 0); // 不要http header 加快效率
+	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.19 Safari/537.36');
+	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	$output = curl_exec($ch);
+	curl_close($ch);
+	return $output;
+}
 
-if($_GET['a'] == 'radio'){
-	switch($_GET['rid']){
-		case 11:
-			$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722?_='.time();
-			break;
-
-		default:
-			exit(array('error'=>404));
-			break;
-	}
+if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
+	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722?_='.time();
+	echo get_xml($url);
+	die();
 	$doc = new DOMDocument();
 	$doc->load($url);
 	$items = $doc->getElementsByTagName('track');
