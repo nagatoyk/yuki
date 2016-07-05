@@ -11,11 +11,13 @@ function get_playcount($sql, $pid){
 	}
 }
 function time2sec($time){
-	// $t = split(':', $time);
-	// $m = preg_replace('/^0+/', '', $t[0]);
-	// $s = preg_replace('/^0+/', '', $t[1]);
-	$t = strtotime($time);
-	return $t;
+	$t = split(':', $time);
+	$m = preg_replace('/^0+/', '', $t[0]);
+	$s = preg_replace('/^0+/', '', $t[1]);
+	$m = $m * 60;
+	$time = $m + $s;
+	// $t = strtotime($time);
+	return $time;
 }
 $url = 'http://moe.fm/listen/playlist?api=json&api_key=18f95c02504fb5a0fdd83b205e7e1aee05421a58b&_='.time();
 $out = array();
