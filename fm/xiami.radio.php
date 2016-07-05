@@ -69,9 +69,8 @@ function get_xml($url){
 	// curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
 	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6;');
 	$output = curl_exec($ch);
-	$info = curl_getinfo($ch);
 	curl_close($ch);
-	return array($output, $info);
+	return array($output);
 }
 
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
