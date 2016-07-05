@@ -61,6 +61,8 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6');
 	$output = curl_exec($ch);
 	$info = curl_getinfo($ch);
+	preg_match_all('/Set-Cookie:(.*)/i', $output, $results);
+	var_dump($results);
 	curl_close($ch);
 	return array($output, $info);
 }
