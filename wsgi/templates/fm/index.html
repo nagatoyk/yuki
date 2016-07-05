@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Cache-Control" content="no-cache"/>
+	<meta http-equiv="Content-Language" content="zh-CN"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+	<meta http-equiv="Page-Enter" content="revealTrans(Duration=3.0,Transition=12)"/>
+	<meta name="viewport" content="user-scalable=no,width=230"/>
+	<title>小熊FM</title>
+	<link rel="apple-touch-icon-precomposed" id="icon"/>
+	<link rel="icon" type="image/x-icon" id="fav"/>
+	<link rel="stylesheet" type="text/css" href="{{ static_url('css/fm.style.css') }}"/>
+	<style type="text/css">html{background:#E7E7E7 url(bg.png);overflow:hidden}</style>
+	<script type="text/javascript" src="{{ static_url('js/fm.m.js') }}"></script>
+</head>
+<body>
+	<div id="box">
+		<div class="cover"><img/></div>
+		<div class="info">
+			<h2><a>音乐加载中...</a></h2>
+			<p><a>请稍候...</a></p>
+			<span>00:00</span>
+		</div>
+		<div class="ctrl">
+			<span id="pause" class="none"><i></i>暂停/播放<s></s></span>
+			<span id="next" class="none"><i></i>下一首<s></s></span>
+		</div>
+	</div>
+	<form id="s_f">
+		<input id="s" placeholder="输入歌曲信息进行搜索" autocomplete="off">
+		<div id="s_d"></div>
+	</form>
+	<p id="lrc"></p>
+	<form id="dm_f" action="#" target="dm_post" method="post">
+		<input id="dm_msg" autocomplete="off" name="msg" maxlength="100">
+		<input type="hidden" name="t" id="dm_t">
+		<p id="dm_tip">输入弹幕内容，回车即可发送<i></i></p>
+	</form>
+	<p id="c">
+		<b id="logo">小熊FM</b>&nbsp;|&nbsp;当前歌曲：<a id="x" target="_blank">歌曲加载中...</a>&nbsp;<!-- |&nbsp;<a id="add_hop" href="javascript:value(0)">申请加入电台列表</a>&nbsp; -->|&nbsp;<a id="wb" href="javascript:value(0)">分享到新浪微博</a>&nbsp;|&nbsp;<a id="tq" href="javascript:value(0)">分享到腾讯微博</a>
+	</p>
+	<div id="plan">
+		<i></i>
+		<b></b>
+	</div>
+	<div id="ad">
+		<h4>小熊电台 测试版 （&lt;ゝω·）~☆Kira~</h4>
+		<p>小熊电台是基于偷揉电台衍生的电台</p>
+		<p><b>我知道了</b></p>
+		<!-- <p><b>登录微博</b>进行评论</p> -->
+		<p>推荐使用 Chrome/Firefox 进行浏览</p>
+		<p>歌曲均为 虾米音乐 提供</p>
+		<span></span>
+	</div>
+	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="fm">
+		<param name="movie" value="{{ static_url('swf/2013-02-05_2.swf') }}&amp;cb=fm.load"/>
+		<embed name="fm" src="{{ static_url('swf/2013-02-05_2.swf') }}&amp;cb=fm.load" rel="noreferer" type="application/x-shockwave-flash"/>
+	</object>
+	<script type="text/javascript" src="{{ static_url('js/fm.fm.js') }}"></script>
+</body>
+</html>
