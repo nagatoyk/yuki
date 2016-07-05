@@ -1,8 +1,8 @@
 <?php
 header('Content-type: application/json;charset=utf-8');
 $out = array();
-require '../getid3/getid3.php';
-function getTime($url){
+// require '../getid3/getid3.php';
+/*function getTime($url){
 	$data = file_get_contents($url);
 	$path = parse_url($url, PHP_URL_PATH);
 	$filename = pathinfo($path, PATHINFO_BASENAME);
@@ -11,11 +11,8 @@ function getTime($url){
 	$ThisFileInfo = $getID3->analyze(SAE_TMP_PATH.$filename);//分析文件
 	// $time = $ThisFileInfo['playtime_seconds']; //获取mp3的长度信息
 	// echo $ThisFileInfo['playtime_seconds']; //获取MP3文件时长
-	/*echo '<pre>';
-	print_r($ThisFileInfo);
-	die();*/
 	return ceil($ThisFileInfo['playtime_seconds']);
-}
+}*/
 function getLocation($location){
 	$loc_2 = (int)substr($location, 0, 1);
 	$loc_3 = substr($location,1);
