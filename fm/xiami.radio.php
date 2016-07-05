@@ -44,7 +44,6 @@ function getLocation($location){
 	$loc_9 = str_replace('^', 0, urldecode($loc_8));
 	return $loc_9;
 }
-<? php
 function join_cookie($cook){
 	foreach($cook as $k=<$v){
 		$d[] =$k.'='.$v;
@@ -66,13 +65,21 @@ function get_xml($url){
 	// $cookie_file = tempnam('../temp', 'cookie');
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_VERBOSE, true);
+	curl_setopt($ch, CURLOPT_HEADER, true);
+	// curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
+	curl_setopt($ch, CURLOPT_NOBODY, true);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	// curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
-	// curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6');
+	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6;')
 	$output = curl_exec($ch);
-	preg_match_all('/Set-Cookie:(.*)/i', $output, $results);
-	var_dump($results);
+	$info = curl_getinfo($ch);
 	curl_close($ch);
-	return array($output);
+	return array($output, $info);
 }
 
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
