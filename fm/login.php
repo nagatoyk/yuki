@@ -26,6 +26,7 @@ if(isset($_GET['redirect'])){
 		$user['moefou'] = array(
 			'oauth_token'=>$_SESSION['moefou']['oauth_token'],
 			'oauth_token_secret'=>$_SESSION['moefou']['oauth_token_secret']
+		);
 		$kv->set('moefou', $user);
 	}
 	echo '<pre>';
