@@ -112,11 +112,13 @@ class MoeFM{
 		}
 		$url = 'http://moe.fm/api/listen/playlist';
 		unset($_GET['a']);
+		unset($_GET['id']);
 		unset($_GET['_']);
-		if($access_token == '' && $access_token_secret == ''){
+		if(!isset($access_token) && !isset($access_token_secret)){
 			$url .= '?'.$this->get_urlencode_string($_GET);
 			$playlist = $this->curl($url);
 		}else{
+			$_GET['fav'] = 'song';
 			$playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
 		return json_decode($playlist, true);
