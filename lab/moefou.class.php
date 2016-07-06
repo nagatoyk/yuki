@@ -109,10 +109,10 @@ class MoeFM{
 		}else{
 			$_GET['perpage'] = 3;
 		}
-		$url = 'http://moe.fm/api/listen/playlist';
+		$url = 'http://moe.fm/listen/playlist';
 		unset($_GET['a']);
 		unset($_GET['rid']);
-		unset($_GET['_']);
+		unset($_GET['_r']);
 		if(!$access_token && !$access_token_secret){
 			$_GET['api_key'] = $this->appkey;
 			echo $url .= '?'.$this->get_urlencode_string($_GET);
