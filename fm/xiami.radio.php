@@ -22,7 +22,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array_merge(
 		rand_ip(),
-		'member_auth=1GnLE9tCv25i1%2FeTSIA4InVL6LLQEmOCwI5Y3uN8sFN3J4laMourlquXSw1J3yKRkYG6uGUmXO3Omzjxk%2BCh; user=6961722%22%E9%95%9C%E8%8A%B1%E6%B0%B4%E6%9C%88%22images%2Favatar_new%2F139%2F23%2F6961722%2F6961722_1322238218_1.jpg%220%227355%22%3Ca+href%3D%27%2Fwebsitehelp%23help9_3%27+%3Esi%3C%2Fa%3E%2220%22357%2223783%2246ba2b68d2%221467683865; _xiamitoken=f706db26ca947c713503f3766ebf39c6; radio_guest_listen=792553; __guestplay=MTc3MjA3NzgyNCwxOzE3NzM3NDc2NDUsMQ%3D%3D; l=AtzcfZXGwt3MEw1vx9FPy/a6LPCPo4B/; isg=AkVFsBLxvrgfKppsKbUvl2nvVIH1MPmUimp89Eer93yL3mRQDlAmZEr2lrXS'
+		'_xiamitoken=f706db26ca947c713503f3766ebf39c6'
 	));
 	if(!curl_exec($ch)){
 		$errno = curl_errno($ch);
