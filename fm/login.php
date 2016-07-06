@@ -12,8 +12,9 @@ if(isset($_GET['redirect'])){
 	$oauth_verifier = $_GET['oauth_verifier'];
 	$data = $MoeFM->get_access_token($oauth_token, $_SESSION['moefou']['token_secret'], $oauth_verifier);
 	parse_str($data);
-	print_r($data);
-	// $_SESSION['moefou']['oauth_token'] = $data['oauth_token'];
-	// $_SESSION['moefou']['oauth_token_secret'] = $data['oauth_token_secret'];
-	// setcookie('moufou', json_encode($_SESSION['moefou']));
+	// print_r($data);
+	$_SESSION['moefou']['oauth_token'] = $oauth_token;
+	$_SESSION['moefou']['oauth_token_secret'] = $oauth_token_secret;
+	setcookie('moufou', json_encode($_SESSION['moefou']));
+	header('Location:/fm/login.php');
 }
