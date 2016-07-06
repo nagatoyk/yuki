@@ -45,7 +45,9 @@ if($_GET['a'] == 'radio'){
 			'artist'=>htmlspecialchars_decode($val['artist'], ENT_QUOTES),
 			'album_id'=>$val['wiki_id'],
 			'length'=>time2sec($val['stream_time']),
-			'play'=>get_playcount($sql, $val['sub_id'])
+			'play'=>get_playcount($sql, $val['sub_id']),
+			'fav_sub'=>$val['fav_sub'],
+			'fav_wiki'=>$val['fav_wiki']
 		);
 	}
 }elseif($_GET['a'] == 'song'){
@@ -60,7 +62,9 @@ if($_GET['a'] == 'radio'){
 		'artist'=>htmlspecialchars_decode($data['artist'], ENT_QUOTES),
 		'album_id'=>$data['wiki_id'],
 		'length'=>time2sec($data['stream_time']),
-		'play'=>get_playcount($sql, $val['sub_id'])
+		'play'=>get_playcount($sql, $val['sub_id']),
+		'fav_sub'=>$val['fav_sub'],
+		'fav_wiki'=>$val['fav_wiki']
 	);
 }
 header('Content-type: application/json;charset=utf-8');
