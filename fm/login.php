@@ -11,6 +11,8 @@ if(isset($_GET['redirect'])){
 	$oauth_token = $_GET['oauth_token'];
 	$oauth_verifier = $_GET['oauth_verifier'];
 	$data = $MoeFM->get_access_token($oauth_token, $_SESSION['moefou']['token_secret'], $oauth_verifier);
-	echo '<pre>';
-	print_r($data);
+	parse_str($data);
+	$_SESSION['moefou']['oauth_token'] = $data['oauth_token'];
+	$_SESSION['moefou']['oauth_token_secret'] = $data['oauth_token_secret'];
+	setcookie('moufou', json_encode($_SESSION['moefou']));
 }

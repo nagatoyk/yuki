@@ -314,7 +314,7 @@ class MoeFM{
 	/**
 	 * 打乱加码
 	 */
-	public function  token_hash($str){
+	public function token_hash($str){
 		// $str = urlencode($str);
 		$r = rand(4, 9);
 		$l = strlen($str);
