@@ -23,6 +23,9 @@ if(preg_match('/^[0-9]{5,12}$/', $pid) && preg_match('/^[0-9]{1,3}$/', $rid)){
 	}
 	if($rid == 12){
 		$r = $MoeFM->set_log($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], $pid);
+		if($r['response']['status']){
+			unset($r['response']['information']);
+		}
 	}
 	header('Content-type: application/json;charset=utf-8');
 	echo json_encode($r);
