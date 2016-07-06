@@ -39,9 +39,10 @@ function writelog($str){
 function get_xml($url){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_HEADER, true)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($ch, CURLOPT_INTERFACE, '127.0.0.1');
 
 	if(!curl_exec($ch)){
@@ -55,7 +56,7 @@ function get_xml($url){
 	return $data;
 }
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
-	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722';
+	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
 	echo get_xml($url);
 	die();
 	$doc = new DOMDocument();
