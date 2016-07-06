@@ -7,4 +7,10 @@ $callback = 'http://kloli.tk/fm/login.php';
 $MoeFM = new MoeFM($key, $secret, $callback);
 if(isset($_GET['redirect'])){
 	$MoeFM->redirect_to_login();
+}elseif(isset($_GET['oauth_token']) && isset($_GET['oauth_verifier'])){
+	$oauth_token = $_GET['oauth_token'];
+	$oauth_verifier = $_GET['oauth_verifier'];
+	$data = $MoeFM->get_access_token($oauth_token, $_SESSION['moefou']['token_secret'], $oauth_verifier);
+	echo '<pre>';
+	print_r($data);
 }
