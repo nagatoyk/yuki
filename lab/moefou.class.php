@@ -3,13 +3,13 @@
  * 萌否电台
  */
 class MoeFM{
-	var $appkey = '';
-	var $appsecret  = '';
-	var $callback  = '';
-	var $base_url = 'http://api.moefou.org';
-	var $authorize_url = 'http://api.moefou.org/oauth/authorize';
-	var $access_token_url = 'http://api.moefou.org/oauth/access_token';
-	var $request_token_url = 'http://api.moefou.org/oauth/request_token';
+	public $appkey;
+	public $appsecret;
+	public $callback;
+	public $base_url = 'http://api.moefou.org';
+	public $authorize_url = 'http://api.moefou.org/oauth/authorize';
+	public $access_token_url = 'http://api.moefou.org/oauth/access_token';
+	public $request_token_url = 'http://api.moefou.org/oauth/request_token';
 	/**
 	 * 构造函数
 	 * @access  public
