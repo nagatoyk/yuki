@@ -32,7 +32,7 @@ if(isset($_GET['redirect'])){
 	print_r($user);
 }elseif($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
-		$user = $kv->get('moufou');
+		$user = $kv->get('moefou');
 		$arr = array(
 			'sss'=>base64_encode('oauth_token='.$user['moefou']['oauth_token'].'&oauth_token_secret='.$user['moefou']['oauth_token_secret'])
 		);
