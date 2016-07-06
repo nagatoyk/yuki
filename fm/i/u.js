@@ -61,7 +61,7 @@ var U=function($){
 					likes[r[i]]=true
 				}
 				U.likes=likes;
-				U.iflike(location.hash.split('/')[1].match(/\d+/)+'',function(r){
+				U.iflike(location.hash.match(/\d+/)+'',function(r){
 					$('#like').className=r?'a':'';
 				})
 			})

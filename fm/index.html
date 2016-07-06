@@ -197,7 +197,7 @@ fm=function(win,doc){
 				setTimeout(function(){
 					$('#ctrl').className='';
 				},3e3);
-				$('#next').href='#!'+fm.rid+'/'+playList[0];
+				$('#next').href='#!'+playList[0];
 			}else{
 				$('#ctrl').className='';
 			}
@@ -253,10 +253,10 @@ fm=function(win,doc){
 			if(_img.complete)
 				setTimeout(_img.onload,10);
 
-			if(win.dm && fm.rid != 12)
+			if(win.dm && fm.rid < 12)
 				dm.load(M.xid);
 
-			if(win.lrc && fm.rid != 12)
+			if(win.lrc && fm.rid < 12)
 				lrc.load(M.xid);
 
 
@@ -274,7 +274,7 @@ fm=function(win,doc){
 			setTimeout(function(){
 				if(playList.length){
 					$('#ctrl').className='';
-					$('#next').href='#!'+fm.rid+'/'+playList[0];
+					$('#next').href='#!'+playList[0];
 				}else{
 					$('#ctrl').className='h load';
 				}
@@ -293,7 +293,7 @@ fm=function(win,doc){
 			if(list[i]){
 				f(list[i]);
 			}else
-				x((fm.rid==12?'moefm.radio.php':'x/')+'?a=song&id='+i.split('/')[1].match(/[\d]+/)+'&rid='+i.split('/')[0].match(/[\d]+/)+'&_r='+Math.random(),function(r){
+				x((fm.rid==12?'moefm.radio.php':'x/')+'?a=song&id='+i.match(/[\d]+/)+'&_r='+Math.random(),function(r){
 					if(r.error){
 						alert(r.error);
 						return add();
@@ -322,7 +322,7 @@ fm=function(win,doc){
 
 	$.j('i/plan.js');
 	A.addEventListener('ended',function(e){
-		x('log.php','pid='+location.hash.split('/')[1].match(/[\d]+/)+'&rid='+location.hash.split('/')[0].match(/[\d]+/),function(r){
+		x('log.php','pid='+location.hash.match(/[\d]+/)+'&rid='+fm.rid,function(r){
 			console.log(r);
 		});
 	},false);
@@ -349,7 +349,7 @@ fm=function(win,doc){
 
 		$('#like').className='a';
 
-		x('like.php?a=like','pid='+location.hash.split('/')[1].match(/[\d]+/)+'&rid='+location.hash.split('/')[0].match(/[\d]+/),function(r){
+		x('like.php?a=like','pid='+location.hash.match(/[\d]+/)+'&rid='+fm.rid,function(r){
 			//console.log(r);
 			if(r.error)
 				return alert(r.error);
