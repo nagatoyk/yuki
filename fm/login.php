@@ -23,6 +23,9 @@ if(isset($_GET['redirect'])){
 	$user = $kv->get('moefou');
 	if(!$user['user']){
 		$user['user'] = $info['response']['user'];
+		$user['moefou'] = array(
+			'oauth_token'=>$_SESSION['moefou']['oauth_token'],
+			'oauth_token_secret'=>$_SESSION['moefou']['oauth_token_secret']
 		$kv->set('moefou', $user);
 	}
 	echo '<pre>';
@@ -30,8 +33,9 @@ if(isset($_GET['redirect'])){
 }
 if($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
+		$user = $kv->get('moufou');
 		$arr = array(
-			'sss'=>$_SESSION['moefou']
+			'sss'=>base64_encode('oauth_token='.$user['moefou']['oauth_token'].'&oauth_token_secret='.$user['moefou']['oauth_token_secret'])
 		);
 	}else{
 		$arr = array(
