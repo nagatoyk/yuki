@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_reporting(E_ALL); //E_ALL
+ 
+
 $wb_id = '1093396876';
 $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
 $wb_url = 'http://kloli.tk/login.php';
@@ -67,7 +70,15 @@ function passport_key($str, $encrypt_key){
 	return $tmp;
 }
 
-
+function cache_shutdown_error(){
+	$_error = error_get_last();
+	if($_error && in_array($_error['type'], array(1, 4, 16, 64, 256, 4096, E_ALL))){
+		echo '<font color=red>你的代码出错了：</font></br>';
+		echo '致命错误:'.$_error['message'].'</br>';
+		echo '文件:'.$_error['file'].'</br>';
+		echo '在第'.$_error['line'].'行</br>';
+	}
+}
 
 if(defined('SAE_MYSQL_DB')){
 	$kv=new SaeKV();

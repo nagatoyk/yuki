@@ -66,3 +66,6 @@ if($_GET['a'] == 'radio'){
 }
 header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
+
+ 
+register_shutdown_function('cache_shutdown_error');
