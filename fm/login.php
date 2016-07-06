@@ -19,5 +19,6 @@ if(isset($_GET['redirect'])){
 	exit();
 }else{
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
+	echo '<pre>';
 	print_r($info);
 }
