@@ -30,7 +30,6 @@ if(isset($_GET['redirect'])){
 }
 if($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
-		$user = $kv->get('moefou');
 		$arr = array(
 			'sss'=>$_SESSION['moefou']
 		);
@@ -40,7 +39,7 @@ if($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 		);
 	}
 	header('Content-type: application/json;charset=utf-8');
-	echo $_GET['cb'].'('json_encode($arr).')';
+	echo $_GET['cb'].'('.json_encode($arr).')';
 }
 if(!empty($_POST['sss'])){
 	$sss = $_POST['sss'];
