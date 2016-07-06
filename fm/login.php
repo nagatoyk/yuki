@@ -46,8 +46,6 @@ if(isset($_GET['redirect'])){
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
 	$sss = $_POST['sss'];
-	echo base64_decode($sss);
-	die();
 	parse_str(base64_decode($sss));
 	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
 	$user = $info['response']['user'];
