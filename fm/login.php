@@ -46,5 +46,14 @@ if(isset($_GET['redirect'])){
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
 	$sss = $_POST['sss'];
-	echo $sss;
+	parse_str($sss);
+	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
+	$user = $info['response']['user'];
+	header('Content-type: application/json;charset=utf-8');
+	$arr = array(
+		'name'=>$user['user_nickname'],
+		'avatar'=>$user['user_avatar'],
+		'home'=>$user['user_fm_url']
+	);
+	echo json_encode($arr);
 }
