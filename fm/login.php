@@ -35,7 +35,10 @@ if(isset($_GET['redirect'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
 		$user = $kv->get('moefou');
 		$arr = array(
-			'sss'=>passport_encrypt('oauth_token='.$user['moefou']['oauth_token'].'&oauth_token_secret='.$user['moefou']['oauth_token_secret'], $key)
+			'sss'=>array(
+				'oauth_token'=>passport_encrypt($user['moefou']['oauth_token'], $key),
+				'oauth_token_secret'=>passport_encrypt($user['moefou']['oauth_token_secret'], $key)
+			)
 		);
 	}else{
 		$arr = array(
@@ -46,7 +49,8 @@ if(isset($_GET['redirect'])){
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
 	$sss = $_POST['sss'];
-	echo passport_decrypt($sss, $key);
+	print_r($sss);
+	// echo passport_decrypt($sss, $key);
 	die();
 	parse_str(passport_decrypt($sss, $key));
 	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
