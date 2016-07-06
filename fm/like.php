@@ -11,5 +11,6 @@ if($_GET['a'] == 'like'){
 	$pid = $_POST['pid'];
 	$rid = $_POST['rid'];
 	$result = $MoeFM->set_fav($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], 'add', 1, 'song', $pid);
-	echo json_encode($result);
+	echo $result;
+	echo json_encode($result, true);
 }
