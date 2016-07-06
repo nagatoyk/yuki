@@ -10,7 +10,6 @@ $MoeFM = new MoeFM($key, $secret, $callback);
 if($_GET['a'] == 'like'){
 	$pid = $_POST['pid'];
 	$rid = $_POST['rid'];
-	$result = $MoeFM->set_fav($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], 'add', 1, 'song', $pid);
-	echo $result;
-	echo json_encode($result, true);
+	$result = $MoeFM->set_fav($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], 1, $pid);
+	print_r($result);
 }
