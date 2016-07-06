@@ -8,7 +8,7 @@ $callback = 'http://kloli.tk/fm/login.php';
 $MoeFM = new MoeFM($key, $secret, $callback);
 echo '<pre>';
 print_r($_SESSION);
-echo '</pre>'
+echo '</pre>';
 if($_GET['a'] == 'like'){
 	$pid = $_POST['pid'];
 	$rid = $_POST['rid'];
