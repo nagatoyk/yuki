@@ -1,7 +1,14 @@
 <?php
+session_start();
 $wb_id = '1093396876';
 $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';
 $wb_url = 'http://kloli.tk/login.php';
+
+$key = '18f95c02504fb5a0fdd83b205e7e1aee05421a58b';
+$secret = 'a3af2e9f06faaefb9408897388f0f916';
+$callback = 'http://kloli.tk/fm/login.php';
+$MoeFM = new MoeFM($key, $secret, $callback);
+
 class KV{
 	public function set($k, $v){
 		$f = '../data/'.$k.'.json';

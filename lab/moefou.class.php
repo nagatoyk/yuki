@@ -100,6 +100,27 @@ class MoeFM{
 		$result = $this->do_get($url, $access_token, $access_token_secret);
 		return json_decode($result, true);
 	}
+	// 收听接口
+	public function get_listen($access_token = null, $access_token_secret = null, $song = 0){
+		$_GET['api'] = 'json';
+		$_GET['api_key'] = '18f95c02504fb5a0fdd83b205e7e1aee05421a58b';
+		if($song == 0){
+			$_GET['perpage'] = 3;
+		}
+		if($song != 0){
+			$_GET['song'] = $song;
+		}
+		$url = 'http://moe.fm/api/listen/playlist';
+		unset($_GET['a']);
+		unset($_GET['_']);
+		if($access_token == '' && $access_token_secret == ''){
+			$url .= '?'.$this->get_urlencode_string($_GET);
+			$playlist = $this->curl($url);
+		}else{
+			$playlist = $this->do_get($url, $access_token, $access_token_secret);
+		}
+		return json_decode($playlist, true);
+	}
 	/**
 	 * @brief 获取access_token。请求需经过URL编码，编码时请遵循 RFC 1738
 	 *
