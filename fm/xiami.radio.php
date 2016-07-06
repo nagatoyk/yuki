@@ -63,9 +63,15 @@ function get_xml($url){
 	curl_close($ch);
 	return $data;
 }
+function simplest_xml_to_array($xmlstring){
+	return json_decode(json_encode((array) simplexml_load_string($xmlstring)), true);
+}
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
-	echo get_xml($url);
+	$file = get_xml($url);
+	$json = simplest_xml_to_array($file);
+	echo '<pre>';
+	print_r($json);
 	die();
 	$doc = new DOMDocument();
 	$doc->load($url);
