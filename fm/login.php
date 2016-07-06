@@ -48,8 +48,7 @@ if(isset($_GET['redirect'])){
 	header('Content-type: application/json;charset=utf-8');
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
-	$sss = $_POST['sss'];
-	$sss = json_decode($sss);
+	$sss = json_decode($_POST['sss'], true);
 	$oauth_token = passport_decrypt($sss['t'], $key);
 	$oauth_token_secret = passport_decrypt($sss['s'], $key);
 	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
