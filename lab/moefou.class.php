@@ -101,16 +101,17 @@ class MoeFM{
 		return json_decode($result, true);
 	}
 	// 收听接口
-	public function get_listen($access_token = null, $access_token_secret = null, $song){
+	public function get_listen($access_token = null, $access_token_secret = null){
 		$_GET['api'] = 'json';
-		if($song){
-			$_GET['song'] = $song;
+		if(isset($_GET['id'])){
+			$_GET['song'] = $_GET['id'];
+			unset($_GET['id']);
 		}else{
 			$_GET['perpage'] = 3;
 		}
 		$url = 'http://moe.fm/api/listen/playlist';
 		unset($_GET['a']);
-		unset($_GET['id']);
+		unset($_GET['rid']);
 		unset($_GET['_']);
 		if(!$access_token && !$access_token_secret){
 			$_GET['api_key'] = $this->appkey;

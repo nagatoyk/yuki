@@ -49,8 +49,7 @@ if($_GET['a'] == 'radio'){
 		);
 	}
 }elseif($_GET['a'] == 'song'){
-	$song = intval($_GET['id']);
-	$json = $MoeFM->get_listen($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], $song);
+	$json = $MoeFM->get_listen($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
 	$data = $json['response']['playlist'][0];
 	$out[] = array(
 		'xid' => $data['sub_id'],
