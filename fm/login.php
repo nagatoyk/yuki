@@ -7,6 +7,7 @@ $secret = 'a3af2e9f06faaefb9408897388f0f916';
 $callback = 'http://kloli.tk/fm/login.php';
 $MoeFM = new MoeFM($key, $secret, $callback);
 if(isset($_GET['redirect'])){
+	$_SESSION['redirect'] = $_GET['redirect'];
 	$MoeFM->redirect_to_login();
 }elseif(isset($_GET['oauth_token']) && isset($_GET['oauth_verifier'])){
 	$oauth_token = $_GET['oauth_token'];
@@ -29,8 +30,10 @@ if(isset($_GET['redirect'])){
 		);
 		$kv->set('moefou', $user);
 	}
-	echo '<pre>';
-	print_r($user);
+	header('Location:'.$_SESSION['redirect']);
+	exit();
+	// echo '<pre>';
+	// print_r($user);
 }elseif($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
 		$user = $kv->get('moefou');
@@ -49,10 +52,8 @@ if(isset($_GET['redirect'])){
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
 	$sss = json_decode($_POST['sss'], true);
-	print_r($sss);
-	echo $oauth_token = passport_decrypt($sss['t'], $key);
-	echo '<hr>';
-	echo $oauth_token_secret = passport_decrypt($sss['s'], $key);
+	$oauth_token = passport_decrypt($sss['t'], $key);
+	$oauth_token_secret = passport_decrypt($sss['s'], $key);
 	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
 	$user = $info['response']['user'];
 	header('Content-type: application/json;charset=utf-8');
