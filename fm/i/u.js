@@ -1,5 +1,7 @@
 var U=function($){
-	var apiUrl='http://api.mouto.org/',
+	var 
+	// apiUrl='http://api.mouto.org/',
+	apiUrl = 'http://kloli.tk/fm/',
 	M,
 	U={
 		init:function(o){
@@ -47,7 +49,8 @@ var U=function($){
 			for(var name in uriData)
 				get.push(name+'='+encodeURIComponent(uriData[name]));
 			get=get.join('&');
-			location.href=apiUrl+'login.html#!'+get
+			// location.href=apiUrl+'login.html#!'+get
+			location.href=apiUrl+'login.php?'+get
 		},
 		allike:function(){
 			x('x/?a=allike',function(r){
