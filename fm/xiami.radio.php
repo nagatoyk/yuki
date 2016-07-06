@@ -31,6 +31,14 @@ function getLocation($location){
 	$loc_9 = str_replace('^', 0, urldecode($loc_8));
 	return $loc_9;
 }
+function rand_ip(){
+	$cip = '123.125.68.'.mt_rand(0, 254);
+	$xip = '125.90.88.'.mt_rand(0, 254);
+	return array( 
+		'CLIENT-IP:'.$cip, 
+		'X-FORWARDED-FOR:'.$xip, 
+	);
+}
 function writelog($str){
 	$open = fopen('../data/fm_getxml_log.txt', 'a');
 	fwrite($open, $str);
@@ -39,11 +47,11 @@ function writelog($str){
 function get_xml($url){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-	curl_setopt($ch, CURLOPT_INTERFACE, '218.66.112.178');
+	curl_setopt($ch, CURLOPT_HTTPHEADER, rand_ip());
+	// curl_setopt($ch, CURLOPT_INTERFACE, '218.66.112.178');
 
 	if(!curl_exec($ch)){
 		// Log::write(curl_errno($ch));
