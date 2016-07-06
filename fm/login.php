@@ -28,8 +28,8 @@ if(isset($_GET['redirect'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
 		$arr = array(
 			'sss'=>json_encode(array(
-				't'=>passport_encrypt($_SESSION['moefou']['oauth_token'], $key),
-				's'=>passport_encrypt($_SESSION['moefou']['oauth_token_secret'], $key)
+				't'=>base64_encode($_SESSION['moefou']['oauth_token']),
+				's'=>base64_encode($_SESSION['moefou']['oauth_token_secret'])
 			))
 		);
 	}else{
@@ -41,8 +41,8 @@ if(isset($_GET['redirect'])){
 	echo $_GET['cb'].'('.json_encode($arr).')';
 }elseif(!empty($_POST['sss'])){
 	$sss = json_decode($_POST['sss'], true);
-	$oauth_token = passport_decrypt($sss['t'], $key);
-	$oauth_token_secret = passport_decrypt($sss['s'], $key);
+	$oauth_token = base64_decode($sss['t']);
+	$oauth_token_secret = base64_decode($sss['s']);
 	$info = $MoeFM->get_user_info($oauth_token, $oauth_token_secret);
 	$user = $info['response']['user'];
 	header('Content-type: application/json;charset=utf-8');
