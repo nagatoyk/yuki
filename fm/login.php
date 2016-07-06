@@ -21,7 +21,7 @@ if(isset($_GET['redirect'])){
 }elseif($_GET['a'] == 'in'){
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
 	$user = $kv->get('moefou');
-	if(!$user['user']){
+	if(!$user['user'] || !$user['moefou']){
 		$user['user'] = $info['response']['user'];
 		$user['moefou'] = array(
 			'oauth_token'=>$_SESSION['moefou']['oauth_token'],
