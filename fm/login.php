@@ -16,6 +16,7 @@ if(isset($_GET['redirect'])){
 	$_SESSION['moefou']['oauth_token_secret'] = $oauth_token_secret;
 	setcookie('moufou', json_encode($_SESSION['moefou']));
 	header('Location:/fm/login.php');
+	exit();
 }else{
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
 	print_r($info);
