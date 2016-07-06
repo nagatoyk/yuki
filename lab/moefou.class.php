@@ -89,9 +89,13 @@ class MoeFM{
 		//获取用户信息的接口地址, 不要更改!!
 		$url = 'http://api.moefou.org/user/detail.json';
 		$info = $this->do_get($url, $access_token, $access_token_secret);
-		$arr = array();
-		$arr = json_decode($info, true);
-		return $arr;
+		return json_decode($info, true);
+	}
+	// 添加收藏或删除收藏
+	public function set_fav($access_token, $access_token_secret, $method = 'add', $fav_type = 1, $fav_obj_type = 'song', $fav_obj_id){
+		$url = 'http://api.moefou.org/fav/'.$method.'.json?fav_type='.$fav_type.'&fav_obj_type='.$fav_obj_type.'&fav_obj_id='.$fav_obj_id;
+		$result = $this->do_get($url, $access_token, $access_token_secret);
+		return json_decode($result, true);
 	}
 	/**
 	 * @brief 获取access_token。请求需经过URL编码，编码时请遵循 RFC 1738

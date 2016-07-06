@@ -349,7 +349,7 @@ fm=function(win,doc){
 
 		$('#like').className='a';
 
-		x('x/?a=like','xid='+location.hash.match(/[\d]+/),function(r){
+		x('like.php?a=like','pid='+location.hash.split('/')[1].match(/[\d]+/)+'&rid='+location.hash.split('/')[0].match(/[\d]+/),function(r){
 			//console.log(r);
 			if(r.error)
 				return alert(r.error);

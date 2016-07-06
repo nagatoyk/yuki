@@ -53,7 +53,7 @@ var U=function($){
 			location.href=apiUrl+'login.php?'+get
 		},
 		allike:function(){
-			x('x/?a=allike',function(r){
+			x('like.php?a=allike',function(r){
 				var likes={};
 				if(!r)
 					return U.likes=likes;
@@ -61,7 +61,7 @@ var U=function($){
 					likes[r[i]]=true
 				}
 				U.likes=likes;
-				U.iflike(location.hash.match(/\d+/)+'',function(r){
+				U.iflike(location.hash.split('/')[1].match(/\d+/)+'',function(r){
 					$('#like').className=r?'a':'';
 				})
 			})
