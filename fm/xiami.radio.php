@@ -1,18 +1,5 @@
 <?php
-header('Content-type: application/json;charset=utf-8');
 $out = array();
-// require '../getid3/getid3.php';
-/*function getTime($url){
-	$data = file_get_contents($url);
-	$path = parse_url($url, PHP_URL_PATH);
-	$filename = pathinfo($path, PATHINFO_BASENAME);
-	file_put_contents(SAE_TMP_PATH.$filename, $data);
-	$getID3 = new getID3(); //实例化类
-	$ThisFileInfo = $getID3->analyze(SAE_TMP_PATH.$filename);//分析文件
-	// $time = $ThisFileInfo['playtime_seconds']; //获取mp3的长度信息
-	// echo $ThisFileInfo['playtime_seconds']; //获取MP3文件时长
-	return ceil($ThisFileInfo['playtime_seconds']);
-}*/
 function getLocation($location){
 	$loc_2 = (int)substr($location, 0, 1);
 	$loc_3 = substr($location,1);
@@ -44,32 +31,32 @@ function getLocation($location){
 	$loc_9 = str_replace('^', 0, urldecode($loc_8));
 	return $loc_9;
 }
+function writelog($str){
+	$open = fopen('../data/fm_getxml_log.txt', 'a');
+	fwrite($open, $str);
+	fclose($open);
+} 
 function get_xml($url){
-	// $cookie_file = tempnam('../temp', 'cookie');
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_VERBOSE, true);
-	curl_setopt($ch, CURLOPT_HEADER, true);
-	// curl_setopt($ch, CURLOPT_HTTPHEADER, 'Host:www.xiami.com');
-	curl_setopt($ch, CURLOPT_NOBODY, true);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	// curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
-	curl_setopt($ch, CURLOPT_COOKIE, '_xiamitoken=f706db26ca947c713503f3766ebf39c6');
-	$output = curl_exec($ch);
-	$info = curl_getinfo($ch);
-	preg_match_all('/Set-Cookie:(.*)/i', $output, $results);
-	var_dump($results);
-	curl_close($ch);
-	return array($output, $info);
-}
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+	curl_setopt($ch, CURLOPT_INTERFACE, '127.0.0.1');
 
+	if(!curl_exec($ch)){
+		// Log::write(curl_errno($ch));
+		$error = curl_errno($ch);
+		$data = '';
+	}else{
+		$data = curl_multi_getcontent( $ch );
+	}
+	curl_close($ch);
+	return $data;
+}
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722';
-	print_r(get_xml($url));
+
 	die();
 	$doc = new DOMDocument();
 	$doc->load($url);
@@ -104,4 +91,6 @@ if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 		);
 	}
 }
+
+// header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
