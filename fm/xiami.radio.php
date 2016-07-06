@@ -19,7 +19,9 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, rand_ip());
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array_merge(rand_ip(), array(
+		'Cookie:_xiamitoken=f706db26ca947c713503f3766ebf39c6'
+	));
 	if(!curl_exec($ch)){
 		$errno = curl_errno($ch);
 		writelog('抓取失败, 错误码->'.$errno);
