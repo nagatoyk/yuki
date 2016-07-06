@@ -107,6 +107,7 @@ class MoeFM{
 			$_GET['song'] = $_GET['id'];
 			unset($_GET['id']);
 		}else{
+			$_GET['fav'] = 'song';
 			$_GET['perpage'] = 3;
 		}
 		$url = 'http://moe.fm/listen/playlist';
@@ -118,7 +119,6 @@ class MoeFM{
 			$url .= '?'.$this->get_urlencode_string($_GET);
 			$playlist = $this->curl($url);
 		}else{
-			$_GET['fav'] = 'song';
 			$playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
 		return json_decode($playlist, true);
