@@ -121,6 +121,7 @@ class MoeFM{
 			$_GET['fav'] = 'song';
 			$playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
+		echo $url;
 		return json_decode($playlist, true);
 	}
 	// 听歌记录
