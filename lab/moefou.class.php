@@ -93,9 +93,12 @@ class MoeFM{
 	}
 	// 添加收藏或删除收藏
 	public function add_like_fav($access_token, $access_token_secret, $fav_obj_id){
-		$url = 'http://api.moefou.org/fav/add.json?fav_type=1&fav_obj_type=song&fav_obj_id='.$fav_obj_id;
+		$_GET['fav_type'] = 1;
+		$_GET['fav_obj_type'] = 'song';
+		$_GET['fav_obj_id'] = $fav_obj_id;
+		$url = 'http://api.moefou.org/fav/add.json';
 		$result = $this->do_get($url, $access_token, $access_token_secret);
-		return $result;
+		return json_decode($result, true);
 	}
 	/**
 	 * @brief 获取access_token。请求需经过URL编码，编码时请遵循 RFC 1738
