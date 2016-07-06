@@ -35,10 +35,10 @@ if(isset($_GET['redirect'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
 		$user = $kv->get('moefou');
 		$arr = array(
-			'sss'=>array(
+			'sss'=>json_encode(array(
 				'oauth_token'=>passport_encrypt($user['moefou']['oauth_token'], $key),
 				'oauth_token_secret'=>passport_encrypt($user['moefou']['oauth_token_secret'], $key)
-			)
+			))
 		);
 	}else{
 		$arr = array(
