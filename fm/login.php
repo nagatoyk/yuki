@@ -36,8 +36,8 @@ if(isset($_GET['redirect'])){
 		$user = $kv->get('moefou');
 		$arr = array(
 			'sss'=>json_encode(array(
-				'oauth_token'=>passport_encrypt($user['moefou']['oauth_token'], $key),
-				'oauth_token_secret'=>passport_encrypt($user['moefou']['oauth_token_secret'], $key)
+				't'=>passport_encrypt($user['moefou']['oauth_token'], $key),
+				's'=>passport_encrypt($user['moefou']['oauth_token_secret'], $key)
 			))
 		);
 	}else{
