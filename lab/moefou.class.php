@@ -101,7 +101,7 @@ class MoeFM{
 		return json_decode($result, true);
 	}
 	// 收听接口
-	public function get_listen($access_token = null, $access_token_secret = null){
+	public function get_listen($access_token, $access_token_secret){
 		$_GET['api'] = 'json';
 		if(isset($_GET['id'])){
 			$_GET['song'] = $_GET['id'];
@@ -115,11 +115,11 @@ class MoeFM{
 		unset($_GET['_r']);
 		if(!$access_token && !$access_token_secret){
 			$_GET['api_key'] = $this->appkey;
-			echo $url .= '?'.$this->get_urlencode_string($_GET);
+			$url .= '?'.$this->get_urlencode_string($_GET);
 			$playlist = $this->curl($url);
 		}else{
 			$_GET['fav'] = 'song';
-			echo $playlist = $this->do_get($url, $access_token, $access_token_secret);
+			$playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
 		return json_decode($playlist, true);
 	}
