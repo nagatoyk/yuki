@@ -123,6 +123,17 @@ class MoeFM{
 		}
 		return json_decode($playlist, true);
 	}
+	// 听歌记录
+	public function set_log($access_token, $access_token_secret, $obj_id){
+		$url = 'http://moe.fm/ajax/log';
+		$_GET['log_obj_type'] = 'sub';
+		$_GET['log_type'] = 'listen';
+		$_GET['obj_type'] = 'song';
+		$_GET['api'] = 'json';
+		$_GET['obj_id'] = $obj_id;
+		$log = $this->do_get($url, $access_token, $access_token_secret);
+		return json_decode($log, true);
+	}
 	/**
 	 * @brief 获取access_token。请求需经过URL编码，编码时请遵循 RFC 1738
 	 *
