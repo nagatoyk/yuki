@@ -13,7 +13,7 @@ var U=function($){
 			};
 		},
 		getsss:function(){
-			$.j(apiUrl+'login.php?a=get&cb={cb}',function(u){
+			$.j(apiUrl+'login.php?a=sss&cb={cb}',function(u){
 				if(!u.sss){
 					M.innerHTML='<a id="loginBtn">登录</a>';
 					$('#loginBtn').onclick=function(){
@@ -28,7 +28,7 @@ var U=function($){
 		},
 		sss:function(sss){
 			if(sss){
-				x('x/u.php','sss='+sss,function(u){
+				x('login.php','sss='+sss,function(u){
 					// console.log(u);
 					if(u.error){
 						return U.getsss()
