@@ -37,7 +37,7 @@ function get_playcount($sql, $pid, $rid = 11){
 }
 $out = array();
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
-	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722?v='.time();
+	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722?v='.time();
 	$xml = get_xml($url);
 	if($xml){
 		$doc = new DOMDocument();
