@@ -1,6 +1,6 @@
 <?php
-require '../r/fun.php';
 require '../lab/moefou.class.php';
+require '../r/fun.php';
 require '../x/mysql.class.php';
 function get_playcount($sql, $pid){
 	$data = $sql->getLine('SELECT * FROM imouto_playcount WHERE pid=\''.$pid.'\' AND rid=\'12\'');
