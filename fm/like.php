@@ -10,6 +10,7 @@ if($_GET['a'] == 'like'){
 	$pid = $_POST['pid'];
 	$rid = $_POST['rid'];
 	$result = $MoeFM->add_like_fav($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret'], $pid);
+	echo $result;
 	if($result['respone']['fav']['fav_obj_id'] == $pid){
 		$r = array(
 			'msg'=>'加入收藏成功'
