@@ -121,7 +121,6 @@ class MoeFM{
 			$_GET['fav'] = 'song';
 			$playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
-		echo $url;
 		return json_decode($playlist, true);
 	}
 	// 听歌记录
@@ -261,6 +260,7 @@ class MoeFM{
 		$key = $this->appsecret.'&'.$access_token_secret;
 		$signature = $this->get_signature($sigstr, $key);
 		$url .= '?'.$normalized_str.'&oauth_signature='.rawurlencode($signature);
+		echo $url;
 		return $this->curl($url);
 	}
 	/**
