@@ -115,11 +115,11 @@ class MoeFM{
 		unset($_GET['_']);
 		if(!$access_token && !$access_token_secret){
 			$_GET['api_key'] = $this->appkey;
-			$url .= '?'.$this->get_urlencode_string($_GET);
+			echo $url .= '?'.$this->get_urlencode_string($_GET);
 			$playlist = $this->curl($url);
 		}else{
 			$_GET['fav'] = 'song';
-			$playlist = $this->do_get($url, $access_token, $access_token_secret);
+			echo $playlist = $this->do_get($url, $access_token, $access_token_secret);
 		}
 		return json_decode($playlist, true);
 	}
