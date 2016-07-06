@@ -16,9 +16,9 @@ if(isset($_GET['redirect'])){
 	$_SESSION['moefou']['oauth_token'] = $oauth_token;
 	$_SESSION['moefou']['oauth_token_secret'] = $oauth_token_secret;
 	// setcookie('moufou', json_encode($_SESSION['moefou']));
-	header('Location:/fm/login.php');
+	header('Location:/fm/login.php?a=in');
 	exit();
-}else{
+}elseif($_GET['a'] == 'in'){
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
 	$user = $kv->get('moefou');
 	if(!$user['user']){
@@ -30,8 +30,7 @@ if(isset($_GET['redirect'])){
 	}
 	echo '<pre>';
 	print_r($user);
-}
-if($_GET['a'] == 'sss' && !empty($_GET['cb'])){
+}elseif($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
 		$user = $kv->get('moufou');
 		$arr = array(
@@ -44,8 +43,7 @@ if($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	}
 	header('Content-type: application/json;charset=utf-8');
 	echo $_GET['cb'].'('.json_encode($arr).')';
-}
-if(!empty($_POST['sss'])){
+}elseif(!empty($_POST['sss'])){
 	$sss = $_POST['sss'];
 	echo $sss;
 }
