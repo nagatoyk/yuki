@@ -1,36 +1,9 @@
 <?php
-$out = array();
-function getLocation($location){
-	$loc_2 = (int)substr($location, 0, 1);
-	$loc_3 = substr($location,1);
-	$loc_4 = floor(strlen($loc_3) / $loc_2);
-	$loc_5 = strlen($loc_3) % $loc_2;
-	$loc_6 = array();
-	$loc_7 = 0;
-	$loc_8 = '';
-	$loc_9 = '';
-	$loc_10 = '';
-	while($loc_7 < $loc_5){
-		$loc_6[$loc_7] = substr($loc_3, ($loc_4 + 1) * $loc_7, $loc_4 + 1);
-		$loc_7++;
-	}
-	$loc_7 = $loc_5;
-	while($loc_7 < $loc_2){
-		$loc_6[$loc_7] = substr($loc_3, $loc_4 * ($loc_7 - $loc_5) + ($loc_4 + 1) * $loc_5, $loc_4);
-		$loc_7++;
-	}
-	$loc_7 = 0;
-	while($loc_7 < strlen($loc_6[0])){
-		$loc_10 = 0;
-		while($loc_10 < count($loc_6)){
-			$loc_8 .= $loc_6[$loc_10][$loc_7];
-			$loc_10++;
-		}
-		$loc_7++;
-	}
-	$loc_9 = str_replace('^', 0, urldecode($loc_8));
-	return $loc_9;
-}
+function writelog($str){
+	$open = fopen('../data/fm_getxml_log.txt', 'a');
+	fwrite($open, $str);
+	fclose($open);
+} 
 function rand_ip(){
 	$cip = '123.125.68.'.mt_rand(0, 254);
 	$xip = '125.90.88.'.mt_rand(0, 254);
@@ -39,11 +12,6 @@ function rand_ip(){
 		'X-FORWARDED-FOR:'.$xip, 
 	);
 }
-function writelog($str){
-	$open = fopen('../data/fm_getxml_log.txt', 'a');
-	fwrite($open, $str);
-	fclose($open);
-} 
 function get_xml($url){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -63,24 +31,12 @@ function get_xml($url){
 	curl_close($ch);
 	return $data;
 }
-function simplest_xml_to_array($xmlstring){
-	return json_decode(json_encode((array) simplexml_load_string($xmlstring)), true);
-}
-function xmltoarray($xml){
-	$arr = xml_to_array($xml);
-	$key = array_keys($arr);
-	return $arr[$key[0]];
-}
+$out = array();
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
-	$file = get_xml($url);
-	// $json = simplest_xml_to_array($file);
-	$xml = xmltoarray($file);
-	echo '<pre>';
-	print_r($xml);
-	die();
+	$xml = get_xml($url);
 	$doc = new DOMDocument();
-	$doc->load($url);
+	$doc->loadXML($xml);
 	$items = $doc->getElementsByTagName('track');
 	foreach($items as $node){
 		$song_ids = $node->getElementsByTagName('song_id');
@@ -112,6 +68,8 @@ if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 		);
 	}
 }
+echo '<pre>';
+print_r($out);
 
 // header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
