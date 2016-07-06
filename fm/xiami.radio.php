@@ -1,4 +1,5 @@
 <?php
+require 'xml/Xml.php';
 $out = array();
 function getLocation($location){
 	$loc_2 = (int)substr($location, 0, 1);
@@ -69,9 +70,10 @@ function simplest_xml_to_array($xmlstring){
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
 	$file = get_xml($url);
-	$json = simplest_xml_to_array($file);
+	// $json = simplest_xml_to_array($file);
+	$xml = Xml::toSimpleArray($file);
 	echo '<pre>';
-	print_r($json);
+	print_r($xml);
 	die();
 	$doc = new DOMDocument();
 	$doc->load($url);
