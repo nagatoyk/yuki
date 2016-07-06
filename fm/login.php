@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../lab/moefou.class.php';
 $key = '18f95c02504fb5a0fdd83b205e7e1aee05421a58b';
 $secret = 'a3af2e9f06faaefb9408897388f0f916';

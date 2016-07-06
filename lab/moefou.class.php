@@ -38,7 +38,7 @@ class MoeFM{
 		$request_token = $this->get_request_token();
 		parse_str($request_token, $result);
 		// request token, request token secret 需要保存起来
-		Yii::app()->session['moefou'] = array(
+		$_SESSION['moefou'] = array(
 			'token' => $result['oauth_token'],
 			'token_secret' => $result['oauth_token_secret']
 			);
