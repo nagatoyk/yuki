@@ -1,5 +1,5 @@
 <?php
-require '../r/fun.php';
+// require '../r/fun.php';
 require '../x/mysql.class.php';
 $pid = $_POST['pid'];
 $rid = $_POST['rid'];
