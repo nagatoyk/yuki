@@ -219,7 +219,7 @@ class MoeFM{
 		$key = $this->appsecret.'&'.$access_token_secret;
 		$signature = $this->get_signature($sigstr, $key);
 		$url .= '?'.$normalized_str.'&oauth_signature='.rawurlencode($signature);
-		return curl($url);
+		return $this->curl($url);
 	}
 	/**
 	 * @brief 所有multi-part post 请求都可以使用这个方法
