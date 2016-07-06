@@ -260,7 +260,6 @@ class MoeFM{
 		$key = $this->appsecret.'&'.$access_token_secret;
 		$signature = $this->get_signature($sigstr, $key);
 		$url .= '?'.$normalized_str.'&oauth_signature='.rawurlencode($signature);
-		echo $url;
 		return $this->curl($url);
 	}
 	/**
