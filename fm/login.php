@@ -21,26 +21,15 @@ if(isset($_GET['redirect'])){
 	exit();
 }elseif($_GET['a'] == 'in'){
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
-	$user = $kv->get('moefou');
-	if(!$user['user'] || !$user['moefou']){
-		$user['user'] = $info['response']['user'];
-		$user['moefou'] = array(
-			'oauth_token'=>$_SESSION['moefou']['oauth_token'],
-			'oauth_token_secret'=>$_SESSION['moefou']['oauth_token_secret']
-		);
-		$kv->set('moefou', $user);
-	}
+	$kv->delete('moefou');
 	header('Location:'.$_SESSION['redirect']);
 	exit();
-	// echo '<pre>';
-	// print_r($user);
 }elseif($_GET['a'] == 'sss' && !empty($_GET['cb'])){
 	if(isset($_SESSION['moefou']['oauth_token'])){
-		$user = $kv->get('moefou');
 		$arr = array(
 			'sss'=>json_encode(array(
-				't'=>passport_encrypt($user['moefou']['oauth_token'], $key),
-				's'=>passport_encrypt($user['moefou']['oauth_token_secret'], $key)
+				't'=>passport_encrypt($_SESSION['moefou']['oauth_token'], $key),
+				's'=>passport_encrypt($_SESSION['moefou']['oauth_token_secret'], $key)
 			))
 		);
 	}else{
