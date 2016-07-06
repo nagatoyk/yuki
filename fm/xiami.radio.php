@@ -43,7 +43,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-	curl_setopt($ch, CURLOPT_INTERFACE, '127.0.0.1');
+	curl_setopt($ch, CURLOPT_INTERFACE, '218.66.112.178');
 
 	if(!curl_exec($ch)){
 		// Log::write(curl_errno($ch));
