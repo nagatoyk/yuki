@@ -47,16 +47,16 @@ function get_xml($url){
 	if(!curl_exec($ch)){
 		// Log::write(curl_errno($ch));
 		$error = curl_errno($ch);
-		$data = '';
+		$data = $error;
 	}else{
-		$data = curl_multi_getcontent( $ch );
+		$data = curl_multi_getcontent($ch);
 	}
 	curl_close($ch);
 	return $data;
 }
 if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 	$url = 'http://www.xiami.com/radio/xml/type/4/id/6961722';
-
+	echo get_xml($url);
 	die();
 	$doc = new DOMDocument();
 	$doc->load($url);
