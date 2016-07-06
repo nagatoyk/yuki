@@ -1,4 +1,5 @@
 <?php
+require '../x/mysql.class.php';
 function writelog($str){
 	$open = fopen('../data/fm_getxml_log.txt', 'a');
 	fwrite($open, $str);
@@ -19,22 +20,22 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, rand_ip());
-	// curl_setopt($ch, CURLOPT_INTERFACE, '218.66.112.178');
-
 	if(!curl_exec($ch)){
-		// Log::write(curl_errno($ch));
-		$error = curl_errno($ch);
-		$data = $error;
+		$errno = curl_errno($ch);
+		writelog('抓取失败, 错误码->'.$errno);
+		$data = '';
 	}else{
 		$data = curl_multi_getcontent($ch);
 	}
 	curl_close($ch);
 	return $data;
 }
-$out = array();
-if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
-	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
-	$xml = get_xml($url);
+function get_playcount($sql, $pid, $rid = 11){
+	$r = $sql->getLine('SELECT `pcount` FROM imouto_playcount WHERE pid=\''.$pid.'\' AND rid=\''.$rid.'\'');
+	return $r ? $r['pcount'] : 0;
+}
+function xmltoarr($xml){
+	$out = array();
 	$doc = new DOMDocument();
 	$doc->loadXML($xml);
 	$items = $doc->getElementsByTagName('track');
@@ -64,12 +65,20 @@ if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
 			'artist'=>htmlspecialchars_decode($artist, ENT_QUOTES),
 			'album_id'=>$album_id,
 			'length'=>$length,
-			'play'=>1
+			'play'=>get_playcount($sql, $song_id)
 		);
 	}
+	return $out;
 }
-echo '<pre>';
-print_r($out);
+if($_GET['a'] == 'radio' && $_GET['rid'] == 11){
+	$url = 'http://www.xiami.com/radio/xml/type/8/id/6961722';
+	$xml = get_xml($url);
+	if($xml != ''){
+		$out = xmltoarr($xml);
+	}else{
+		$out = array();
+	}
 
-// header('Content-type: application/json;charset=utf-8');
+}
+header('Content-type: application/json;charset=utf-8');
 echo json_encode($out);
