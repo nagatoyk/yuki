@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '../r/fun.php';
 require '../lab/moefou.class.php';
 $key = '18f95c02504fb5a0fdd83b205e7e1aee05421a58b';
 $secret = 'a3af2e9f06faaefb9408897388f0f916';
@@ -19,6 +20,8 @@ if(isset($_GET['redirect'])){
 	exit();
 }else{
 	$info = $MoeFM->get_user_info($_SESSION['moefou']['oauth_token'], $_SESSION['moefou']['oauth_token_secret']);
+	$user['user'] = $info['response']['user'];
+	$kv->set('moefou', $user);
 	echo '<pre>';
-	print_r($info);
+	print_r($user);
 }

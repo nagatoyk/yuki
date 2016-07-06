@@ -1,6 +1,6 @@
 var U=function($){
 	var 
-	// apiUrl='http://api.mouto.org/',
+	/*apiUrl='http://api.mouto.org/',*/
 	apiUrl = 'http://kloli.tk/fm/',
 	M,
 	U={
@@ -13,7 +13,7 @@ var U=function($){
 			};
 		},
 		getsss:function(){
-			$.j(apiUrl+'x/?a=sss&cb={cb}',function(u){
+			$.j(apiUrl+'login.php?a=get&cb={cb}',function(u){
 				if(!u.sss){
 					M.innerHTML='<a id="loginBtn">登录</a>';
 					$('#loginBtn').onclick=function(){
