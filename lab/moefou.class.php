@@ -101,19 +101,18 @@ class MoeFM{
 		return json_decode($result, true);
 	}
 	// 收听接口
-	public function get_listen($access_token = null, $access_token_secret = null, $song = 0){
+	public function get_listen($access_token = null, $access_token_secret = null, $song){
 		$_GET['api'] = 'json';
-		if($song == 0){
-			$_GET['perpage'] = 3;
-		}
-		if($song != 0){
+		if($song){
 			$_GET['song'] = $song;
+		}else{
+			$_GET['perpage'] = 3;
 		}
 		$url = 'http://moe.fm/api/listen/playlist';
 		unset($_GET['a']);
 		unset($_GET['id']);
 		unset($_GET['_']);
-		if(!isset($access_token) && !isset($access_token_secret)){
+		if(!$access_token && !$access_token_secret){
 			$_GET['api_key'] = $this->appkey;
 			$url .= '?'.$this->get_urlencode_string($_GET);
 			$playlist = $this->curl($url);
