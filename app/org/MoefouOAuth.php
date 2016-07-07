@@ -1,5 +1,5 @@
 <?php
-namespace web\org;
+namespace app\org;
 class MoefouOAuth{
 	const VERSION = '0.1.0';
 	private $consumer_key;

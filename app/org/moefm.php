@@ -1,5 +1,5 @@
 <?php
-namespace web\org;
+namespace app\org;
 class MoeFM extends MoefouOAuth{
 	private $host = 'http://moe.fm/';
 	public function listen($url_data){

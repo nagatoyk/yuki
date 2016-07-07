@@ -1,5 +1,5 @@
 <?php
-namespace web\fm\controller;
+namespace app\fm\controller;
 class Index {
 	public function index() {
 		\View::make();
