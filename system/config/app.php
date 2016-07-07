@@ -1,7 +1,7 @@
 <?php
 return [
 	//应用目录
-	'path'               => 'web',
+	'path'               => 'app',
 	//加密key
 	'key'                => 'ce9fdeba3a030fbcb0e2ffb2a00a34b7e1008bc55abe0251e5e1d417cd8b5476',
 	//页面编码
@@ -11,7 +11,7 @@ return [
 	//语言包
 	'lang'               => '',
 	//自动加载文件
-	'auto_load_file'     => [ ROOT_PATH . '/web/functions.php' ],
+	'auto_load_file'     => [ ROOT_PATH . '/app/functions.php' ],
 	//令牌验证
 	'token_on'           => TRUE,
 	//令牌验证的表单隐藏字段名称
