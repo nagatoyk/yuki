@@ -5,9 +5,8 @@
 *.pydevproject
 .project
 .metadata
-bin/
-tmp/
-lab/up - 副本.php
+old/
+storage/
 *.tmp
 *.bak
 *.swp
