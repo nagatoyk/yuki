@@ -3,7 +3,7 @@ return [
 	//基于https协议
 	'https'              => FALSE,
 	//url重写模式
-	'rewrite'            => FALSE,
+	'rewrite'            => TRUE,
 	//URL变量
 	'url_var'            => 's',
 	//禁止使用的模块
