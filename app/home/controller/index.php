@@ -10,11 +10,6 @@
 namespace app\home\controller;
 class Index {
 	public function index() {
-		echo u('fm.index.index');
-		echo '<hr>';
-		// $MoeFM = new \app\org\MoefouOAuth('18f95c02504fb5a0fdd83b205e7e1aee05421a58b', 'a3af2e9f06faaefb9408897388f0f916', u('login'));
-		// $url = $MoeFM->getAuthorizeURL();
-		// echo $url;
 		\View::make();
 	}
 	public function login() {
