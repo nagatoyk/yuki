@@ -53,8 +53,8 @@ class MoefouOAuth{
 		$params = array();
 		$params['oauth_consumer_key'] = $this->consumer_key;
 		parse_str($this->getRequestToken());
-		$_SESSION['moefou']['oauth_token'] = $oauth_token;
-		$_SESSION['moefou']['oauth_token_secret'] = $oauth_token_secret;
+		$_SESSION['moefou']['request_token'] = $oauth_token;
+		$_SESSION['moefou']['request_token_secret'] = $oauth_token_secret;
 		$params['oauth_token'] = $oauth_token;
 		$params['oauth_callback'] = $this->callback;
 		$link = $this->authorizeURL().'?'.http_build_query($params);
@@ -64,6 +64,15 @@ class MoefouOAuth{
 		}else{
 			return $link;
 		}
+	}
+
+	public function getConst(){
+		return array(
+			'consumer_key'=>$this->consumer_key,
+			'consumer_secret'=>$this->consumer_secret,
+			'oauth_token'->$this->oauth_token,
+			'oauth_token_secret'=>$this->oauth_token_secret
+		);
 	}
 
 	public function get_normalized_string($params){
