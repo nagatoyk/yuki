@@ -1,6 +1,6 @@
 <?php
 namespace web\org;
-class MoeFMOAuth1 extends MoeFM{
+class MoefouOAuth{
 	const VERSION = '0.1.0';
 	private $consumer_key;
 	private $consumer_secret;
