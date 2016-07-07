@@ -13,8 +13,16 @@ if [ ! -d ${OPENSHIFT_DATA_DIR}data ]; then
 	mkdir ${OPENSHIFT_DATA_DIR}data
 fi
 
-if [ ! -d ${OPENSHIFT_DATA_DIR}temp ]; then
-	mkdir ${OPENSHIFT_DATA_DIR}temp
+if [ ! -d ${OPENSHIFT_DATA_DIR}storage/log ]; then
+	mkdir ${OPENSHIFT_DATA_DIR}storage/log
+fi
+
+if [ ! -d ${OPENSHIFT_DATA_DIR}storage/session ]; then
+	mkdir ${OPENSHIFT_DATA_DIR}storage/session
+fi
+
+if [ ! -d ${OPENSHIFT_DATA_DIR}storage/view ]; then
+	mkdir ${OPENSHIFT_DATA_DIR}storage/view
 fi
 
 
@@ -22,7 +30,11 @@ ln -sfv ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}
 
 ln -sfv ${OPENSHIFT_DATA_DIR}data ${OPENSHIFT_REPO_DIR}
 
-ln -sfv ${OPENSHIFT_DATA_DIR}temp ${OPENSHIFT_REPO_DIR}
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/log ${OPENSHIFT_REPO_DIR}
+
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}
+
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}
 
 # ln -sf ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}uploads/
 
