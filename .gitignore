@@ -6,8 +6,6 @@
 .project
 .metadata
 .htaccess
-old/
-storage/
 *.tmp
 *.bak
 *.swp
