@@ -9,3 +9,4 @@
  * '-------------------------------------------------------------------*/
 Route::any( 'wxnotifyurl/{siteid}', 'site/pay/weixinNotify' );
 Route::any( 'admin', 'system/entry/login' );
+Route::any( '/', 'web/home/index' );
