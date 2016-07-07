@@ -6,8 +6,11 @@
 .project
 .metadata
 .htaccess
+<<<<<<< HEAD
 old/
 storage/
+=======
+>>>>>>> 68121f2b9e98913284fa8d404d01e625f5c720e7
 *.tmp
 *.bak
 *.swp
