@@ -70,7 +70,7 @@ class MoefouOAuth{
 		return array(
 			'consumer_key'=>$this->consumer_key,
 			'consumer_secret'=>$this->consumer_secret,
-			'oauth_token'->$this->oauth_token,
+			'oauth_token'=>$this->oauth_token,
 			'oauth_token_secret'=>$this->oauth_token_secret
 		);
 	}
