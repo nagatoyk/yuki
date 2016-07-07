@@ -30,3 +30,5 @@ if(preg_match('/^[0-9]{5,12}$/', $pid) && preg_match('/^[0-9]{1,3}$/', $rid)){
 	header('Content-type: application/json;charset=utf-8');
 	echo json_encode($r);
 }
+
+
