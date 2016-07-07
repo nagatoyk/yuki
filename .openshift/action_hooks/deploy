@@ -30,11 +30,11 @@ ln -sfv ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}
 
 ln -sfv ${OPENSHIFT_DATA_DIR}data ${OPENSHIFT_REPO_DIR}
 
-ln -sfv ${OPENSHIFT_DATA_DIR}storage/log ${OPENSHIFT_REPO_DIR}
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/log ${OPENSHIFT_REPO_DIR}storage
 
-ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}storage
 
-ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}
+ln -sfv ${OPENSHIFT_DATA_DIR}storage/session ${OPENSHIFT_REPO_DIR}storage
 
 # ln -sf ${OPENSHIFT_DATA_DIR}files ${OPENSHIFT_REPO_DIR}uploads/
 
