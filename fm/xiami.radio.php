@@ -23,7 +23,7 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_HTTPHEADER, rand_ip());
 	if(!curl_exec($ch)){
 		$errno = curl_errno($ch);
-		writelog('抓取失败, 错误码->'.$errno);
+		writelog('抓取失败, 错误码->'.$errno."\n\r");
 		$data = false;
 	}else{
 		$data = curl_multi_getcontent($ch);
