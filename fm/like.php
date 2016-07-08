@@ -1,5 +1,4 @@
 <?php
-require '../lab/moefou.class.php';
 require '../r/fun.php';
 
 if($_GET['a'] == 'like'){

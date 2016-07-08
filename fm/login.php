@@ -1,5 +1,4 @@
 <?php
-require '../lab/moefou.class.php';
 require '../r/fun.php';
 if(isset($_GET['redirect'])){
 	$_SESSION['redirect'] = $_GET['redirect'];

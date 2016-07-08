@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(E_ALL); //E_ALL
- 
+require '../lab/moefou.class.php';
 
 $wb_id = '1093396876';
 $wb_key = 'd126f1302a7f1b7e36536f4ad84622a0';

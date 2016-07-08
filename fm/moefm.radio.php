@@ -1,5 +1,5 @@
 <?php
-require '../lab/moefou.class.php';
+
 require '../r/fun.php';
 require '../x/mysql.class.php';
 function get_playcount($sql, $pid){

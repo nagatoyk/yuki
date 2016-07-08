@@ -4,14 +4,6 @@ function writelog($str){
 	$open = fopen('../data/fm_getxml_log.txt', 'a');
 	fwrite($open, $str);
 	fclose($open);
-} 
-function rand_ip(){
-	$cip = '123.125.68.'.mt_rand(0, 254);
-	$xip = '125.90.88.'.mt_rand(0, 254);
-	return array( 
-		'CLIENT-IP:'.$cip, 
-		'X-FORWARDED-FOR:'.$xip, 
-	);
 }
 function get_xml($url){
 	$ch = curl_init();
@@ -20,10 +12,13 @@ function get_xml($url){
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	// curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, rand_ip());
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'CLIENT-IP:123.125.68.'.mt_rand(0, 254),
+		'X-FORWARDED-FOR:125.90.88.'.mt_rand(0, 254)
+	));
 	if(!curl_exec($ch)){
 		$errno = curl_errno($ch);
-		writelog('抓取失败, 错误码->'.$errno."\n\r");
+		writelog('['.date(time(), 'Y-m-d H:i:s').']: __ 抓取失败, 错误码: '.$errno.";\n\r");
 		$data = false;
 	}else{
 		$data = curl_multi_getcontent($ch);
