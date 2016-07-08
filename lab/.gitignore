@@ -7,7 +7,6 @@
 .metadata
 bin/
 tmp/
-lab/up - 副本.php
 *.tmp
 *.bak
 *.swp

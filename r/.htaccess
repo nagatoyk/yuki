@@ -1,0 +1,4 @@
+AuthName "===LOGIN==="
+AuthType Basic
+AuthUserFile /var/lib/openshift/543296e54382eca2990002c9/app-root/runtime/repo/r/.htpasswd
+Require valid-user yuki
