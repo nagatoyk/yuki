@@ -7,16 +7,17 @@ function err($i){
 	exit(json_encode(array('error'=>$i)));
 }
 
-
-require 'fun.php';
-require '../x/mysql.class.php';
+if(defined('SAE_MYSQL_DB'))
+	$sql=new SaeMysql();
+else
+	require '../x/mysql.class.php';
 
 $r=array();
 
-if(preg_match('/^(?:ep|ap|dp|am|dm|gm)$/',$_GET['a']))
+if(preg_match('/^(?:ep|ap|dp)$/',$_GET['a']))
 	require 'x.'.$_GET['a'].'.php';
 
-
+	
 
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * User: TMs
@@ -7,14 +7,14 @@
  */
 
 require 'DB_driver.php';
-// 当前可选driver:Mysql,PDO;
-$db_driver = 'PDO';
+
+$db_driver='PDO';//当前可选driver:Mysql,PDO;
 if(defined('MYSQL_DATABASE')){
-	$host = 'localhost';
-	$port = 3306;
-	$dbname = MYSQL_DATABASE;
-	$user = MYSQL_USERNAME;
-	$pwd = MYSQL_PASSWORD;
+	$host='localhost';
+	$port=3306;
+    $dbname=MYSQL_DATABASE;
+    $user=MYSQL_USERNAME;
+    $pwd=MYSQL_PASSWORD;
 }elseif(getenv('OPENSHIFT_APP_NAME')){
 	$host = getenv('OPENSHIFT_MYSQL_DB_HOST');
 	$port = getenv('OPENSHIFT_MYSQL_DB_PORT');

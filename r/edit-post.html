@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="r.css">
 
 <ul class="header">
-	<li><a href="/" target="_blank">前台</a></li>
-	<li><a href="music.html">添加音乐</a></li>
 	<li><a href="add-post.html">写文章</a></li>
 	<li><a href="index.html" class="a">管理文章</a></li>
 </ul>
@@ -29,6 +27,8 @@
 	</div>
 	<input type="hidden" name="pid">
 </form>
+
+<i id="co"></i>
 
 
 <script src="../i/itorr.m.js"></script>
@@ -81,10 +81,10 @@ $.onsubmit(F,function(r){
 var C=new MD.C();
 
 $('#pr-btn').onclick=function(){
-	var w=window.open('','_pr','');
+	var w=window.open('','_blank','');
 	w.document.open('text/html','replace');
 	w.opener=null;
-	var b=location.href.split('/r/')[0]+'/';
+	var b=location.href.split("/r/")[0]+"/";
 	w.document.write('<!DOCTYPE html>\
 <link rel="stylesheet" href="'+b+'i/md/md.css">\
 <link rel="stylesheet" href="'+b+'r/pr.css"><h1>'+F.title.value+'</h1><div id="p">\

@@ -14,12 +14,15 @@ var UP=function($){
 		pace.id='pace';
 		$.D.a(pace);
 	}
-	/*
-	_html.ondragenter=function(e){_html.className='drop';};
-	_html.ondragleave=function(e){_html.className='';};
-	*/
+
+	_html.onmouseout=function(e){
+		$('#co').className='';
+	};
+
 	_html.ondragover=function(e){
 		e.preventDefault();
+		$('#co').className='drop';
+
 	};
 	_html.ondrop=function(e){
 		e.preventDefault();
@@ -78,8 +81,7 @@ var UP=function($){
 
 					var I=$('textarea[name="text"]');
 
-					// I.value+=(I.value?'\n':'')+'http://ww2.sinaimg.cn/large/'+xhr.responseText.match(/[\w]{24,32}/)+'\n';
-					I.value+=(I.value?'\n':'')+xhr.responseText+'\n';
+					I.value+=(I.value?'\n':'')+'http://ww2.sinaimg.cn/large/'+xhr.responseText.match(/[\w]{24,32}/)+'\n';
 
 					I.onkeydown();
 					
@@ -96,8 +98,7 @@ var UP=function($){
 					}
 				}
 			};
-			// xhr.open('POST','http://x.mouto.org/wb/x.php?up&_r='+Math.random(),1);
-			xhr.open('POST', '/lab/up.php?up&_r='+Math.random(), 1);
+			xhr.open('POST','http://x.mouto.org/wb/x.php?up&_r='+Math.random(),1);
 			//xhr.setRequestHeader('X_FILENAME',encodeURIComponent(file.name));
 			xhr.send(file);
 			

@@ -7,7 +7,10 @@ function err($i){
 	exit(json_encode(array('error'=>$i)));
 }
 
-require 'mysql.class.php';
+if(defined('SAE_MYSQL_DB'))
+	$sql=new SaeMysql();
+else
+	require 'mysql.class.php';
 
 $r=array();
 

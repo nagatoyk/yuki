@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="r.css">
 
 <ul class="header">
-	<li><a href="/" target="_blank">前台</a></li>
-	<li><a href="music.html">添加音乐</a></li>
 	<li><a href="add-post.html" class="a">写文章</a></li>
 	<li><a href="index.html">管理文章</a></li>
 </ul>
@@ -28,6 +26,7 @@
 	</div>
 </form>
 
+<i id="co"></i>
 
 <script src="../i/itorr.m.js"></script>
 <script src="../inf.js"></script>
@@ -35,18 +34,16 @@
 <script src="../i/md/md.js"></script>
 <script>
 var h='';
-for(var key in INF.c){
-	if(INF.c[key][1]){
+for(var key in INF.c)
+	if(INF.c[key][1])
 		h+='<label><input type="radio" name="category" value="'+key+'"'+(key=='nichijou'?' checked':'')+'>'+INF.c[key][0]+'</label>'
-	}
-}
+
 $('.category').innerHTML=h;
 
 
 h='<select name="authorId">';
-for(var uid=0,l=INF.u.length;uid<l;uid++){
+for(var uid=0,l=INF.u.length;uid<l;uid++)
 	h+='<option value="'+uid+'"'+(uid==1?' selected':'')+'>'+INF.u[uid]+'</option>'
-}
 
 $('.author').innerHTML=h+'</select>';
 
@@ -117,11 +114,10 @@ $.onsubmit(F,function(r){
 var C=new MD.C();
 
 $('#pr-btn').onclick=function(){
-	var w=window.open('','_pr','');
+	var w=window.open('','_blank','');
 	w.document.open('text/html','replace');
 	w.opener=null;
-	// var b=location.href.match(/^[\w\:\/]+/);
-	var b=location.href.split('/r/')[0]+'/';
+	var b=location.href.split("/r/")[0]+"/";
 	w.document.write('<!DOCTYPE html>\
 <link rel="stylesheet" href="'+b+'i/md/md.css">\
 <link rel="stylesheet" href="'+b+'r/pr.css"><h1>'+F.title.value+'</h1><div id="p">\

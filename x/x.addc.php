@@ -15,7 +15,7 @@ foreach(array(
 	$r[$key]=$_POST[$key];
 }
 
-$p=$sql->getLine('SELECT pid FROM imouto_article WHERE `pid`=\''.$_POST['pid'].'\'');
+$p=$sql->getLine('SELECT pid FROM imouto_article WHERE pid='.$_POST['pid']);
 if(!isset($p['pid']))
 	err('您评论的文章不存在！');
 
