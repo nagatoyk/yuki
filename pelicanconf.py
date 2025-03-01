@@ -1,6 +1,6 @@
 AUTHOR = 'Suzumiya Nagato'
 SITENAME = "Suzumiya Nagato's Blog"
-SITEURL = "https://nagatoyk.github.io/yuki"
+SITEURL = "."
 
 PATH = "content"
 
