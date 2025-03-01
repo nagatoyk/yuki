@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<cross-domain-policy>
+    <allow-access-from domain="*.yukimax.cn"/>
+    <allow-access-from domain="*.kloli.tk"/>
+    <allow-access-from domain="*.loli-yuki.tk"/>
+    <allow-access-from domain="yuki-yukimax.rhcloud.com"/>
+    <allow-access-from domain="loli-yukimax.rhcloud.com"/>
+    <allow-access-from domain="yukimax.sinaapp.com"/>
+    <allow-access-from domain="*.yukimax.sinaapp.com"/>
+</cross-domain-policy>
