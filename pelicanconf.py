@@ -25,8 +25,7 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
+    ("github", "https://github.com/nagatoyk"),
 )
 
 DEFAULT_PAGINATION = 10
@@ -50,3 +49,5 @@ PAGE_URL = 'pages/{slug}.html'
 PAGE_SAVE_AS = PAGE_URL
 
 FEED_ALL_RSS = 'feeds/all.rss.xml'
+DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+GITHUB_URL = 'https://github.com/nagatoyk'
